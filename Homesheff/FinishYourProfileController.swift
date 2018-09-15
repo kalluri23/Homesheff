@@ -1,33 +1,27 @@
 //
-//  CreateYourAccountController.swift
+//  FinishYourProfileController.swift
 //  Homesheff
 //
-//  Created by Dimitrios Papageorgiou on 9/12/18.
+//  Created by Dimitrios Papageorgiou on 9/13/18.
 //  Copyright © 2018 Dimitrios Papageorgiou. All rights reserved.
 //
 
-
+import Foundation
 import UIKit
 
 
-extension UITextField{
-    
-    func setBottomBorderLightGray(){
-        self.layer.shadowColor = UIColor.lightGray.cgColor
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        self.layer.shadowOpacity = 1.0
-        self.layer.shadowRadius = 0.0
-    }
-}
-
-class CreateAccountController: UIViewController {
+class FinishYourProfile : UIViewController{
     
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var phoneTextField: UITextField!
+
+    //following fields have their own search page
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var addServicesTextField: UITextField!
+    @IBOutlet weak var ratesTextField: UITextField!
     
-    @IBOutlet weak var signUpButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,18 +32,25 @@ class CreateAccountController: UIViewController {
         
         lastNameTextField.setPadding()
         lastNameTextField.setBottomBorderLightGray()
-        
+
         emailTextField.setPadding()
         emailTextField.setBottomBorderLightGray()
+
+        locationTextField.setPadding()
+        locationTextField.setBottomBorderLightGray()
         
-        passwordTextField.setPadding()
-        passwordTextField.setBottomBorderLightGray()
+        phoneTextField.setPadding()
+        phoneTextField.setBottomBorderLightGray()
         
+        addServicesTextField.setPadding()
+        addServicesTextField.setBottomBorderLightGray()
+
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
 }
-

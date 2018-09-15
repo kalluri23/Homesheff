@@ -15,7 +15,7 @@ extension UITextField{
         self.leftView = paddingView
         self.leftViewMode = .always
     }
-    func bottomBorder(){
+    func bottomBorderWhite(){
         self.layer.shadowColor = UIColor.white.cgColor
         self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         self.layer.shadowOpacity = 1.0
@@ -23,20 +23,23 @@ extension UITextField{
     }
 }
 
-class ViewController: UIViewController {
+class SignInViewController: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var forgotYourPasswordButton: UIButton!
+    @IBOutlet weak var createYourAccountButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         usernameTextField.setPadding()
-        usernameTextField.bottomBorder()
+        usernameTextField.bottomBorderWhite()
         
         passwordTextField.setPadding()
-        passwordTextField.bottomBorder()
+        passwordTextField.bottomBorderWhite()
         
     }
 
