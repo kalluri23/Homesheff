@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182430214E924F009F62CE /* FindChefsViewController.swift */; };
+		E9182433214E97F0009F62CE /* ChefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182432214E97F0009F62CE /* ChefCell.swift */; };
+		E9182438214EA22A009F62CE /* Chef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182437214EA22A009F62CE /* Chef.swift */; };
 		E9D14B522147BEFF009A57A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D14B512147BEFF009A57A1 /* AppDelegate.swift */; };
 		E9D14B542147BEFF009A57A1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D14B532147BEFF009A57A1 /* SignInViewController.swift */; };
 		E9D14B572147BF00009A57A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9D14B552147BEFF009A57A1 /* Main.storyboard */; };
@@ -15,10 +18,12 @@
 		E9D2700821499C130087F476 /* CreateAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2700721499C130087F476 /* CreateAccountController.swift */; };
 		E9D2700A214B13F40087F476 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D27009214B13F40087F476 /* UIView+Extension.swift */; };
 		E9D2700C214B1D240087F476 /* FinishYourProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2700B214B1D240087F476 /* FinishYourProfileController.swift */; };
-		E9D2700E214BEDA00087F476 /* FindChefsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D2700D214BEDA00087F476 /* FindChefsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E9182430214E924F009F62CE /* FindChefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefsViewController.swift; sourceTree = "<group>"; };
+		E9182432214E97F0009F62CE /* ChefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefCell.swift; sourceTree = "<group>"; };
+		E9182437214EA22A009F62CE /* Chef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chef.swift; sourceTree = "<group>"; };
 		E9D14B4E2147BEFF009A57A1 /* Homesheff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homesheff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D14B512147BEFF009A57A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9D14B532147BEFF009A57A1 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -29,7 +34,6 @@
 		E9D2700721499C130087F476 /* CreateAccountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountController.swift; sourceTree = "<group>"; };
 		E9D27009214B13F40087F476 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		E9D2700B214B1D240087F476 /* FinishYourProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishYourProfileController.swift; sourceTree = "<group>"; };
-		E9D2700D214BEDA00087F476 /* FindChefsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9182434214E9893009F62CE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E9D14B532147BEFF009A57A1 /* SignInViewController.swift */,
+				E9D2700721499C130087F476 /* CreateAccountController.swift */,
+				E9D2700B214B1D240087F476 /* FinishYourProfileController.swift */,
+				E9182430214E924F009F62CE /* FindChefsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E9182435214E98B9009F62CE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E9182436214E98C2009F62CE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E9D14B452147BEFF009A57A1 = {
 			isa = PBXGroup;
 			children = (
@@ -62,16 +91,17 @@
 		E9D14B502147BEFF009A57A1 /* Homesheff */ = {
 			isa = PBXGroup;
 			children = (
+				E9182436214E98C2009F62CE /* Model */,
+				E9182435214E98B9009F62CE /* View */,
+				E9182434214E9893009F62CE /* Controller */,
 				E9D14B512147BEFF009A57A1 /* AppDelegate.swift */,
-				E9D14B532147BEFF009A57A1 /* SignInViewController.swift */,
-				E9D2700721499C130087F476 /* CreateAccountController.swift */,
-				E9D2700B214B1D240087F476 /* FinishYourProfileController.swift */,
-				E9D2700D214BEDA00087F476 /* FindChefsController.swift */,
 				E9D14B552147BEFF009A57A1 /* Main.storyboard */,
+				E9182432214E97F0009F62CE /* ChefCell.swift */,
+				E9182437214EA22A009F62CE /* Chef.swift */,
+				E9D27009214B13F40087F476 /* UIView+Extension.swift */,
 				E9D14B582147BF01009A57A1 /* Assets.xcassets */,
 				E9D14B5A2147BF01009A57A1 /* LaunchScreen.storyboard */,
 				E9D14B5D2147BF01009A57A1 /* Info.plist */,
-				E9D27009214B13F40087F476 /* UIView+Extension.swift */,
 			);
 			path = Homesheff;
 			sourceTree = "<group>";
@@ -147,8 +177,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */,
 				E9D2700C214B1D240087F476 /* FinishYourProfileController.swift in Sources */,
-				E9D2700E214BEDA00087F476 /* FindChefsController.swift in Sources */,
+				E9182433214E97F0009F62CE /* ChefCell.swift in Sources */,
+				E9182438214EA22A009F62CE /* Chef.swift in Sources */,
 				E9D2700821499C130087F476 /* CreateAccountController.swift in Sources */,
 				E9D14B542147BEFF009A57A1 /* SignInViewController.swift in Sources */,
 				E9D2700A214B13F40087F476 /* UIView+Extension.swift in Sources */,

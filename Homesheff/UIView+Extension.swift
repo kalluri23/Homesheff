@@ -6,6 +6,8 @@
 //  Copyright © 2018 Dimitrios Papageorgiou. All rights reserved.
 //
 
+
+//Extension for Splash screen gradient
 import Foundation
 import UIKit
 
