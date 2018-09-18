@@ -61,6 +61,10 @@
 		E9182435214E98B9009F62CE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E9182432214E97F0009F62CE /* ChefCell.swift */,
+				E9D14B552147BEFF009A57A1 /* Main.storyboard */,
+				E9D14B582147BF01009A57A1 /* Assets.xcassets */,
+				E9D27009214B13F40087F476 /* UIView+Extension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -68,6 +72,7 @@
 		E9182436214E98C2009F62CE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E9182437214EA22A009F62CE /* Chef.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -95,11 +100,6 @@
 				E9182435214E98B9009F62CE /* View */,
 				E9182434214E9893009F62CE /* Controller */,
 				E9D14B512147BEFF009A57A1 /* AppDelegate.swift */,
-				E9D14B552147BEFF009A57A1 /* Main.storyboard */,
-				E9182432214E97F0009F62CE /* ChefCell.swift */,
-				E9182437214EA22A009F62CE /* Chef.swift */,
-				E9D27009214B13F40087F476 /* UIView+Extension.swift */,
-				E9D14B582147BF01009A57A1 /* Assets.xcassets */,
 				E9D14B5A2147BF01009A57A1 /* LaunchScreen.storyboard */,
 				E9D14B5D2147BF01009A57A1 /* Info.plist */,
 			);

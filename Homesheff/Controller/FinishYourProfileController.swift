@@ -45,6 +45,10 @@ class FinishYourProfile : UIViewController{
         addServicesTextField.setPadding()
         addServicesTextField.setBottomBorderLightGray()
 
+        //delegate-CONTINUE STEP 16 FROM https://blog.apoorvmote.com/segue-when-tapped-on-textfield-pass-data-through-navigation-back-button-ios-swift/
+        locationTextField.delegate = self as! UITextFieldDelegate
+        addServicesTextField.delegate = self as! UITextFieldDelegate
+        ratesTextField.delegate = self as! UITextFieldDelegate
     }
 
     override func didReceiveMemoryWarning() {
