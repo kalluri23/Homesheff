@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */; };
 		E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182430214E924F009F62CE /* FindChefsViewController.swift */; };
 		E9182433214E97F0009F62CE /* ChefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182432214E97F0009F62CE /* ChefCell.swift */; };
 		E9182438214EA22A009F62CE /* Chef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182437214EA22A009F62CE /* Chef.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesRatesViewController.swift; sourceTree = "<group>"; };
 		E9182430214E924F009F62CE /* FindChefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefsViewController.swift; sourceTree = "<group>"; };
 		E9182432214E97F0009F62CE /* ChefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefCell.swift; sourceTree = "<group>"; };
 		E9182437214EA22A009F62CE /* Chef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chef.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 				E9D14B532147BEFF009A57A1 /* SignInViewController.swift */,
 				E9D2700721499C130087F476 /* CreateAccountController.swift */,
 				E9D2700B214B1D240087F476 /* FinishYourProfileController.swift */,
+				E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */,
 				E9182430214E924F009F62CE /* FindChefsViewController.swift */,
 			);
 			path = Controller;
@@ -62,9 +65,9 @@
 			isa = PBXGroup;
 			children = (
 				E9182432214E97F0009F62CE /* ChefCell.swift */,
-				E9D14B552147BEFF009A57A1 /* Main.storyboard */,
 				E9D14B582147BF01009A57A1 /* Assets.xcassets */,
 				E9D27009214B13F40087F476 /* UIView+Extension.swift */,
+				E9D14B552147BEFF009A57A1 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				E9182438214EA22A009F62CE /* Chef.swift in Sources */,
 				E9D2700821499C130087F476 /* CreateAccountController.swift in Sources */,
 				E9D14B542147BEFF009A57A1 /* SignInViewController.swift in Sources */,
+				E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */,
 				E9D2700A214B13F40087F476 /* UIView+Extension.swift in Sources */,
 				E9D14B522147BEFF009A57A1 /* AppDelegate.swift in Sources */,
 			);
