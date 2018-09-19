@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sa3-9K-6he">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -249,19 +249,19 @@
                         <outlet property="locationTextField" destination="IRg-8t-GVl" id="LPR-DI-hDo"/>
                         <outlet property="phoneTextField" destination="RB6-NB-HMj" id="te1-5X-aPa"/>
                         <outlet property="ratesTextField" destination="cvO-Mb-4Iy" id="v3T-FZ-x8M"/>
-                        <segue destination="9HC-yQ-69p" kind="show" id="EEZ-Fd-eLU"/>
-                        <segue destination="t7Y-Y3-H9B" kind="show" id="0Q5-VG-Fuy"/>
-                        <segue destination="noh-hV-bDB" kind="show" id="684-I3-QBT"/>
+                        <segue destination="9HC-yQ-69p" kind="show" identifier="locationPage" id="EEZ-Fd-eLU"/>
+                        <segue destination="t7Y-Y3-H9B" kind="show" identifier="servicesPage" id="0Q5-VG-Fuy"/>
+                        <segue destination="noh-hV-bDB" kind="show" identifier="ratesPage" id="684-I3-QBT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nbN-ur-r9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1692" y="707.49625187406298"/>
         </scene>
-        <!--View Controller-->
+        <!--Location Services Rates View Controller-->
         <scene sceneID="zzP-8k-ich">
             <objects>
-                <viewController storyboardIdentifier="servicesPage" id="t7Y-Y3-H9B" sceneMemberID="viewController">
+                <viewController id="t7Y-Y3-H9B" customClass="LocationServicesRatesViewController" customModule="Homesheff" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NEq-rg-1Ju">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -384,10 +384,10 @@
             </objects>
             <point key="canvasLocation" x="4634.3999999999996" y="760.56971514242889"/>
         </scene>
-        <!--View Controller-->
+        <!--Location Services Rates View Controller-->
         <scene sceneID="2qd-gd-xj0">
             <objects>
-                <viewController storyboardIdentifier="ratesPage" id="noh-hV-bDB" sceneMemberID="viewController">
+                <viewController id="noh-hV-bDB" customClass="LocationServicesRatesViewController" customModule="Homesheff" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kZK-Hu-ZQU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -422,10 +422,10 @@
             </objects>
             <point key="canvasLocation" x="1692" y="1644"/>
         </scene>
-        <!--View Controller-->
+        <!--Location Services Rates View Controller-->
         <scene sceneID="R5O-aq-nVQ">
             <objects>
-                <viewController storyboardIdentifier="locationPage" id="9HC-yQ-69p" sceneMemberID="viewController">
+                <viewController id="9HC-yQ-69p" customClass="LocationServicesRatesViewController" customModule="Homesheff" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lgN-Ng-qKV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -448,10 +448,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="XTJ-DP-wtc"/>
                     </view>
+                    <connections>
+                        <outlet property="locationTextView" destination="JUt-9Z-cLz" id="AiT-vy-R1i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aMk-5H-Ck3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2317" y="707"/>
+            <point key="canvasLocation" x="2446" y="707"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LbQ-U0-Xe1">

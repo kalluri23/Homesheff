@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class FinishYourProfile : UIViewController{
+class FinishYourProfile : UIViewController, UITextFieldDelegate{
     
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -22,6 +22,9 @@ class FinishYourProfile : UIViewController{
     @IBOutlet weak var addServicesTextField: UITextField!
     @IBOutlet weak var ratesTextField: UITextField!
     
+    var location: String?
+    var services: String?
+    var rates: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,13 +48,39 @@ class FinishYourProfile : UIViewController{
         addServicesTextField.setPadding()
         addServicesTextField.setBottomBorderLightGray()
 
-        //delegate-CONTINUE STEP 16 FROM https://blog.apoorvmote.com/segue-when-tapped-on-textfield-pass-data-through-navigation-back-button-ios-swift/
+
+        locationTextField.delegate = self
+        addServicesTextField.delegate = self
+        ratesTextField.delegate = self
         
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        locationTextField.text = location
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        performSegue(withIdentifier: "locationPage", sender: self)
+        
+        return false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "locationPage" {
+            
+            let locationController = segue.destination as! LocationServicesRatesViewController
+            
+            locationController.location = locationTextField.text
+        }
     }
     
     
