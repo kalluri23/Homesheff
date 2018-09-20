@@ -45,6 +45,9 @@ class CreateAccountController: UIViewController {
         passwordTextField.setPadding()
         passwordTextField.setBottomBorderLightGray()
         
+        //simplified back button on next page
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: nil, action: nil)
+
     }
     
     override func didReceiveMemoryWarning() {

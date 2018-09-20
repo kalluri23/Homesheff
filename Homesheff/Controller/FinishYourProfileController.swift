@@ -50,8 +50,8 @@ class FinishYourProfile : UIViewController, UITextFieldDelegate{
 
 
         locationTextField.delegate = self
-        addServicesTextField.delegate = self
-        ratesTextField.delegate = self
+        //addServicesTextField.delegate = self
+        //ratesTextField.delegate = self
         
     }
 

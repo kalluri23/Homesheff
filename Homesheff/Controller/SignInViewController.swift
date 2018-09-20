@@ -34,6 +34,10 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+       
+        //simplified back button on next page
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: nil, action: nil)
+        
         
         //makes navigation bar transparent for Sign In page
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -46,6 +50,19 @@ class SignInViewController: UIViewController {
         passwordTextField.setPadding()
         passwordTextField.bottomBorderWhite()
         
+       
+    }
+    
+    //hides navigation bar on SignIn screen
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    //reappears navigation bar on next page
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
