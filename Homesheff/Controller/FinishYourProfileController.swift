@@ -10,7 +10,36 @@ import Foundation
 import UIKit
 
 
-class FinishYourProfile : UIViewController, UITextFieldDelegate{
+class FinishYourProfile : UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+    
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBAction func importProfileImage(_ sender: Any)
+    {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        //CAN ALSO ADD SOURCE TYPE: CAMERA
+        
+        //determined whether the user can edit their image before uploading 
+        image.allowsEditing = false
+        
+        self.present(image, animated: true){
+            //after it is complete
+        }
+    }
+    
+    //when the user has picked the image, checking if item can be converted to an image
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        {
+            profileImage.image = image
+        }
+        else{
+            print("picture failed to upload")
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
