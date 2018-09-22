@@ -28,6 +28,7 @@ class FinishYourProfile : UIViewController, UITextFieldDelegate, UINavigationCon
         }
     }
     
+    
     //when the user has picked the image, checking if item can be converted to an image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
@@ -58,6 +59,12 @@ class FinishYourProfile : UIViewController, UITextFieldDelegate, UINavigationCon
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        profileImage.layer.borderWidth = 1
+        profileImage.layer.masksToBounds = false
+        profileImage.layer.borderColor = UIColor.lightGray.cgColor
+        profileImage.layer.cornerRadius = profileImage.frame.height/2
+        profileImage.clipsToBounds = true
         
         firstNameTextField.setPadding()
         firstNameTextField.setBottomBorderLightGray()
