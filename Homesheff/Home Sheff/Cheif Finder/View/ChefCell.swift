@@ -17,11 +17,12 @@ class ChefCell: UITableViewCell {
     
     @IBOutlet weak var chefRate: UILabel!
     
-    func setChef(chef: Chef){
-        cheffImageView.image = chef.chefImage
-        chefName.text = chef.chefName
-        chefLocation.text = chef.chefLocation
-        chefRate.text = chef.chefRate
+    var chef: Chef? {
+        didSet{
+            cheffImageView.image = chef?.chefImage
+            chefName.text = chef?.chefName
+            chefLocation.text = chef?.chefLocation
+            chefRate.text = chef?.chefRate
+        }
     }
-    
 }

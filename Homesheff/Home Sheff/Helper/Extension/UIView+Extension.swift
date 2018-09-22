@@ -11,7 +11,7 @@
 import Foundation
 import UIKit
 
-extension UIView{
+extension UIView {
     
     func setGradientBackground(colorOne: UIColor, colorTwo: UIColor) {
         

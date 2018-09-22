@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A49D34152156E91500AA24CF /* FindCheifViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49D34142156E91500AA24CF /* FindCheifViewModel.swift */; };
 		E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */; };
 		E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182430214E924F009F62CE /* FindChefsViewController.swift */; };
 		E9182433214E97F0009F62CE /* ChefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182432214E97F0009F62CE /* ChefCell.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A49D34142156E91500AA24CF /* FindCheifViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCheifViewModel.swift; sourceTree = "<group>"; };
 		E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesRatesViewController.swift; sourceTree = "<group>"; };
 		E9182430214E924F009F62CE /* FindChefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefsViewController.swift; sourceTree = "<group>"; };
 		E9182432214E97F0009F62CE /* ChefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefCell.swift; sourceTree = "<group>"; };
@@ -49,13 +51,98 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E9182434214E9893009F62CE /* Controller */ = {
+		A49D340B2156E74A00AA24CF /* Boiler Plate */ = {
+			isa = PBXGroup;
+			children = (
+				E9D14B512147BEFF009A57A1 /* AppDelegate.swift */,
+				E9D14B5A2147BF01009A57A1 /* LaunchScreen.storyboard */,
+			);
+			path = "Boiler Plate";
+			sourceTree = "<group>";
+		};
+		A49D340C2156E76200AA24CF /* Home Sheff */ = {
+			isa = PBXGroup;
+			children = (
+				A49D34122156E8CB00AA24CF /* Helper */,
+				A49D340D2156E85900AA24CF /* Create Account */,
+				A49D340E2156E86600AA24CF /* Finish Your profile */,
+				A49D340F2156E88F00AA24CF /* Location Services */,
+				A49D34102156E89E00AA24CF /* Sign in */,
+				A49D34112156E8A800AA24CF /* Cheif Finder */,
+			);
+			path = "Home Sheff";
+			sourceTree = "<group>";
+		};
+		A49D340D2156E85900AA24CF /* Create Account */ = {
+			isa = PBXGroup;
+			children = (
+				E9D2700721499C130087F476 /* CreateAccountController.swift */,
+			);
+			path = "Create Account";
+			sourceTree = "<group>";
+		};
+		A49D340E2156E86600AA24CF /* Finish Your profile */ = {
+			isa = PBXGroup;
+			children = (
+				E9D2700B214B1D240087F476 /* FinishYourProfileController.swift */,
+			);
+			path = "Finish Your profile";
+			sourceTree = "<group>";
+		};
+		A49D340F2156E88F00AA24CF /* Location Services */ = {
+			isa = PBXGroup;
+			children = (
+				E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */,
+			);
+			path = "Location Services";
+			sourceTree = "<group>";
+		};
+		A49D34102156E89E00AA24CF /* Sign in */ = {
 			isa = PBXGroup;
 			children = (
 				E9D14B532147BEFF009A57A1 /* SignInViewController.swift */,
-				E9D2700721499C130087F476 /* CreateAccountController.swift */,
-				E9D2700B214B1D240087F476 /* FinishYourProfileController.swift */,
-				E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */,
+			);
+			path = "Sign in";
+			sourceTree = "<group>";
+		};
+		A49D34112156E8A800AA24CF /* Cheif Finder */ = {
+			isa = PBXGroup;
+			children = (
+				E9182436214E98C2009F62CE /* Model */,
+				A49D34162156E91C00AA24CF /* View Model */,
+				E9182435214E98B9009F62CE /* View */,
+				A49D34172156EBBE00AA24CF /* Controller */,
+			);
+			path = "Cheif Finder";
+			sourceTree = "<group>";
+		};
+		A49D34122156E8CB00AA24CF /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				A49D34132156E8D200AA24CF /* Extension */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		A49D34132156E8D200AA24CF /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E9D27009214B13F40087F476 /* UIView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		A49D34162156E91C00AA24CF /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				A49D34142156E91500AA24CF /* FindCheifViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		A49D34172156EBBE00AA24CF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				E9182430214E924F009F62CE /* FindChefsViewController.swift */,
 			);
 			path = Controller;
@@ -65,9 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				E9182432214E97F0009F62CE /* ChefCell.swift */,
-				E9D14B582147BF01009A57A1 /* Assets.xcassets */,
-				E9D27009214B13F40087F476 /* UIView+Extension.swift */,
-				E9D14B552147BEFF009A57A1 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -99,12 +183,11 @@
 		E9D14B502147BEFF009A57A1 /* Homesheff */ = {
 			isa = PBXGroup;
 			children = (
-				E9182436214E98C2009F62CE /* Model */,
-				E9182435214E98B9009F62CE /* View */,
-				E9182434214E9893009F62CE /* Controller */,
-				E9D14B512147BEFF009A57A1 /* AppDelegate.swift */,
-				E9D14B5A2147BF01009A57A1 /* LaunchScreen.storyboard */,
+				A49D340B2156E74A00AA24CF /* Boiler Plate */,
+				A49D340C2156E76200AA24CF /* Home Sheff */,
 				E9D14B5D2147BF01009A57A1 /* Info.plist */,
+				E9D14B552147BEFF009A57A1 /* Main.storyboard */,
+				E9D14B582147BF01009A57A1 /* Assets.xcassets */,
 			);
 			path = Homesheff;
 			sourceTree = "<group>";
@@ -183,6 +266,7 @@
 				E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */,
 				E9D2700C214B1D240087F476 /* FinishYourProfileController.swift in Sources */,
 				E9182433214E97F0009F62CE /* ChefCell.swift in Sources */,
+				A49D34152156E91500AA24CF /* FindCheifViewModel.swift in Sources */,
 				E9182438214EA22A009F62CE /* Chef.swift in Sources */,
 				E9D2700821499C130087F476 /* CreateAccountController.swift in Sources */,
 				E9D14B542147BEFF009A57A1 /* SignInViewController.swift in Sources */,
