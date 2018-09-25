@@ -28,7 +28,7 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChefCell") as! ChefCell
+        let cell: ChefCell = tableView.dequeueReusableCell(for: indexPath)
         cell.chef = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
         
         return cell
