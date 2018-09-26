@@ -64,10 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				A49D34122156E8CB00AA24CF /* Helper */,
+				A49D34102156E89E00AA24CF /* Sign in */,
 				A49D340D2156E85900AA24CF /* Create Account */,
 				A49D340E2156E86600AA24CF /* Finish Your profile */,
 				A49D340F2156E88F00AA24CF /* Location Services */,
-				A49D34102156E89E00AA24CF /* Sign in */,
 				A49D34112156E8A800AA24CF /* Cheif Finder */,
 			);
 			path = "Home Sheff";
