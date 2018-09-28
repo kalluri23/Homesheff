@@ -29,6 +29,15 @@ class CreateAccountController: UIViewController {
     
     @IBOutlet weak var signUpButton: UIButton!
     
+    @IBAction func checkBoxTapped(_ sender: UIButton){
+        if sender.isSelected {
+            sender.isSelected = false
+        }
+        else{
+            sender.isSelected = true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
