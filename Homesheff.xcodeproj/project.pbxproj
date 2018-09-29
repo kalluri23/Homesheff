@@ -7,12 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B42017BD6F0D30ECAEC28E3 /* Pods_Homesheff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */; };
 		A49D34152156E91500AA24CF /* FindCheifViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49D34142156E91500AA24CF /* FindCheifViewModel.swift */; };
 		A49D341D215AF21700AA24CF /* UITableViewGenericId.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49D341C215AF21700AA24CF /* UITableViewGenericId.swift */; };
 		E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */; };
 		E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182430214E924F009F62CE /* FindChefsViewController.swift */; };
 		E9182433214E97F0009F62CE /* ChefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182432214E97F0009F62CE /* ChefCell.swift */; };
 		E9182438214EA22A009F62CE /* Chef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182437214EA22A009F62CE /* Chef.swift */; };
+		E975B606216005C400BE6DD2 /* FieldsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975B605216005C400BE6DD2 /* FieldsModel.swift */; };
+		E975B609216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975B607216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift */; };
+		E975B60A216009D100BE6DD2 /* GenericFieldsCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E975B608216009D100BE6DD2 /* GenericFieldsCellTableViewCell.xib */; };
+		E975B60D2160133100BE6DD2 /* ChefFieldsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975B60B2160133100BE6DD2 /* ChefFieldsCell.swift */; };
+		E975B60E2160133100BE6DD2 /* ChefFieldsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E975B60C2160133100BE6DD2 /* ChefFieldsCell.xib */; };
+		E975B6122160156000BE6DD2 /* SignUpContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975B6102160156000BE6DD2 /* SignUpContentTableViewCell.swift */; };
+		E975B6132160156000BE6DD2 /* SignUpContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E975B6112160156000BE6DD2 /* SignUpContentTableViewCell.xib */; };
 		E9D14B522147BEFF009A57A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D14B512147BEFF009A57A1 /* AppDelegate.swift */; };
 		E9D14B542147BEFF009A57A1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D14B532147BEFF009A57A1 /* SignInViewController.swift */; };
 		E9D14B572147BF00009A57A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9D14B552147BEFF009A57A1 /* Main.storyboard */; };
@@ -24,12 +32,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.release.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.release.xcconfig"; sourceTree = "<group>"; };
+		76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homesheff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A49D34142156E91500AA24CF /* FindCheifViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCheifViewModel.swift; sourceTree = "<group>"; };
 		A49D341C215AF21700AA24CF /* UITableViewGenericId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewGenericId.swift; sourceTree = "<group>"; };
+		C8CB94F0F399356DEC3B25B7 /* Pods-Homesheff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.debug.xcconfig"; sourceTree = "<group>"; };
 		E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesRatesViewController.swift; sourceTree = "<group>"; };
 		E9182430214E924F009F62CE /* FindChefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefsViewController.swift; sourceTree = "<group>"; };
 		E9182432214E97F0009F62CE /* ChefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefCell.swift; sourceTree = "<group>"; };
 		E9182437214EA22A009F62CE /* Chef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chef.swift; sourceTree = "<group>"; };
+		E975B605216005C400BE6DD2 /* FieldsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldsModel.swift; sourceTree = "<group>"; };
+		E975B607216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericFieldsCellTableViewCell.swift; sourceTree = "<group>"; };
+		E975B608216009D100BE6DD2 /* GenericFieldsCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericFieldsCellTableViewCell.xib; sourceTree = "<group>"; };
+		E975B60B2160133100BE6DD2 /* ChefFieldsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefFieldsCell.swift; sourceTree = "<group>"; };
+		E975B60C2160133100BE6DD2 /* ChefFieldsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChefFieldsCell.xib; sourceTree = "<group>"; };
+		E975B6102160156000BE6DD2 /* SignUpContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpContentTableViewCell.swift; sourceTree = "<group>"; };
+		E975B6112160156000BE6DD2 /* SignUpContentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpContentTableViewCell.xib; sourceTree = "<group>"; };
 		E9D14B4E2147BEFF009A57A1 /* Homesheff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homesheff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D14B512147BEFF009A57A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9D14B532147BEFF009A57A1 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B42017BD6F0D30ECAEC28E3 /* Pods_Homesheff.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,7 +97,9 @@
 		A49D340D2156E85900AA24CF /* Create Account */ = {
 			isa = PBXGroup;
 			children = (
+				E975B605216005C400BE6DD2 /* FieldsModel.swift */,
 				E9D2700721499C130087F476 /* CreateAccountController.swift */,
+				E975B60F216014F400BE6DD2 /* View */,
 			);
 			path = "Create Account";
 			sourceTree = "<group>";
@@ -151,6 +172,23 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		B164EBEF99C0E409204F778F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BBFD88680A29BA9E463FE1C5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C8CB94F0F399356DEC3B25B7 /* Pods-Homesheff.debug.xcconfig */,
+				17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E9182435214E98B9009F62CE /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,11 +205,26 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		E975B60F216014F400BE6DD2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E975B607216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift */,
+				E975B608216009D100BE6DD2 /* GenericFieldsCellTableViewCell.xib */,
+				E975B60B2160133100BE6DD2 /* ChefFieldsCell.swift */,
+				E975B60C2160133100BE6DD2 /* ChefFieldsCell.xib */,
+				E975B6102160156000BE6DD2 /* SignUpContentTableViewCell.swift */,
+				E975B6112160156000BE6DD2 /* SignUpContentTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E9D14B452147BEFF009A57A1 = {
 			isa = PBXGroup;
 			children = (
 				E9D14B502147BEFF009A57A1 /* Homesheff */,
 				E9D14B4F2147BEFF009A57A1 /* Products */,
+				BBFD88680A29BA9E463FE1C5 /* Pods */,
+				B164EBEF99C0E409204F778F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,9 +255,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E9D14B602147BF01009A57A1 /* Build configuration list for PBXNativeTarget "Homesheff" */;
 			buildPhases = (
+				84249C38A60964BA6B57E1E7 /* [CP] Check Pods Manifest.lock */,
 				E9D14B4A2147BEFF009A57A1 /* Sources */,
 				E9D14B4B2147BEFF009A57A1 /* Frameworks */,
 				E9D14B4C2147BEFF009A57A1 /* Resources */,
+				9B2C2516D04705D5D25500EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -255,11 +310,53 @@
 			files = (
 				E9D14B5C2147BF01009A57A1 /* LaunchScreen.storyboard in Resources */,
 				E9D14B592147BF01009A57A1 /* Assets.xcassets in Resources */,
+				E975B60A216009D100BE6DD2 /* GenericFieldsCellTableViewCell.xib in Resources */,
 				E9D14B572147BF00009A57A1 /* Main.storyboard in Resources */,
+				E975B60E2160133100BE6DD2 /* ChefFieldsCell.xib in Resources */,
+				E975B6132160156000BE6DD2 /* SignUpContentTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		84249C38A60964BA6B57E1E7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Homesheff-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B2C2516D04705D5D25500EE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E9D14B4A2147BEFF009A57A1 /* Sources */ = {
@@ -269,11 +366,15 @@
 				E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */,
 				E9D2700C214B1D240087F476 /* FinishYourProfileController.swift in Sources */,
 				E9182433214E97F0009F62CE /* ChefCell.swift in Sources */,
+				E975B6122160156000BE6DD2 /* SignUpContentTableViewCell.swift in Sources */,
 				A49D34152156E91500AA24CF /* FindCheifViewModel.swift in Sources */,
+				E975B60D2160133100BE6DD2 /* ChefFieldsCell.swift in Sources */,
+				E975B609216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift in Sources */,
 				E9182438214EA22A009F62CE /* Chef.swift in Sources */,
 				E9D2700821499C130087F476 /* CreateAccountController.swift in Sources */,
 				E9D14B542147BEFF009A57A1 /* SignInViewController.swift in Sources */,
 				E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */,
+				E975B606216005C400BE6DD2 /* FieldsModel.swift in Sources */,
 				E9D2700A214B13F40087F476 /* UIView+Extension.swift in Sources */,
 				A49D341D215AF21700AA24CF /* UITableViewGenericId.swift in Sources */,
 				E9D14B522147BEFF009A57A1 /* AppDelegate.swift in Sources */,
@@ -418,6 +519,7 @@
 		};
 		E9D14B612147BF01009A57A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8CB94F0F399356DEC3B25B7 /* Pods-Homesheff.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -436,6 +538,7 @@
 		};
 		E9D14B622147BF01009A57A1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
