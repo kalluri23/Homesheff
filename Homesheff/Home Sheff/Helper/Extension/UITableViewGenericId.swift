@@ -16,6 +16,10 @@ extension ReusableView {
     static var reuseIdentifier: String {
         return String(describing: self)
     }
+    
+    static var nib:UINib {
+        return UINib(nibName: reuseIdentifier, bundle: nil)
+    }
 }
 
 extension UITableViewCell:ReusableView {}
