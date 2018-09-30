@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vry-wH-SnY">
-                        <rect key="frame" x="28" y="24.5" width="264" height="17"/>
+                        <rect key="frame" x="32" y="24.5" width="260" height="17"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
@@ -46,7 +46,7 @@
                     <constraint firstItem="12i-Mf-36L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="bwm-U6-ivf"/>
                     <constraint firstAttribute="trailing" secondItem="12i-Mf-36L" secondAttribute="trailing" constant="28" id="kNc-5V-umF"/>
                     <constraint firstItem="bRS-bu-zfS" firstAttribute="top" secondItem="vry-wH-SnY" secondAttribute="bottom" constant="2" id="vqW-Yv-tcF"/>
-                    <constraint firstItem="vry-wH-SnY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="wiW-qK-ypH"/>
+                    <constraint firstItem="vry-wH-SnY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="wiW-qK-ypH"/>
                     <constraint firstItem="bRS-bu-zfS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="xsp-dJ-A07"/>
                     <constraint firstItem="vry-wH-SnY" firstAttribute="top" secondItem="12i-Mf-36L" secondAttribute="bottom" constant="5" id="yMB-83-n3c"/>
                 </constraints>

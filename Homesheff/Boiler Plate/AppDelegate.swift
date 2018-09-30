@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IQKeyboardManager
+//import IQKeyboardManager
 
 
 @UIApplicationMain
@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = UIColor(red: 124.0/255.0, green: 177.0/255.0, blue: 54.0/255.0, alpha: 1.0)
         UINavigationBar.appearance().tintColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         
-        IQKeyboardManager.shared().isEnabled = true
+       // IQKeyboardManager.shared().isEnabled = true
         return true
     }
 

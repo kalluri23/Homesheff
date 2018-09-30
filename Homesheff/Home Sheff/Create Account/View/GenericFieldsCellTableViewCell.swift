@@ -13,6 +13,13 @@ class GenericFieldsCellTableViewCell: UITableViewCell {
     @IBOutlet weak var genericNameLabel: UILabel!
     @IBOutlet weak var genericField: UITextField!
     
+    var geneircFields: GenericField? {
+        didSet {
+           
+            genericNameLabel.text = geneircFields?.placeHolder
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
