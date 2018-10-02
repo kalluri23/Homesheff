@@ -12,6 +12,12 @@ class ChefFieldsCell: UITableViewCell {
 
     @IBOutlet weak var checkCategory: UIButton!
     @IBOutlet weak var categoryLabel: UILabel!
+    
+    var category: CategoryField? {
+        didSet{
+            categoryLabel.text = category?.placeHolder
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -9,6 +9,13 @@
 import UIKit
 
 class SignUpContentTableViewCell: UITableViewCell {
+    
+    var signup: SignUpField? {
+        didSet{
+            print(signup?.placeHolder)
+        }
+    }
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

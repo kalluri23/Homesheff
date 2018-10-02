@@ -10,6 +10,7 @@
 		2B42017BD6F0D30ECAEC28E3 /* Pods_Homesheff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */; };
 		A49D34152156E91500AA24CF /* FindCheifViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49D34142156E91500AA24CF /* FindCheifViewModel.swift */; };
 		A49D341D215AF21700AA24CF /* UITableViewGenericId.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49D341C215AF21700AA24CF /* UITableViewGenericId.swift */; };
+		A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */; };
 		E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */; };
 		E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182430214E924F009F62CE /* FindChefsViewController.swift */; };
 		E9182433214E97F0009F62CE /* ChefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182432214E97F0009F62CE /* ChefCell.swift */; };
@@ -36,6 +37,7 @@
 		76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homesheff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A49D34142156E91500AA24CF /* FindCheifViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCheifViewModel.swift; sourceTree = "<group>"; };
 		A49D341C215AF21700AA24CF /* UITableViewGenericId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewGenericId.swift; sourceTree = "<group>"; };
+		A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		C8CB94F0F399356DEC3B25B7 /* Pods-Homesheff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.debug.xcconfig"; sourceTree = "<group>"; };
 		E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesRatesViewController.swift; sourceTree = "<group>"; };
 		E9182430214E924F009F62CE /* FindChefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefsViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				E975B605216005C400BE6DD2 /* FieldsModel.swift */,
+				A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */,
 				E9D2700721499C130087F476 /* CreateAccountController.swift */,
 				E975B60F216014F400BE6DD2 /* View */,
 			);
@@ -259,7 +262,6 @@
 				E9D14B4A2147BEFF009A57A1 /* Sources */,
 				E9D14B4B2147BEFF009A57A1 /* Frameworks */,
 				E9D14B4C2147BEFF009A57A1 /* Resources */,
-				9B2C2516D04705D5D25500EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -338,24 +340,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9B2C2516D04705D5D25500EE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -367,6 +351,7 @@
 				E9D2700C214B1D240087F476 /* FinishYourProfileController.swift in Sources */,
 				E9182433214E97F0009F62CE /* ChefCell.swift in Sources */,
 				E975B6122160156000BE6DD2 /* SignUpContentTableViewCell.swift in Sources */,
+				A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */,
 				A49D34152156E91500AA24CF /* FindCheifViewModel.swift in Sources */,
 				E975B60D2160133100BE6DD2 /* ChefFieldsCell.swift in Sources */,
 				E975B609216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift in Sources */,
@@ -522,8 +507,8 @@
 			baseConfigurationReference = C8CB94F0F399356DEC3B25B7 /* Pods-Homesheff.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CFD9594T7R;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Homesheff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -531,6 +516,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimitriosmpapageorgiou.Homesheff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -541,8 +527,8 @@
 			baseConfigurationReference = 17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CFD9594T7R;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Homesheff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,6 +536,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimitriosmpapageorgiou.Homesheff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
