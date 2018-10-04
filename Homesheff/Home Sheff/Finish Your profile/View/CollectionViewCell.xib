@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CollectionViewCell" customModule="Homesheff" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="377" height="222"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="377" height="222"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2db-c4-NET">
+                        <rect key="frame" x="333" y="28" width="8" height="17"/>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD SERVICES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZM-5U-9Fz">
+                        <rect key="frame" x="20" y="9" width="321" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.55294117649999996" green="0.55294117649999996" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9FE-kw-nJc">
+                        <rect key="frame" x="20" y="47" width="321" height="1"/>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="StH-c4-56V"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xz3-zb-Zsq" userLabel="Teaching">
+                        <rect key="frame" x="13" y="127" width="85" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="+ Teaching" backgroundImage="rectangle-suggested-service">
+                            <color key="titleColor" red="0.55294117649999996" green="0.55294117649999996" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggested Chef Services:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfI-AI-GcK" userLabel="Suggested Chef Services:">
+                        <rect key="frame" x="20" y="98" width="321" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.55294117649999996" green="0.55294117649999996" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f0r-iB-YyV" userLabel="Meal Prep">
+                        <rect key="frame" x="105" y="127" width="85" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="+ Meal Prep" backgroundImage="rectangle-suggested-service">
+                            <color key="titleColor" red="0.55294117649999996" green="0.55294117649999996" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6k1-Ec-BT5" userLabel="Grocery Shopping">
+                        <rect key="frame" x="13" y="169" width="137" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="+ Grocery Shopping" backgroundImage="RectangleLong-suggested-service">
+                            <color key="titleColor" red="0.55294117649999996" green="0.55294117649999996" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C8a-an-XeP" userLabel="Creative Dietary Plans">
+                        <rect key="frame" x="10" y="59" width="153" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title=" $ Creative Dietary Plans" backgroundImage="Rectangle">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTF-8Z-6CW" userLabel="Catering">
+                        <rect key="frame" x="178" y="59" width="76" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="$ Catering" backgroundImage="Rectangle-short">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="9FE-kw-nJc" firstAttribute="leading" secondItem="bZM-5U-9Fz" secondAttribute="leading" id="3HU-jg-Gp4"/>
+                <constraint firstItem="9FE-kw-nJc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="47" id="3yI-8e-Or6"/>
+                <constraint firstItem="9FE-kw-nJc" firstAttribute="top" secondItem="2db-c4-NET" secondAttribute="bottom" constant="2" id="NNV-EC-F0m"/>
+                <constraint firstItem="9FE-kw-nJc" firstAttribute="trailing" secondItem="bZM-5U-9Fz" secondAttribute="trailing" id="Tcc-hD-NUx"/>
+                <constraint firstItem="2db-c4-NET" firstAttribute="top" secondItem="bZM-5U-9Fz" secondAttribute="bottom" constant="4" id="UAe-av-eSc"/>
+                <constraint firstItem="9FE-kw-nJc" firstAttribute="trailing" secondItem="VfI-AI-GcK" secondAttribute="trailing" id="bei-i6-Fal"/>
+                <constraint firstItem="9FE-kw-nJc" firstAttribute="trailing" secondItem="2db-c4-NET" secondAttribute="trailing" id="mcx-nM-gYO"/>
+                <constraint firstItem="9FE-kw-nJc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="pEU-sJ-oF5"/>
+                <constraint firstItem="VfI-AI-GcK" firstAttribute="top" secondItem="9FE-kw-nJc" secondAttribute="bottom" constant="50" id="tFX-zo-1kp"/>
+                <constraint firstItem="9FE-kw-nJc" firstAttribute="leading" secondItem="VfI-AI-GcK" secondAttribute="leading" id="v1d-wt-VaO"/>
+                <constraint firstAttribute="trailing" secondItem="9FE-kw-nJc" secondAttribute="trailing" constant="36" id="xAK-a8-no6"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="320" height="222"/>
+            <point key="canvasLocation" x="52" y="111.54422788605699"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Rectangle" width="210" height="52"/>
+        <image name="Rectangle-short" width="89" height="30"/>
+        <image name="RectangleLong-suggested-service" width="137" height="30"/>
+        <image name="rectangle-suggested-service" width="85" height="30"/>
+    </resources>
+</document>
