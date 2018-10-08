@@ -8,10 +8,10 @@
 
 import Foundation
 
-//protocol FieldsViewModelItem {
-//    var type: FieldItemType { get }
-//    var rowCount: Int { get }
-//}
+protocol FinishYourProfileFieldsViewModelItem {
+    var type: FieldItemType { get }
+    var rowCount: Int { get }
+}
 
 class FinishYourProfileViewModel: NSObject {
     

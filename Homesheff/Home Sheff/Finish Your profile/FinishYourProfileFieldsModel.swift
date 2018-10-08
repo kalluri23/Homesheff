@@ -9,26 +9,43 @@
 import Foundation
 
 
-struct CollectionViewField {
-    var addServices: String
-    var placeholder: String
+struct SelectedServicesCollectionViewField {
+    var addedSelectedServices: SelectedServicesCollectionViewCell
 }
+
+struct SuggestedServicesCollectionViewField {
+    var suggestedServices: String
+    var addSuggestedServices: SuggestedServicesCollectionViewCell
+
+}
+
 
 class FinishYourProfileFields {
     
     var genericFields = [GenericField]()
-    //var collectionViewFields = [CollectionViewField]()
+    var selectedCollectionViewFields = [SelectedServicesCollectionViewField]()
+    var suggestedCollectionViewFields = [SuggestedServicesCollectionViewField]()
     
     init() {
         self.addGenericData()
     }
     
     private func addGenericData() {
-        genericFields = [GenericField(name: "FIRST NAME", placeHolder: ""),GenericField(name: "LAST NAME", placeHolder: ""),GenericField(name: "EMAIL", placeHolder: ""),GenericField(name: "LOCATION", placeHolder: ""), GenericField(name: "PHONE", placeHolder: ""), GenericField(name: "RATES", placeHolder: "$ 0.00 /hour")]
+        genericFields = [GenericField(name: "FIRST NAME", placeHolder: ""),GenericField(name: "LAST NAME", placeHolder: ""),GenericField(name: "EMAIL", placeHolder: ""),GenericField(name: "LOCATION", placeHolder: ""), GenericField(name: "PHONE", placeHolder: ""), GenericField(name: "ADD SERVICES", placeHolder: "Service (ex. teaching)"), GenericField(name: "RATES", placeHolder: "$ 0.00 /hour")]
+    }
         
-      // collectionViewFields = [CollectionViewField(addServices: "LOCATION", placeholder: "Service (ex. teaching)")]
-       
+    private func addCollectionViewData(){
+        //NOT SURE HOW TO SET DEFAULT CELL VALUES 
+     //   selectedCollectionViewFields = [SelectedServicesCollectionViewField(addedSelectedServices: <#T##SelectedServicesCollectionViewCell#> )]
+     //   suggestedCollectionViewFields = [SuggestedServicesCollectionViewField(suggestedServices: "Suggested chef services:", addSuggestedServices: <#T##SuggestedServicesCollectionViewCell#>)]
         
     }
+    
+}
+
+enum FinishYourProfileFieldItemType {
+    case genericField
+    case selectedServicesCollectionViewField
+    case suggestedServicesCollectionViewField
 }
 

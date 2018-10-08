@@ -51,6 +51,8 @@ class FinishYourProfile : UIViewController, UITextFieldDelegate, UINavigationCon
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var addServicesTextField: UITextField!
     @IBOutlet weak var ratesTextField: UITextField!
+    @IBOutlet weak var finishYourProfileTableView: UITableView!
+    
     
     var location: String?
     var services: String?
