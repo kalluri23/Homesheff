@@ -7,17 +7,36 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class FindChefsViewController: UIViewController {
     
     @IBOutlet weak var chefTableView: UITableView!
     let findCheifViewModel = FindCheifViewModel()
 
+    @IBOutlet weak var loadingIndoicator: NVActivityIndicatorView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Chef"
         chefTableView.delegate = self
         chefTableView.dataSource = self
+        loadingIndoicator.color = .appDefaultColor
+        loadingIndoicator.type = .ballClipRotate
+        loadingIndoicator.startAnimating()
+        viewModelBinding()
+    
+    }
+    
+    func viewModelBinding()  {
+        findCheifViewModel.reloadTableView = { [weak self] in
+            DispatchQueue.main.async {
+                self?.chefTableView.reloadData()
+                self?.loadingIndoicator.stopAnimating()
+            }
+        }
     }
 }
 
@@ -34,4 +53,9 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ChefDetailsVCID") as! ChefDetailsViewController
+           vc.chefInfo = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

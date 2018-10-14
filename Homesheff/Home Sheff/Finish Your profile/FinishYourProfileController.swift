@@ -51,6 +51,10 @@ class FinishYourProfile : UIViewController, UITextFieldDelegate, UINavigationCon
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var addServicesTextField: UITextField!
     @IBOutlet weak var ratesTextField: UITextField!
+    @IBOutlet weak var finishYourProfileTableView: UITableView!
+    
+    let viewModel = FinishYourProfileViewModel()
+    
     
     var location: String?
     var services: String?
@@ -66,29 +70,33 @@ class FinishYourProfile : UIViewController, UITextFieldDelegate, UINavigationCon
         profileImage.layer.cornerRadius = profileImage.frame.height/2
         profileImage.clipsToBounds = true
         
-        firstNameTextField.setPadding()
-        firstNameTextField.setBottomBorderLightGray()
         
-        lastNameTextField.setPadding()
-        lastNameTextField.setBottomBorderLightGray()
+//        firstNameTextField.setPadding()
+//        firstNameTextField.setBottomBorderLightGray()
+//
+//        lastNameTextField.setPadding()
+//        lastNameTextField.setBottomBorderLightGray()
+//
+//        emailTextField.setPadding()
+//        emailTextField.setBottomBorderLightGray()
+//
+//        locationTextField.setPadding()
+//        locationTextField.setBottomBorderLightGray()
+//
+//        phoneTextField.setPadding()
+//        phoneTextField.setBottomBorderLightGray()
+//
+//        addServicesTextField.setPadding()
+//        addServicesTextField.setBottomBorderLightGray()
 
-        emailTextField.setPadding()
-        emailTextField.setBottomBorderLightGray()
 
-        locationTextField.setPadding()
-        locationTextField.setBottomBorderLightGray()
-        
-        phoneTextField.setPadding()
-        phoneTextField.setBottomBorderLightGray()
-        
-        addServicesTextField.setPadding()
-        addServicesTextField.setBottomBorderLightGray()
-
-
-        locationTextField.delegate = self
+       // locationTextField.delegate = self
         //addServicesTextField.delegate = self
         //ratesTextField.delegate = self
         
+        
+         finishYourProfileTableView.register(GenericFieldsCellTableViewCell.nib, forCellReuseIdentifier: GenericFieldsCellTableViewCell.reuseIdentifier)
+        finishYourProfileTableView.register(SelectedServiceTableViewCell.nib, forCellReuseIdentifier: SelectedServiceTableViewCell.reuseIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -99,7 +107,7 @@ class FinishYourProfile : UIViewController, UITextFieldDelegate, UINavigationCon
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        locationTextField.text = location
+      //  locationTextField.text = location
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -120,4 +128,55 @@ class FinishYourProfile : UIViewController, UITextFieldDelegate, UINavigationCon
     }
     
     
+}
+
+extension FinishYourProfile: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return viewModel.fields[section].rowCount
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.fields.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let item = viewModel.fields[indexPath.section]
+        
+        switch item.type {
+        case .genericField:
+            if let item = item as? FinishGenericFieldItem {
+                let cell: GenericFieldsCellTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.geneircFields = item.genericData[indexPath.row]
+                
+                return cell
+            }
+            
+        case .selectedServicesCollectionViewField:
+            if let item = item as? SelectedServiceFieldItem {
+                let cell: SelectedServiceTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                     print(item.rowCount)
+                cell.services = item.addServices
+                return cell
+            }
+            
+            
+        case .suggestedServicesCollectionViewField:
+            print("here we have to add the item")
+           
+        }
+         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let item = viewModel.fields[indexPath.section]
+        
+        switch item.type {
+        case .selectedServicesCollectionViewField:
+            return 200.0
+        default:
+            return 56.0
+        }
+    }
 }

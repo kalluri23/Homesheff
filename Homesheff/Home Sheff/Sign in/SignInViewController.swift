@@ -31,21 +31,24 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var forgotYourPasswordButton: UIButton!
     @IBOutlet weak var createYourAccountButton: UIButton!
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
        
         //simplified back button on next page
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: nil, action: nil)
-        
-        
-        //makes navigation bar transparent for Sign In page
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: nil, action: nil)
+//
+//
+//        //makes navigation bar transparent for Sign In page
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.isTranslucent = true
         
         usernameTextField.setPadding()
         usernameTextField.bottomBorderWhite()
+        usernameTextField.attributedPlaceholder = NSAttributedString(string:"User Name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        passwordTextField.attributedPlaceholder = NSAttributedString(string:"Password", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
         passwordTextField.setPadding()
         passwordTextField.bottomBorderWhite()
@@ -70,6 +73,20 @@ class SignInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func didTapSignIn(_ sender: UIButton) {
+//n call api from here
+//      let baseTabbar = storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
+//        self.present(baseTabbar, animated: false, completion: nil)
+    }
+    
+    func callLoginAPI() {
+        
+    }
     
 }
 
+extension SignInViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+}

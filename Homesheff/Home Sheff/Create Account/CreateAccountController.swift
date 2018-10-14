@@ -58,7 +58,7 @@ class CreateAccountController: UIViewController {
         passwordTextField.setBottomBorderLightGray()
         
         //simplified back button on next page
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: nil, action: nil)
+       // self.navigationItem.backBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: nil, action: nil)
         
         // Register cell
         
@@ -71,6 +71,11 @@ class CreateAccountController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func navigateToFinishYourProfile() {
+        let vc =  storyboard?.instantiateViewController(withIdentifier: "finishProfileID")
+        self.navigationController?.pushViewController(vc!, animated: true)
     }
 }
 
@@ -112,6 +117,10 @@ extension CreateAccountController: UITableViewDataSource {
             if let item = item as? SignupFieldItem {
                 let cell: SignUpContentTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.signup = item.signupFieldsData
+                
+                cell.didTapSignUp = { [weak self] in
+                    self?.navigateToFinishYourProfile()
+                }
                 
                 return cell
             }
