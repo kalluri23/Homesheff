@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class FindCheifViewModel: NSObject {
+    
+    private let getUserList = APIManager()
+
+    var reloadTableView: (() -> Void)?
+    
     
     /// return default number of section
     var numberOfSection: Int {
@@ -37,7 +43,24 @@ class FindCheifViewModel: NSObject {
     var cheif = [Chef]()
     override init() {
         super.init()
-       self.cheif = self.createArray()
+        
+        getListOfUser(userType: "all")
+       //self.cheif = self.createArray()
+    }
+    
+    private func getListOfUser(userType:String) {
+        getUserList.fetchUserList(requestEnvelop: self.userListEnvelop()) { [weak self] (list,isCompleted ) in
+            self?.cheif = list!
+            self?.reloadTableView?()
+        }
+    }
+    
+    func userListEnvelop() -> Requestable {
+        
+        let userListSearchPath = ServicePath.listOfUsers(userType: "all")
+        let userListEnvelop = ListOfUsers(pathType: userListSearchPath)
+        
+        return userListEnvelop
     }
     
  
@@ -45,20 +68,20 @@ class FindCheifViewModel: NSObject {
 /// Temp data to feed UI
 ///
 /// - Returns: return array of chef
-private func createArray() -> [Chef]{
-    
-    var tempChefs: [Chef] = []
-    
-    let chef1 = Chef(chefImage: #imageLiteral(resourceName: "soma-kun"), chefName: "Ray", chefLocation: "Virginia, USA", chefRate: "25.00")
-    let chef2 = Chef(chefImage: #imageLiteral(resourceName: "erina-sama"), chefName: "Erina", chefLocation: "Kyoto, Japan", chefRate: "35.00")
-    let chef3 = Chef(chefImage: #imageLiteral(resourceName: "alice-nakiri"), chefName: "Alice", chefLocation: "Akina, Japan", chefRate: "40.00")
-    let chef4 = Chef(chefImage: #imageLiteral(resourceName: "aldini-takumi"), chefName: "Takumi", chefLocation: "Osaka, Japan", chefRate: "29.00")
-    
-    tempChefs.append(chef1)
-    tempChefs.append(chef2)
-    tempChefs.append(chef3)
-    tempChefs.append(chef4)
-    
-    return tempChefs
-   }
+//private func createArray() -> [Chef]{
+//    
+//    var tempChefs: [Chef] = []
+//    
+////    let chef1 = Chef(chefImage: #imageLiteral(resourceName: "soma-kun"), chefName: "Ray", chefLocation: "Virginia, USA", chefRate: "25.00")
+////    let chef2 = Chef(chefImage: #imageLiteral(resourceName: "erina-sama"), chefName: "Erina", chefLocation: "Kyoto, Japan", chefRate: "35.00")
+////    let chef3 = Chef(chefImage: #imageLiteral(resourceName: "alice-nakiri"), chefName: "Alice", chefLocation: "Akina, Japan", chefRate: "40.00")
+////    let chef4 = Chef(chefImage: #imageLiteral(resourceName: "aldini-takumi"), chefName: "Takumi", chefLocation: "Osaka, Japan", chefRate: "29.00")
+//    
+//    tempChefs.append(chef1)
+//    tempChefs.append(chef2)
+//    tempChefs.append(chef3)
+//    tempChefs.append(chef4)
+//    
+//    return tempChefs
+//   }
 }

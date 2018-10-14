@@ -10,21 +10,40 @@ import UIKit
 
 class SelectedServicesCollectionViewCell: UICollectionViewCell {
 
-    
-    //needs to be connect to UI
-    @IBOutlet weak var selectedServicesCollectionView: UICollectionView!
 
-    var selectedServiceField: SelectedServicesCollectionViewField?
-    {
+    @IBOutlet weak var contentBackgroundView: UIView!
+    
+    var contentBackgroundColor: UIColor? {
         didSet {
-            
-            //genericNameLabel.text = geneircFields?.placeHolder
+            contentView.backgroundColor = contentBackgroundColor
+            contentBackgroundView.backgroundColor = contentBackgroundColor
+            serviceLabel.textColor = .appDefaultColor
         }
     }
     
+    
+   
+    @IBOutlet weak var serviceLabel: UILabel!
+    //needs to be connect to UI
+    @IBOutlet weak var selectedServicesCollectionView: UICollectionView!
+
+    @IBOutlet weak var widthConstraints: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+       setCollectionViewCellEffect()
+        
+      //  self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+    }
+    
+    func setCollectionViewCellEffect()  {
+        
+        self.contentView.layer.cornerRadius = 15.0
+        self.contentView.layer.borderWidth = 1.0
+        self.contentView.layer.borderColor = UIColor.appDefaultColor.cgColor
+        self.contentView.layer.masksToBounds = true
+        
     }
 
 }

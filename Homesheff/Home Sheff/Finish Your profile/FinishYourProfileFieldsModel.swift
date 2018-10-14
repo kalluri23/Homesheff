@@ -9,35 +9,39 @@
 import Foundation
 
 
-struct SelectedServicesCollectionViewField {
-    var addedSelectedServices: SelectedServicesCollectionViewCell
+struct SelectServiceField {
+    var name: String
+    var isSelected = false
+
 }
 
-struct SuggestedServicesCollectionViewField {
-    var suggestedServices: String
-    var addSuggestedServices: SuggestedServicesCollectionViewCell
-
+struct AddServiceFields {
+    var genericField: GenericField
+    var defaultService: [SelectServiceField]
+    var selectedService: [SelectServiceField]? = nil
+    
 }
 
 
 class FinishYourProfileFields {
     
     var genericFields = [GenericField]()
-    var selectedCollectionViewFields = [SelectedServicesCollectionViewField]()
-    var suggestedCollectionViewFields = [SuggestedServicesCollectionViewField]()
+    var service: AddServiceFields?
     
     init() {
         self.addGenericData()
+        self.addCollectionViewData()
     }
     
     private func addGenericData() {
-        genericFields = [GenericField(name: "FIRST NAME", placeHolder: ""),GenericField(name: "LAST NAME", placeHolder: ""),GenericField(name: "EMAIL", placeHolder: ""),GenericField(name: "LOCATION", placeHolder: ""), GenericField(name: "PHONE", placeHolder: ""), GenericField(name: "ADD SERVICES", placeHolder: "Service (ex. teaching)"), GenericField(name: "RATES", placeHolder: "$ 0.00 /hour")]
+        genericFields = [GenericField(name: "", placeHolder: "FIRST NAME"),GenericField(name: "", placeHolder: "LAST NAME"),GenericField(name: "", placeHolder: "BIO"),GenericField(name: "", placeHolder: "EMAIL"), GenericField(name: "" , placeHolder: "LOCATION"), GenericField(name: "", placeHolder: "PHONE")]
     }
         
     private func addCollectionViewData(){
-        //NOT SURE HOW TO SET DEFAULT CELL VALUES 
-     //   selectedCollectionViewFields = [SelectedServicesCollectionViewField(addedSelectedServices: <#T##SelectedServicesCollectionViewCell#> )]
-     //   suggestedCollectionViewFields = [SuggestedServicesCollectionViewField(suggestedServices: "Suggested chef services:", addSuggestedServices: <#T##SuggestedServicesCollectionViewCell#>)]
+        
+        let genericField = GenericField(name: "", placeHolder: "ADD SERVICES")
+        let defaultService = [SelectServiceField(name: "Teaching", isSelected: false),SelectServiceField(name: "Meal Prep", isSelected: false),SelectServiceField(name: "Catering", isSelected: false),SelectServiceField(name: "Grocery Shopping", isSelected: false)]
+        service = AddServiceFields(genericField: genericField, defaultService: defaultService, selectedService: nil)
         
     }
     

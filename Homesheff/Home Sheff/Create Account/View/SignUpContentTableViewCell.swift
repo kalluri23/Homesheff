@@ -10,6 +10,8 @@ import UIKit
 
 class SignUpContentTableViewCell: UITableViewCell {
     
+    var didTapSignUp: (() -> Void)?
+    
     var signup: SignUpField? {
         didSet{
             print(signup?.placeHolder)
@@ -22,6 +24,9 @@ class SignUpContentTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    @IBAction func didTapSignup(_ sender: UIButton) {
+           self.didTapSignUp?()
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

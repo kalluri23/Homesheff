@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import IQKeyboardManager
+import IQKeyboardManagerSwift
 
 
 @UIApplicationMain
@@ -18,9 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        UINavigationBar.appearance().backgroundColor = UIColor(red: 124.0/255.0, green: 177.0/255.0, blue: 54.0/255.0, alpha: 1.0)
-        UINavigationBar.appearance().tintColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+       // UINavigationBar.appearance().backgroundColor = UIColor(red: 145.0/255.0, green: 175.0/255.0, blue: 88.0/255.0, alpha: 1.0)
+     //   UINavigationBar.appearance().tintColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
         
+        ConfigEndPoints.shared.initialize()
+        IQKeyboardManager.shared.enable = true
+
        // IQKeyboardManager.shared().isEnabled = true
         return true
     }

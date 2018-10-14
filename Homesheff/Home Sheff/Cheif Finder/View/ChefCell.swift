@@ -19,10 +19,10 @@ class ChefCell: UITableViewCell {
     
     var chef: Chef? {
         didSet{
-            cheffImageView.image = chef?.chefImage
-            chefName.text = chef?.chefName
-            chefLocation.text = chef?.chefLocation
-            chefRate.text = chef?.chefRate
+           cheffImageView.image = UIImage(named: "soma-kun")
+            chefName.text = chef?.firstName
+            chefLocation.text = "Virginia, USA"
+            chefRate.text = "$25"
         }
     }
 }

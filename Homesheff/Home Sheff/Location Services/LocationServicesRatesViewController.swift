@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationServicesRatesViewController: UIViewController, UINavigationControllerDelegate{
+class LocationServicesRatesViewController: UIViewController {
     
     @IBOutlet weak var locationTextView: UITextView!
     
@@ -27,7 +27,6 @@ class LocationServicesRatesViewController: UIViewController, UINavigationControl
         
         locationTextView.becomeFirstResponder()
         
-        navigationController?.delegate = self
         
         // Do any additional setup after loading the view.
     }
@@ -37,11 +36,11 @@ class LocationServicesRatesViewController: UIViewController, UINavigationControl
         // Dispose of any resources that can be recreated.
     }
     
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        
-        if let formViewController = viewController as? FinishYourProfile {
-            
-            formViewController.location = locationTextView.text
-        }
-    }
+//    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+//        
+//        if let formViewController = viewController as? FinishYourProfile {
+//            
+//            formViewController.location = locationTextView.text
+//        }
+//    }
 }
