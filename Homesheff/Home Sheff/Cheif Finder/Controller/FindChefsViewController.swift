@@ -23,7 +23,7 @@ class FindChefsViewController: UIViewController {
         self.title = "Chef"
         chefTableView.delegate = self
         chefTableView.dataSource = self
-        loadingIndoicator.color = .appDefaultColor
+        loadingIndoicator.color = .black
         loadingIndoicator.type = .ballClipRotate
         loadingIndoicator.startAnimating()
         viewModelBinding()

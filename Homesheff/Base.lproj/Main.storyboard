@@ -47,7 +47,7 @@
                                     <constraint firstItem="tFN-Xa-azj" firstAttribute="top" secondItem="IBH-EC-tzP" secondAttribute="bottom" constant="5" id="kld-S4-RyC"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Username" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GhX-0b-RfX">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GhX-0b-RfX">
                                 <rect key="frame" x="40" y="321" width="334" height="20"/>
                                 <color key="backgroundColor" red="0.48627450979999998" green="0.69411764710000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -60,7 +60,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="j6M-iK-w3S"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1bU-pX-waH">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1bU-pX-waH">
                                 <rect key="frame" x="40" y="371" width="334" height="20"/>
                                 <color key="backgroundColor" red="0.48627450979999998" green="0.69411764710000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -130,12 +130,21 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uyp-eG-ewk" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="185" y="453" width="44" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="qUt-z5-aoO"/>
+                                    <constraint firstAttribute="height" constant="44" id="sH2-DX-9vh"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.48627450980392156" green="0.69411764705882351" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gGW-qL-sXY" secondAttribute="trailing" id="6wb-U3-Sho"/>
                             <constraint firstItem="gWE-fv-ynE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7XB-BP-tVr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1bU-pX-waH" secondAttribute="trailing" constant="40" id="7bc-qA-56g"/>
+                            <constraint firstItem="Uyp-eG-ewk" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="8jV-f0-ATT"/>
                             <constraint firstItem="twm-e1-SIt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="9Gx-6T-fhL"/>
                             <constraint firstItem="GhX-0b-RfX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="DIy-fH-xj4"/>
                             <constraint firstItem="GhX-0b-RfX" firstAttribute="top" secondItem="gWE-fv-ynE" secondAttribute="bottom" constant="30" id="JTk-ke-4f2"/>
@@ -144,6 +153,7 @@
                             <constraint firstItem="gWE-fv-ynE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NBx-Q2-Fnj"/>
                             <constraint firstItem="gGW-qL-sXY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="e9R-LZ-kxe"/>
                             <constraint firstItem="gWE-fv-ynE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="eEj-Fg-uZP"/>
+                            <constraint firstItem="Uyp-eG-ewk" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="frE-uG-90l"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GhX-0b-RfX" secondAttribute="trailing" constant="40" id="hDK-em-EHc"/>
                             <constraint firstItem="1bU-pX-waH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="jBE-a4-5TG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="twm-e1-SIt" secondAttribute="trailing" constant="57" id="mP2-zF-yic"/>
@@ -156,6 +166,7 @@
                     <connections>
                         <outlet property="createYourAccountButton" destination="M4J-Rw-jjz" id="OAq-uo-yRb"/>
                         <outlet property="forgotYourPasswordButton" destination="twm-e1-SIt" id="3J4-hi-eB7"/>
+                        <outlet property="loadingIndicator" destination="Uyp-eG-ewk" id="wVX-Tq-KUq"/>
                         <outlet property="passwordTextField" destination="1bU-pX-waH" id="yIe-8Y-Pkc"/>
                         <outlet property="signInButton" destination="qwq-v1-iua" id="Smp-y5-ady"/>
                         <outlet property="usernameTextField" destination="GhX-0b-RfX" id="hCN-5u-PvU"/>
@@ -591,7 +602,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HQq-WE-fKP">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plantarian-profileimg" translatesAutoresizingMaskIntoConstraints="NO" id="HQq-WE-fKP">
                                 <rect key="frame" x="162" y="44" width="90" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="XPd-nK-YVg"/>
@@ -775,7 +786,6 @@
         <!--Navigation Controller-->
         <scene sceneID="LbQ-U0-Xe1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IV1-z5-KPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="eYM-TP-8yv" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="x8e-Dp-XSc">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -797,6 +807,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="z1V-wM-KhJ"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IV1-z5-KPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-332" y="-119"/>
         </scene>
@@ -4173,6 +4184,7 @@ AAAAAAAAAAAAAALRRQ
         <image name="my-account-selected" width="75" height="75"/>
         <image name="pencil-icon" width="11" height="11"/>
         <image name="pencil-icon-background-circle" width="33" height="33"/>
+        <image name="plantarian-profileimg" width="90" height="90"/>
         <image name="search-nonselected" width="75" height="75"/>
         <image name="search-selected" width="75" height="75"/>
         <image name="soma-kun" width="225" height="225"/>

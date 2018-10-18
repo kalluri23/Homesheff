@@ -10,6 +10,25 @@ import Foundation
 import Alamofire
 
 class APIManager {
+    
+    typealias LoginSuccessHanlder = (Bool) -> Void
+    func signInApi(requestEnvelop:Requestable, completion: @escaping LoginSuccessHanlder)  {
+        
+        Alamofire.request(
+            requestEnvelop.requestURL()!,
+            parameters: requestEnvelop.pathType.httpBodyEnvelop(),
+            headers: requestEnvelop.httpHeaders()).validate()
+            .responseString { response  in
+                
+               // if response.result == "null" {}
+                switch response.result{
+                   case .success:
+                    completion(true)
+                case .failure:
+                    completion(false)
+                }
+    }
+}
   
   typealias CompletionHandler = ([Chef]?,Bool) -> Void
   
