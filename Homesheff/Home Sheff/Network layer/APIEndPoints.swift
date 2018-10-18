@@ -23,6 +23,12 @@ struct ListOfUsers:Requestable {
   var pathType : ServicePath
 }
 
+struct SignInEnvelop:Requestable {
+    var apiPath:String { return "getUserByUsernamePassword" }
+    var httpType:HttpType { return .get }
+    var pathType : ServicePath
+}
+
 
 /*
  ALL services post dictionary is mentioned under enum switch statement.
@@ -32,6 +38,7 @@ struct ListOfUsers:Requestable {
 internal enum ServicePath:ParameterBodyMaker {
   
   case listOfUsers(userType: String)
+  case signInCall(userName: String, password: String)
   
   func httpBodyEnvelop()->[String:Any]? {
     
@@ -39,6 +46,9 @@ internal enum ServicePath:ParameterBodyMaker {
     case .listOfUsers(userType: let userType):
       
       return ["userType": userType]
+      
+    case .signInCall(userName: let userName, password: let password):
+        return ["username": userName, "password": password]
     }
   }
   

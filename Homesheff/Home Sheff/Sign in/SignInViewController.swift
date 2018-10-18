@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 extension UITextField{
     
@@ -30,20 +31,14 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var forgotYourPasswordButton: UIButton!
     @IBOutlet weak var createYourAccountButton: UIButton!
+    @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
     
+    let viewModel = SignInViewModel()
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-       
-        //simplified back button on next page
-//        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: nil, action: nil)
-//
-//
-//        //makes navigation bar transparent for Sign In page
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.isTranslucent = true
+        loadingIndicator.color = .black
+        loadingIndicator.type = .ballClipRotate
         
         usernameTextField.setPadding()
         usernameTextField.bottomBorderWhite()
@@ -74,6 +69,8 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func didTapSignIn(_ sender: UIButton) {
+        loadingIndicator.startAnimating()
+        callLoginAPI()
 //n call api from here
 //      let baseTabbar = storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
 //        self.present(baseTabbar, animated: false, completion: nil)
@@ -81,12 +78,34 @@ class SignInViewController: UIViewController {
     
     func callLoginAPI() {
         
+        if usernameTextField.text !=  nil && passwordTextField.text != nil {
+            viewModel.signInApi(envelop:userListEnvelop(userName: usernameTextField.text!, password: passwordTextField.text!)) { [weak self] isSuccess in
+                
+                if isSuccess{
+                    self?.loadingIndicator.stopAnimating()
+                    let baseTabbar = self?.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
+                    self?.present(baseTabbar, animated: false, completion: nil)
+                } else {
+                    // Throw an error here
+                }
+                
+            }
+        }
     }
     
+    func userListEnvelop(userName: String, password: String) -> Requestable {
+        
+        let userListSearchPath = ServicePath.signInCall(userName: userName, password: password)
+        let userListEnvelop = SignInEnvelop(pathType: userListSearchPath)
+        
+        return userListEnvelop
+    }
 }
 
 extension SignInViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-    }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        if textField .isEqual(usernameTextField) {
+//
+//        }
+//    }
 }

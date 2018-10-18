@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2B42017BD6F0D30ECAEC28E3 /* Pods_Homesheff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */; };
+		A403097421794F71001397EE /* UserDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A403097321794F71001397EE /* UserDetailModal.swift */; };
+		A403097621795046001397EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A403097521795046001397EE /* User.swift */; };
 		A49D34152156E91500AA24CF /* FindCheifViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49D34142156E91500AA24CF /* FindCheifViewModel.swift */; };
 		A49D341D215AF21700AA24CF /* UITableViewGenericId.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49D341C215AF21700AA24CF /* UITableViewGenericId.swift */; };
 		A4AA63FF2173B6E5007D83F2 /* ProfileGenericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA63FD2173B6E5007D83F2 /* ProfileGenericTableViewCell.swift */; };
@@ -18,6 +20,7 @@
 		A4AA64092173CC5C007D83F2 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA64082173CC5C007D83F2 /* UserProfileViewController.swift */; };
 		A4AA640C2173CD57007D83F2 /* UserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA640A2173CD57007D83F2 /* UserProfileTableViewCell.swift */; };
 		A4AA640D2173CD57007D83F2 /* UserProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4AA640B2173CD57007D83F2 /* UserProfileTableViewCell.xib */; };
+		A4AA640F2173FF4E007D83F2 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA640E2173FF4E007D83F2 /* SignInViewModel.swift */; };
 		A4C92498216ECAB000F3BBDE /* SelectedServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C92496216ECAB000F3BBDE /* SelectedServiceTableViewCell.swift */; };
 		A4C92499216ECAB000F3BBDE /* SelectedServiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C92497216ECAB000F3BBDE /* SelectedServiceTableViewCell.xib */; };
 		A4C9249C216ED7BD00F3BBDE /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C9249A216ED7BD00F3BBDE /* CollectionReusableView.swift */; };
@@ -62,6 +65,8 @@
 /* Begin PBXFileReference section */
 		17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.release.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.release.xcconfig"; sourceTree = "<group>"; };
 		76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homesheff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A403097321794F71001397EE /* UserDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModal.swift; sourceTree = "<group>"; };
+		A403097521795046001397EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A49D34142156E91500AA24CF /* FindCheifViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCheifViewModel.swift; sourceTree = "<group>"; };
 		A49D341C215AF21700AA24CF /* UITableViewGenericId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewGenericId.swift; sourceTree = "<group>"; };
 		A4AA63FD2173B6E5007D83F2 /* ProfileGenericTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGenericTableViewCell.swift; sourceTree = "<group>"; };
@@ -72,6 +77,7 @@
 		A4AA64082173CC5C007D83F2 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		A4AA640A2173CD57007D83F2 /* UserProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A4AA640B2173CD57007D83F2 /* UserProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileTableViewCell.xib; sourceTree = "<group>"; };
+		A4AA640E2173FF4E007D83F2 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		A4C92496216ECAB000F3BBDE /* SelectedServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServiceTableViewCell.swift; sourceTree = "<group>"; };
 		A4C92497216ECAB000F3BBDE /* SelectedServiceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedServiceTableViewCell.xib; sourceTree = "<group>"; };
 		A4C9249A216ED7BD00F3BBDE /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
@@ -187,6 +193,9 @@
 			isa = PBXGroup;
 			children = (
 				E9D14B532147BEFF009A57A1 /* SignInViewController.swift */,
+				A403097521795046001397EE /* User.swift */,
+				A403097321794F71001397EE /* UserDetailModal.swift */,
+				A4AA640E2173FF4E007D83F2 /* SignInViewModel.swift */,
 			);
 			path = "Sign in";
 			sourceTree = "<group>";
@@ -501,6 +510,7 @@
 				E975B609216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift in Sources */,
 				A4C9249F2172AFB800F3BBDE /* BaseTabbarController.swift in Sources */,
 				E9182438214EA22A009F62CE /* Chef.swift in Sources */,
+				A403097621795046001397EE /* User.swift in Sources */,
 				E9D2700821499C130087F476 /* CreateAccountController.swift in Sources */,
 				E9B3AF7B216A7557005BE172 /* SelectedServicesCollectionViewCell.swift in Sources */,
 				E9B3AF81216A75BC005BE172 /* SuggestedServicesCollectionViewCell.swift in Sources */,
@@ -515,6 +525,8 @@
 				A4C924C52173A41700F3BBDE /* UserAccountCell.swift in Sources */,
 				E9836C5B21659782004554D4 /* FinishYourProfileFieldsModel.swift in Sources */,
 				E9D2700A214B13F40087F476 /* UIView+Extension.swift in Sources */,
+				A4AA640F2173FF4E007D83F2 /* SignInViewModel.swift in Sources */,
+				A403097421794F71001397EE /* UserDetailModal.swift in Sources */,
 				A49D341D215AF21700AA24CF /* UITableViewGenericId.swift in Sources */,
 				E9D14B522147BEFF009A57A1 /* AppDelegate.swift in Sources */,
 				A4C92498216ECAB000F3BBDE /* SelectedServiceTableViewCell.swift in Sources */,
