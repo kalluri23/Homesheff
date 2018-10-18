@@ -23,8 +23,21 @@ class APIManager {
                // if response.result == "null" {}
                 switch response.result{
                    case .success:
-                    completion(true)
-                case .failure:
+                    if response.result.value != nil {
+                        
+                        do {
+                            let jsonDecoder = JSONDecoder()
+                            let list = try jsonDecoder.decode(User.self, from: response.data!)
+                            UserDetailModal.sharedInstance.user = list
+                            completion(true)
+                        }
+                        catch {
+                            
+                            print(error)
+                        }
+                        
+                    }
+                      case .failure:
                     completion(false)
                 }
     }
