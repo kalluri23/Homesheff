@@ -33,7 +33,7 @@ class APIManager {
                         }
                         catch {
                             
-                            print(error)
+                           completion(false)
                         }
                         
                     }
