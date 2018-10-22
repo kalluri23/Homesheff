@@ -13,10 +13,16 @@ class GenericFieldsCellTableViewCell: UITableViewCell {
     @IBOutlet weak var genericNameLabel: UILabel!
     @IBOutlet weak var genericField: UITextField!
     
+    //var didTapSignUp: ((String) -> Void)?
+    
     var geneircFields: GenericField? {
         didSet {
            
             genericNameLabel.text = geneircFields?.placeHolder
+            
+            if geneircFields?.placeHolder == "Password" {
+                genericField.isSecureTextEntry =  true
+            }
         }
     }
     
@@ -28,7 +34,6 @@ class GenericFieldsCellTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
 }

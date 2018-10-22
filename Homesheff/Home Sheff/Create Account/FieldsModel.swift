@@ -36,7 +36,7 @@ class Fields {
     }
 
     private func addGenericData() {
-      genericFields = [GenericField(name: "", placeHolder: "First Name"),GenericField(name: "", placeHolder: "Last Name"),GenericField(name: "", placeHolder: "Email"),GenericField(name: "", placeHolder: "Password")]
+      genericFields = [GenericField(name: "", placeHolder: "First Name"),GenericField(name: "", placeHolder: "Last Name"),GenericField(name: "", placeHolder: "Email"),GenericField(name: "", placeHolder: "Password"), GenericField(name: "", placeHolder: "Phone No")]
         categoryFields = [CategoryField(placeHolder: "I want to be a chef", isSelected: false),CategoryField(placeHolder: "I want to be a customer", isSelected: false)]
         signUpFields = SignUpField(placeHolder: "Sign Up", termsAndCondition: "terms and condition")
         

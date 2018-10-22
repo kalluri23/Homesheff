@@ -89,10 +89,9 @@ class SignInViewController: UIViewController {
                     let baseTabbar = self?.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
                     self?.present(baseTabbar, animated: false, completion: nil)
                 } else {
-                    self?.loadingIndicator.stopAnimating()
                     self?.showAlert(title: "Oops!", message: "Please check your email address & password")
                 }
-                
+                 self?.loadingIndicator.stopAnimating()
             }
     } else {
         self.showAlert(title: "Oops!", message: "Please check your email address & password")

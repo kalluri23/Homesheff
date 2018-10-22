@@ -29,6 +29,12 @@ struct SignInEnvelop:Requestable {
     var pathType : ServicePath
 }
 
+struct SignUpEnvelop:Requestable {
+    var apiPath:String { return "saveUserInformation" }
+    var httpType:HttpType { return .post }
+    var pathType : ServicePath
+}
+
 
 /*
  ALL services post dictionary is mentioned under enum switch statement.
@@ -39,6 +45,7 @@ internal enum ServicePath:ParameterBodyMaker {
   
   case listOfUsers(userType: String)
   case signInCall(userName: String, password: String)
+  case signUpCall(userName: String, password: String, phoneNo: String)
   
   func httpBodyEnvelop()->[String:Any]? {
     
@@ -49,6 +56,9 @@ internal enum ServicePath:ParameterBodyMaker {
       
     case .signInCall(userName: let userName, password: let password):
         return ["username": userName, "password": password]
+        
+    case .signUpCall(userName: let userName, password: let password, phoneNo: let phoneNo):
+        return ["username": userName, "password": password, "phone": phoneNo]
     }
   }
   
