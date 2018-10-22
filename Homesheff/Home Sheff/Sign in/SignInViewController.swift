@@ -69,28 +69,33 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func didTapSignIn(_ sender: UIButton) {
-        loadingIndicator.startAnimating()
         callLoginAPI()
-//n call api from here
-//      let baseTabbar = storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
-//        self.present(baseTabbar, animated: false, completion: nil)
     }
     
-    func callLoginAPI() {
+    private func isTextFieldHasText() -> Bool {
+        if usernameTextField.text?.isEmpty ?? false || passwordTextField.text?.isEmpty ?? false {
+            return false
+        }
+        return true
+    }
+    
+   private func callLoginAPI() {
         
-        if usernameTextField.text !=  nil && passwordTextField.text != nil {
+        if isTextFieldHasText() {
+              loadingIndicator.startAnimating()
             viewModel.signInApi(envelop:userListEnvelop(userName: usernameTextField.text!, password: passwordTextField.text!)) { [weak self] isSuccess in
                 
                 if isSuccess{
-                    self?.loadingIndicator.stopAnimating()
                     let baseTabbar = self?.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
                     self?.present(baseTabbar, animated: false, completion: nil)
                 } else {
-                    // Throw an error here
+                    self?.showAlert(title: "Oops!", message: "Please check your email address & password")
                 }
-                
+                 self?.loadingIndicator.stopAnimating()
             }
-        }
+    } else {
+        self.showAlert(title: "Oops!", message: "Please check your email address & password")
+    }
     }
     
     func userListEnvelop(userName: String, password: String) -> Requestable {
@@ -102,10 +107,3 @@ class SignInViewController: UIViewController {
     }
 }
 
-extension SignInViewController: UITextFieldDelegate {
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        if textField .isEqual(usernameTextField) {
-//
-//        }
-//    }
-}

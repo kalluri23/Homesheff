@@ -33,7 +33,7 @@ class APIManager {
                         }
                         catch {
                             
-                            print(error)
+                           completion(false)
                         }
                         
                     }
@@ -42,6 +42,30 @@ class APIManager {
                 }
     }
 }
+    
+    func signUpCall(requestEnvelop:Requestable, completion: @escaping (Bool) -> Void)  {
+        
+        let method = requestEnvelop.httpType.rawValue
+        let type = HTTPMethod(rawValue: method)
+        
+        Alamofire.request(
+            requestEnvelop.requestURL()!,
+            method: type!,
+            parameters: requestEnvelop.pathType.httpBodyEnvelop(),
+            encoding: JSONEncoding.default,
+            headers: requestEnvelop.httpHeaders())
+            .responseString { (response) -> Void in
+                
+                switch response.result{
+                case .success:
+                    if response.result.value != nil && response.result.value == "success" {
+                        completion(true)
+                    }
+                case .failure:
+                    completion(false)
+                }
+        }
+    }
   
   typealias CompletionHandler = ([Chef]?,Bool) -> Void
   

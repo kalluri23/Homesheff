@@ -17,6 +17,11 @@ class CreateAccountViewModel: NSObject {
     
     let fieldData = Fields()
     var fields = [FieldsViewModelItem]()
+    let apiHandler = APIManager()
+    
+    func signUp(envelop:Requestable, completion: @escaping (Bool) -> Void ) {
+        apiHandler.signUpCall(requestEnvelop: envelop, completion: completion)
+    }
     
     override init() {
         

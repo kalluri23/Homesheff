@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import NVActivityIndicatorView
 
 
 extension UITextField{
@@ -28,6 +29,13 @@ class CreateAccountController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var createAccountTableView: UITableView!
     
+    var username: String?
+    var password: String?
+    var phoneNo: String?
+    
+    @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
+
+    
     let viewModel = CreateAccountViewModel()
     
     @IBOutlet weak var signUpButton: UIButton!
@@ -45,17 +53,20 @@ class CreateAccountController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        firstNameTextField.setPadding()
-        firstNameTextField.setBottomBorderLightGray()
+        loadingIndicator.color = .black
+        loadingIndicator.type = .ballClipRotate
         
-        lastNameTextField.setPadding()
-        lastNameTextField.setBottomBorderLightGray()
-        
-        emailTextField.setPadding()
-        emailTextField.setBottomBorderLightGray()
-        
-        passwordTextField.setPadding()
-        passwordTextField.setBottomBorderLightGray()
+//        firstNameTextField.setPadding()
+//        firstNameTextField.setBottomBorderLightGray()
+//        
+//        lastNameTextField.setPadding()
+//        lastNameTextField.setBottomBorderLightGray()
+//        
+//        emailTextField.setPadding()
+//        emailTextField.setBottomBorderLightGray()
+//        
+//        passwordTextField.setPadding()
+//        passwordTextField.setBottomBorderLightGray()
         
         //simplified back button on next page
        // self.navigationItem.backBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: nil, action: nil)
@@ -73,9 +84,68 @@ class CreateAccountController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    private func callSignupAPI() {
+       
+        let item = viewModel.fields[0]
+        
+        if item.type == .genericField {
+              if let item = item as? GenericFieldItem {
+                for value in item.genericData {
+                    switch value.placeHolder {
+                    case "Email":
+                        username = value.name
+                    case "Password":
+                        password = value.name
+                    case "Phone No":
+                        phoneNo = value.name
+                    default:
+                        print(value.name)
+                    }
+                }
+            }
+        }
+        
+        signupAPI()
+    }
+    
+    private func signupAPI() {
+        
+        if isTextFieldHasText() {
+            loadingIndicator.startAnimating()
+            
+            viewModel.signUp(envelop: signUpEnvelop()) { [weak self] isSuccess in
+                
+                                if isSuccess{
+                                  self?.navigationController?.popViewController(animated: true)
+                                } else {
+                                    self?.loadingIndicator.stopAnimating()
+                                    self?.showAlert(title: "Oops!", message: "Please check your details")
+                                }
+                
+                            }
+        } else {
+            self.showAlert(title: "Oops!", message: "Please check your details")
+        }
+    }
+    
+    private func isTextFieldHasText() -> Bool {
+        if username?.isEmpty ?? false && password?.isEmpty ?? false && phoneNo?.isEmpty ?? false {
+            return false
+        }
+        return true
+    }
+    
     private func navigateToFinishYourProfile() {
         let vc =  storyboard?.instantiateViewController(withIdentifier: "finishProfileID")
         self.navigationController?.pushViewController(vc!, animated: true)
+    }
+    
+   private func signUpEnvelop() -> Requestable {
+        
+        let signupSearchPath = ServicePath.signUpCall(userName: username!, password: password!, phoneNo: phoneNo!)
+        let signupEnvelop = SignUpEnvelop(pathType: signupSearchPath)
+        
+        return signupEnvelop
     }
 }
 
@@ -99,7 +169,9 @@ extension CreateAccountController: UITableViewDataSource {
             if let item = item as? GenericFieldItem {
                 let cell: GenericFieldsCellTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.geneircFields = item.genericData[indexPath.row]
-                
+                cell.genericField.tag = indexPath.item
+                cell.tag = indexPath.section
+                cell.genericField.delegate = self
                 return cell
             }
             
@@ -119,7 +191,7 @@ extension CreateAccountController: UITableViewDataSource {
                 cell.signup = item.signupFieldsData
                 
                 cell.didTapSignUp = { [weak self] in
-                    self?.navigateToFinishYourProfile()
+                    self?.callSignupAPI()
                 }
                 
                 return cell
@@ -129,6 +201,21 @@ extension CreateAccountController: UITableViewDataSource {
         }
          return UITableViewCell()
     }
+}
+
+//TODO: Move it cell class
+extension CreateAccountController: UITextFieldDelegate {
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if viewModel.fields[0].type == .genericField {
+            
+            if let item = viewModel.fields[0] as? GenericFieldItem {
+                item.genericData[textField.tag].name = textField.text ?? ""
+                
+                print(item.genericData[textField.tag].name)
+            }
+        }
+    }
 }
 

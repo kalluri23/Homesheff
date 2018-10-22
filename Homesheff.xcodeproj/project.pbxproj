@@ -34,6 +34,7 @@
 		A4C924BE21739D0000F3BBDE /* UserAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C924BD21739D0000F3BBDE /* UserAccountViewController.swift */; };
 		A4C924C52173A41700F3BBDE /* UserAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C924C32173A41700F3BBDE /* UserAccountCell.swift */; };
 		A4C924C62173A41700F3BBDE /* UserAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C924C42173A41700F3BBDE /* UserAccountCell.xib */; };
+		A4D45760217CEDDC002E4588 /* TermsAndConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */; };
 		A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */; };
 		E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */; };
 		E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182430214E924F009F62CE /* FindChefsViewController.swift */; };
@@ -91,6 +92,7 @@
 		A4C924BD21739D0000F3BBDE /* UserAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountViewController.swift; sourceTree = "<group>"; };
 		A4C924C32173A41700F3BBDE /* UserAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountCell.swift; sourceTree = "<group>"; };
 		A4C924C42173A41700F3BBDE /* UserAccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserAccountCell.xib; sourceTree = "<group>"; };
+		A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionViewController.swift; sourceTree = "<group>"; };
 		A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		C8CB94F0F399356DEC3B25B7 /* Pods-Homesheff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.debug.xcconfig"; sourceTree = "<group>"; };
 		E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesRatesViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,8 @@
 		A49D340C2156E76200AA24CF /* Home Sheff */ = {
 			isa = PBXGroup;
 			children = (
+				A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */,
+				A4D4575E217CECCC002E4588 /* Account */,
 				A4AA64072173CC17007D83F2 /* Chef Details */,
 				A4C924BA2173920D00F3BBDE /* Network layer */,
 				A49D34122156E8CB00AA24CF /* Helper */,
@@ -162,9 +166,9 @@
 		A49D340D2156E85900AA24CF /* Create Account */ = {
 			isa = PBXGroup;
 			children = (
-				E975B605216005C400BE6DD2 /* FieldsModel.swift */,
-				A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */,
 				E9D2700721499C130087F476 /* CreateAccountController.swift */,
+				A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */,
+				E975B605216005C400BE6DD2 /* FieldsModel.swift */,
 				E975B60F216014F400BE6DD2 /* View */,
 			);
 			path = "Create Account";
@@ -268,6 +272,19 @@
 			path = "Network layer";
 			sourceTree = "<group>";
 		};
+		A4D4575E217CECCC002E4588 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				A4AA64082173CC5C007D83F2 /* UserProfileViewController.swift */,
+				A4AA640A2173CD57007D83F2 /* UserProfileTableViewCell.swift */,
+				A4AA640B2173CD57007D83F2 /* UserProfileTableViewCell.xib */,
+				A4C924BD21739D0000F3BBDE /* UserAccountViewController.swift */,
+				A4C924C32173A41700F3BBDE /* UserAccountCell.swift */,
+				A4C924C42173A41700F3BBDE /* UserAccountCell.xib */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 		B164EBEF99C0E409204F778F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,12 +367,6 @@
 		E9D14B502147BEFF009A57A1 /* Homesheff */ = {
 			isa = PBXGroup;
 			children = (
-				A4AA64082173CC5C007D83F2 /* UserProfileViewController.swift */,
-				A4AA640A2173CD57007D83F2 /* UserProfileTableViewCell.swift */,
-				A4AA640B2173CD57007D83F2 /* UserProfileTableViewCell.xib */,
-				A4C924BD21739D0000F3BBDE /* UserAccountViewController.swift */,
-				A4C924C32173A41700F3BBDE /* UserAccountCell.swift */,
-				A4C924C42173A41700F3BBDE /* UserAccountCell.xib */,
 				A49D340B2156E74A00AA24CF /* Boiler Plate */,
 				A49D340C2156E76200AA24CF /* Home Sheff */,
 				E9D14B5D2147BF01009A57A1 /* Info.plist */,
@@ -508,6 +519,7 @@
 				A4AA64062173BE76007D83F2 /* ChefDetailsModel.swift in Sources */,
 				E975B60D2160133100BE6DD2 /* ChefFieldsCell.swift in Sources */,
 				E975B609216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift in Sources */,
+				A4D45760217CEDDC002E4588 /* TermsAndConditionViewController.swift in Sources */,
 				A4C9249F2172AFB800F3BBDE /* BaseTabbarController.swift in Sources */,
 				E9182438214EA22A009F62CE /* Chef.swift in Sources */,
 				A403097621795046001397EE /* User.swift in Sources */,

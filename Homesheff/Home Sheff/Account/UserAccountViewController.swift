@@ -13,7 +13,7 @@ class UserAccountViewController: UIViewController {
     // Change it to VM later //*
     @IBOutlet weak var userAccountVC: UITableView!
     
-    let dataArray = [["Profile"],["Version","Privacy Policy","Terms of Services"]]
+    let dataArray = [["Profile"],["Version","Privacy Policy","Terms of Services","Sign Out"]]
     @IBOutlet weak var nameLabel: UILabel!
     
 
@@ -23,6 +23,11 @@ class UserAccountViewController: UIViewController {
       userAccountVC.register(UserAccountCell.nib, forCellReuseIdentifier: UserAccountCell.reuseIdentifier)
     }
 
+    private func didTapTermsAndCondition(isTermsAndCondition: Bool) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "TermsAndConditionViewControllerID") as! TermsAndConditionViewController
+           vc.isTermsAndCondition = isTermsAndCondition
+           self.present(vc, animated: true, completion: nil)
+    }
 }
 
 extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
@@ -35,7 +40,7 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
             return 1
         }
         
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,6 +51,7 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
         cell.detailedLabel.isHidden = true
         cell.accessoryType = .none
         
+        // This is temp , need to tie state with enum and data source
         if dataArray[indexPath.section][indexPath.row] == "Profile" {
             cell.accessoryType = .disclosureIndicator
         }
@@ -66,10 +72,22 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // This is temp , need to tie state with enum and data source
         if dataArray[indexPath.section][indexPath.row] == "Profile" {
             let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        else if dataArray[indexPath.section][indexPath.row] == "Terms of Services" {
+            self.didTapTermsAndCondition(isTermsAndCondition: true)
+        }
+        else if dataArray[indexPath.section][indexPath.row] == "Privacy Policy" {
+            self.didTapTermsAndCondition(isTermsAndCondition: false)
+        }
+        else if dataArray[indexPath.section][indexPath.row] == "Sign Out" {
+           self.dismiss(animated: false, completion: nil)
+        }
+        
     }
     
 }
