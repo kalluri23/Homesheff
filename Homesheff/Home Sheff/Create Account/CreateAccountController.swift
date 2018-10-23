@@ -189,7 +189,8 @@ extension CreateAccountController: UITableViewDataSource {
             if let item = item as? SignupFieldItem {
                 let cell: SignUpContentTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.signup = item.signupFieldsData
-                
+              //  cell.termsOfServiceTextView.delegate = self
+              
                 cell.didTapSignUp = { [weak self] in
                     self?.callSignupAPI()
                 }
@@ -219,3 +220,11 @@ extension CreateAccountController: UITextFieldDelegate {
     }
 }
 
+//extension CreateAccountController: UITextViewDelegate {
+//
+//    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+//
+//        print(URL)
+//        return true
+//    }
+//}

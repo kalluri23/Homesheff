@@ -85,6 +85,8 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
             self.didTapTermsAndCondition(isTermsAndCondition: false)
         }
         else if dataArray[indexPath.section][indexPath.row] == "Sign Out" {
+            
+            UserDefaults.standard.set(false, forKey: "userLoggedIn")
            self.dismiss(animated: false, completion: nil)
         }
         
