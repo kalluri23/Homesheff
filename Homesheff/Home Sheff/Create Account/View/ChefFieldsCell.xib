@@ -20,11 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnW-L9-XAz" userLabel="chefCheckbox">
-                        <rect key="frame" x="28" y="10" width="21" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="21" id="7uM-5R-FyW"/>
-                            <constraint firstAttribute="height" constant="22" id="pfa-1P-Dbt"/>
-                        </constraints>
+                        <rect key="frame" x="285" y="14" width="19" height="22"/>
                         <state key="normal" image="checkbox-blank"/>
                         <state key="selected" image="checkbox-selected-1"/>
                         <connections>
@@ -32,20 +28,23 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I want to be a chef" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGV-c2-t4r">
-                        <rect key="frame" x="54" y="12" width="238" height="18"/>
+                        <rect key="frame" x="19" y="16" width="126.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" red="0.23976840101522845" green="0.23976840101522845" blue="0.23976840101522845" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="DnW-L9-XAz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="D2c-Rp-cDI"/>
-                    <constraint firstItem="AGV-c2-t4r" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="ROI-9u-aw9"/>
-                    <constraint firstAttribute="trailing" secondItem="AGV-c2-t4r" secondAttribute="trailing" constant="28" id="buE-2d-Hbk"/>
-                    <constraint firstItem="AGV-c2-t4r" firstAttribute="leading" secondItem="DnW-L9-XAz" secondAttribute="trailing" constant="5" id="ecV-NE-sIl"/>
-                    <constraint firstItem="DnW-L9-XAz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="yMP-74-vjg"/>
+                    <constraint firstItem="DnW-L9-XAz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="Mpl-OL-vxn"/>
+                    <constraint firstItem="AGV-c2-t4r" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="lOk-vS-iks"/>
+                    <constraint firstItem="AGV-c2-t4r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="19" id="m8G-3h-k3l"/>
+                    <constraint firstAttribute="trailing" secondItem="DnW-L9-XAz" secondAttribute="trailing" constant="16" id="nQS-pi-9nK"/>
+                    <constraint firstAttribute="bottom" secondItem="AGV-c2-t4r" secondAttribute="bottom" constant="9.5" id="vPf-ac-9aE"/>
                 </constraints>
             </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="njF-e1-oar" firstAttribute="bottom" secondItem="DnW-L9-XAz" secondAttribute="bottom" constant="8" id="fB9-fI-W8d"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="categoryLabel" destination="AGV-c2-t4r" id="SQ8-uN-zlb"/>

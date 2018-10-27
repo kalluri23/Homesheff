@@ -29,13 +29,10 @@ class CreateAccountViewModel: NSObject {
             let genericFields = GenericFieldItem(genericData: fieldData.genericFields)
             fields.append(genericFields)
         }
+        
         if  !fieldData.categoryFields.isEmpty {
             let category = CategoryFieldItem(categoryFieldData: fieldData.categoryFields)
             fields.append(category)
-        }
-        if  !fieldData.signUpFields.placeHolder.isEmpty {
-            let signupFields = SignupFieldItem(signupFieldsData: fieldData.signUpFields)
-            fields.append(signupFields)
         }
     }
     
@@ -72,23 +69,5 @@ class CategoryFieldItem: FieldsViewModelItem {
     
     init(categoryFieldData: [CategoryField]) {
         self.categoryFieldData = categoryFieldData
-    }
-}
-
-
-class SignupFieldItem: FieldsViewModelItem {
-    
-    var signupFieldsData: SignUpField!
-    
-    var type: FieldItemType {
-        return .signupField
-    }
-    
-    var rowCount: Int {
-        return 1
-    }
-    
-    init(signupFieldsData: SignUpField) {
-        self.signupFieldsData = signupFieldsData
     }
 }
