@@ -58,8 +58,10 @@ class APIManager {
                 
                 switch response.result{
                 case .success:
-                    if response.result.value != nil && response.result.value == "success" {
+                    if let resultValue = response.result.value, resultValue == "success" {
                         completion(true)
+                    } else {
+                        completion(false)
                     }
                 case .failure:
                     completion(false)
