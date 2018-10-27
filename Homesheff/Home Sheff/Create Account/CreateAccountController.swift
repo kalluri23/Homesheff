@@ -23,11 +23,8 @@ extension UITextField{
 
 class CreateAccountController: UIViewController {
     
-    @IBOutlet weak var firstNameTextField: UITextField!
-    @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var createAccountTableView: UITableView!
+    @IBOutlet weak var termsAndConditionsLabel: UILabel!
     
     var username: String?
     var password: String?
@@ -55,28 +52,12 @@ class CreateAccountController: UIViewController {
         
         loadingIndicator.color = .black
         loadingIndicator.type = .ballClipRotate
-        
-//        firstNameTextField.setPadding()
-//        firstNameTextField.setBottomBorderLightGray()
-//        
-//        lastNameTextField.setPadding()
-//        lastNameTextField.setBottomBorderLightGray()
-//        
-//        emailTextField.setPadding()
-//        emailTextField.setBottomBorderLightGray()
-//        
-//        passwordTextField.setPadding()
-//        passwordTextField.setBottomBorderLightGray()
-        
-        //simplified back button on next page
-       // self.navigationItem.backBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: nil, action: nil)
-        
+        setTermsAndConditions()
+    
         // Register cell
         
         createAccountTableView.register(GenericFieldsCellTableViewCell.nib, forCellReuseIdentifier: GenericFieldsCellTableViewCell.reuseIdentifier)
         createAccountTableView.register(ChefFieldsCell.nib, forCellReuseIdentifier: ChefFieldsCell.reuseIdentifier)
-        createAccountTableView.register(SignUpContentTableViewCell.nib, forCellReuseIdentifier: SignUpContentTableViewCell.reuseIdentifier)
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,10 +65,18 @@ class CreateAccountController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func callSignupAPI() {
+    override func viewDidLayoutSubviews() {
+        DispatchQueue.main.async( execute: {
+            var frame = self.createAccountTableView.frame
+            frame.size.height = self.createAccountTableView.contentSize.height
+            self.createAccountTableView.frame = frame
+        })
+    }
+    
+    @IBAction func callSignupAPI() {
        
+        self.view.endEditing(true) // Force end editing to get the last generic field user entry
         let item = viewModel.fields[0]
-        
         if item.type == .genericField {
               if let item = item as? GenericFieldItem {
                 for value in item.genericData {
@@ -152,7 +141,7 @@ class CreateAccountController: UIViewController {
 extension CreateAccountController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return viewModel.fields.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -183,23 +172,24 @@ extension CreateAccountController: UITableViewDataSource {
                 
                 return cell
             }
-            
-        case .signupField:
-            
-            if let item = item as? SignupFieldItem {
-                let cell: SignUpContentTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-                cell.signup = item.signupFieldsData
-                
-                cell.didTapSignUp = { [weak self] in
-                    self?.callSignupAPI()
-                }
-                
-                return cell
-            }
-   
-           
         }
-         return UITableViewCell()
+        return UITableViewCell()
+    }
+}
+
+extension CreateAccountController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            if let headerView = tableView.dequeueReusableCell(withIdentifier: "SelectOptionHeaderCell") {
+                return headerView;
+            }
+        }
+        return nil
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 1 ? 44 : 0
     }
 }
 
@@ -219,3 +209,76 @@ extension CreateAccountController: UITextFieldDelegate {
     }
 }
 
+extension CreateAccountController {
+    
+    func setTermsAndConditions() {
+        
+        let termsAndConditionsText = "By signing up, I agree to the Terms of Service and Privacy Statement, and consent to receiving email communication."
+        termsAndConditionsLabel.text = termsAndConditionsText
+        
+        let termsOfServiceString = "Terms of Service"
+        let termsOfServiceRange = (termsAndConditionsText as NSString).range(of: termsOfServiceString)
+        let attribute = NSMutableAttributedString.init(string: termsAndConditionsText)
+        attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.appDefaultColor , range: termsOfServiceRange)
+        
+        let privacyStatement = "Privacy Statement"
+        let privacyStatementRange = (termsAndConditionsText as NSString).range(of: privacyStatement)
+        attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.appDefaultColor , range: privacyStatementRange)
+        termsAndConditionsLabel.attributedText = attribute
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapLabel(gesture:)))
+        termsAndConditionsLabel.addGestureRecognizer(tap)
+        termsAndConditionsLabel.isUserInteractionEnabled = true
+    }
+    
+    @IBAction func tapLabel(gesture: UITapGestureRecognizer) {
+        let text = (termsAndConditionsLabel.text)!
+        let termsRange = (text as NSString).range(of: " Terms of Service")
+        let privacyRange = (text as NSString).range(of: " Privacy Statement")
+        
+        if gesture.didTapAttributedTextInLabel(label: termsAndConditionsLabel, inRange: privacyRange) {
+            didTapTermsAndCondition(isTermsAndCondition: false)
+        } else if gesture.didTapAttributedTextInLabel(label: termsAndConditionsLabel, inRange: termsRange) {
+           didTapTermsAndCondition(isTermsAndCondition: true)
+        }
+    }
+    
+    private func didTapTermsAndCondition(isTermsAndCondition: Bool) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "TermsAndConditionViewControllerID") as! TermsAndConditionViewController
+        vc.isTermsAndCondition = isTermsAndCondition
+        self.present(vc, animated: true, completion: nil)
+    }
+}
+
+extension UITapGestureRecognizer {
+    
+    func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
+        // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: CGSize.zero)
+        let textStorage = NSTextStorage(attributedString: label.attributedText!)
+        
+        // Configure layoutManager and textStorage
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        // Configure textContainer
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = label.lineBreakMode
+        textContainer.maximumNumberOfLines = label.numberOfLines
+        let labelSize = label.bounds.size
+        textContainer.size = labelSize
+        
+        // Find the tapped character location and compare it to the specified range
+        let locationOfTouchInLabel = self.location(in: label)
+        let textBoundingBox = layoutManager.usedRect(for: textContainer)
+        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
+                                          y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y);
+        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x + textContainerOffset.x,
+                                                     y: locationOfTouchInLabel.y - textContainerOffset.y);
+        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        
+        return NSLocationInRange(indexOfCharacter, targetRange)
+    }
+    
+}

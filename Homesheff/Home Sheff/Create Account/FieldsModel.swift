@@ -37,7 +37,7 @@ class Fields {
 
     private func addGenericData() {
       genericFields = [GenericField(name: "", placeHolder: "First Name"),GenericField(name: "", placeHolder: "Last Name"),GenericField(name: "", placeHolder: "Email"),GenericField(name: "", placeHolder: "Password"), GenericField(name: "", placeHolder: "Phone No")]
-        categoryFields = [CategoryField(placeHolder: "I want to be a chef", isSelected: false),CategoryField(placeHolder: "I want to be a customer", isSelected: false)]
+        categoryFields = [CategoryField(placeHolder: "I want to be a Plantarian", isSelected: false),CategoryField(placeHolder: "I want to be a Chef", isSelected: false)]
         signUpFields = SignUpField(placeHolder: "Sign Up", termsAndCondition: "terms and condition")
         
     }
@@ -46,5 +46,4 @@ class Fields {
 enum FieldItemType {
     case genericField
     case categoryField
-    case signupField
 }
