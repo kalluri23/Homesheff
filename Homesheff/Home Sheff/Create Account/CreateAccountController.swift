@@ -213,15 +213,17 @@ extension CreateAccountController {
     
     func setTermsAndConditions() {
         
-        let main_string = "By signing up, I agree to the Terms of Service and Privacy Statement, and consent to receiving email communication."
-        let string_to_color = "Terms of Service"
-        let range = (main_string as NSString).range(of: string_to_color)
-        let attribute = NSMutableAttributedString.init(string: main_string)
-        attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.appDefaultColor , range: range)
+        let termsAndConditionsText = "By signing up, I agree to the Terms of Service and Privacy Statement, and consent to receiving email communication."
+        termsAndConditionsLabel.text = termsAndConditionsText
         
-        let string_to_color2 = "Privacy Statement"
-        let range2 = (main_string as NSString).range(of: string_to_color2)
-        attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.appDefaultColor , range: range2)
+        let termsOfServiceString = "Terms of Service"
+        let termsOfServiceRange = (termsAndConditionsText as NSString).range(of: termsOfServiceString)
+        let attribute = NSMutableAttributedString.init(string: termsAndConditionsText)
+        attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.appDefaultColor , range: termsOfServiceRange)
+        
+        let privacyStatement = "Privacy Statement"
+        let privacyStatementRange = (termsAndConditionsText as NSString).range(of: privacyStatement)
+        attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.appDefaultColor , range: privacyStatementRange)
         termsAndConditionsLabel.attributedText = attribute
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapLabel(gesture:)))
