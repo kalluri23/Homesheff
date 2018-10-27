@@ -73,10 +73,10 @@ class CreateAccountController: UIViewController {
         })
     }
     
-    private func callSignupAPI() {
+    @IBAction func callSignupAPI() {
        
+        self.view.endEditing(true) // Force end editing to get the last generic field user entry
         let item = viewModel.fields[0]
-        
         if item.type == .genericField {
               if let item = item as? GenericFieldItem {
                 for value in item.genericData {
