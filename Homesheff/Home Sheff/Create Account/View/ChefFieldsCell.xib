@@ -23,9 +23,6 @@
                         <rect key="frame" x="285" y="14" width="19" height="22"/>
                         <state key="normal" image="checkbox-blank"/>
                         <state key="selected" image="checkbox-selected-1"/>
-                        <connections>
-                            <action selector="didSelectCheckCategory:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="agT-HJ-dhJ"/>
-                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I want to be a chef" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGV-c2-t4r">
                         <rect key="frame" x="19" y="16" width="126.5" height="18"/>

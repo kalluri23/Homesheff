@@ -28,7 +28,4 @@ class ChefFieldsCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    @IBAction func didSelectCheckCategory(_ sender: UIButton) {
-    }
 }

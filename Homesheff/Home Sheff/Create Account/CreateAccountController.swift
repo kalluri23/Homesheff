@@ -25,10 +25,18 @@ class CreateAccountController: UIViewController {
     
     @IBOutlet weak var createAccountTableView: UITableView!
     @IBOutlet weak var termsAndConditionsLabel: UILabel!
+    private let unSelectedCheckboxImage = UIImage(named: "checkbox-blank")
+    private let selectedCheckboxImage = UIImage(named: "checkbox-selected")
     
-    var username: String?
+    var email: String?
     var password: String?
+    var firstName: String?
+    var lastName: String?
     var phoneNo: String?
+    var isChef = false
+    var isCustomer = false
+    var imageUrl = "https://png.icons8.com/color/2x/person-male.png"
+    var zipCode = "20017"
     
     @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
 
@@ -37,12 +45,20 @@ class CreateAccountController: UIViewController {
     
     @IBOutlet weak var signUpButton: UIButton!
     
-    @IBAction func checkBoxTapped(_ sender: UIButton){
+    @objc func checkBoxTapped(_ sender: UIButton){
         if sender.isSelected {
             sender.isSelected = false
+            sender.setImage(unSelectedCheckboxImage, for: .normal)
         }
-        else{
+        else {
             sender.isSelected = true
+            sender.setImage(selectedCheckboxImage, for: .normal)
+        }
+        
+        if sender.tag == 1 {
+            isChef = sender.isSelected
+        } else {
+            isCustomer = sender.isSelected
         }
     }
     
@@ -82,11 +98,15 @@ class CreateAccountController: UIViewController {
                 for value in item.genericData {
                     switch value.placeHolder {
                     case "Email":
-                        username = value.name
+                        email = value.name
                     case "Password":
                         password = value.name
+                    case "First Name":
+                        firstName = value.name
                     case "Phone No":
                         phoneNo = value.name
+                    case "Last Name":
+                        lastName = value.name
                     default:
                         print(value.name)
                     }
@@ -118,7 +138,7 @@ class CreateAccountController: UIViewController {
     }
     
     private func isTextFieldHasText() -> Bool {
-        if username?.isEmpty ?? false && password?.isEmpty ?? false && phoneNo?.isEmpty ?? false {
+        if email?.isEmpty ?? false && password?.isEmpty ?? false && phoneNo?.isEmpty ?? false && isChef == false && isCustomer == false {
             return false
         }
         return true
@@ -131,11 +151,12 @@ class CreateAccountController: UIViewController {
     
    private func signUpEnvelop() -> Requestable {
         
-        let signupSearchPath = ServicePath.signUpCall(userName: username!, password: password!, phoneNo: phoneNo!)
-        let signupEnvelop = SignUpEnvelop(pathType: signupSearchPath)
+    let signupSearchPath = ServicePath.signUpCall(email: email!, password: password!, phoneNo: phoneNo!, firstName: firstName!, lastName: lastName!, isChef: isChef, isCustomer: isCustomer, imageUrl: imageUrl, zipCode: zipCode)
+        let signupEnvelop = SaveUserPreferencesEnvelop(pathType: signupSearchPath)
         
         return signupEnvelop
     }
+
 }
 
 extension CreateAccountController: UITableViewDataSource {
@@ -169,7 +190,8 @@ extension CreateAccountController: UITableViewDataSource {
             if let item = item as? CategoryFieldItem {
                 let cell: ChefFieldsCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.category = item.categoryFieldData[indexPath.row]
-                
+                cell.checkCategory.addTarget(self, action: #selector(checkBoxTapped), for: .touchUpInside)
+                cell.checkCategory.tag = indexPath.row
                 return cell
             }
         }
