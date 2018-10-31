@@ -12,14 +12,18 @@ class UserProfileViewController: UIViewController {
 
     @IBOutlet weak var userProfileTableView: UITableView!
     @IBOutlet weak var userProfilePicture: UIImageView!
+    // we have to change these value to MVVM later
+    //TODO :----
+    let chefUser = User.defaultUser.currentUser
     
-    let data = [GenericField(name: "Sally", placeHolder: "FIRST NAME"),GenericField(name: "Lockwood", placeHolder: "LAST NAME"),GenericField(name: "sally.lockwood@gmail.com", placeHolder: "EMAIL"),GenericField(name: "Georgetown, Washington, D.C.", placeHolder: "LOCATION"),GenericField(name: "703-212-7854", placeHolder: "PHONE")]
+    var data = [GenericField]()
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
       
+       data =  [GenericField(name: self.chefUser?.firstName ?? "", placeHolder: "FIRST NAME"),GenericField(name: self.chefUser?.lastName ?? "", placeHolder: "LAST NAME"),GenericField(name: self.chefUser?.email ?? "", placeHolder: "EMAIL"),GenericField(name: "Georgetown, Washington, D.C.", placeHolder: "LOCATION"),GenericField(name: self.chefUser?.phone ?? "", placeHolder: "PHONE")]
         userProfileTableView.register(UserProfileTableViewCell.nib, forCellReuseIdentifier: UserProfileTableViewCell.reuseIdentifier)
     }
 }

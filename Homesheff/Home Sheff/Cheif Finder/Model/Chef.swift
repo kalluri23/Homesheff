@@ -36,15 +36,34 @@ import UIKit
 //
 //}
 
+//{
+//    "id": 41,
+//    "firstName": "Sally",
+//    "lastName": "Davidson",
+//    "password": "yk3XlptPsTGrk+YhEdwO4MqzRzYcMFvIdvSLqmPDZ+I=",
+//    "salt": null,
+//    "email": "sally.test2@gmail.com",
+//    "phone": "1234567890",
+//    "zipcode": "21909",
+//    "signUpDate": "2018-08-18T21:19:55.000+0000",
+//    "isChef": true,
+//    "isCustomer": false,
+//    "isActive": true,
+//    "imageURL": "https://i.imgur.com/wIir2lm.png",
+//    "services": null
+//}
 
 struct Chef: Codable {
     var id: Int
     var firstName: String?
     var lastName: String?
+    var password: String?
     var email: String?
     var phone: String?
     var zipcode: String?
     var signUpDate: String?
     var isChef: Bool?
     var isCustomer: Bool?
+    var isActive: Bool?
+    var imageURL: String?
 }
