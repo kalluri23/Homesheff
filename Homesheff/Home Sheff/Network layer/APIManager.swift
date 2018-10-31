@@ -24,17 +24,7 @@ class APIManager {
                 switch response.result{
                    case .success:
                     if response.result.value != nil {
-                        
-                        do {
-                            let jsonDecoder = JSONDecoder()
-                            let list = try jsonDecoder.decode(User.self, from: response.data!)
-                            UserDetailModal.sharedInstance.user = list
-                            completion(true)
-                        }
-                        catch {
-                            
-                           completion(false)
-                        }
+                     completion(User.defaultUser.createUser(data: response.data))
                         
                     }
                       case .failure:

@@ -10,7 +10,7 @@ import UIKit
 
 class ChefCell: UITableViewCell {
 
-    @IBOutlet weak var cheffImageView: UIImageView!
+    @IBOutlet weak var cheffImageView: CustomImageView!
 
     @IBOutlet weak var chefName: UILabel!
     @IBOutlet weak var chefLocation: UILabel!
@@ -19,7 +19,7 @@ class ChefCell: UITableViewCell {
     
     var chef: Chef? {
         didSet{
-           cheffImageView.image = UIImage(named: "soma-kun")
+            cheffImageView.loadImageWithUrlString(urlString: chef?.imageURL ?? "")
             chefName.text = chef?.firstName
             chefLocation.text = "Virginia, USA"
             chefRate.text = "$25"

@@ -12,6 +12,9 @@ class SignUpContentTableViewCell: UITableViewCell {
     
     var didTapSignUp: (() -> Void)?
     
+  //  @IBOutlet weak var termsOfServiceTextView: UITextView!
+    
+    
     var signup: SignUpField? {
         didSet{
             print(signup?.placeHolder)
@@ -21,7 +24,12 @@ class SignUpContentTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+      //  let attributedString = NSMutableAttributedString(attributedString: termsOfServiceTextView.attributedText)
+        
+//        if attributedString.setAsLink(textToFind: "Terms of Service", linkURL: "https://homesheff.com/#/terms-of-service") && attributedString.setAsLink(textToFind: "Privacy Statement", linkURL: "https://homesheff.com/#/privacy-policy") {
+//            termsOfServiceTextView.attributedText = attributedString
+//        }
     }
 
     @IBAction func didTapSignup(_ sender: UIButton) {
@@ -32,5 +40,6 @@ class SignUpContentTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }
+
+

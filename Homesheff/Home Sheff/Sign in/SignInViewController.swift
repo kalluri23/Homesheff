@@ -37,6 +37,13 @@ class SignInViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+              //TODO: Manage session time out from API --later
+        if UserDefaults.standard.bool(forKey: "userLoggedIn") == true {
+            let baseTabbar = self.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
+            self.present(baseTabbar, animated: false, completion: nil)
+        }
+        
         loadingIndicator.color = .black
         loadingIndicator.type = .ballClipRotate
         
@@ -86,6 +93,9 @@ class SignInViewController: UIViewController {
             viewModel.signInApi(envelop:userListEnvelop(userName: usernameTextField.text!, password: passwordTextField.text!)) { [weak self] isSuccess in
                 
                 if isSuccess{
+                    
+                    //TODO: Manage session time out from API --later
+                    UserDefaults.standard.set(true, forKey: "userLoggedIn")
                     let baseTabbar = self?.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
                     self?.present(baseTabbar, animated: false, completion: nil)
                 } else {
@@ -96,7 +106,7 @@ class SignInViewController: UIViewController {
     } else {
         self.showAlert(title: "Oops!", message: "Please check your email address & password")
     }
-    }
+}
     
     func userListEnvelop(userName: String, password: String) -> Requestable {
         

@@ -6,12 +6,63 @@
 //  Copyright © 2018 Dimitrios Papageorgiou. All rights reserved.
 //
 
+
+//{
+//    "id": 117,
+//    "firstName": "First name",
+//    "lastName": "last name",
+//    "password": "Evr6eHL+xPEgVjKB9ErUTa3gMAwhnZAZUFZoUbik4Qs=",
+//    "salt": "PndW0L6mlQLGjH29AEUMzX5L1gXrD4",
+//    "email": "user9090@homesheff.com",
+//    "phone": "1231231234",
+//    "zipcode": "21909",
+//    "signUpDate": "2018-10-29T23:50:54.000+0000",
+//    "isChef": false,
+//    "isCustomer": true,
+//    "isActive": true,
+//    "imageURL": "https://png.icons8.com/color/2x/person-female.png",
+//    "services": "string"
+//}
+
+
 import Foundation
 
-struct User: Codable {
-    var id: Int
-    var username: String
-    var password: String
-    var phone: String
-    var isActive: Bool
+ struct UserModel: Codable {
+    let id: Int?
+    let firstName: String?
+    let lastName: String?
+    let password: String?
+    let salt: String?
+    let email: String?
+    let phone: String?
+    let zipcode: String?
+    let signUpDate: String?
+    let isChef: Bool?
+    let isCustomer: Bool?
+    let isActive: Bool?
+    let imageURL: String?
+    let services: String?
+}
+
+
+final class User {
+    
+    static let defaultUser = User()
+    
+    var currentUser: UserModel? = nil
+    
+    private init() {}
+    
+    func createUser(data: Data?) -> Bool {
+        do {
+            let jsonDecoder = JSONDecoder()
+            let list = try jsonDecoder.decode(UserModel.self, from: data!)
+                currentUser = list
+            return true
+        }
+        catch (let error){
+            print(error)
+            return false
+        }
+   }
 }

@@ -12,7 +12,7 @@ import UIKit
 
 class ChefDetailsViewController: UIViewController {
 
-    @IBOutlet weak var profilePictureImageView: UIImageView!
+    @IBOutlet weak var profilePictureImageView: CustomImageView!
     
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var chefServiceTableView: UITableView!
@@ -27,9 +27,11 @@ class ChefDetailsViewController: UIViewController {
          title = chefInfo?.firstName
          emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
          chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
+        
     }
     
     private func setProfilePicture() {
+        profilePictureImageView.loadImageWithUrlString(urlString: chefInfo?.imageURL ?? "")
         profilePictureImageView.layer.cornerRadius = profilePictureImageView.frame.size.width / 2;
         profilePictureImageView.clipsToBounds = true;
         profilePictureImageView.layer.borderWidth = 3.0;
