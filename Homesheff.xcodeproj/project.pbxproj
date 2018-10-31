@@ -694,11 +694,8 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DYD3VGU64Z;
 				INFOPLIST_FILE = Homesheff/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.homesheff.appstore;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dimitriosmpapageorgiou.Homesheff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = HomeSheffAppstore;
 				SWIFT_VERSION = 4.0;
@@ -715,11 +712,8 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DYD3VGU64Z;
 				INFOPLIST_FILE = Homesheff/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.homesheff.appstore;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dimitriosmpapageorgiou.Homesheff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = HomeSheffAppstore;
 				SWIFT_VERSION = 4.0;
