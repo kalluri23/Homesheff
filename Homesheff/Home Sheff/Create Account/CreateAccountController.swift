@@ -138,7 +138,7 @@ class CreateAccountController: UIViewController {
     }
     
     private func isTextFieldHasText() -> Bool {
-        if email?.isEmpty ?? false && password?.isEmpty ?? false && phoneNo?.isEmpty ?? false && isChef == false && isCustomer == false {
+        if email?.isEmpty ?? false || password?.isEmpty ?? false || phoneNo?.isEmpty ?? false || (isChef == false && isCustomer == false) {
             return false
         }
         return true
