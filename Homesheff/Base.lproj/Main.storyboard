@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -681,8 +684,8 @@
                                     <constraint firstAttribute="width" constant="90" id="eXZ-5A-G1j"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9iN-Ho-QFO">
-                                <rect key="frame" x="0.0" y="190" width="375" height="477"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9iN-Ho-QFO">
+                                <rect key="frame" x="0.0" y="183" width="375" height="484"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="YNa-9R-VOy" id="gab-Ws-dIn"/>
@@ -695,7 +698,7 @@
                             <constraint firstItem="itn-hj-gws" firstAttribute="trailing" secondItem="9iN-Ho-QFO" secondAttribute="trailing" id="MKy-Tc-c6D"/>
                             <constraint firstItem="9iN-Ho-QFO" firstAttribute="leading" secondItem="itn-hj-gws" secondAttribute="leading" id="N4k-dc-iVk"/>
                             <constraint firstItem="HQq-WE-fKP" firstAttribute="centerX" secondItem="itn-hj-gws" secondAttribute="centerX" id="e5m-ru-xvG"/>
-                            <constraint firstItem="9iN-Ho-QFO" firstAttribute="top" secondItem="HQq-WE-fKP" secondAttribute="bottom" constant="50" id="fK1-nn-vB4"/>
+                            <constraint firstItem="9iN-Ho-QFO" firstAttribute="top" secondItem="HQq-WE-fKP" secondAttribute="bottom" constant="43" id="fK1-nn-vB4"/>
                             <constraint firstItem="itn-hj-gws" firstAttribute="bottom" secondItem="9iN-Ho-QFO" secondAttribute="bottom" id="mt3-fe-wym"/>
                             <constraint firstItem="HQq-WE-fKP" firstAttribute="top" secondItem="itn-hj-gws" secondAttribute="top" constant="30" id="tz6-0q-cdD"/>
                         </constraints>
@@ -4177,13 +4180,13 @@ AAAAAAAAAAAAAALRRQ
 </mutableData>
         </image>
         <image name="leaves-background" width="375" height="125"/>
-        <image name="my-account-nonselected" width="50" height="50"/>
-        <image name="my-account-selected" width="50" height="50"/>
+        <image name="my-account-nonselected" width="25" height="25"/>
+        <image name="my-account-selected" width="25" height="25"/>
         <image name="pencil-icon" width="11" height="11"/>
         <image name="pencil-icon-background-circle" width="33" height="33"/>
         <image name="plantarian-profileimg" width="90" height="90"/>
-        <image name="search-nonselected" width="50" height="50"/>
-        <image name="search-selected" width="50" height="50"/>
+        <image name="search-nonselected" width="25" height="25"/>
+        <image name="search-selected" width="25" height="25"/>
         <image name="soma-kun" width="225" height="225"/>
     </resources>
 </document>

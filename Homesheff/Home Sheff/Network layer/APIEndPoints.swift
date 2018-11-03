@@ -18,7 +18,7 @@ protocol ParameterBodyMaker {
  Request Envelops are mentioned here with api path, pathType(Enum with tupple which holds api parameters)
  */
 struct ListOfUsers:Requestable {
-  var apiPath:String { return "getListOfUsers/all" }
+  var apiPath:String { return "getListOfUsers/chef" }
   var httpType:HttpType { return .get }
   var pathType : ServicePath
 }
