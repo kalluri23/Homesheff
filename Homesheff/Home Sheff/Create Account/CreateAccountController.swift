@@ -151,7 +151,7 @@ class CreateAccountController: UIViewController {
     
    private func signUpEnvelop() -> Requestable {
         
-    let signupSearchPath = ServicePath.signUpCall(email: email!, password: password!, phoneNo: phoneNo!, firstName: firstName!, lastName: lastName!, isChef: isChef, isCustomer: isCustomer, imageUrl: imageUrl, zipCode: zipCode)
+    let signupSearchPath = ServicePath.signUpCall(email: email!, password: password!, phoneNo: phoneNo, firstName: firstName!, lastName: lastName!, isChef: isChef, isCustomer: isCustomer, imageUrl: imageUrl, zipCode: zipCode)
         let signupEnvelop = SaveUserPreferencesEnvelop(pathType: signupSearchPath)
         
         return signupEnvelop
