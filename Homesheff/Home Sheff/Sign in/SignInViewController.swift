@@ -39,10 +39,10 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         
               //TODO: Manage session time out from API --later
-        if UserDefaults.standard.bool(forKey: "userLoggedIn") == true {
+        /*if UserDefaults.standard.bool(forKey: "userLoggedIn") == true {
             let baseTabbar = self.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
             self.present(baseTabbar, animated: false, completion: nil)
-        }
+        }*/
         
         loadingIndicator.color = .black
         loadingIndicator.type = .ballClipRotate

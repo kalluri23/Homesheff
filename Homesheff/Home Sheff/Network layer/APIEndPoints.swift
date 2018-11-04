@@ -41,6 +41,12 @@ struct SaveUserPreferencesEnvelop:Requestable {
     var pathType : ServicePath
 }
 
+struct UpdateUserPreferencesEnvelop:Requestable {
+    var apiPath:String 
+    var httpType:HttpType { return .put }
+    var pathType : ServicePath
+}
+
 /*
  ALL services post dictionary is mentioned under enum switch statement.
  These cases get their values in ViewController (or respective controller or other class).
@@ -51,6 +57,7 @@ internal enum ServicePath:ParameterBodyMaker {
   case listOfUsers(userType: String)
   case signInCall(userName: String, password: String)
     case signUpCall(email: String, password: String, phoneNo: String, firstName: String, lastName: String, isChef: Bool, isCustomer: Bool, imageUrl: String, zipCode: String)
+    case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: [String]?, isChef: Bool?, isCustomer: Bool?)
   
   func httpBodyEnvelop()->[String:Any]? {
     
@@ -64,6 +71,9 @@ internal enum ServicePath:ParameterBodyMaker {
         
     case .signUpCall(email: let email, password: let password, phoneNo: let phoneNo, firstName: let firstName, lastName: let lastName, isChef: let isChef, isCustomer: let isCustomer, imageUrl: let imageUrl, zipCode: let zipCode):
         return ["email": email, "password": password, "phone": phoneNo, "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, zipCode: "zipCode"]
+        
+    case .updateUserPreferenceCall(let firstName, let lastName, let headline, let phoneNo, let location, let zipCode, let services, let isChef, let isCustomer):
+        return ["firstName": firstName, "lastName": lastName, "phone": phoneNo, "headline": headline, "phoneNo": phoneNo, "location": location, "zipCode": zipCode, "services": services, "isChef": isChef, "isCustomer": isCustomer]
     }
   }
   

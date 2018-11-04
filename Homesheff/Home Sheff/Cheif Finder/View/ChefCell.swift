@@ -22,7 +22,7 @@ class ChefCell: UITableViewCell {
             cheffImageView.loadImageWithUrlString(urlString: chef?.imageURL ?? "")
             chefName.text = chef?.firstName
             chefLocation.text = "Virginia, USA"
-            chefRate.text = "$25"
+            chefRate.text = ""
         }
     }
 }

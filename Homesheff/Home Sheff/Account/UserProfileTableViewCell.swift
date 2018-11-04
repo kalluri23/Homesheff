@@ -11,11 +11,10 @@ import UIKit
 class UserProfileTableViewCell: UITableViewCell {
 
     @IBOutlet weak var placeHolderLabel: UILabel!
-    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var valueTextField: UITextField!
+    var isEditMode = false
     
     // dummy data
-    
-  
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +24,20 @@ class UserProfileTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func updateVisualElements() {
+        
+        guard placeHolderLabel.text != "EMAIL", placeHolderLabel.text != "LOCATION" else {
+            return
+        }
+        if isEditMode {
+            valueTextField.borderStyle = .roundedRect
+            valueTextField.isUserInteractionEnabled = true
+        } else {
+            valueTextField.borderStyle = .none
+            valueTextField.isUserInteractionEnabled = false
+        }
     }
     
 }

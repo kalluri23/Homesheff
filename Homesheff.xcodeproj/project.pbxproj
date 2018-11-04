@@ -37,6 +37,7 @@
 		A4C924C62173A41700F3BBDE /* UserAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C924C42173A41700F3BBDE /* UserAccountCell.xib */; };
 		A4D45760217CEDDC002E4588 /* TermsAndConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */; };
 		A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */; };
+		E4350836218E8E4C00C33719 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4350835218E8E4C00C33719 /* UserProfileViewModel.swift */; };
 		E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */; };
 		E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182430214E924F009F62CE /* FindChefsViewController.swift */; };
 		E9182433214E97F0009F62CE /* ChefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182432214E97F0009F62CE /* ChefCell.swift */; };
@@ -97,6 +98,7 @@
 		A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionViewController.swift; sourceTree = "<group>"; };
 		A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		C8CB94F0F399356DEC3B25B7 /* Pods-Homesheff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.debug.xcconfig"; sourceTree = "<group>"; };
+		E4350835218E8E4C00C33719 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesRatesViewController.swift; sourceTree = "<group>"; };
 		E9182430214E924F009F62CE /* FindChefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefsViewController.swift; sourceTree = "<group>"; };
 		E9182432214E97F0009F62CE /* ChefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefCell.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 			children = (
 				A4AA64082173CC5C007D83F2 /* UserProfileViewController.swift */,
 				A4AA640A2173CD57007D83F2 /* UserProfileTableViewCell.swift */,
+				E4350835218E8E4C00C33719 /* UserProfileViewModel.swift */,
 				A4AA640B2173CD57007D83F2 /* UserProfileTableViewCell.xib */,
 				A4C924BD21739D0000F3BBDE /* UserAccountViewController.swift */,
 				A4C924C32173A41700F3BBDE /* UserAccountCell.swift */,
@@ -514,6 +517,7 @@
 				E9D2700C214B1D240087F476 /* FinishYourProfileController.swift in Sources */,
 				A4AA64092173CC5C007D83F2 /* UserProfileViewController.swift in Sources */,
 				E9182433214E97F0009F62CE /* ChefCell.swift in Sources */,
+				E4350836218E8E4C00C33719 /* UserProfileViewModel.swift in Sources */,
 				E975B6122160156000BE6DD2 /* SignUpContentTableViewCell.swift in Sources */,
 				A453503C2185310D005748D3 /* CustomImageView.swift in Sources */,
 				A4C924BC2173990B00F3BBDE /* ChefDetailsViewController.swift in Sources */,
@@ -694,7 +698,10 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DYD3VGU64Z;
 				INFOPLIST_FILE = Homesheff/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimitriosmpapageorgiou.Homesheff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = HomeSheffAppstore;
@@ -712,7 +719,10 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DYD3VGU64Z;
 				INFOPLIST_FILE = Homesheff/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dimitriosmpapageorgiou.Homesheff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = HomeSheffAppstore;

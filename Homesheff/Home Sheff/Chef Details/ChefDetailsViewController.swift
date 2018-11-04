@@ -50,9 +50,9 @@ extension ChefDetailsViewController: UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 1{
+        /*if indexPath.row == 1{
             return 120
-        }
+        }*/
         return 55
     }
     
@@ -64,13 +64,13 @@ extension ChefDetailsViewController: UITableViewDataSource,UITableViewDelegate {
         cell.partCount1.isHidden = true
         cell.partyCount2.isHidden = true
         cell.partyCount3.isHidden = true
-        
-        if indexPath.row == 1 {
+        cell.servicePriceLabel.isHidden = true
+        /*if indexPath.row == 1 {
             cell.partCount1.isHidden = false
             cell.partyCount2.isHidden = false
             cell.partyCount3.isHidden = false
             
-        }
+        }*/
         
         return cell
     }

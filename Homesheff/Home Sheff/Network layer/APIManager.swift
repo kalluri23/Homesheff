@@ -92,4 +92,31 @@ class APIManager {
       }
     }
   }
+    
+    
+    func updateUserPreferenceCall(requestEnvelop:Requestable, completion: @escaping (Bool) -> Void)  {
+        
+        let method = requestEnvelop.httpType.rawValue
+        let type = HTTPMethod(rawValue: method)
+        
+        Alamofire.request(
+            requestEnvelop.requestURL()!,
+            method: type!,
+            parameters: requestEnvelop.pathType.httpBodyEnvelop(),
+            encoding: JSONEncoding.default,
+            headers: requestEnvelop.httpHeaders())
+            .responseString { (response) -> Void in
+                
+                switch response.result{
+                case .success:
+                    if let resultValue = response.result.value, resultValue == "success" {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                case .failure:
+                    completion(false)
+                }
+        }
+    }
 }

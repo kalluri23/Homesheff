@@ -29,19 +29,19 @@ import Foundation
 
  struct UserModel: Codable {
     let id: Int?
-    let firstName: String?
-    let lastName: String?
+    var firstName: String?
+    var lastName: String?
     let password: String?
     let salt: String?
     let email: String?
-    let phone: String?
-    let zipcode: String?
+    var phone: String?
+    var zipcode: String?
     let signUpDate: String?
     let isChef: Bool?
     let isCustomer: Bool?
     let isActive: Bool?
     let imageURL: String?
-    let services: String?
+    var services: [String]?
 }
 
 
