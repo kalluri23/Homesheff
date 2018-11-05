@@ -29,6 +29,7 @@ class UserProfileTableViewCell: UITableViewCell {
     func updateVisualElements() {
         
         guard placeHolderLabel.text != "EMAIL", placeHolderLabel.text != "LOCATION" else {
+            valueTextField.isUserInteractionEnabled = false
             return
         }
         if isEditMode {

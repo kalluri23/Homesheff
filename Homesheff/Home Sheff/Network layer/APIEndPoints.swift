@@ -57,7 +57,7 @@ internal enum ServicePath:ParameterBodyMaker {
   case listOfUsers(userType: String)
   case signInCall(userName: String, password: String)
     case signUpCall(email: String, password: String, phoneNo: String?, firstName: String, lastName: String, isChef: Bool, isCustomer: Bool, imageUrl: String, zipCode: String)
-    case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: [String]?, isChef: Bool?, isCustomer: Bool?)
+    case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: String?, isChef: Bool?, isCustomer: Bool?)
   
   func httpBodyEnvelop()->[String:Any]? {
     

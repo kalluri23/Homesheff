@@ -46,7 +46,7 @@ class UserProfileViewController: UIViewController {
     
     private func updateUserProfileEnvelop() -> Requestable {
         
-        let updateUserProfileSearchPath = ServicePath.updateUserPreferenceCall(firstName: data[0].name, lastName: data[1].name, headline: "", phoneNo: data[4].name, location: data[3].name, zipCode: "", services: [], isChef: chefUser?.isChef, isCustomer: chefUser?.isCustomer)
+        let updateUserProfileSearchPath = ServicePath.updateUserPreferenceCall(firstName: data[0].name, lastName: data[1].name, headline: "", phoneNo: data[4].name, location: data[3].name, zipCode: "", services: "", isChef: chefUser?.isChef, isCustomer: chefUser?.isCustomer)
         let path = "updateUserPreferences/" + "\(chefUser?.id ?? 0)"
         let updateUserProfile = UpdateUserPreferencesEnvelop(apiPath: path, pathType: updateUserProfileSearchPath)
         return updateUserProfile

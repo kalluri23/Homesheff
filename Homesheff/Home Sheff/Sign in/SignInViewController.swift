@@ -86,11 +86,11 @@ class SignInViewController: UIViewController {
         return true
     }
     
-   private func callLoginAPI() {
+    private func callLoginAPI() {
         
         if isTextFieldHasText() {
-              loadingIndicator.startAnimating()
-            viewModel.signInApi(envelop:userListEnvelop(userName: usernameTextField.text!, password: passwordTextField.text!)) { [weak self] isSuccess in
+            loadingIndicator.startAnimating()
+            viewModel.signInApi(envelop: viewModel.signInEnvelop(userName: usernameTextField.text!, password: passwordTextField.text!)) { [weak self] isSuccess in
                 
                 if isSuccess{
                     
@@ -101,19 +101,11 @@ class SignInViewController: UIViewController {
                 } else {
                     self?.showAlert(title: "Oops!", message: "Please check your email address & password")
                 }
-                 self?.loadingIndicator.stopAnimating()
+                self?.loadingIndicator.stopAnimating()
             }
-    } else {
-        self.showAlert(title: "Oops!", message: "Please check your email address & password")
-    }
-}
-    
-    func userListEnvelop(userName: String, password: String) -> Requestable {
-        
-        let userListSearchPath = ServicePath.signInCall(userName: userName, password: password)
-        let userListEnvelop = SignInEnvelop(pathType: userListSearchPath)
-        
-        return userListEnvelop
+        } else {
+            self.showAlert(title: "Oops!", message: "Please check your email address & password")
+        }
     }
 }
 

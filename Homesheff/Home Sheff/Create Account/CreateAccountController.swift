@@ -41,7 +41,8 @@ class CreateAccountController: UIViewController {
     @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
 
     
-    let viewModel = CreateAccountViewModel()
+    private let viewModel = CreateAccountViewModel()
+    private let signInViewModel = SignInViewModel()
     
     @IBOutlet weak var signUpButton: UIButton!
     
@@ -124,14 +125,17 @@ class CreateAccountController: UIViewController {
             
             viewModel.signUp(envelop: signUpEnvelop()) { [weak self] isSuccess in
                 
-                                if isSuccess{
-                                  self?.navigationController?.popViewController(animated: true)
-                                } else {
-                                    self?.loadingIndicator.stopAnimating()
-                                    self?.showAlert(title: "Oops!", message: "Please check your details")
-                                }
+                if isSuccess{
+                    // Again login
+                    // TODO: Make common Signin api call
+                    self?.callLoginAPI()
+                    
+                } else {
+                    self?.loadingIndicator.stopAnimating()
+                    self?.showAlert(title: "Oops!", message: "Please check your details")
+                }
                 
-                            }
+            }
         } else {
             self.showAlert(title: "Oops!", message: "Please check your details")
         }
@@ -156,7 +160,28 @@ class CreateAccountController: UIViewController {
         
         return signupEnvelop
     }
-
+    
+    private func callLoginAPI() {
+        
+        if isTextFieldHasText() {
+            loadingIndicator.startAnimating()
+            signInViewModel.signInApi(envelop:signInViewModel.signInEnvelop(userName: email!, password: password!)) { [weak self] isSuccess in
+                
+                if isSuccess{
+                    
+                    //TODO: Manage session time out from API --later
+                    UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                    let baseTabbar = self?.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
+                    self?.present(baseTabbar, animated: false, completion: nil)
+                } else {
+                    self?.showAlert(title: "Oops!", message: "Please check your email address & password")
+                }
+                self?.loadingIndicator.stopAnimating()
+            }
+        } else {
+            self.showAlert(title: "Oops!", message: "Please check your email address & password")
+        }
+    }
 }
 
 extension CreateAccountController: UITableViewDataSource {

@@ -13,4 +13,12 @@ class SignInViewModel {
     func signInApi(envelop:Requestable, completion: @escaping (Bool) -> Void ) {
         apiHandler.signInApi(requestEnvelop: envelop, completion: completion)
     }
+    
+    func signInEnvelop(userName: String, password: String) -> Requestable {
+        
+        let userListSearchPath = ServicePath.signInCall(userName: userName, password: password)
+        let userListEnvelop = SignInEnvelop(pathType: userListSearchPath)
+        
+        return userListEnvelop
+    }
 }
