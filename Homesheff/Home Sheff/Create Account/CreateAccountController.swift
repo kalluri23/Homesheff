@@ -126,10 +126,9 @@ class CreateAccountController: UIViewController {
             viewModel.signUp(envelop: signUpEnvelop()) { [weak self] isSuccess in
                 
                 if isSuccess{
-                    // Again login
+                    // Login again
                     // TODO: Make common Signin api call
                     self?.callLoginAPI()
-                    
                 } else {
                     self?.loadingIndicator.stopAnimating()
                     self?.showAlert(title: "Oops!", message: "Please check your details")
@@ -172,7 +171,9 @@ class CreateAccountController: UIViewController {
                     //TODO: Manage session time out from API --later
                     UserDefaults.standard.set(true, forKey: "userLoggedIn")
                     let baseTabbar = self?.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
-                    self?.present(baseTabbar, animated: false, completion: nil)
+                    self?.present(baseTabbar, animated: false, completion: {
+                        self?.navigationController?.popViewController(animated: false)
+                    })
                 } else {
                     self?.showAlert(title: "Oops!", message: "Please check your email address & password")
                 }
