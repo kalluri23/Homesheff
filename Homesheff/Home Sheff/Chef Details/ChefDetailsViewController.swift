@@ -37,6 +37,68 @@ class ChefDetailsViewController: UIViewController {
         profilePictureImageView.layer.borderWidth = 3.0;
         profilePictureImageView.layer.borderColor = UIColor.white.cgColor
     }
+    
+    @IBAction func dismissViewController(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    //This is temp , need to change based on archi.
+    
+    @IBAction func contactSheffButoonAction(_ sender: Any) {
+        
+        let optionMenu = UIAlertController(title: nil, message: "Choose how you would like to contact this sheff", preferredStyle: .actionSheet)
+        
+        let call = UIAlertAction(title: "Call", style: .default){ [weak self] (alert) -> Void in
+          
+            self?.makeACall()
+        }
+        let iMessage = UIAlertAction(title: "iMessage", style: .default){ [weak self] (alert) -> Void in
+            
+            self?.sendAMessage()
+        }
+        let email = UIAlertAction(title: "Email", style: .default){ [weak self] (alert) -> Void in
+            
+            self?.sendAnEmail()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        optionMenu.addAction(call)
+        optionMenu.addAction(iMessage)
+        optionMenu.addAction(email)
+        optionMenu.addAction(cancelAction)
+        
+        // 5
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    
+    private func makeACall() {
+        if let url = URL(string: "tel://\(chefInfo?.phone ?? "")"), UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
+    private func sendAMessage() {
+        guard let messageURL = URL(string: "sms:\(chefInfo?.phone ?? "")")
+            else { return }
+        if UIApplication.shared.canOpenURL(messageURL) {
+            UIApplication.shared.open(messageURL)
+        }
+    }
+    
+    private func sendAnEmail() {
+        
+        if let url = URL(string: "mailto:\(chefInfo?.email ?? "")") {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
 }
 
 
@@ -78,6 +140,17 @@ extension ChefDetailsViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "SERVICES"
     }
+    
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
+//        footerView.backgroundColor = UIColor.blue
+//        return footerView
+//    }
+//
+//    // set height for footer
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 40
+//    }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        if dataArray[indexPath.section][indexPath.row] == "Profile" {
