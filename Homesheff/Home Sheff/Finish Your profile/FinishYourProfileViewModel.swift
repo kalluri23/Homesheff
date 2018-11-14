@@ -17,6 +17,7 @@ class FinishYourProfileViewModel: NSObject {
     
     let fieldData = FinishYourProfileFields()
     var fields = [FinishYourProfileFieldsViewModelItem]()
+    let apiHandler = APIManager()
     
     override init() {
         
@@ -28,6 +29,11 @@ class FinishYourProfileViewModel: NSObject {
         let selectedFields = SelectedServiceFieldItem(addserviceData:fieldData.service!)
             fields.append(selectedFields)
     }
+    
+    func finishUserProfile(envelop:Requestable, completion: @escaping (Bool) -> Void ) {
+        apiHandler.updateUserPreferenceCall(requestEnvelop: envelop, completion: completion)
+    }
+    
     
 }
 

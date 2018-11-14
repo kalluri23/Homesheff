@@ -18,6 +18,7 @@ class GenericFieldsCellTableViewCell: UITableViewCell {
         didSet {
             
             genericField.placeholder = geneircFields?.placeHolder
+            genericField.text = geneircFields?.name
             if geneircFields?.placeHolder == "Password" {
                 genericField.isSecureTextEntry =  true
             }
