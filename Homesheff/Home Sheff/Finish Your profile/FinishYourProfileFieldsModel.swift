@@ -27,6 +27,7 @@ class FinishYourProfileFields {
     
     var genericFields = [GenericField]()
     var service: AddServiceFields?
+    let chefUser = User.defaultUser.currentUser
     
     init() {
         self.addGenericData()
@@ -34,7 +35,7 @@ class FinishYourProfileFields {
     }
     
     private func addGenericData() {
-        genericFields = [GenericField(name: "", placeHolder: "FIRST NAME"),GenericField(name: "", placeHolder: "LAST NAME"),GenericField(name: "", placeHolder: "BIO"),GenericField(name: "", placeHolder: "EMAIL"), GenericField(name: "" , placeHolder: "LOCATION"), GenericField(name: "", placeHolder: "PHONE")]
+        genericFields = [GenericField(name: chefUser?.firstName ?? "", placeHolder: "FIRST NAME"),GenericField(name: chefUser?.lastName ?? "", placeHolder: "LAST NAME"),GenericField(name: "", placeHolder: "BIO"),GenericField(name: chefUser?.email ?? "", placeHolder: "EMAIL"), GenericField(name: "" , placeHolder: "LOCATION"), GenericField(name: chefUser?.phone ?? "", placeHolder: "PHONE")]
     }
         
     private func addCollectionViewData(){

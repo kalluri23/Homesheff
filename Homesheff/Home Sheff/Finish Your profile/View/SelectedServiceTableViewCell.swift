@@ -12,6 +12,8 @@ class SelectedServiceTableViewCell: UITableViewCell {
 
     @IBOutlet weak var serviceCollectionView: UICollectionView!
     
+    @IBOutlet weak var genericField: UITextField!
+    
     var services: AddServiceFields? {
         didSet{
             serviceCollectionView.reloadData()
@@ -128,11 +130,11 @@ extension SelectedServiceTableViewCell: UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-//        guard var serviceAdded = services?.defaultService[indexPath.item] else { return }
-//        if serviceAdded.isSelected == false {
-//        services?.selectedService?.append(serviceAdded)
-//        serviceAdded.isSelected = true
-//      }
+        guard var serviceAdded = services?.defaultService[indexPath.item] else { return }
+        if serviceAdded.isSelected == false {
+        services?.selectedService?.append(serviceAdded)
+        serviceAdded.isSelected = true
+      }
     }
 }
 

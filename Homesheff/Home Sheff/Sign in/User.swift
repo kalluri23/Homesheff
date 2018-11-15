@@ -42,6 +42,7 @@ import Foundation
     let isActive: Bool?
     let imageURL: String?
     var services: String?
+    var location: String?
 }
 
 

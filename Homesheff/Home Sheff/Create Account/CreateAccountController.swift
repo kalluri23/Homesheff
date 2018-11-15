@@ -152,6 +152,11 @@ class CreateAccountController: UIViewController {
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
+    private func navigateToBaseTabBar() {
+        let baseTabbar = self.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
+        self.navigationController?.pushViewController(baseTabbar, animated: true)
+    }
+    
    private func signUpEnvelop() -> Requestable {
         
     let signupSearchPath = ServicePath.signUpCall(email: email!, password: password!, phoneNo: phoneNo, firstName: firstName!, lastName: lastName!, isChef: isChef, isCustomer: isCustomer, imageUrl: imageUrl, zipCode: zipCode)
@@ -170,10 +175,13 @@ class CreateAccountController: UIViewController {
                     
                     //TODO: Manage session time out from API --later
                     UserDefaults.standard.set(true, forKey: "userLoggedIn")
-                    let baseTabbar = self?.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
-                    self?.present(baseTabbar, animated: false, completion: {
-                        self?.navigationController?.popViewController(animated: false)
-                    })
+                    
+                    if let isCustomer = self?.isCustomer, isCustomer {
+                        self?.navigateToBaseTabBar()
+                    } else {
+                        self?.navigateToFinishYourProfile()
+                    }
+                    
                 } else {
                     self?.showAlert(title: "Oops!", message: "Please check your email address & password")
                 }
@@ -321,7 +329,8 @@ extension UITapGestureRecognizer {
         let locationOfTouchInLabel = self.location(in: label)
         let textBoundingBox = layoutManager.usedRect(for: textContainer)
         let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
-                                          y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y);
+                                          y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
+
         let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x + textContainerOffset.x,
                                                      y: locationOfTouchInLabel.y - textContainerOffset.y);
         let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)

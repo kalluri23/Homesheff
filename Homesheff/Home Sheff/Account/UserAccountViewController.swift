@@ -28,6 +28,14 @@ class UserAccountViewController: UIViewController {
            vc.isTermsAndCondition = isTermsAndCondition
            self.present(vc, animated: true, completion: nil)
     }
+    
+    private func didTapSignOut() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "SignInID") as! SignInViewController
+        self.navigationController?.present(vc, animated: true, completion: {
+            UserDefaults.standard.set(false, forKey: "userLoggedIn")
+        })
+        
+    }
 }
 
 extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
@@ -58,7 +66,7 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
         
         if dataArray[indexPath.section][indexPath.row] == "Version" {
             cell.detailedLabel.isHidden = false
-            cell.detailedLabel.text = "1.0.4"
+            cell.detailedLabel.text = "1.2"
         }
         
         return cell
@@ -85,9 +93,7 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
             self.didTapTermsAndCondition(isTermsAndCondition: false)
         }
         else if dataArray[indexPath.section][indexPath.row] == "Sign Out" {
-            
-            UserDefaults.standard.set(false, forKey: "userLoggedIn")
-           self.dismiss(animated: false, completion: nil)
+            didTapSignOut()
         }
         
     }

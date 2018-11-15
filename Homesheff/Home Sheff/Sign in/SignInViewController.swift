@@ -54,7 +54,7 @@ class SignInViewController: UIViewController {
         
         passwordTextField.setPadding()
         passwordTextField.bottomBorderWhite()
-        
+        forgotYourPasswordButton.isHidden = true
        
     }
     
