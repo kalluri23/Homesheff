@@ -152,6 +152,11 @@ class CreateAccountController: UIViewController {
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
+    private func navigateToBaseTabBar() {
+        let baseTabbar = self.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
+        self.navigationController?.pushViewController(baseTabbar, animated: true)
+    }
+    
    private func signUpEnvelop() -> Requestable {
         
     let signupSearchPath = ServicePath.signUpCall(email: email!, password: password!, phoneNo: phoneNo, firstName: firstName!, lastName: lastName!, isChef: isChef, isCustomer: isCustomer, imageUrl: imageUrl, zipCode: zipCode)
@@ -172,13 +177,9 @@ class CreateAccountController: UIViewController {
                     UserDefaults.standard.set(true, forKey: "userLoggedIn")
                     
                     if let isCustomer = self?.isCustomer, isCustomer {
-                        let baseTabbar = self?.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
-                        self?.present(baseTabbar, animated: false, completion: {
-                            self?.navigationController?.popViewController(animated: false)
-                        })
+                        self?.navigateToBaseTabBar()
                     } else {
-                        let finishProfileController = self?.storyboard?.instantiateViewController(withIdentifier:"finishProfileID") as! FinishYourProfile
-                        self?.present(finishProfileController, animated: false, completion: nil)
+                        self?.navigateToFinishYourProfile()
                     }
                     
                 } else {

@@ -70,6 +70,7 @@ class FinishYourProfile : UIViewController, UINavigationControllerDelegate, UIIm
         profileImage.layer.cornerRadius = profileImage.frame.height/2
         profileImage.clipsToBounds = true
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveUserProfile))
         
         //        firstNameTextField.setPadding()
         //        firstNameTextField.setBottomBorderLightGray()
@@ -127,10 +128,6 @@ class FinishYourProfile : UIViewController, UINavigationControllerDelegate, UIIm
         }
     }
     
-    @IBAction func finishUserProfile() {
-        view.endEditing(true)
-        saveUserProfile()
-    }
 }
 
 
@@ -202,7 +199,9 @@ extension FinishYourProfile {
         return nil
     }
     
-    func saveUserProfile() {
+    @objc func saveUserProfile() {
+        
+        view.endEditing(true)
         guard let finishUserProfileEnvelop = finishUserProfileEnvelop()  else {
             return
         }
