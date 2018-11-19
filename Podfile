@@ -7,6 +7,7 @@ target 'Homesheff' do
 pod 'IQKeyboardManagerSwift'
 pod 'Alamofire'
 pod 'NVActivityIndicatorView'
+pod 'AlamofireImage'
   # Pods for Homesheff
 
 end

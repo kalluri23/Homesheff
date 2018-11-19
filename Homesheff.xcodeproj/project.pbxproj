@@ -281,8 +281,8 @@
 			isa = PBXGroup;
 			children = (
 				A4AA64082173CC5C007D83F2 /* UserProfileViewController.swift */,
-				A4AA640A2173CD57007D83F2 /* UserProfileTableViewCell.swift */,
 				E4350835218E8E4C00C33719 /* UserProfileViewModel.swift */,
+				A4AA640A2173CD57007D83F2 /* UserProfileTableViewCell.swift */,
 				A4AA640B2173CD57007D83F2 /* UserProfileTableViewCell.xib */,
 				A4C924BD21739D0000F3BBDE /* UserAccountViewController.swift */,
 				A4C924C32173A41700F3BBDE /* UserAccountCell.swift */,
@@ -488,12 +488,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 			);
@@ -699,10 +701,7 @@
 				DEVELOPMENT_TEAM = DYD3VGU64Z;
 				INFOPLIST_FILE = Homesheff/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.homesheff.appstore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -721,10 +720,7 @@
 				DEVELOPMENT_TEAM = DYD3VGU64Z;
 				INFOPLIST_FILE = Homesheff/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.homesheff.appstore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

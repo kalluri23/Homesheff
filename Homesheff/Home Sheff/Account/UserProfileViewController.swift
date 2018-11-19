@@ -7,24 +7,34 @@
 //
 
 import UIKit
+import Alamofire
 
 class UserProfileViewController: UIViewController {
 
     @IBOutlet weak var userProfileTableView: UITableView!
     @IBOutlet weak var userProfilePicture: UIImageView!
+    @IBOutlet weak var userCoverPicture: UIImageView!
     // we have to change these value to MVVM later
     //TODO :----
     let viewModel = UserProfileViewModel()
     var chefUser = User.defaultUser.currentUser
     var data = [GenericField]()
     var isEditMode = false
+    private var isProfilePhotoSelected = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-       data =  [GenericField(name: self.chefUser?.firstName ?? "", placeHolder: "FIRST NAME"),GenericField(name: self.chefUser?.lastName ?? "", placeHolder: "LAST NAME"),GenericField(name: self.chefUser?.email ?? "", placeHolder: "EMAIL"),GenericField(name: self.chefUser?.location ?? "Georgetown, Washington, D.C.", placeHolder: "LOCATION"),GenericField(name: self.chefUser?.phone ?? "", placeHolder: "PHONE")]
+        
+        updateUserProfileImage()
+        data =  [GenericField(name: self.chefUser?.firstName ?? "", placeHolder: "FIRST NAME"),GenericField(name: self.chefUser?.lastName ?? "", placeHolder: "LAST NAME"),GenericField(name: self.chefUser?.email ?? "", placeHolder: "EMAIL"),GenericField(name: self.chefUser?.location ?? "Georgetown, Washington, D.C.", placeHolder: "LOCATION"),GenericField(name: self.chefUser?.phone ?? "", placeHolder: "PHONE")]
         userProfileTableView.register(UserProfileTableViewCell.nib, forCellReuseIdentifier: UserProfileTableViewCell.reuseIdentifier)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editSaveProfile))
+        
+        userProfilePicture.layer.borderWidth = 1
+        userProfilePicture.layer.masksToBounds = false
+        userProfilePicture.layer.borderColor = UIColor.lightGray.cgColor
+        userProfilePicture.layer.cornerRadius = userProfilePicture.frame.height/2
+        userProfilePicture.clipsToBounds = true
     }
     
     @objc func editSaveProfile() {
@@ -41,6 +51,17 @@ class UserProfileViewController: UIViewController {
     func saveUserProfile() {
         viewModel.updateUserProfile(envelop: updateUserProfileEnvelop()) { (success) in
             
+        }
+    }
+    
+    func updateUserProfileImage() {
+        
+        viewModel.downloadImage(imageName: "\(chefUser?.id ?? 0)_ProfilePhoto") { (profilePhoto) in
+            self.userProfilePicture.image = profilePhoto
+        }
+        
+        viewModel.downloadImage(imageName: "\(chefUser?.id ?? 0)_CoverPhoto") { (coverPhoto) in
+            self.userCoverPicture.image = coverPhoto
         }
     }
     
@@ -101,4 +122,45 @@ extension UserProfileViewController: UITextFieldDelegate {
         }
         User.defaultUser.currentUser = chefUser
     }
+}
+
+extension UserProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    @IBAction func importProfileImage(_ sender: UIButton)
+    {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        //CAN ALSO ADD SOURCE TYPE: CAMERA
+        //determined whether the user can edit their image before uploading
+        image.allowsEditing = false
+        
+        self.present(image, animated: true){
+            //after it is complete
+        }
+    }
+    
+    
+    //when the user has picked the image, checking if item can be converted to an image
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        {
+            if isProfilePhotoSelected {
+                userProfilePicture.image = image
+                viewModel.uploadPhoto(photo: image, photoName: "ProfilePhoto")
+                
+            } else {
+                userCoverPicture.image = image
+                viewModel.uploadPhoto(photo: image, photoName: "CoverPhoto")
+            }
+            
+        }
+        else{
+            print("picture failed to upload")
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+        self.view.bringSubview(toFront: userProfilePicture)
+    }
+    
 }

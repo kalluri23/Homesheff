@@ -166,7 +166,6 @@ class CreateAccountController: UIViewController {
     }
     
     private func callLoginAPI() {
-        
         if isTextFieldHasText() {
             loadingIndicator.startAnimating()
             signInViewModel.signInApi(envelop:signInViewModel.signInEnvelop(userName: email!, password: password!)) { [weak self] isSuccess in

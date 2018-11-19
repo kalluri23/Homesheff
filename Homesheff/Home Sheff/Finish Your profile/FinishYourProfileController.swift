@@ -12,36 +12,9 @@ import UIKit
 
 class FinishYourProfile : UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     
+    let userProfileViewwModel = UserProfileViewModel()
     @IBOutlet weak var profileImage: UIImageView!
-    @IBAction func importProfileImage(_ sender: Any)
-    {
-        let image = UIImagePickerController()
-        image.delegate = self
-        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        //CAN ALSO ADD SOURCE TYPE: CAMERA
-        
-        //determined whether the user can edit their image before uploading 
-        image.allowsEditing = false
-        
-        self.present(image, animated: true){
-            //after it is complete
-        }
-    }
-    
-    
-    //when the user has picked the image, checking if item can be converted to an image
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        {
-            profileImage.image = image
-        }
-        else{
-            print("picture failed to upload")
-        }
-        
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+    @IBOutlet weak var coverImage: UIImageView!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -54,7 +27,7 @@ class FinishYourProfile : UIViewController, UINavigationControllerDelegate, UIIm
     @IBOutlet weak var finishYourProfileTableView: UITableView!
     
     let viewModel = FinishYourProfileViewModel()
-    
+    private var isProfilePhotoSelected = false
     
     var location: String?
     var services: String?
@@ -235,4 +208,45 @@ extension FinishYourProfile: UITextFieldDelegate {
             }
         }
     }
+}
+
+extension FinishYourProfile {
+    
+    @IBAction func importImage(_ sender: UIButton)
+    {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        //CAN ALSO ADD SOURCE TYPE: CAMERA
+        
+        //determined whether the user can edit their image before uploading
+        image.allowsEditing = false
+        isProfilePhotoSelected = (sender.tag == 1)
+        self.present(image, animated: true) {
+            //after it is complete
+        }
+    }
+    
+    //when the user has picked the image, checking if item can be converted to an image
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        {
+            if isProfilePhotoSelected {
+                profileImage.image = image
+                userProfileViewwModel.uploadPhoto(photo: image, photoName: "ProfilePhoto")
+
+            } else {
+                coverImage.image = image
+                userProfileViewwModel.uploadPhoto(photo: image, photoName: "CoverPhoto")
+            }
+           
+        }
+        else{
+            print("picture failed to upload")
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+        self.view.bringSubview(toFront: profileImage)
+    }
+    
 }

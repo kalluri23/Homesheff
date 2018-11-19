@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 
 class APIManager {
     
@@ -119,4 +120,81 @@ class APIManager {
                 }
         }
     }
+    
+    let imageCache = AutoPurgingImageCache(
+        memoryCapacity: UInt64(100).megabytes(),
+        preferredMemoryUsageAfterPurge: UInt64(60).megabytes()
+    )
 }
+
+// Mark: Photos upload & Download
+
+extension APIManager {
+    
+    func uploadPhoto(_ photo: UIImage, fileName: String, completionHandler: @escaping(_ success: Bool) -> Void) {
+        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            let imageData = UIImageJPEGRepresentation(photo, 0.1)
+            if let imageData = imageData {
+                multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "image/jpeg")
+            }
+        }, usingThreshold: UInt64.init(), to: "http://api.dev.homesheff.com/v1/uploadFile", method: .post, headers: headers) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseString { response in
+                    if response.value == "File is uploaded successfully" {
+                        completionHandler(true)
+                    }
+                    else {
+                        completionHandler(false)
+                    }
+                }
+            case .failure(_):
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func retrieveImage(for imageName: String, completion: @escaping (UIImage?) -> Void) {
+        let url = "http://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
+        Alamofire.request(url).responseData { (response) in
+            if response.error == nil {
+                print(response.result)
+                // Show the downloaded image:
+                if let data = response.data {
+                    completion(UIImage(data: data))
+                    self.cache(UIImage(data: data), for: url)
+                }
+            }
+        }
+    }
+    
+    //MARK: = Image Caching
+    
+    func cache(_ image: Image?, for url: String) {
+        guard let image = image else {
+            return
+        }
+        imageCache.add(image, withIdentifier: url)
+    }
+    
+    func cachedImage(for url: String) -> Image? {
+        return imageCache.image(withIdentifier: url)
+    }
+    
+    func resetCacheFor(imageName: String) {
+        let url = "http://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
+        imageCache.removeImage(withIdentifier: url)
+    }
+}
+
+extension UInt64 {
+    
+    func megabytes() -> UInt64 {
+        return self * 1024 * 1024
+    }
+    
+}
+
+

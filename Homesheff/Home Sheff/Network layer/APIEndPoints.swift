@@ -53,42 +53,42 @@ struct UpdateUserPreferencesEnvelop:Requestable {
  This enum also wrap a method which provides dictionary for post body.
  */
 internal enum ServicePath:ParameterBodyMaker {
-  
-  case listOfUsers(userType: String)
-  case signInCall(userName: String, password: String)
+    
+    case listOfUsers(userType: String)
+    case signInCall(userName: String, password: String)
     case signUpCall(email: String, password: String, phoneNo: String?, firstName: String, lastName: String, isChef: Bool, isCustomer: Bool, imageUrl: String, zipCode: String)
     case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: String?, isChef: Bool?, isCustomer: Bool?)
-  
-  func httpBodyEnvelop()->[String:Any]? {
     
-    switch self {
-    case .listOfUsers(userType: let userType):
-      
-      return ["userType": userType]
-      
-    case .signInCall(userName: let userName, password: let password):
-        return ["username": userName, "password": password]
+    func httpBodyEnvelop()->[String:Any]? {
         
-    case .signUpCall(email: let email, password: let password, phoneNo: let phoneNo, firstName: let firstName, lastName: let lastName, isChef: let isChef, isCustomer: let isCustomer, imageUrl: let imageUrl, zipCode: let zipCode):
-        return ["email": email, "password": password, "phone": phoneNo ?? "", "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, zipCode: "zipCode"]
+        switch self {
+        case .listOfUsers(userType: let userType):
+            
+            return ["userType": userType]
+            
+        case .signInCall(userName: let userName, password: let password):
+            return ["username": userName, "password": password]
+            
+        case .signUpCall(email: let email, password: let password, phoneNo: let phoneNo, firstName: let firstName, lastName: let lastName, isChef: let isChef, isCustomer: let isCustomer, imageUrl: let imageUrl, zipCode: let zipCode):
+            return ["email": email, "password": password, "phone": phoneNo ?? "", "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, zipCode: "zipCode"]
+            
+        case .updateUserPreferenceCall(let firstName, let lastName, let headline, let phoneNo, let location, let zipCode, let services, let isChef, let isCustomer):
+            return ["firstName": firstName ?? "", "lastName": lastName ?? "" , "phone": phoneNo ?? "" , "headertext": headline ?? "", "phoneNo": phoneNo ?? "", "location": location ?? "", "zipCode": zipCode ?? "", "services": services ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
+        }
+    }
+    
+    func encodeBodyEnvelop() throws -> Data? {
         
-    case .updateUserPreferenceCall(let firstName, let lastName, let headline, let phoneNo, let location, let zipCode, let services, let isChef, let isCustomer):
-        return ["firstName": firstName ?? "", "lastName": lastName ?? "" , "phone": phoneNo ?? "" , "headertext": headline ?? "", "phoneNo": phoneNo ?? "", "location": location ?? "", "zipCode": zipCode ?? "", "services": services ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
+        do {
+            if let body = self.httpBodyEnvelop() {
+                let data = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
+                return data
+            }
+        }
+        catch  {
+            throw error
+        }
+        
+        return nil
     }
-  }
-  
-  func encodeBodyEnvelop() throws -> Data? {
-    
-    do {
-      if let body = self.httpBodyEnvelop() {
-        let data = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
-        return data
-      }
-    }
-    catch  {
-      throw error
-    }
-    
-    return nil
-  }
 }
