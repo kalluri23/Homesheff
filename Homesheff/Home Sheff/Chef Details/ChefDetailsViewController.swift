@@ -16,6 +16,8 @@ class ChefDetailsViewController: UIViewController {
     
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var chefServiceTableView: UITableView!
+
+    @IBOutlet weak var navigationTitleLbl: UILabel!
     var chefServiceData = ChefServiceModel()
     var chefInfo: Chef?
     
@@ -24,7 +26,7 @@ class ChefDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          setProfilePicture()
-         title = chefInfo?.firstName
+         navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
          emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
          chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
         
