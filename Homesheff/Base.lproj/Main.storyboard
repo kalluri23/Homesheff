@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -946,7 +946,7 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dgo-cA-ERy">
                                 <rect key="frame" x="20" y="623" width="335" height="34"/>
-                                <color key="backgroundColor" red="0.45442897081375122" green="0.71329301595687866" blue="0.39994263648986816" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.45490196078431372" green="0.71372549019607845" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="dWb-oa-wBv"/>
                                 </constraints>
@@ -4375,8 +4375,8 @@ AAAAAAAAAAAAAALRRQ
 </mutableData>
         </image>
         <image name="leaves-background" width="375" height="125"/>
-        <image name="my-account-nonselected" width="25" height="25"/>
-        <image name="my-account-selected" width="25" height="25"/>
+        <image name="my-account-nonselected" width="50" height="50"/>
+        <image name="my-account-selected" width="50" height="50"/>
         <image name="pencil-icon" width="11" height="11"/>
         <image name="pencil-icon-background-circle" width="33" height="33"/>
         <image name="plantarian-profileimg" width="90" height="90"/>

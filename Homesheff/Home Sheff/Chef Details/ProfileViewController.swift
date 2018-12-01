@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 // convert this into MVVM
 
 enum ProfileType {
@@ -28,10 +30,21 @@ class ProfileViewController: UIViewController {
     var profileType: ProfileType?
     
     @IBOutlet weak var profileEditButton: UIButton!
+    var aboutChef: String = """
+                                         I am an avid plant-based chef who enjoys meal-prepping every week.
+                                          It's a great way to jump start the week especially if your weeks are crazy busy
+                                          like mine are! I like to spend my time teaching others how to meal prep also - it really is
+                                          a total life save if you don't have much time to spare for cooking or don't want to spend that
+                                          much time doing it during the week! Cooking has always been a life long passion of mine and I love
+                                          getting share any/all parts of that experience with friends, family, and eveyone who is also interested in the art of cooking.
+                                       """
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setProfileAndBgPicture()
         chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
+        chefServiceTableView.register(AboutTableViewCell.nib, forCellReuseIdentifier: AboutTableViewCell.reuseIdentifier)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -140,40 +153,67 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chefServiceData.chefService.count
+        switch section {
+        case 0:
+            return chefServiceData.chefService.count
+        case 1:
+            return 1
+        default:
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         /*if indexPath.row == 1{
             return 120
         }*/
-        return 55
+        switch indexPath.section {
+        case 0:
+            return 55
+        case 1:
+            return 150
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
-            cell.chefDetails = chefServiceData.chefService[indexPath.row]
-        
-        cell.partCount1.isHidden = true
-        cell.partyCount2.isHidden = true
-        cell.partyCount3.isHidden = true
-        cell.servicePriceLabel.isHidden = true
-        /*if indexPath.row == 1 {
-            cell.partCount1.isHidden = false
-            cell.partyCount2.isHidden = false
-            cell.partyCount3.isHidden = false
+        let cell:UITableViewCell = UITableViewCell()
+        switch indexPath.section {
+            case 0:
+                let profileCell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
+                profileCell.chefDetails = chefServiceData.chefService[indexPath.row]
+                
+                profileCell.partCount1.isHidden = true
+                profileCell.partyCount2.isHidden = true
+                profileCell.partyCount3.isHidden = true
+                profileCell.servicePriceLabel.isHidden = true
+                return profileCell
             
-        }*/
-        
-        return cell
+            case 1:
+                let aboutCell: AboutTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
+                aboutCell.delegate = self
+                aboutCell.aboutChef = aboutChef
+                return aboutCell
+            default:
+                return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "SERVICES"
+        switch section {
+            case 0:
+                return "SERVICES"
+            case 1:
+                return "About"
+            default:
+                return ""
+        }
+        
     }
     
     
@@ -197,4 +237,12 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
 //        }
 //    }
     
+}
+
+extension ProfileViewController: AboutCellDelegate {
+    
+    func viewMoreClicked() {
+        self.navigationController?.pushViewController(AboutChefController.create(aboutChef: aboutChef), animated: true)
+         // self.present(AboutChefController.create(aboutChef: aboutChef), animated: true, completion: nil)
+    }
 }
