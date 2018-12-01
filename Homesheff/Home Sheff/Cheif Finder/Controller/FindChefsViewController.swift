@@ -20,14 +20,17 @@ class FindChefsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Chef"
         chefTableView.delegate = self
         chefTableView.dataSource = self
         loadingIndoicator.color = .black
         loadingIndoicator.type = .ballClipRotate
         loadingIndoicator.startAnimating()
         viewModelBinding()
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.navigationItem.hidesBackButton = true
     }
     
     func viewModelBinding()  {

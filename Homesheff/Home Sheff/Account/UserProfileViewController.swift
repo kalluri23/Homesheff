@@ -133,6 +133,7 @@ extension UserProfileViewController: UINavigationControllerDelegate, UIImagePick
         image.sourceType = UIImagePickerControllerSourceType.photoLibrary
         //CAN ALSO ADD SOURCE TYPE: CAMERA
         //determined whether the user can edit their image before uploading
+        isProfilePhotoSelected = (sender.tag == 1)
         image.allowsEditing = false
         
         self.present(image, animated: true){
@@ -160,7 +161,6 @@ extension UserProfileViewController: UINavigationControllerDelegate, UIImagePick
         }
         
         self.dismiss(animated: true, completion: nil)
-        self.view.bringSubview(toFront: userProfilePicture)
     }
     
 }

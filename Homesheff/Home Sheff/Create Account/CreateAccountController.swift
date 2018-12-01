@@ -154,7 +154,7 @@ class CreateAccountController: UIViewController {
     
     private func navigateToBaseTabBar() {
         let baseTabbar = self.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
-        self.navigationController?.pushViewController(baseTabbar, animated: true)
+        self.present(baseTabbar, animated: true, completion: nil)
     }
     
    private func signUpEnvelop() -> Requestable {

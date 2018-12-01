@@ -19,8 +19,7 @@ class UserAccountViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      userAccountVC.register(UserAccountCell.nib, forCellReuseIdentifier: UserAccountCell.reuseIdentifier)
+        userAccountVC.register(UserAccountCell.nib, forCellReuseIdentifier: UserAccountCell.reuseIdentifier)
     }
 
     private func didTapTermsAndCondition(isTermsAndCondition: Bool) {
