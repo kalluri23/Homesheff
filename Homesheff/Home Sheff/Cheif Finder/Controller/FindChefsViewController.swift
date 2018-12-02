@@ -12,9 +12,8 @@ import NVActivityIndicatorView
 class FindChefsViewController: UIViewController {
     
     @IBOutlet weak var chefTableView: UITableView!
-    var findCheifViewModel :FindCheifViewModel?
     @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
-    
+    var findCheifViewModel :FindCheifViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +51,13 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ChefCell = tableView.dequeueReusableCell(for: indexPath)
         cell.chef = findCheifViewModel?.cheifObjectAtIndex(index: indexPath.row)
+        if (cell.chef?.imageURL != nil) {
+            findCheifViewModel?.downloadImage(imageName: "\(cell.chef?.id ?? 0)_ProfilePhoto", completion: { (image) in
+                cell.cheffImageView.image = image
+                self.findCheifViewModel?.prepareProfileImageView(imageView: cell.cheffImageView)
+            })
+        }
+        
         return cell
     }
     

@@ -36,12 +36,22 @@ class ChefDetailsViewController: UIViewController {
     }
     
     private func setProfileAndBgPicture() {
-        profilePictureImageView.loadImageWithUrlString(urlString: chefInfo?.imageURL ?? "")
-        profilePictureImageView.layer.cornerRadius = profilePictureImageView.frame.size.width / 2;
-        profilePictureImageView.clipsToBounds = true;
-        profilePictureImageView.layer.borderWidth = 3.0;
-        profilePictureImageView.layer.borderColor = UIColor.white.cgColor
-        profileBgView.loadImageWithUrlString(urlString: chefInfo?.coverURL ?? "")
+        
+        if(chefInfo?.imageURL != nil) {
+            chefServiceData.downloadImage(imageName: "\(chefInfo?.id ?? 0)_ProfilePhoto") { (image) in
+                self.profilePictureImageView.image = image
+                self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width / 2
+                self.profilePictureImageView.clipsToBounds = true;
+                self.profilePictureImageView.layer.borderWidth = 3.0
+                self.profilePictureImageView.layer.borderColor = UIColor.white.cgColor
+            }
+        }
+        
+        if(chefInfo?.coverURL != nil) {
+            chefServiceData.downloadImage(imageName: "\(chefInfo?.id ?? 0)_CoverPhoto") { (image) in
+               self.profileBgView.image = image
+            }
+        }
     }
     
     @IBAction func dismissViewController(_ sender: Any) {

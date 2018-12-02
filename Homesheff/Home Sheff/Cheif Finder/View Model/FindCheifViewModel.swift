@@ -11,7 +11,8 @@ import NVActivityIndicatorView
 
 class FindCheifViewModel: NSObject {
     
-    private let getUserList = APIManager()
+    private let apiHandler = APIManager()
+
 
     var reloadTableView: (() -> Void)?
     
@@ -49,7 +50,7 @@ class FindCheifViewModel: NSObject {
     }
     
     private func getListOfUser(userType:String) {
-        getUserList.fetchUserList(requestEnvelop: self.userListEnvelop()) { [weak self] (list,isCompleted ) in
+        apiHandler.fetchUserList(requestEnvelop: self.userListEnvelop()) { [weak self] (list,isCompleted ) in
             self?.cheif = list!
             self?.reloadTableView?()
         }
@@ -63,6 +64,24 @@ class FindCheifViewModel: NSObject {
         return userListEnvelop
     }
     
+    func downloadImage(imageName:String, completion: @escaping (UIImage) -> ()) {
+        if let image = apiHandler.cachedImage(for: imageName) {
+            completion(image)
+            return
+        }
+        apiHandler.retrieveImage(for: imageName) { (image) in
+            if let image = image {
+                completion(image)
+            }
+        }
+    }
+    
+    func prepareProfileImageView(imageView: UIImageView) {
+        imageView.layer.cornerRadius = imageView.frame.size.width / 2
+        imageView.clipsToBounds = true;
+        imageView.layer.borderWidth = 3.0
+        imageView.layer.borderColor = UIColor.white.cgColor
+    }
  
     
 /// Temp data to feed UI
