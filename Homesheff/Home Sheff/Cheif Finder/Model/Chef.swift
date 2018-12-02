@@ -66,4 +66,5 @@ struct Chef: Codable {
     var isCustomer: Bool?
     var isActive: Bool?
     var imageURL: String?
+    var coverURL: String?
 }

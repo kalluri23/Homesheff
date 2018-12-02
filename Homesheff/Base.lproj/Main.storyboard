@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -614,7 +611,7 @@
                     <navigationItem key="navigationItem" title="Chef" id="y7y-1a-bLw"/>
                     <connections>
                         <outlet property="chefTableView" destination="8xf-zN-Kyy" id="0ep-7b-USf"/>
-                        <outlet property="loadingIndoicator" destination="9NR-LZ-2pB" id="uCf-EG-Bwh"/>
+                        <outlet property="loadingIndicator" destination="9NR-LZ-2pB" id="1IY-gI-mS6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hST-Jg-VzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -818,7 +815,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNd-av-mNc">
                                 <rect key="frame" x="0.0" y="84" width="375" height="220"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leaves-background" translatesAutoresizingMaskIntoConstraints="NO" id="szh-lA-CbX">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leaves-background" translatesAutoresizingMaskIntoConstraints="NO" id="szh-lA-CbX" customClass="CustomImageView" customModule="Homesheff" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="124" id="d69-91-Ti5"/>
@@ -919,6 +916,7 @@
                         <outlet property="chefServiceTableView" destination="cQ4-nx-b36" id="z26-q6-ajE"/>
                         <outlet property="emailLabel" destination="1Ub-vV-E7I" id="F36-wS-78z"/>
                         <outlet property="navigationTitleLbl" destination="BnT-md-so9" id="Qzf-st-sju"/>
+                        <outlet property="profileBgView" destination="szh-lA-CbX" id="ds6-KN-RNF"/>
                         <outlet property="profilePictureImageView" destination="Ssj-Hc-LAG" id="vbQ-4n-vhv"/>
                     </connections>
                 </viewController>
@@ -4302,13 +4300,13 @@ AAAAAAAAAAAAAALRRQ
 </mutableData>
         </image>
         <image name="leaves-background" width="375" height="125"/>
-        <image name="my-account-nonselected" width="25" height="25"/>
-        <image name="my-account-selected" width="25" height="25"/>
+        <image name="my-account-nonselected" width="50" height="50"/>
+        <image name="my-account-selected" width="50" height="50"/>
         <image name="pencil-icon" width="11" height="11"/>
         <image name="pencil-icon-background-circle" width="33" height="33"/>
         <image name="plantarian-profileimg" width="90" height="90"/>
-        <image name="search-nonselected" width="25" height="25"/>
-        <image name="search-selected" width="25" height="25"/>
+        <image name="search-nonselected" width="50" height="50"/>
+        <image name="search-selected" width="50" height="50"/>
         <image name="soma-kun" width="225" height="225"/>
     </resources>
 </document>
