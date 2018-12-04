@@ -8,6 +8,7 @@
 
 import UIKit
 import NVActivityIndicatorView
+import FacebookLogin
 
 extension UITextField{
     
@@ -38,6 +39,10 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
+        loginButton.center = view.center
+        
+        view.addSubview(loginButton)
               //TODO: Manage session time out from API --later
         /*if UserDefaults.standard.bool(forKey: "userLoggedIn") == true {
             let baseTabbar = self.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
