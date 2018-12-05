@@ -41,7 +41,8 @@ class SignInViewController: UIViewController {
         
         let loginButton = LoginButton(readPermissions: [ .publicProfile ])
         loginButton.center = view.center
-        
+        loginButton.backgroundColor = UIColor(red: 124.0/255.0, green: 177/255.0, blue: 54/255.0, alpha: 1.0)
+        loginButton.tintColor = UIColor(red: 124.0/255.0, green: 177/255.0, blue: 54/255.0, alpha: 1.0)
         view.addSubview(loginButton)
               //TODO: Manage session time out from API --later
         /*if UserDefaults.standard.bool(forKey: "userLoggedIn") == true {
