@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWE-fv-ynE" userLabel="Top View">
-                                <rect key="frame" x="0.0" y="94" width="375" height="173"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="173"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HomeSheff" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFN-Xa-azj">
                                         <rect key="frame" x="89.5" y="123" width="196" height="40"/>
@@ -51,7 +48,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GhX-0b-RfX">
-                                <rect key="frame" x="40" y="297" width="295" height="20"/>
+                                <rect key="frame" x="40" y="253" width="295" height="20"/>
                                 <color key="backgroundColor" red="0.48627450979999998" green="0.69411764710000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="nx2-lC-Plz"/>
@@ -64,7 +61,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1bU-pX-waH">
-                                <rect key="frame" x="40" y="347" width="295" height="20"/>
+                                <rect key="frame" x="40" y="303" width="295" height="20"/>
                                 <color key="backgroundColor" red="0.48627450979999998" green="0.69411764710000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="rGJ-uA-exs"/>
@@ -124,7 +121,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twm-e1-SIt">
-                                <rect key="frame" x="185" y="379" width="133" height="27"/>
+                                <rect key="frame" x="185" y="335" width="133" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="e7p-gz-kM4"/>
                                 </constraints>
@@ -134,7 +131,7 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uyp-eG-ewk" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="165.5" y="343.5" width="44" height="44"/>
+                                <rect key="frame" x="165.5" y="321.5" width="44" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="qUt-z5-aoO"/>
@@ -979,6 +976,94 @@
             </objects>
             <point key="canvasLocation" x="3355.072463768116" y="706.47321428571422"/>
         </scene>
+        <!--Add Photos Controller-->
+        <scene sceneID="xLp-Px-gu3">
+            <objects>
+                <viewController storyboardIdentifier="AddPhotosController" id="eF8-k6-tGP" customClass="AddPhotosController" customModule="Homesheff" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ohT-cm-b9x">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNa-Ge-IN5">
+                                <rect key="frame" x="0.0" y="64" width="375" height="48"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4kL-Nq-S0n">
+                                        <rect key="frame" x="133" y="10" width="109" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="109" id="pF1-wR-ibp"/>
+                                            <constraint firstAttribute="height" constant="30" id="pvM-63-C0m"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Add Photos">
+                                            <color key="titleColor" red="0.48627450979999998" green="0.69411764710000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPhotosClicked:" destination="eF8-k6-tGP" eventType="touchUpInside" id="VZt-KB-ROv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="NBx-sh-8GW"/>
+                                    <constraint firstAttribute="bottom" secondItem="4kL-Nq-S0n" secondAttribute="bottom" constant="8" id="fUv-Ys-o2f"/>
+                                    <constraint firstItem="4kL-Nq-S0n" firstAttribute="centerX" secondItem="dNa-Ge-IN5" secondAttribute="centerX" id="lyH-wp-EIQ"/>
+                                    <constraint firstItem="4kL-Nq-S0n" firstAttribute="top" secondItem="dNa-Ge-IN5" secondAttribute="top" constant="10" id="sOO-gE-8EI"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LeE-d7-KD0" customClass="PhotosCollectionView" customModule="Homesheff" customModuleProvider="target">
+                                <rect key="frame" x="8" y="120" width="367" height="547"/>
+                                <color key="backgroundColor" red="0.83921568629999999" green="0.84705882349999995" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PXk-3j-rWj">
+                                    <size key="itemSize" width="112" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotosCollectionViewCell" id="QFr-5C-KhT" customClass="PhotosCollectionViewCell" customModule="Homesheff" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="egv-SX-e5t">
+                                                    <rect key="frame" x="0.0" y="0.0" width="112" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <size key="customSize" width="100" height="100"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="egv-SX-e5t" id="6ak-r0-dES"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.83921568629999999" green="0.84705882349999995" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="LeE-d7-KD0" firstAttribute="top" secondItem="dNa-Ge-IN5" secondAttribute="bottom" constant="8" id="0gc-DV-Lh5"/>
+                            <constraint firstItem="LeE-d7-KD0" firstAttribute="leading" secondItem="6qD-4F-07P" secondAttribute="leading" constant="8" id="11x-Rj-Thq"/>
+                            <constraint firstItem="dNa-Ge-IN5" firstAttribute="leading" secondItem="6qD-4F-07P" secondAttribute="leading" id="CoI-TP-fiI"/>
+                            <constraint firstItem="dNa-Ge-IN5" firstAttribute="top" secondItem="6qD-4F-07P" secondAttribute="top" id="CxB-sp-j4P"/>
+                            <constraint firstItem="LeE-d7-KD0" firstAttribute="bottom" secondItem="6qD-4F-07P" secondAttribute="bottom" id="Pbb-hU-v03"/>
+                            <constraint firstItem="dNa-Ge-IN5" firstAttribute="trailing" secondItem="6qD-4F-07P" secondAttribute="trailing" id="Q3z-Xb-KcU"/>
+                            <constraint firstItem="LeE-d7-KD0" firstAttribute="trailing" secondItem="6qD-4F-07P" secondAttribute="trailing" id="kNB-VM-blx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6qD-4F-07P"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="pyM-qn-4go"/>
+                    <connections>
+                        <outlet property="addPhotosBtn" destination="4kL-Nq-S0n" id="o99-jC-CF8"/>
+                        <outlet property="photosCollectionView" destination="LeE-d7-KD0" id="3qO-ai-4Ma"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JXX-Xj-Nhr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1428" y="-141.67916041979012"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="LbQ-U0-Xe1">
             <objects>
@@ -1000,7 +1085,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="z1V-wM-KhJ"/>
+                        <segue destination="eF8-k6-tGP" kind="relationship" relationship="rootViewController" id="mDD-S6-wn5"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IV1-z5-KPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4302,13 +4387,13 @@ AAAAAAAAAAAAAALRRQ
 </mutableData>
         </image>
         <image name="leaves-background" width="375" height="125"/>
-        <image name="my-account-nonselected" width="25" height="25"/>
-        <image name="my-account-selected" width="25" height="25"/>
+        <image name="my-account-nonselected" width="50" height="50"/>
+        <image name="my-account-selected" width="50" height="50"/>
         <image name="pencil-icon" width="11" height="11"/>
         <image name="pencil-icon-background-circle" width="33" height="33"/>
         <image name="plantarian-profileimg" width="90" height="90"/>
-        <image name="search-nonselected" width="25" height="25"/>
-        <image name="search-selected" width="25" height="25"/>
+        <image name="search-nonselected" width="50" height="50"/>
+        <image name="search-selected" width="50" height="50"/>
         <image name="soma-kun" width="225" height="225"/>
     </resources>
 </document>

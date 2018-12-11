@@ -37,6 +37,10 @@
 		A4C924C62173A41700F3BBDE /* UserAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C924C42173A41700F3BBDE /* UserAccountCell.xib */; };
 		A4D45760217CEDDC002E4588 /* TermsAndConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */; };
 		A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */; };
+		DA240C7021C03C5D0004474B /* AddPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA240C6F21C03C5D0004474B /* AddPhotosController.swift */; };
+		DA240C7221C03E980004474B /* PhotosCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA240C7121C03E980004474B /* PhotosCollectionView.swift */; };
+		DA240C7421C03EDA0004474B /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA240C7321C03EDA0004474B /* PhotosCollectionViewCell.swift */; };
+		DA240C7621C070C90004474B /* PhotosCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA240C7521C070C90004474B /* PhotosCollectionViewModel.swift */; };
 		E4350836218E8E4C00C33719 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4350835218E8E4C00C33719 /* UserProfileViewModel.swift */; };
 		E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */; };
 		E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182430214E924F009F62CE /* FindChefsViewController.swift */; };
@@ -98,6 +102,10 @@
 		A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionViewController.swift; sourceTree = "<group>"; };
 		A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		C8CB94F0F399356DEC3B25B7 /* Pods-Homesheff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.debug.xcconfig"; sourceTree = "<group>"; };
+		DA240C6F21C03C5D0004474B /* AddPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosController.swift; sourceTree = "<group>"; };
+		DA240C7121C03E980004474B /* PhotosCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionView.swift; sourceTree = "<group>"; };
+		DA240C7321C03EDA0004474B /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		DA240C7521C070C90004474B /* PhotosCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewModel.swift; sourceTree = "<group>"; };
 		E4350835218E8E4C00C33719 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesRatesViewController.swift; sourceTree = "<group>"; };
 		E9182430214E924F009F62CE /* FindChefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefsViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +189,7 @@
 		A49D340E2156E86600AA24CF /* Finish Your profile */ = {
 			isa = PBXGroup;
 			children = (
+				DA240C6E21C03C180004474B /* Add Photos */,
 				E9836C5E2165A8C0004554D4 /* View */,
 				E9836C5A21659782004554D4 /* FinishYourProfileFieldsModel.swift */,
 				E9836C5C2165982D004554D4 /* FinishYourProfileViewModel.swift */,
@@ -306,6 +315,17 @@
 				17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		DA240C6E21C03C180004474B /* Add Photos */ = {
+			isa = PBXGroup;
+			children = (
+				DA240C6F21C03C5D0004474B /* AddPhotosController.swift */,
+				DA240C7121C03E980004474B /* PhotosCollectionView.swift */,
+				DA240C7321C03EDA0004474B /* PhotosCollectionViewCell.swift */,
+				DA240C7521C070C90004474B /* PhotosCollectionViewModel.swift */,
+			);
+			path = "Add Photos";
 			sourceTree = "<group>";
 		};
 		E9182435214E98B9009F62CE /* View */ = {
@@ -516,9 +536,11 @@
 				A4C9249C216ED7BD00F3BBDE /* CollectionReusableView.swift in Sources */,
 				A4C924BE21739D0000F3BBDE /* UserAccountViewController.swift in Sources */,
 				A4AA640C2173CD57007D83F2 /* UserProfileTableViewCell.swift in Sources */,
+				DA240C7421C03EDA0004474B /* PhotosCollectionViewCell.swift in Sources */,
 				E9D2700C214B1D240087F476 /* FinishYourProfileController.swift in Sources */,
 				A4AA64092173CC5C007D83F2 /* UserProfileViewController.swift in Sources */,
 				E9182433214E97F0009F62CE /* ChefCell.swift in Sources */,
+				DA240C7221C03E980004474B /* PhotosCollectionView.swift in Sources */,
 				E4350836218E8E4C00C33719 /* UserProfileViewModel.swift in Sources */,
 				E975B6122160156000BE6DD2 /* SignUpContentTableViewCell.swift in Sources */,
 				A453503C2185310D005748D3 /* CustomImageView.swift in Sources */,
@@ -533,6 +555,7 @@
 				A4C9249F2172AFB800F3BBDE /* BaseTabbarController.swift in Sources */,
 				E9182438214EA22A009F62CE /* Chef.swift in Sources */,
 				A403097621795046001397EE /* User.swift in Sources */,
+				DA240C7621C070C90004474B /* PhotosCollectionViewModel.swift in Sources */,
 				E9D2700821499C130087F476 /* CreateAccountController.swift in Sources */,
 				E9B3AF7B216A7557005BE172 /* SelectedServicesCollectionViewCell.swift in Sources */,
 				E9B3AF81216A75BC005BE172 /* SuggestedServicesCollectionViewCell.swift in Sources */,
@@ -543,6 +566,7 @@
 				A4C924B62172C3D000F3BBDE /* ConfigEndPoints.swift in Sources */,
 				A4AA63FF2173B6E5007D83F2 /* ProfileGenericTableViewCell.swift in Sources */,
 				A4C924B82172C3D000F3BBDE /* APIManager.swift in Sources */,
+				DA240C7021C03C5D0004474B /* AddPhotosController.swift in Sources */,
 				E975B606216005C400BE6DD2 /* FieldsModel.swift in Sources */,
 				A4C924C52173A41700F3BBDE /* UserAccountCell.swift in Sources */,
 				E9836C5B21659782004554D4 /* FinishYourProfileFieldsModel.swift in Sources */,
