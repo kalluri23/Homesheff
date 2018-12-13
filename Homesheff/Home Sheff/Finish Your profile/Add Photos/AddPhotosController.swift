@@ -15,19 +15,22 @@ class AddPhotosController: UIViewController {
     @IBOutlet weak var photosCollectionView: PhotosCollectionView!
     var imagePicker = UIImagePickerController()
     var photoCollectionViewModel: PhotosCollectionViewModel!
+    let photoEditor = Bundle.main.loadNibNamed("ImageEditor", owner: ImageEditor(), options: nil)![0] as? ImageEditor
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
-       PhotosCollectionViewModel.shared.reloadCollectionView = { [weak self] in
+        PhotosCollectionViewModel.shared.reloadCollectionView = { [weak self] in
             self?.photosCollectionView.reloadData()
         }
+        photoEditor?.delegate = self
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.photosCollectionView.delegate = self.photosCollectionView
         self.photosCollectionView.dataSource = self.photosCollectionView
+        self.photosCollectionView.collectionDelegate = self
     }
     
    
@@ -113,9 +116,7 @@ extension AddPhotosController: UIImagePickerControllerDelegate, UINavigationCont
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
         DispatchQueue.main.async {
-            
             if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
                 self.dismiss(animated: true, completion: { () -> Void in
                     PhotosCollectionViewModel.shared.adddImage(image: image)
@@ -128,5 +129,33 @@ extension AddPhotosController: UIImagePickerControllerDelegate, UINavigationCont
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension AddPhotosController: PhotosCollectionViewDelegate {
+    
+    func cellClicked(clickedImage: UIImage) {
+        photoEditor?.imageView.image = clickedImage
+        self.view.addSubview(photoEditor!)
+        self.view.bringSubview(toFront: photoEditor!)
+    }
+}
+
+extension AddPhotosController: ImageEditorDelegate {
+    func optionsClicked() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { _ in
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Resize", style: .default, handler: { _ in
+        }))
+        
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func closeClicked() {
+       self.photoEditor?.removeFromSuperview()
     }
 }

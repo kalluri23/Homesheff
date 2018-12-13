@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="o5r-V8-ApO" customClass="EmptyCollectionView" customModule="Homesheff" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="say-q1-LjC">
+                    <rect key="frame" x="30" y="168.5" width="315" height="330"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="gX3-kd-lqh">
+                            <rect key="frame" x="57.5" y="0.0" width="200" height="200"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="Crf-6z-gCO"/>
+                                <constraint firstAttribute="height" constant="200" id="pbY-g6-9Xy"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't uploaded any photos yet!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jha-Oa-bSm">
+                            <rect key="frame" x="0.0" y="220" width="315" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="BAi-NU-WmR"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload some photos that showcase the meals you've prepared and/or the services you offer for clients." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Fo-Ko-wkn">
+                            <rect key="frame" x="0.0" y="249" width="315" height="50.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="4Fo-Ko-wkn" firstAttribute="top" secondItem="Jha-Oa-bSm" secondAttribute="bottom" constant="8" id="1RF-I8-d1k"/>
+                        <constraint firstAttribute="trailing" secondItem="4Fo-Ko-wkn" secondAttribute="trailing" id="6dJ-2r-BlG"/>
+                        <constraint firstAttribute="trailing" secondItem="Jha-Oa-bSm" secondAttribute="trailing" id="7fc-WZ-cXF"/>
+                        <constraint firstItem="Jha-Oa-bSm" firstAttribute="leading" secondItem="say-q1-LjC" secondAttribute="leading" id="A81-mf-Fwb"/>
+                        <constraint firstItem="4Fo-Ko-wkn" firstAttribute="leading" secondItem="say-q1-LjC" secondAttribute="leading" id="IYy-p2-Oh3"/>
+                        <constraint firstAttribute="height" constant="330" id="NAG-4u-Nr0"/>
+                        <constraint firstItem="gX3-kd-lqh" firstAttribute="centerX" secondItem="say-q1-LjC" secondAttribute="centerX" id="lrM-t0-GDx"/>
+                        <constraint firstItem="gX3-kd-lqh" firstAttribute="top" secondItem="say-q1-LjC" secondAttribute="top" id="tHF-lF-iNX"/>
+                        <constraint firstItem="Jha-Oa-bSm" firstAttribute="top" secondItem="gX3-kd-lqh" secondAttribute="bottom" constant="20" id="wLR-TS-LI8"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="lBL-da-qfJ" firstAttribute="trailing" secondItem="say-q1-LjC" secondAttribute="trailing" constant="30" id="Ujo-R1-6hP"/>
+                <constraint firstItem="say-q1-LjC" firstAttribute="centerX" secondItem="o5r-V8-ApO" secondAttribute="centerX" id="ZFd-Zh-DAi"/>
+                <constraint firstItem="say-q1-LjC" firstAttribute="leading" secondItem="lBL-da-qfJ" secondAttribute="leading" constant="30" id="vwK-Dh-FYY"/>
+                <constraint firstItem="say-q1-LjC" firstAttribute="centerY" secondItem="o5r-V8-ApO" secondAttribute="centerY" id="wIG-Tg-6uR"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="lBL-da-qfJ"/>
+            <connections>
+                <outlet property="cameraView" destination="gX3-kd-lqh" id="V6B-TR-6te"/>
+                <outlet property="headingLbl" destination="Jha-Oa-bSm" id="4eC-ay-mtI"/>
+                <outlet property="subHeadingLbl" destination="4Fo-Ko-wkn" id="v1p-Dr-8U1"/>
+            </connections>
+            <point key="canvasLocation" x="-567.20000000000005" y="-38.23088455772114"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="camera" width="163" height="163"/>
+    </resources>
+</document>
