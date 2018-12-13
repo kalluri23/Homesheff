@@ -42,7 +42,7 @@ DEPENDENCIES:
   - NVActivityIndicatorView
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
     - Bolts
@@ -70,4 +70,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: c1a1aa47c5549db9c9c11e6de90b377e53ce0a4f
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
