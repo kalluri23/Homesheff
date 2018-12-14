@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		142C8C2621C44E9500C04619 /* FindChefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C8C2521C44E9500C04619 /* FindChefCell.swift */; };
 		2B42017BD6F0D30ECAEC28E3 /* Pods_Homesheff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */; };
 		A403097421794F71001397EE /* UserDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A403097321794F71001397EE /* UserDetailModal.swift */; };
 		A403097621795046001397EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A403097521795046001397EE /* User.swift */; };
@@ -66,6 +67,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		142C8C2521C44E9500C04619 /* FindChefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefCell.swift; sourceTree = "<group>"; };
 		17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.release.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.release.xcconfig"; sourceTree = "<group>"; };
 		76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homesheff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A403097321794F71001397EE /* UserDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModal.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				E9182432214E97F0009F62CE /* ChefCell.swift */,
+				142C8C2521C44E9500C04619 /* FindChefCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				A4AA64062173BE76007D83F2 /* ChefDetailsModel.swift in Sources */,
 				E975B60D2160133100BE6DD2 /* ChefFieldsCell.swift in Sources */,
 				E975B609216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift in Sources */,
+				142C8C2621C44E9500C04619 /* FindChefCell.swift in Sources */,
 				A4D45760217CEDDC002E4588 /* TermsAndConditionViewController.swift in Sources */,
 				A4C9249F2172AFB800F3BBDE /* BaseTabbarController.swift in Sources */,
 				E9182438214EA22A009F62CE /* Chef.swift in Sources */,

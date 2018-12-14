@@ -15,15 +15,14 @@ class FindCheifViewModel: NSObject {
 
     var reloadTableView: (() -> Void)?
     
-    
     /// return default number of section
-    var numberOfSection: Int {
-        return 1
+    var numberOfSections: Int {
+        return 2
     }
     
     /// returns counts of cheif to generate the rows
     var numberOfRows: Int {
-        return cheif.count
+        return matchingCheffs.count
     }
     
     //TODO:  Should return optional in future, because data will come from server and we were not sure that we always have value for chef or not
@@ -35,12 +34,13 @@ class FindCheifViewModel: NSObject {
     /// - Returns: cheif object to feed tableview cell
     func cheifObjectAtIndex(index: Int) -> Chef {
         
-        return cheif[index]
+        return matchingCheffs[index]
     }
     
     //TODO: cheif data should be dynamic
     
     var cheif = [Chef]()
+    var matchingCheffs = [Chef]()
     override init() {
         super.init()
         
@@ -51,6 +51,7 @@ class FindCheifViewModel: NSObject {
     private func getListOfUser(userType:String) {
         getUserList.fetchUserList(requestEnvelop: self.userListEnvelop()) { [weak self] (list,isCompleted ) in
             self?.cheif = list!
+            self?.matchingCheffs = list!
             self?.reloadTableView?()
         }
     }
@@ -63,25 +64,38 @@ class FindCheifViewModel: NSObject {
         return userListEnvelop
     }
     
- 
+    func searchListOfUser(matchingString:String) {
+        let matchingChefs = self.cheif.filter({(cheff) in
+            if let firstName = cheff.firstName {
+                if let _ = firstName.range(of: matchingString, options: .caseInsensitive) {
+                    return true
+                } else {
+                    return false
+                }
+            }else {
+                return false
+            }
+        })
+        self.matchingCheffs = matchingChefs
+    }
+}
+
+extension FindCheifViewModel: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        if let searchText = textField.text {
+            print(searchText)
+            searchListOfUser(matchingString: searchText)
+            self.reloadTableView?()
+        }
+    }
     
-/// Temp data to feed UI
-///
-/// - Returns: return array of chef
-//private func createArray() -> [Chef]{
-//    
-//    var tempChefs: [Chef] = []
-//    
-////    let chef1 = Chef(chefImage: #imageLiteral(resourceName: "soma-kun"), chefName: "Ray", chefLocation: "Virginia, USA", chefRate: "25.00")
-////    let chef2 = Chef(chefImage: #imageLiteral(resourceName: "erina-sama"), chefName: "Erina", chefLocation: "Kyoto, Japan", chefRate: "35.00")
-////    let chef3 = Chef(chefImage: #imageLiteral(resourceName: "alice-nakiri"), chefName: "Alice", chefLocation: "Akina, Japan", chefRate: "40.00")
-////    let chef4 = Chef(chefImage: #imageLiteral(resourceName: "aldini-takumi"), chefName: "Takumi", chefLocation: "Osaka, Japan", chefRate: "29.00")
-//    
-//    tempChefs.append(chef1)
-//    tempChefs.append(chef2)
-//    tempChefs.append(chef3)
-//    tempChefs.append(chef4)
-//    
-//    return tempChefs
-//   }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let searchText = textField.text {
+            print(searchText)
+            searchListOfUser(matchingString: searchText)
+            self.reloadTableView?()
+        }
+        return true
+    }
+    
 }

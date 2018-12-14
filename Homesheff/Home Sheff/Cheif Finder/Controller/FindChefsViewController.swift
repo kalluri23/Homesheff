@@ -45,15 +45,28 @@ class FindChefsViewController: UIViewController {
 
 extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return findCheifViewModel.numberOfSections
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return findCheifViewModel.numberOfRows
+        if section == 0 {
+            return 1
+        }else {
+            return findCheifViewModel.numberOfRows
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: ChefCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.chef = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
-        
-        return cell
+        if indexPath.section == 0 {
+            let searchCell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! FindChefCell
+            searchCell.textField.delegate = findCheifViewModel
+            return searchCell
+        }else {
+            let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefCell", for: indexPath) as! ChefCell
+            cheffCell.chef = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
+            return cheffCell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -506,7 +503,7 @@
             </objects>
             <point key="canvasLocation" x="3218.840579710145" y="1409.5982142857142"/>
         </scene>
-        <!--Chef-->
+        <!--Find Sheffs-->
         <scene sceneID="p4y-2Z-yL0">
             <objects>
                 <viewController id="flC-Se-m36" customClass="FindChefsViewController" customModule="Homesheff" customModuleProvider="target" sceneMemberID="viewController">
@@ -588,6 +585,41 @@
                                             <outlet property="cheffImageView" destination="AX4-ld-mfd" id="aaI-MI-1of"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="60" id="o5s-Kb-AHo" customClass="FindChefCell" customModule="Homesheff" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="59" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="o5s-Kb-AHo" id="Ij2-tQ-M0z">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="hB4-rc-LHa">
+                                                    <rect key="frame" x="15" y="12" width="36" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="Knf-mg-K7p"/>
+                                                        <constraint firstAttribute="width" constant="36" id="SfN-VH-ySV"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="search" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FfL-eb-cTw">
+                                                    <rect key="frame" x="61" y="10" width="304" height="39.5"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" keyboardAppearance="alert" returnKeyType="search" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FfL-eb-cTw" firstAttribute="top" secondItem="Ij2-tQ-M0z" secondAttribute="top" constant="10" id="CgQ-8O-Ach"/>
+                                                <constraint firstAttribute="bottom" secondItem="FfL-eb-cTw" secondAttribute="bottom" constant="10" id="JBY-I3-TcS"/>
+                                                <constraint firstAttribute="trailing" secondItem="FfL-eb-cTw" secondAttribute="trailing" constant="10" id="Lxw-vz-uqH"/>
+                                                <constraint firstItem="FfL-eb-cTw" firstAttribute="leading" secondItem="hB4-rc-LHa" secondAttribute="trailing" constant="10" id="Wgf-5M-15J"/>
+                                                <constraint firstItem="hB4-rc-LHa" firstAttribute="leading" secondItem="Ij2-tQ-M0z" secondAttribute="leading" constant="15" id="dLV-ab-Er9"/>
+                                                <constraint firstItem="hB4-rc-LHa" firstAttribute="centerY" secondItem="Ij2-tQ-M0z" secondAttribute="centerY" id="lAR-vm-t76"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="searchImageView" destination="hB4-rc-LHa" id="Rg4-DH-RZq"/>
+                                            <outlet property="textField" destination="FfL-eb-cTw" id="QEg-pA-bmL"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NR-LZ-2pB" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
@@ -611,7 +643,7 @@
                         <viewLayoutGuide key="safeArea" id="B9a-hZ-pfP"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Chef" id="y7y-1a-bLw"/>
+                    <navigationItem key="navigationItem" title="Find Sheffs" id="y7y-1a-bLw"/>
                     <connections>
                         <outlet property="chefTableView" destination="8xf-zN-Kyy" id="0ep-7b-USf"/>
                         <outlet property="loadingIndoicator" destination="9NR-LZ-2pB" id="uCf-EG-Bwh"/>
@@ -619,7 +651,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hST-Jg-VzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4284.057971014493" y="-169.41964285714286"/>
+            <point key="canvasLocation" x="4284" y="-169.56521739130437"/>
         </scene>
         <!--Location Services Rates View Controller-->
         <scene sceneID="2qd-gd-xj0">
@@ -4307,6 +4339,7 @@ AAAAAAAAAAAAAALRRQ
         <image name="pencil-icon" width="11" height="11"/>
         <image name="pencil-icon-background-circle" width="33" height="33"/>
         <image name="plantarian-profileimg" width="90" height="90"/>
+        <image name="search" width="36" height="36"/>
         <image name="search-nonselected" width="25" height="25"/>
         <image name="search-selected" width="25" height="25"/>
         <image name="soma-kun" width="225" height="225"/>
