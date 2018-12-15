@@ -37,6 +37,7 @@
 		A4C924C62173A41700F3BBDE /* UserAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C924C42173A41700F3BBDE /* UserAccountCell.xib */; };
 		A4D45760217CEDDC002E4588 /* TermsAndConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */; };
 		A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */; };
+		DA25642521B4787600681C5D /* HSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25642421B4787600681C5D /* HSTextField.swift */; };
 		E4350836218E8E4C00C33719 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4350835218E8E4C00C33719 /* UserProfileViewModel.swift */; };
 		E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */; };
 		E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182430214E924F009F62CE /* FindChefsViewController.swift */; };
@@ -98,6 +99,7 @@
 		A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionViewController.swift; sourceTree = "<group>"; };
 		A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		C8CB94F0F399356DEC3B25B7 /* Pods-Homesheff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.debug.xcconfig"; sourceTree = "<group>"; };
+		DA25642421B4787600681C5D /* HSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSTextField.swift; sourceTree = "<group>"; };
 		E4350835218E8E4C00C33719 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesRatesViewController.swift; sourceTree = "<group>"; };
 		E9182430214E924F009F62CE /* FindChefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefsViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		A49D34122156E8CB00AA24CF /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				DA25642621B47A3000681C5D /* TextField */,
 				A453503B2185310D005748D3 /* CustomImageView.swift */,
 				A49D34132156E8D200AA24CF /* Extension */,
 			);
@@ -306,6 +309,14 @@
 				17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		DA25642621B47A3000681C5D /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				DA25642421B4787600681C5D /* HSTextField.swift */,
+			);
+			path = TextField;
 			sourceTree = "<group>";
 		};
 		E9182435214E98B9009F62CE /* View */ = {
@@ -515,6 +526,7 @@
 				A4AA64032173B704007D83F2 /* ProfileDetailedTableViewCell.swift in Sources */,
 				A4C9249C216ED7BD00F3BBDE /* CollectionReusableView.swift in Sources */,
 				A4C924BE21739D0000F3BBDE /* UserAccountViewController.swift in Sources */,
+				DA25642521B4787600681C5D /* HSTextField.swift in Sources */,
 				A4AA640C2173CD57007D83F2 /* UserProfileTableViewCell.swift in Sources */,
 				E9D2700C214B1D240087F476 /* FinishYourProfileController.swift in Sources */,
 				A4AA64092173CC5C007D83F2 /* UserProfileViewController.swift in Sources */,
