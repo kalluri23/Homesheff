@@ -64,6 +64,8 @@ class FindCheifViewModel: NSObject {
         return userListEnvelop
     }
     
+    /**This function will search user by firstname from master list and put in matching cheffs
+    */
     func searchListOfUser(matchingString:String) {
         let matchingChefs = self.cheif.filter({(cheff) in
             if let firstName = cheff.firstName {
@@ -79,7 +81,7 @@ class FindCheifViewModel: NSObject {
         self.matchingCheffs = matchingChefs
     }
 }
-
+//TODO: Need to handle all textfield events to improve user experience
 extension FindCheifViewModel: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if let searchText = textField.text {
