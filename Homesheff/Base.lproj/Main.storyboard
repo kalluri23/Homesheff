@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -519,6 +514,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="8xf-zN-Kyy">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="583"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="nFd-k5-HCt">
+                                    <rect key="frame" x="0.0" y="91" width="375" height="1"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChefCell" id="PfA-aW-8Jy" customClass="ChefCell" customModule="Homesheff" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="375" height="58"/>
@@ -590,6 +590,41 @@
                                             <outlet property="cheffImageView" destination="AX4-ld-mfd" id="aaI-MI-1of"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="32" id="mBf-I0-cdk" customClass="FindChefCell" customModule="Homesheff" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="59" width="375" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mBf-I0-cdk" id="0tz-0u-D0S">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="31.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="Lvy-FS-F5h">
+                                                    <rect key="frame" x="20" y="1" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="5gt-bq-brI"/>
+                                                        <constraint firstAttribute="width" constant="30" id="cZS-kG-Co7"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Yo8-09-0xr">
+                                                    <rect key="frame" x="60" y="1" width="305" height="29.5"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" keyboardAppearance="light" returnKeyType="search" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Lvy-FS-F5h" firstAttribute="leading" secondItem="0tz-0u-D0S" secondAttribute="leading" constant="20" id="0XM-be-Eub"/>
+                                                <constraint firstItem="Lvy-FS-F5h" firstAttribute="centerY" secondItem="0tz-0u-D0S" secondAttribute="centerY" id="MuP-v0-UOg"/>
+                                                <constraint firstAttribute="trailing" secondItem="Yo8-09-0xr" secondAttribute="trailing" constant="10" id="bHS-l6-D0C"/>
+                                                <constraint firstItem="Yo8-09-0xr" firstAttribute="leading" secondItem="Lvy-FS-F5h" secondAttribute="trailing" constant="10" id="kVN-zb-dXM"/>
+                                                <constraint firstItem="Yo8-09-0xr" firstAttribute="top" secondItem="0tz-0u-D0S" secondAttribute="top" constant="1" id="rPN-E8-kFA"/>
+                                                <constraint firstAttribute="bottom" secondItem="Yo8-09-0xr" secondAttribute="bottom" constant="1" id="sw8-G7-PU2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="searchImageView" destination="Lvy-FS-F5h" id="AoK-55-HEY"/>
+                                            <outlet property="textField" destination="Yo8-09-0xr" id="28t-WZ-PXd"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NR-LZ-2pB" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
@@ -621,7 +656,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hST-Jg-VzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4284.057971014493" y="-169.41964285714286"/>
+            <point key="canvasLocation" x="4284" y="-169.56521739130437"/>
         </scene>
         <!--Location Services Rates View Controller-->
         <scene sceneID="2qd-gd-xj0">
@@ -4304,13 +4339,14 @@ AAAAAAAAAAAAAALRRQ
 </mutableData>
         </image>
         <image name="leaves-background" width="375" height="125"/>
-        <image name="my-account-nonselected" width="50" height="50"/>
-        <image name="my-account-selected" width="50" height="50"/>
+        <image name="my-account-nonselected" width="25" height="25"/>
+        <image name="my-account-selected" width="25" height="25"/>
         <image name="pencil-icon" width="11" height="11"/>
         <image name="pencil-icon-background-circle" width="33" height="33"/>
         <image name="plantarian-profileimg" width="90" height="90"/>
-        <image name="search-nonselected" width="50" height="50"/>
-        <image name="search-selected" width="50" height="50"/>
+        <image name="search" width="20" height="20"/>
+        <image name="search-nonselected" width="25" height="25"/>
+        <image name="search-selected" width="25" height="25"/>
         <image name="soma-kun" width="225" height="225"/>
     </resources>
 </document>

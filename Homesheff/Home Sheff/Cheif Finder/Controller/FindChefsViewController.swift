@@ -75,4 +75,12 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
              tableView.deselectRow(at: indexPath, animated: true)
         self.present(vc, animated: true, completion: nil)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            cell.separatorInset = UIEdgeInsetsMake(0, 60, 0, 10)
+        }else {
+            cell.separatorInset = UIEdgeInsetsMake(0, 10, 0, 10)
+        }
+    }
 }
