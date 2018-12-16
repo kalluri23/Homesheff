@@ -503,7 +503,7 @@
             </objects>
             <point key="canvasLocation" x="3218.840579710145" y="1409.5982142857142"/>
         </scene>
-        <!--Chef-->
+        <!--Find Sheffs-->
         <scene sceneID="p4y-2Z-yL0">
             <objects>
                 <viewController id="flC-Se-m36" customClass="FindChefsViewController" customModule="Homesheff" customModuleProvider="target" sceneMemberID="viewController">
@@ -648,7 +648,7 @@
                         <viewLayoutGuide key="safeArea" id="B9a-hZ-pfP"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Chef" id="y7y-1a-bLw"/>
+                    <navigationItem key="navigationItem" title="Find Sheffs" id="y7y-1a-bLw"/>
                     <connections>
                         <outlet property="chefTableView" destination="8xf-zN-Kyy" id="0ep-7b-USf"/>
                         <outlet property="loadingIndoicator" destination="9NR-LZ-2pB" id="uCf-EG-Bwh"/>
