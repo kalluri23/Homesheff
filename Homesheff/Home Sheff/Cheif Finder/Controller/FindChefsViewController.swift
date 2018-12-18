@@ -12,8 +12,7 @@ import NVActivityIndicatorView
 class FindChefsViewController: UIViewController {
     
     @IBOutlet weak var chefTableView: UITableView!
-    let findCheifViewModel = FindCheifViewModel()
-
+    @IBOutlet weak var findCheifViewModel: FindCheifViewModel!
     @IBOutlet weak var loadingIndoicator: NVActivityIndicatorView!
     
     
@@ -36,7 +35,8 @@ class FindChefsViewController: UIViewController {
     func viewModelBinding()  {
         findCheifViewModel.reloadTableView = { [weak self] in
             DispatchQueue.main.async {
-                self?.chefTableView.reloadData()
+                //Reload only content section to do not resign first responser
+                self?.chefTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
                 self?.loadingIndoicator.stopAnimating()
             }
         }
@@ -60,7 +60,6 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let searchCell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! FindChefCell
-            searchCell.textField.delegate = findCheifViewModel
             return searchCell
         }else {
             let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefCell", for: indexPath) as! ChefCell

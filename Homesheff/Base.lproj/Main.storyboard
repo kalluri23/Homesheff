@@ -609,6 +609,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" keyboardAppearance="light" returnKeyType="search" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                    <connections>
+                                                        <action selector="textDidChange:forEvent:" destination="JJ8-Ck-9eJ" eventType="editingChanged" id="FLR-6i-IAb"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -651,10 +654,12 @@
                     <navigationItem key="navigationItem" title="Find Sheffs" id="y7y-1a-bLw"/>
                     <connections>
                         <outlet property="chefTableView" destination="8xf-zN-Kyy" id="0ep-7b-USf"/>
+                        <outlet property="findCheifViewModel" destination="JJ8-Ck-9eJ" id="4HU-ks-3Ho"/>
                         <outlet property="loadingIndoicator" destination="9NR-LZ-2pB" id="uCf-EG-Bwh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hST-Jg-VzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="JJ8-Ck-9eJ" customClass="FindCheifViewModel" customModule="Homesheff" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="4284" y="-169.56521739130437"/>
         </scene>

@@ -80,24 +80,14 @@ class FindCheifViewModel: NSObject {
         })
         self.matchingCheffs = matchingChefs
     }
-}
-//TODO: Need to handle all textfield events to improve user experience
-extension FindCheifViewModel: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        if let searchText = textField.text {
+    @IBAction func textDidChange(_ sender: UITextField, forEvent event: UIEvent) {
+        if let searchText = sender.text, !searchText.isEmpty{
             print(searchText)
             searchListOfUser(matchingString: searchText)
-            self.reloadTableView?()
+        }else {
+            self.matchingCheffs = self.cheif
         }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let searchText = textField.text {
-            print(searchText)
-            searchListOfUser(matchingString: searchText)
-            self.reloadTableView?()
-        }
-        return true
+        self.reloadTableView?()
     }
     
 }
