@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ConfigEndPoints.shared.initialize()
         IQKeyboardManager.shared.enable = true
-
+        self.setInitialScreen()
        // IQKeyboardManager.shared().isEnabled = true
         return true
     }
@@ -50,6 +50,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    /** Check if user is logged in and set the initial content screen
+    */
+    private func setInitialScreen() {
+        //user previously logged in to app
+        if let _ = UserDefaults.standard.value(forKey: "userLoggedIn") {
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabBarControllerId")
+            
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }else { //user does not have a session before
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let initialViewController = storyboard.instantiateInitialViewController()
+            
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+            
+        }
+    }
 }
 

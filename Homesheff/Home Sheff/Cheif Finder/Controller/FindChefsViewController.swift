@@ -12,8 +12,7 @@ import NVActivityIndicatorView
 class FindChefsViewController: UIViewController {
     
     @IBOutlet weak var chefTableView: UITableView!
-    let findCheifViewModel = FindCheifViewModel()
-
+    @IBOutlet weak var findCheifViewModel: FindCheifViewModel!
     @IBOutlet weak var loadingIndoicator: NVActivityIndicatorView!
     
     
@@ -36,7 +35,8 @@ class FindChefsViewController: UIViewController {
     func viewModelBinding()  {
         findCheifViewModel.reloadTableView = { [weak self] in
             DispatchQueue.main.async {
-                self?.chefTableView.reloadData()
+                //Reload only content section to do not resign first responser
+                self?.chefTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
                 self?.loadingIndoicator.stopAnimating()
             }
         }
@@ -45,15 +45,27 @@ class FindChefsViewController: UIViewController {
 
 extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return findCheifViewModel.numberOfSections
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return findCheifViewModel.numberOfRows
+        if section == 0 {
+            return 1
+        }else {
+            return findCheifViewModel.numberOfRows
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: ChefCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.chef = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
-        
-        return cell
+        if indexPath.section == 0 {
+            let searchCell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! FindChefCell
+            return searchCell
+        }else {
+            let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefCell", for: indexPath) as! ChefCell
+            cheffCell.chef = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
+            return cheffCell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -61,5 +73,13 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
            vc.chefInfo = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
              tableView.deselectRow(at: indexPath, animated: true)
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            cell.separatorInset = UIEdgeInsetsMake(0, 60, 0, 10)
+        }else {
+            cell.separatorInset = UIEdgeInsetsMake(0, 10, 0, 10)
+        }
     }
 }
