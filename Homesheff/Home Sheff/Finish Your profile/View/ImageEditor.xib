@@ -16,53 +16,82 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="icY-aQ-xzX">
-                    <rect key="frame" x="10" y="133.5" width="355" height="400"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bGN-1c-Os6">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="Mf9-zP-Xhg">
+                            <rect key="frame" x="8" y="46" width="359" height="613"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="icY-aQ-xzX">
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="613"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="350" id="YeS-rh-FNJ"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="icY-aQ-xzX" secondAttribute="trailing" id="6Kx-oS-TzF"/>
+                                <constraint firstAttribute="bottom" secondItem="icY-aQ-xzX" secondAttribute="bottom" id="DuE-Ic-lMG"/>
+                                <constraint firstItem="icY-aQ-xzX" firstAttribute="leading" secondItem="Mf9-zP-Xhg" secondAttribute="leading" id="FbO-Oa-Sog"/>
+                                <constraint firstItem="icY-aQ-xzX" firstAttribute="centerY" secondItem="Mf9-zP-Xhg" secondAttribute="centerY" id="hLn-af-3BH"/>
+                                <constraint firstItem="icY-aQ-xzX" firstAttribute="top" secondItem="Mf9-zP-Xhg" secondAttribute="top" id="qao-Lg-61E"/>
+                            </constraints>
+                        </scrollView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PgV-dp-Yml">
+                            <rect key="frame" x="8" y="8" width="37" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="37" id="dLL-Fs-wqj"/>
+                                <constraint firstAttribute="height" constant="30" id="wfU-wC-Ic3"/>
+                            </constraints>
+                            <state key="normal" image="close-button"/>
+                            <connections>
+                                <action selector="closeClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="BMc-ea-x1c"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uS-CQ-CqQ">
+                            <rect key="frame" x="313" y="8" width="54" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="54" id="3p4-mW-FQQ"/>
+                                <constraint firstAttribute="height" constant="30" id="qb7-ys-iTh"/>
+                            </constraints>
+                            <state key="normal" image="ellipsis"/>
+                            <connections>
+                                <action selector="optionsClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="c1P-q0-sh7"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="400" id="bex-HP-aqM"/>
+                        <constraint firstItem="4uS-CQ-CqQ" firstAttribute="top" secondItem="bGN-1c-Os6" secondAttribute="top" constant="8" id="751-6g-kOo"/>
+                        <constraint firstAttribute="trailing" secondItem="4uS-CQ-CqQ" secondAttribute="trailing" constant="8" id="9aX-aD-qkH"/>
+                        <constraint firstItem="Mf9-zP-Xhg" firstAttribute="leading" secondItem="bGN-1c-Os6" secondAttribute="leading" constant="8" id="InG-6M-JRh"/>
+                        <constraint firstItem="PgV-dp-Yml" firstAttribute="top" secondItem="bGN-1c-Os6" secondAttribute="top" constant="8" id="aiR-kn-4rd"/>
+                        <constraint firstAttribute="trailing" secondItem="Mf9-zP-Xhg" secondAttribute="trailing" constant="8" id="gs0-3q-YMz"/>
+                        <constraint firstItem="Mf9-zP-Xhg" firstAttribute="top" secondItem="PgV-dp-Yml" secondAttribute="bottom" constant="8" symbolic="YES" id="ou8-eA-wfA"/>
+                        <constraint firstAttribute="bottom" secondItem="Mf9-zP-Xhg" secondAttribute="bottom" constant="8" id="q50-oe-6ew"/>
+                        <constraint firstItem="PgV-dp-Yml" firstAttribute="leading" secondItem="bGN-1c-Os6" secondAttribute="leading" constant="8" id="yPm-Y1-93f"/>
                     </constraints>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PgV-dp-Yml">
-                    <rect key="frame" x="8" y="20" width="37" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="37" id="dLL-Fs-wqj"/>
-                        <constraint firstAttribute="height" constant="30" id="wfU-wC-Ic3"/>
-                    </constraints>
-                    <state key="normal" title="close"/>
-                    <connections>
-                        <action selector="closeClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="BMc-ea-x1c"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uS-CQ-CqQ">
-                    <rect key="frame" x="313" y="20" width="54" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="54" id="3p4-mW-FQQ"/>
-                        <constraint firstAttribute="height" constant="30" id="qb7-ys-iTh"/>
-                    </constraints>
-                    <state key="normal" title="Options"/>
-                    <connections>
-                        <action selector="optionsClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="c1P-q0-sh7"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="PgV-dp-Yml" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="7Vd-lQ-SH8"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="icY-aQ-xzX" secondAttribute="trailing" constant="10" id="99n-pG-pcb"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="4uS-CQ-CqQ" secondAttribute="trailing" constant="8" id="E7u-TJ-tE2"/>
-                <constraint firstItem="4uS-CQ-CqQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="HuG-AL-XRx"/>
-                <constraint firstItem="icY-aQ-xzX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="Pg9-m6-vS6"/>
-                <constraint firstItem="PgV-dp-Yml" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="XAM-1M-oL8"/>
-                <constraint firstItem="icY-aQ-xzX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dJc-6X-8fg"/>
-                <constraint firstItem="icY-aQ-xzX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wFf-Wr-M1S"/>
+                <constraint firstItem="bGN-1c-Os6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="R7m-I4-YjD"/>
+                <constraint firstItem="bGN-1c-Os6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="fsi-lt-s1y"/>
+                <constraint firstItem="bGN-1c-Os6" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="kbu-Gb-yz9"/>
+                <constraint firstItem="bGN-1c-Os6" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="nXg-wI-OfF"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="closeBtn" destination="PgV-dp-Yml" id="jxi-zm-crY"/>
                 <outlet property="imageView" destination="icY-aQ-xzX" id="Flu-Jf-g7B"/>
                 <outlet property="optionsBtn" destination="4uS-CQ-CqQ" id="8PR-t4-rGf"/>
+                <outlet property="scrollView" destination="Mf9-zP-Xhg" id="K4b-Rp-cle"/>
             </connections>
             <point key="canvasLocation" x="138.40000000000001" y="154.27286356821591"/>
         </view>
     </objects>
+    <resources>
+        <image name="close-button" width="20" height="21"/>
+        <image name="ellipsis" width="6" height="24"/>
+    </resources>
 </document>

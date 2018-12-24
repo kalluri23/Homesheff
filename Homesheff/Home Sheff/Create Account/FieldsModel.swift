@@ -24,7 +24,6 @@ struct SignUpField {
     var termsAndCondition: String
 }
 
-
 class Fields {
     
     var genericFields = [GenericField]()
@@ -39,7 +38,6 @@ class Fields {
       genericFields = [GenericField(name: "", placeHolder: "First Name"),GenericField(name: "", placeHolder: "Last Name"),GenericField(name: "", placeHolder: "Email"),GenericField(name: "", placeHolder: "Password")]
         categoryFields = [CategoryField(placeHolder: "I want to be a Plantarian", isSelected: false),CategoryField(placeHolder: "I want to be a Chef", isSelected: false)]
         signUpFields = SignUpField(placeHolder: "Sign Up", termsAndCondition: "terms and condition")
-        
     }
 }
 

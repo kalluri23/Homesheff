@@ -20,6 +20,7 @@ class AddPhotosController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        photoEditor?.scrollView.delegate = photoEditor
         PhotosCollectionViewModel.shared.reloadCollectionView = { [weak self] in
             self?.photosCollectionView.reloadData()
         }
@@ -38,17 +39,24 @@ class AddPhotosController: UIViewController {
     @IBAction func addPhotosClicked(_ sender: Any) {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
+        
+        let takePhotoAction = UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
             self.openCamera()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { _ in
+        })
+        takePhotoAction.setValue( UIImage(named: "Take Photo Icon", in: nil, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        alert.addAction(takePhotoAction)
+    
+        let  photoLibraryAction =  UIAlertAction(title: "Photo Library", style: .default, handler: { _ in
             self.openGallary()
-        }))
+        })
+        photoLibraryAction.setValue( UIImage(named: "Photo Library Icon", in: nil, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        alert.addAction(photoLibraryAction)
         
-        alert.addAction(UIAlertAction(title: "Browse", style: .default, handler: { _ in
-             self.openGallary()
-        }))
+        let browseAction = UIAlertAction(title: "Browse", style: .default, handler: { _ in
+            self.openGallary()
+        })
+        browseAction.setValue( UIImage(named: "Browse Icon", in: nil, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        alert.addAction(browseAction)
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
@@ -137,6 +145,7 @@ extension AddPhotosController: PhotosCollectionViewDelegate {
     func cellClicked(clickedImage: UIImage) {
         photoEditor?.imageView.image = clickedImage
         self.view.addSubview(photoEditor!)
+        self.navigationController?.isNavigationBarHidden = true
         self.view.bringSubview(toFront: photoEditor!)
     }
 }
@@ -148,6 +157,7 @@ extension AddPhotosController: ImageEditorDelegate {
         }))
         
         alert.addAction(UIAlertAction(title: "Resize", style: .default, handler: { _ in
+            
         }))
         
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
@@ -157,5 +167,6 @@ extension AddPhotosController: ImageEditorDelegate {
     
     func closeClicked() {
        self.photoEditor?.removeFromSuperview()
+        self.navigationController?.isNavigationBarHidden = false
     }
 }

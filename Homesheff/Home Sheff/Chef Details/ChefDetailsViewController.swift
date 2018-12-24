@@ -29,6 +29,7 @@ class ChefDetailsViewController: UIViewController {
          navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
          emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
          chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
+        chefServiceTableView.register(PhotoGalleryCell.nib, forCellReuseIdentifier: PhotoGalleryCell.reuseIdentifier)
         
     }
     
@@ -107,40 +108,61 @@ class ChefDetailsViewController: UIViewController {
 extension ChefDetailsViewController: UITableViewDataSource,UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chefServiceData.chefService.count
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return chefServiceData.chefService.count
+        default:
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        /*if indexPath.row == 1{
-            return 120
-        }*/
-        return 55
+        switch indexPath.section {
+            case 0:
+                return 120
+            default:
+                return 55
+
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
-            cell.chefDetails = chefServiceData.chefService[indexPath.row]
-        
-        cell.partCount1.isHidden = true
-        cell.partyCount2.isHidden = true
-        cell.partyCount3.isHidden = true
-        cell.servicePriceLabel.isHidden = true
-        /*if indexPath.row == 1 {
-            cell.partCount1.isHidden = false
-            cell.partyCount2.isHidden = false
-            cell.partyCount3.isHidden = false
-            
-        }*/
-        
-        return cell
+        switch indexPath.section {
+            case 0:
+                 let photoGalleryCell = tableView.dequeueReusableCell(withIdentifier: PhotoGalleryCell.reuseIdentifier, for: indexPath) as! PhotoGalleryCell
+                 photoGalleryCell.photoList = []
+                 return photoGalleryCell
+            case 1:
+                let cell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
+                cell.chefDetails = chefServiceData.chefService[indexPath.row]
+                
+                cell.partCount1.isHidden = true
+                cell.partyCount2.isHidden = true
+                cell.partyCount3.isHidden = true
+                cell.servicePriceLabel.isHidden = true
+             return cell
+            default:
+               return  UITableViewCell()
+        }
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "SERVICES"
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?{
+        
+        switch section {
+        case 0:
+            return "SERVICES"
+        case 1:
+            return ""
+        default:
+            return ""
+        }
     }
     
 //    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoGalleryCell" rowHeight="182" id="Ogz-tI-6qK" customClass="PhotoGalleryCell" customModule="Homesheff" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="182"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ogz-tI-6qK" id="51M-5j-7Ez">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="181.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JZJ-8v-X4d">
+                        <rect key="frame" x="10" y="54" width="365" height="127.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UzF-4H-22C">
+                            <size key="itemSize" width="150" height="120"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionCell" id="1aJ-WZ-SDV" customClass="PhotoCollectionCell" customModule="Homesheff" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6E9-VI-fuM">
+                                            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="6E9-VI-fuM" secondAttribute="trailing" id="0d5-1e-H43"/>
+                                    <constraint firstItem="6E9-VI-fuM" firstAttribute="top" secondItem="1aJ-WZ-SDV" secondAttribute="top" id="88H-IS-byo"/>
+                                    <constraint firstItem="6E9-VI-fuM" firstAttribute="leading" secondItem="1aJ-WZ-SDV" secondAttribute="leading" id="i5D-4g-Ooo"/>
+                                    <constraint firstAttribute="bottom" secondItem="6E9-VI-fuM" secondAttribute="bottom" id="ou2-51-i6C"/>
+                                </constraints>
+                                <size key="customSize" width="120" height="120"/>
+                                <connections>
+                                    <outlet property="imageView" destination="6E9-VI-fuM" id="Nyy-99-uBL"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                    </collectionView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77O-2w-aHS">
+                        <rect key="frame" x="10" y="10" width="357" height="33"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Gt-Lz-Sqd">
+                                <rect key="frame" x="0.0" y="0.0" width="60" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Dk1-N6-uPu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kn4-om-hCW">
+                                <rect key="frame" x="316" y="0.0" width="33" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="iZc-sk-H2Q"/>
+                                    <constraint firstAttribute="width" constant="33" id="miO-NR-Snd"/>
+                                </constraints>
+                                <state key="normal" image="pencil-icon" backgroundImage="pencil-icon-background-circle"/>
+                                <connections>
+                                    <action selector="editPhotos" destination="Ogz-tI-6qK" eventType="touchUpInside" id="rbv-Wi-w3m"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="33" id="TOF-40-10w"/>
+                            <constraint firstAttribute="bottom" secondItem="Kn4-om-hCW" secondAttribute="bottom" id="Ze4-fZ-j6s"/>
+                            <constraint firstItem="Kn4-om-hCW" firstAttribute="top" secondItem="77O-2w-aHS" secondAttribute="top" id="dQY-Ql-ano"/>
+                            <constraint firstAttribute="trailing" secondItem="Kn4-om-hCW" secondAttribute="trailing" constant="8" id="kNW-o0-Rv8"/>
+                            <constraint firstItem="6Gt-Lz-Sqd" firstAttribute="top" secondItem="77O-2w-aHS" secondAttribute="top" id="ncC-GU-VGq"/>
+                            <constraint firstAttribute="bottom" secondItem="6Gt-Lz-Sqd" secondAttribute="bottom" id="wWd-KB-FD3"/>
+                            <constraint firstItem="6Gt-Lz-Sqd" firstAttribute="leading" secondItem="77O-2w-aHS" secondAttribute="leading" id="wuy-KX-rCq"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="JZJ-8v-X4d" firstAttribute="top" secondItem="77O-2w-aHS" secondAttribute="bottom" constant="11" id="4yh-FW-eVd"/>
+                    <constraint firstAttribute="trailing" secondItem="77O-2w-aHS" secondAttribute="trailing" constant="8" id="UKI-UK-bQF"/>
+                    <constraint firstItem="JZJ-8v-X4d" firstAttribute="leading" secondItem="51M-5j-7Ez" secondAttribute="leading" constant="10" id="gib-Lc-HzV"/>
+                    <constraint firstAttribute="bottom" secondItem="JZJ-8v-X4d" secondAttribute="bottom" id="h3D-Me-xYt"/>
+                    <constraint firstItem="77O-2w-aHS" firstAttribute="top" secondItem="51M-5j-7Ez" secondAttribute="top" constant="10" id="mak-MO-fe0"/>
+                    <constraint firstAttribute="trailing" secondItem="JZJ-8v-X4d" secondAttribute="trailing" id="pmN-vp-1fY"/>
+                    <constraint firstItem="77O-2w-aHS" firstAttribute="leading" secondItem="51M-5j-7Ez" secondAttribute="leading" constant="10" id="x1S-1b-3PT"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="collectionView" destination="JZJ-8v-X4d" id="3au-YO-ozH"/>
+                <outlet property="heightConstraint" destination="TOF-40-10w" id="CqH-yJ-Pu7"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="pencil-icon" width="11" height="11"/>
+        <image name="pencil-icon-background-circle" width="33" height="33"/>
+    </resources>
+</document>

@@ -15,11 +15,11 @@ protocol ImageEditorDelegate: class {
 
 class ImageEditor: UIView {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var optionsBtn: UIButton!
      @IBOutlet weak var closeBtn: UIButton!
     weak var delegate: ImageEditorDelegate?
-
 
     @IBAction func optionsClicked(_ sender: Any) {
         self.delegate?.optionsClicked()
@@ -28,5 +28,13 @@ class ImageEditor: UIView {
     
     @IBAction func closeClicked(_ sender: Any) {
         self.delegate?.closeClicked()
+    }
+    
+    
+}
+
+extension ImageEditor: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.imageView
     }
 }

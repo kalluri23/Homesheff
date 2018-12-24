@@ -45,6 +45,9 @@
 		DA5C7E4921C1ECCB003656BE /* EmptyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C7E4821C1ECCB003656BE /* EmptyCollectionView.swift */; };
 		DA5C7E4B21C1F567003656BE /* ImageEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA5C7E4A21C1F567003656BE /* ImageEditor.xib */; };
 		DA5C7E4D21C1F6D6003656BE /* ImageEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C7E4C21C1F6D6003656BE /* ImageEditor.swift */; };
+		DAB7AD7F21D0191F006E43A3 /* PhotoGalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7AD7E21D0191F006E43A3 /* PhotoGalleryCell.swift */; };
+		DAB7AD8121D01B4C006E43A3 /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7AD8021D01B4C006E43A3 /* PhotoCollectionCell.swift */; };
+		DAB7AD8321D13182006E43A3 /* PhotoGalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAB7AD8221D13182006E43A3 /* PhotoGalleryCell.xib */; };
 		E4350836218E8E4C00C33719 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4350835218E8E4C00C33719 /* UserProfileViewModel.swift */; };
 		E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */; };
 		E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9182430214E924F009F62CE /* FindChefsViewController.swift */; };
@@ -114,6 +117,9 @@
 		DA5C7E4821C1ECCB003656BE /* EmptyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCollectionView.swift; sourceTree = "<group>"; };
 		DA5C7E4A21C1F567003656BE /* ImageEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageEditor.xib; sourceTree = "<group>"; };
 		DA5C7E4C21C1F6D6003656BE /* ImageEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditor.swift; sourceTree = "<group>"; };
+		DAB7AD7E21D0191F006E43A3 /* PhotoGalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryCell.swift; sourceTree = "<group>"; };
+		DAB7AD8021D01B4C006E43A3 /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionCell.swift; sourceTree = "<group>"; };
+		DAB7AD8221D13182006E43A3 /* PhotoGalleryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoGalleryCell.xib; sourceTree = "<group>"; };
 		E4350835218E8E4C00C33719 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		E90730F62151DA1E00995103 /* LocationServicesRatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesRatesViewController.swift; sourceTree = "<group>"; };
 		E9182430214E924F009F62CE /* FindChefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefsViewController.swift; sourceTree = "<group>"; };
@@ -304,6 +310,9 @@
 				A4C924BD21739D0000F3BBDE /* UserAccountViewController.swift */,
 				A4C924C32173A41700F3BBDE /* UserAccountCell.swift */,
 				A4C924C42173A41700F3BBDE /* UserAccountCell.xib */,
+				DAB7AD7E21D0191F006E43A3 /* PhotoGalleryCell.swift */,
+				DAB7AD8021D01B4C006E43A3 /* PhotoCollectionCell.swift */,
+				DAB7AD8221D13182006E43A3 /* PhotoGalleryCell.xib */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -480,6 +489,7 @@
 				E9B3AF7C216A7557005BE172 /* SelectedServicesCollectionViewCell.xib in Resources */,
 				DA5C7E4721C1E885003656BE /* EmptyCollectionView.xib in Resources */,
 				A4AA640D2173CD57007D83F2 /* UserProfileTableViewCell.xib in Resources */,
+				DAB7AD8321D13182006E43A3 /* PhotoGalleryCell.xib in Resources */,
 				E975B60A216009D100BE6DD2 /* GenericFieldsCellTableViewCell.xib in Resources */,
 				A4AA64002173B6E5007D83F2 /* ProfileGenericTableViewCell.xib in Resources */,
 				A4AA64042173B704007D83F2 /* ProfileDetailedTableViewCell.xib in Resources */,
@@ -551,6 +561,7 @@
 				A4C9249C216ED7BD00F3BBDE /* CollectionReusableView.swift in Sources */,
 				A4C924BE21739D0000F3BBDE /* UserAccountViewController.swift in Sources */,
 				A4AA640C2173CD57007D83F2 /* UserProfileTableViewCell.swift in Sources */,
+				DAB7AD8121D01B4C006E43A3 /* PhotoCollectionCell.swift in Sources */,
 				DA240C7421C03EDA0004474B /* PhotosCollectionViewCell.swift in Sources */,
 				E9D2700C214B1D240087F476 /* FinishYourProfileController.swift in Sources */,
 				A4AA64092173CC5C007D83F2 /* UserProfileViewController.swift in Sources */,
@@ -572,6 +583,7 @@
 				A403097621795046001397EE /* User.swift in Sources */,
 				DA240C7621C070C90004474B /* PhotosCollectionViewModel.swift in Sources */,
 				E9D2700821499C130087F476 /* CreateAccountController.swift in Sources */,
+				DAB7AD7F21D0191F006E43A3 /* PhotoGalleryCell.swift in Sources */,
 				E9B3AF7B216A7557005BE172 /* SelectedServicesCollectionViewCell.swift in Sources */,
 				E9B3AF81216A75BC005BE172 /* SuggestedServicesCollectionViewCell.swift in Sources */,
 				E9836C5D2165982D004554D4 /* FinishYourProfileViewModel.swift in Sources */,
