@@ -65,7 +65,8 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
         
         if dataArray[indexPath.section][indexPath.row] == "Version" {
             cell.detailedLabel.isHidden = false
-            cell.detailedLabel.text = "1.4"
+            let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+            cell.detailedLabel.text = appVersion
         }
         
         return cell

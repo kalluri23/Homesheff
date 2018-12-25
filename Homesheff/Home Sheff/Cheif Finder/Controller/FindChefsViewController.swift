@@ -69,10 +69,12 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "ChefDetailsVCID") as! ChefDetailsViewController
-           vc.chefInfo = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
-             tableView.deselectRow(at: indexPath, animated: true)
-        self.present(vc, animated: true, completion: nil)
+        if indexPath.section == 1 {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "ChefDetailsVCID") as! ChefDetailsViewController
+            vc.chefInfo = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
+            tableView.deselectRow(at: indexPath, animated: true)
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
