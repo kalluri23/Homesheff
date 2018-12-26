@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     private func setInitialScreen() {
         //user previously logged in to app
-        if let _ = UserDefaults.standard.value(forKey: "userLoggedIn") {
+        if UserDefaults.standard.bool(forKey: "userLoggedIn") {
             self.window = UIWindow(frame: UIScreen.main.bounds)
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
