@@ -159,7 +159,7 @@ extension ChefDetailsViewController: UITableViewDataSource,UITableViewDelegate {
         case 0:
             return "SERVICES"
         case 1:
-            return ""
+            return "PHOTOS"
         default:
             return ""
         }
