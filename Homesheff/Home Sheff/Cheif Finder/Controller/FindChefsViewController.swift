@@ -12,8 +12,9 @@ import NVActivityIndicatorView
 class FindChefsViewController: UIViewController {
     
     @IBOutlet weak var chefTableView: UITableView!
+    @IBOutlet weak var findCheifViewModel: FindCheifViewModel!
     @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
-    var findCheifViewModel :FindCheifViewModel?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,8 @@ class FindChefsViewController: UIViewController {
     func viewModelBinding()  {
         findCheifViewModel?.reloadTableView = { [weak self] in
             DispatchQueue.main.async {
-                self?.chefTableView.reloadData()
+                //Reload only content section to do not resign first responser
+                self?.chefTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
                 self?.loadingIndicator.stopAnimating()
             }
         }
@@ -44,27 +46,50 @@ class FindChefsViewController: UIViewController {
 
 extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return findCheifViewModel.numberOfSections
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return findCheifViewModel?.numberOfRows ?? 0
+        if section == 0 {
+            return 1
+        }else {
+            return findCheifViewModel.numberOfRows
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: ChefCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.chef = findCheifViewModel?.cheifObjectAtIndex(index: indexPath.row)
-        if (cell.chef?.imageURL != nil) {
-            findCheifViewModel?.downloadImage(imageName: "\(cell.chef?.id ?? 0)_ProfilePhoto", completion: { (image) in
-                cell.cheffImageView.image = image
-                self.findCheifViewModel?.prepareProfileImageView(imageView: cell.cheffImageView)
-            })
+        if indexPath.section == 0 {
+            let searchCell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! FindChefCell
+            return searchCell
+        } else {
+
+            let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefCell", for: indexPath) as! ChefCell
+            cheffCell.chef = findCheifViewModel?.cheifObjectAtIndex(index: indexPath.row)
+            if (cheffCell.chef?.imageURL != nil) {
+                findCheifViewModel?.downloadImage(imageName: "\(cheffCell.chef?.id ?? 0)_ProfilePhoto", completion: { (image) in
+                    cheffCell.cheffImageView.image = image
+                    self.findCheifViewModel?.prepareProfileImageView(imageView: cheffCell.cheffImageView)
+                })
+            }
+             return cheffCell
         }
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "ChefDetailsVCID") as! ChefDetailsViewController
-        vc.chefInfo = findCheifViewModel?.cheifObjectAtIndex(index: indexPath.row)
-             tableView.deselectRow(at: indexPath, animated: true)
-        self.present(vc, animated: true, completion: nil)
+         if indexPath.section == 1 {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "ChefDetailsVCID") as! ChefDetailsViewController
+            vc.chefInfo = findCheifViewModel?.cheifObjectAtIndex(index: indexPath.row)
+                tableView.deselectRow(at: indexPath, animated: true)
+            self.present(vc, animated: true, completion: nil)
+         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            cell.separatorInset = UIEdgeInsetsMake(0, 60, 0, 10)
+        }else {
+            cell.separatorInset = UIEdgeInsetsMake(0, 10, 0, 10)
+        }
     }
 }
