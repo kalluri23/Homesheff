@@ -18,7 +18,8 @@ class FindChefsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadingIndicator.startAnimating()
+        viewModelBinding()
         chefTableView.delegate = self
         chefTableView.dataSource = self
         loadingIndicator.color = .black
@@ -27,9 +28,8 @@ class FindChefsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        findCheifViewModel = FindCheifViewModel()
-        loadingIndicator.startAnimating()
-        viewModelBinding()
+        //findCheifViewModel = FindCheifViewModel()
+        self.findCheifViewModel.reloadTableView!()
         self.tabBarController?.navigationItem.hidesBackButton = true
     }
     
