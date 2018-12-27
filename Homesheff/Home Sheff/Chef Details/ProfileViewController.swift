@@ -1,5 +1,5 @@
 //
-//  ChefDetailsViewController.swift
+//  ProfileViewController.swift
 //  Homesheff
 //
 //  Created by Anurag Yadev on 10/14/18.
@@ -10,26 +10,45 @@ import UIKit
 
 // convert this into MVVM
 
-class ChefDetailsViewController: UIViewController {
+enum ProfileType {
+    case cheffDetails
+    case myAccount
+}
+
+class ProfileViewController: UIViewController {
 
     @IBOutlet weak var profilePictureImageView: CustomImageView!
-    
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var chefServiceTableView: UITableView!
-
     @IBOutlet weak var navigationTitleLbl: UILabel!
+    @IBOutlet weak var contactCheff: UIButton!
     var chefServiceData = ChefServiceModel()
     var chefInfo: Chef?
+    var profileType: ProfileType?
     
-    
+    @IBOutlet weak var profileEditButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         setProfilePicture()
-         navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
-         emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
-         chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
-        
+        chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+        if profileType == ProfileType.myAccount {
+            self.contactCheff.alpha = 0.0
+            self.chefInfo = Chef(user:User.defaultUser.currentUser!)
+            setProfilePicture()
+            navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
+            emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
+        }
+    }
+    
+    func setUpProfileData() {
+        setProfilePicture()
+        navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
+        emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
     }
     
     private func setProfilePicture() {
@@ -41,7 +60,7 @@ class ChefDetailsViewController: UIViewController {
     }
     
     @IBAction func dismissViewController(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     //This is temp , need to change based on archi.
     
@@ -91,6 +110,11 @@ class ChefDetailsViewController: UIViewController {
         }
     }
     
+    @IBAction func editProfile(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
     private func sendAnEmail() {
         
         if let url = URL(string: "mailto:\(chefInfo?.email ?? "")") {
@@ -104,7 +128,7 @@ class ChefDetailsViewController: UIViewController {
 }
 
 
-extension ChefDetailsViewController: UITableViewDataSource,UITableViewDelegate {
+extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -142,6 +166,8 @@ extension ChefDetailsViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "SERVICES"
     }
+    
+    
     
 //    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 //        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))

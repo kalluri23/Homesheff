@@ -66,4 +66,19 @@ struct Chef: Codable {
     var isCustomer: Bool?
     var isActive: Bool?
     var imageURL: String?
+    
+    init(user: UserModel) {
+        self.id = user.id!
+        self.firstName = user.firstName
+        self.lastName = user.lastName
+        self.password = user.password
+        self.email = user.email
+        self.phone = user.phone
+        self.zipcode = user.zipcode
+        self.signUpDate = user.signUpDate
+        self.isChef = user.isChef
+        self.isCustomer = user.isCustomer
+        self.isActive = user.isActive
+        self.imageURL = user.imageURL
+    }
 }

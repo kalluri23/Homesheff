@@ -21,6 +21,11 @@ class UserAccountViewController: UIViewController {
         super.viewDidLoad()
         userAccountVC.register(UserAccountCell.nib, forCellReuseIdentifier: UserAccountCell.reuseIdentifier)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
 
     private func didTapTermsAndCondition(isTermsAndCondition: Bool) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "TermsAndConditionViewControllerID") as! TermsAndConditionViewController
@@ -83,7 +88,11 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
         
         // This is temp , need to tie state with enum and data source
         if dataArray[indexPath.section][indexPath.row] == "Profile" {
-            let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
+              let vc = storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+             vc.profileType = .myAccount
+            // vc.chefInfo = Chef(user:User.defaultUser.currentUser!)
+//
+//            let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else if dataArray[indexPath.section][indexPath.row] == "Terms of Services" {

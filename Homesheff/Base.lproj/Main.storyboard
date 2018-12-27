@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -740,7 +740,7 @@
             </objects>
             <point key="canvasLocation" x="5220.289855072464" y="577.90178571428567"/>
         </scene>
-        <!--User Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="bI1-zX-qVd">
             <objects>
                 <viewController storyboardIdentifier="UserProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YNa-9R-VOy" customClass="UserProfileViewController" customModule="Homesheff" customModuleProvider="target" sceneMemberID="viewController">
@@ -808,6 +808,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="itn-hj-gws"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Profile" id="VYu-Z1-PaX"/>
                     <connections>
                         <outlet property="userCoverPicture" destination="1ca-Sv-v5u" id="w89-tQ-u6h"/>
                         <outlet property="userProfilePicture" destination="HQq-WE-fKP" id="AWW-Pr-4Rg"/>
@@ -818,10 +819,10 @@
             </objects>
             <point key="canvasLocation" x="6064.8000000000002" y="584.25787106446785"/>
         </scene>
-        <!--Chef Details View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="PNf-06-njN">
             <objects>
-                <viewController storyboardIdentifier="ChefDetailsVCID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zc4-1T-JnA" customClass="ChefDetailsViewController" customModule="Homesheff" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zc4-1T-JnA" customClass="ProfileViewController" customModule="Homesheff" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KOO-X5-5cU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -861,7 +862,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNd-av-mNc">
-                                <rect key="frame" x="0.0" y="84" width="375" height="220"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="250"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leaves-background" translatesAutoresizingMaskIntoConstraints="NO" id="szh-lA-CbX">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
@@ -870,10 +871,10 @@
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="soma-kun" translatesAutoresizingMaskIntoConstraints="NO" id="Ssj-Hc-LAG" customClass="CustomImageView" customModule="Homesheff" customModuleProvider="target">
-                                        <rect key="frame" x="157.5" y="91" width="60" height="60"/>
+                                        <rect key="frame" x="137.5" y="51" width="100" height="100"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="KVE-1E-CvV"/>
-                                            <constraint firstAttribute="width" constant="60" id="VOz-6k-IKt"/>
+                                            <constraint firstAttribute="height" constant="100" id="KVE-1E-CvV"/>
+                                            <constraint firstAttribute="width" constant="100" id="VOz-6k-IKt"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Love meal-preps. And all things green." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOr-c0-H1j">
@@ -895,13 +896,28 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfo-NB-il0">
+                                        <rect key="frame" x="334" y="209" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="33" id="6ps-oA-n63"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="RuH-29-CFl"/>
+                                            <constraint firstAttribute="height" constant="33" id="hk7-F1-GxS"/>
+                                            <constraint firstAttribute="width" constant="33" id="w21-Zq-C3k"/>
+                                        </constraints>
+                                        <state key="normal" image="pencil-icon" backgroundImage="pencil-icon-background-circle"/>
+                                        <connections>
+                                            <action selector="editProfile:" destination="zc4-1T-JnA" eventType="touchUpInside" id="yc9-1G-BNx"/>
+                                            <action selector="importProfileImage:" destination="YNa-9R-VOy" eventType="touchUpInside" id="us6-1C-Bv1"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.99998801946640015" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="220" id="0bZ-p6-Bcl"/>
+                                    <constraint firstAttribute="height" constant="250" id="0bZ-p6-Bcl"/>
                                     <constraint firstItem="IOr-c0-H1j" firstAttribute="top" secondItem="Ssj-Hc-LAG" secondAttribute="bottom" constant="8" id="Aa8-tp-3xh"/>
+                                    <constraint firstAttribute="bottom" secondItem="tfo-NB-il0" secondAttribute="bottom" constant="8" id="M8d-AI-Yzs"/>
                                     <constraint firstItem="1Ub-vV-E7I" firstAttribute="centerX" secondItem="KNd-av-mNc" secondAttribute="centerX" id="Un9-25-HYW"/>
-                                    <constraint firstItem="Ssj-Hc-LAG" firstAttribute="top" secondItem="KNd-av-mNc" secondAttribute="top" constant="91" id="YQY-cv-3Lz"/>
+                                    <constraint firstItem="Ssj-Hc-LAG" firstAttribute="top" secondItem="KNd-av-mNc" secondAttribute="top" constant="51" id="YQY-cv-3Lz"/>
                                     <constraint firstItem="IOr-c0-H1j" firstAttribute="centerX" secondItem="KNd-av-mNc" secondAttribute="centerX" id="awG-h9-Km0"/>
                                     <constraint firstItem="1Ub-vV-E7I" firstAttribute="top" secondItem="IOr-c0-H1j" secondAttribute="bottom" constant="5" id="bDL-aF-nLd"/>
                                     <constraint firstItem="szh-lA-CbX" firstAttribute="top" secondItem="KNd-av-mNc" secondAttribute="top" id="fnY-LK-ymE"/>
@@ -909,10 +925,11 @@
                                     <constraint firstItem="szh-lA-CbX" firstAttribute="leading" secondItem="KNd-av-mNc" secondAttribute="leading" id="icT-YG-wvA"/>
                                     <constraint firstAttribute="trailing" secondItem="1Ub-vV-E7I" secondAttribute="trailing" constant="5" id="qHI-ch-VqN"/>
                                     <constraint firstAttribute="trailing" secondItem="szh-lA-CbX" secondAttribute="trailing" id="wak-NL-BfJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="tfo-NB-il0" secondAttribute="trailing" constant="8" id="xhe-1t-ToA"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="cQ4-nx-b36">
-                                <rect key="frame" x="0.0" y="304" width="375" height="309"/>
+                                <rect key="frame" x="0.0" y="334" width="375" height="279"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="zc4-1T-JnA" id="bZU-fW-VIg"/>
@@ -962,8 +979,10 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="chefServiceTableView" destination="cQ4-nx-b36" id="z26-q6-ajE"/>
+                        <outlet property="contactCheff" destination="Dgo-cA-ERy" id="Vqj-PB-jmZ"/>
                         <outlet property="emailLabel" destination="1Ub-vV-E7I" id="F36-wS-78z"/>
                         <outlet property="navigationTitleLbl" destination="BnT-md-so9" id="Qzf-st-sju"/>
+                        <outlet property="profileEditButton" destination="tfo-NB-il0" id="tXN-Ul-9vZ"/>
                         <outlet property="profilePictureImageView" destination="Ssj-Hc-LAG" id="vbQ-4n-vhv"/>
                     </connections>
                 </viewController>
@@ -4475,14 +4494,14 @@ AAAAAAAAAAAAAALRRQ
         </image>
         <image name="leaves-background" width="375" height="125"/>
         <image name="lock" width="36" height="36"/>
-        <image name="my-account-nonselected" width="25" height="25"/>
-        <image name="my-account-selected" width="25" height="25"/>
+        <image name="my-account-nonselected" width="50" height="50"/>
+        <image name="my-account-selected" width="50" height="50"/>
         <image name="pencil-icon" width="11" height="11"/>
         <image name="pencil-icon-background-circle" width="33" height="33"/>
         <image name="plantarian-profileimg" width="90" height="90"/>
         <image name="search" width="20" height="20"/>
-        <image name="search-nonselected" width="25" height="25"/>
-        <image name="search-selected" width="25" height="25"/>
+        <image name="search-nonselected" width="50" height="50"/>
+        <image name="search-selected" width="50" height="50"/>
         <image name="soma-kun" width="225" height="225"/>
     </resources>
 </document>
