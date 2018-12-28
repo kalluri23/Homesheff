@@ -41,7 +41,7 @@ import Foundation
     let isCustomer: Bool?
     let isActive: Bool?
     let imageURL: String?
-    var services: [String]?
+    var services: String?
     var location: String?
 }
 

@@ -28,6 +28,7 @@ class FindChefsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // comment below since findchief is already an outlet
         //findCheifViewModel = FindCheifViewModel()
         self.findCheifViewModel.reloadTableView!()
         self.tabBarController?.navigationItem.hidesBackButton = true
@@ -77,12 +78,14 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         if indexPath.section == 1 {
-            let vc = storyboard?.instantiateViewController(withIdentifier: "ChefDetailsVCID") as! ChefDetailsViewController
-            vc.chefInfo = findCheifViewModel?.cheifObjectAtIndex(index: indexPath.row)
-                tableView.deselectRow(at: indexPath, animated: true)
-            self.present(vc, animated: true, completion: nil)
-         }
+        if indexPath.section == 1 {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+            vc.chefInfo = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
+            vc.profileType = .cheffDetails
+            tableView.deselectRow(at: indexPath, animated: true)
+            self.navigationController?.pushViewController(vc, animated: true)
+           //  self.present(vc, animated: true, completion: nil)
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
