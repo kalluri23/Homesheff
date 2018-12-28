@@ -658,7 +658,7 @@
                     <connections>
                         <outlet property="chefTableView" destination="8xf-zN-Kyy" id="0ep-7b-USf"/>
                         <outlet property="findCheifViewModel" destination="JJ8-Ck-9eJ" id="4HU-ks-3Ho"/>
-                        <outlet property="loadingIndoicator" destination="9NR-LZ-2pB" id="uCf-EG-Bwh"/>
+                        <outlet property="loadingIndicator" destination="9NR-LZ-2pB" id="J07-ut-f9K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hST-Jg-VzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -758,7 +758,7 @@
                                     <constraint firstAttribute="width" constant="90" id="eXZ-5A-G1j"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miX-7f-dtU">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miX-7f-dtU">
                                 <rect key="frame" x="204.5" y="117" width="33" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="33" id="WI4-zt-7ZA"/>
@@ -864,7 +864,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNd-av-mNc">
                                 <rect key="frame" x="0.0" y="84" width="375" height="250"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leaves-background" translatesAutoresizingMaskIntoConstraints="NO" id="szh-lA-CbX">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leaves-background" translatesAutoresizingMaskIntoConstraints="NO" id="szh-lA-CbX" customClass="CustomImageView" customModule="Homesheff" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="124" id="d69-91-Ti5"/>
@@ -982,6 +982,7 @@
                         <outlet property="contactCheff" destination="Dgo-cA-ERy" id="Vqj-PB-jmZ"/>
                         <outlet property="emailLabel" destination="1Ub-vV-E7I" id="F36-wS-78z"/>
                         <outlet property="navigationTitleLbl" destination="BnT-md-so9" id="Qzf-st-sju"/>
+                        <outlet property="profileBgView" destination="szh-lA-CbX" id="ds6-KN-RNF"/>
                         <outlet property="profileEditButton" destination="tfo-NB-il0" id="tXN-Ul-9vZ"/>
                         <outlet property="profilePictureImageView" destination="Ssj-Hc-LAG" id="vbQ-4n-vhv"/>
                     </connections>

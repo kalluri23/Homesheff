@@ -71,7 +71,7 @@ class UserProfileViewController: UIViewController {
         let path = "updateUserPreferences/" + "\(chefUser?.id ?? 0)"
         let updateUserProfile = UpdateUserPreferencesEnvelop(apiPath: path, pathType: updateUserProfileSearchPath)
         return updateUserProfile
-    }
+    }   
     
 }
 

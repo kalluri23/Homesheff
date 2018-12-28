@@ -66,7 +66,8 @@ struct Chef: Codable {
     var isCustomer: Bool?
     var isActive: Bool?
     var imageURL: String?
-    
+    var coverURL: String?
+
     init(user: UserModel) {
         self.id = user.id!
         self.firstName = user.firstName
