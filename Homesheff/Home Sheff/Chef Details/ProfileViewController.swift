@@ -41,6 +41,7 @@ class ProfileViewController: UIViewController {
         // Refresh profile after edit
         if profileType == ProfileType.myAccount {
             self.contactCheff.alpha = 0.0
+            self.profileEditButton.alpha = 0.0
             self.chefInfo = Chef(user:User.defaultUser.currentUser!)
             setProfileAndBgPicture()
             navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
