@@ -14,6 +14,7 @@ class ChefDetailsViewController: UIViewController {
 
     @IBOutlet weak var profilePictureImageView: CustomImageView!
     
+    @IBOutlet weak var profileBgView: CustomImageView!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var chefServiceTableView: UITableView!
 
@@ -21,23 +22,36 @@ class ChefDetailsViewController: UIViewController {
     var chefServiceData = ChefServiceModel()
     var chefInfo: Chef?
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-         setProfilePicture()
-         navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
-         emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
          chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
         
     }
     
-    private func setProfilePicture() {
-        profilePictureImageView.loadImageWithUrlString(urlString: chefInfo?.imageURL ?? "")
-        profilePictureImageView.layer.cornerRadius = profilePictureImageView.frame.size.width / 2;
-        profilePictureImageView.clipsToBounds = true;
-        profilePictureImageView.layer.borderWidth = 3.0;
-        profilePictureImageView.layer.borderColor = UIColor.white.cgColor
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setProfileAndBgPicture()
+        navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
+        emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
+    }
+    
+    private func setProfileAndBgPicture() {
+        
+        if(chefInfo?.imageURL != nil) {
+            chefServiceData.downloadImage(imageName: "\(chefInfo?.id ?? 0)_ProfilePhoto") { (image) in
+                self.profilePictureImageView.image = image
+                self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width / 2
+                self.profilePictureImageView.clipsToBounds = true;
+                self.profilePictureImageView.layer.borderWidth = 3.0
+                self.profilePictureImageView.layer.borderColor = UIColor.white.cgColor
+            }
+        }
+        
+        if(chefInfo?.coverURL != nil) {
+            chefServiceData.downloadImage(imageName: "\(chefInfo?.id ?? 0)_CoverPhoto") { (image) in
+               self.profileBgView.image = image
+            }
+        }
     }
     
     @IBAction func dismissViewController(_ sender: Any) {

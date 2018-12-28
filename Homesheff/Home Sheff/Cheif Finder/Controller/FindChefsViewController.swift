@@ -13,31 +13,32 @@ class FindChefsViewController: UIViewController {
     
     @IBOutlet weak var chefTableView: UITableView!
     @IBOutlet weak var findCheifViewModel: FindCheifViewModel!
-    @IBOutlet weak var loadingIndoicator: NVActivityIndicatorView!
+    @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadingIndicator.startAnimating()
+        viewModelBinding()
         chefTableView.delegate = self
         chefTableView.dataSource = self
-        loadingIndoicator.color = .black
-        loadingIndoicator.type = .ballClipRotate
-        loadingIndoicator.startAnimating()
-        viewModelBinding()
+        loadingIndicator.color = .black
+        loadingIndicator.type = .ballClipRotate
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //findCheifViewModel = FindCheifViewModel()
+        self.findCheifViewModel.reloadTableView!()
         self.tabBarController?.navigationItem.hidesBackButton = true
     }
     
     func viewModelBinding()  {
-        findCheifViewModel.reloadTableView = { [weak self] in
+        findCheifViewModel?.reloadTableView = { [weak self] in
             DispatchQueue.main.async {
                 //Reload only content section to do not resign first responser
                 self?.chefTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
-                self?.loadingIndoicator.stopAnimating()
+                self?.loadingIndicator.stopAnimating()
             }
         }
     }
@@ -61,20 +62,27 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             let searchCell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! FindChefCell
             return searchCell
-        }else {
+        } else {
+
             let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefCell", for: indexPath) as! ChefCell
-            cheffCell.chef = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
-            return cheffCell
+            cheffCell.chef = findCheifViewModel?.cheifObjectAtIndex(index: indexPath.row)
+            if (cheffCell.chef?.imageURL != nil) {
+                findCheifViewModel?.downloadImage(imageName: "\(cheffCell.chef?.id ?? 0)_ProfilePhoto", completion: { (image) in
+                    cheffCell.cheffImageView.image = image
+                    self.findCheifViewModel?.prepareProfileImageView(imageView: cheffCell.cheffImageView)
+                })
+            }
+             return cheffCell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+         if indexPath.section == 1 {
             let vc = storyboard?.instantiateViewController(withIdentifier: "ChefDetailsVCID") as! ChefDetailsViewController
-            vc.chefInfo = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
-            tableView.deselectRow(at: indexPath, animated: true)
+            vc.chefInfo = findCheifViewModel?.cheifObjectAtIndex(index: indexPath.row)
+                tableView.deselectRow(at: indexPath, animated: true)
             self.present(vc, animated: true, completion: nil)
-        }
+         }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
