@@ -1087,6 +1087,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Forgot Password" id="SCK-OM-pcF"/>
                     <connections>
+                        <outlet property="forgotPasswordViewModel" destination="AUX-Ri-0pl" id="osG-By-9us"/>
                         <outlet property="imageView" destination="2eP-b9-0Wc" id="swO-bQ-2Zm"/>
                         <outlet property="primaryLabel" destination="nfB-Br-Rpf" id="CYM-WU-qHK"/>
                         <outlet property="secondaryLabel" destination="3zo-yd-9Ls" id="xN8-5p-FSq"/>
@@ -1095,6 +1096,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iOC-Kl-ZOy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="AUX-Ri-0pl" customClass="ForgotPasswordViewModel" customModule="Homesheff" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1608.8" y="-201.04947526236884"/>
         </scene>

@@ -14,25 +14,48 @@ class APIManager {
     
     typealias LoginSuccessHanlder = (Bool) -> Void
     func signInApi(requestEnvelop:Requestable, completion: @escaping LoginSuccessHanlder)  {
-        
-        Alamofire.request(
+        let request = Alamofire.request(
             requestEnvelop.requestURL()!,
             parameters: requestEnvelop.pathType.httpBodyEnvelop(),
-            headers: requestEnvelop.httpHeaders()).validate()
+            headers: requestEnvelop.httpHeaders())
+        request.validate()
             .responseString { response  in
                 
-               // if response.result == "null" {}
+                // if response.result == "null" {}
                 switch response.result{
-                   case .success:
+                case .success:
                     if response.result.value != nil {
-                     completion(User.defaultUser.createUser(data: response.data))
+                        completion(User.defaultUser.createUser(data: response.data))
                         
                     }
-                      case .failure:
+                case .failure:
                     completion(false)
                 }
+        }
     }
-}
+    
+    func forgotPassword(requestEnvelop:Requestable, completion: @escaping (Bool)->Void) {
+        let request = Alamofire.request(requestEnvelop.requestURL()!, headers: requestEnvelop.httpHeaders())
+        request.validate()
+            .responseString{ (response) -> Void in
+                
+                switch response.result{
+                case .success:
+                    if let resultValue = response.result.value
+                    {
+                        print(resultValue)
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                case .failure:
+                    if let error = response.error {
+                        print(error.localizedDescription)
+                    }
+                    completion(false)
+                }
+        }
+    }
     
     func signUpCall(requestEnvelop:Requestable, completion: @escaping (Bool) -> Void)  {
         

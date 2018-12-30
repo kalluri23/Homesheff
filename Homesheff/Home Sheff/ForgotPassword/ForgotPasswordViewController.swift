@@ -15,6 +15,8 @@ class ForgotPasswordViewController: UIViewController {
     @IBOutlet weak var secondaryLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet var forgotPasswordViewModel: ForgotPasswordViewModel!
+    
     //TODO: Need to change these images when we get from Sakura
     let lockImage = UIImage(named: "lock")
     let sentImage = UIImage(named: "done")
@@ -56,7 +58,14 @@ class ForgotPasswordViewController: UIViewController {
     
     //TODO: Add the backend code to send email
     @IBAction func sendButtonTapped(_ sender: UIButton, forEvent event: UIEvent) {
-        confiugreSentScreen()
+        forgotPasswordViewModel.forgotPassword(envelop: forgotPasswordViewModel.forgotPasswordEnvelop(email: self.textField.text!), completion: {[unowned self] isSuccess in
+            if (isSuccess) {
+                self.confiugreSentScreen()
+            }else {
+               print("error occured")
+            }
+            
+        })
     }
     
 

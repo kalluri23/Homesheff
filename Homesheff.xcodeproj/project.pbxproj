@@ -10,6 +10,7 @@
 		142C8C2621C44E9500C04619 /* FindChefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C8C2521C44E9500C04619 /* FindChefCell.swift */; };
 		149EA07621D15D54004DD3E5 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149EA07421D15D54004DD3E5 /* ForgotPasswordViewController.swift */; };
 		149EA07921D2D51E004DD3E5 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149EA07821D2D51E004DD3E5 /* String+Extension.swift */; };
+		149EA07B21D42525004DD3E5 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149EA07A21D42525004DD3E5 /* ForgotPasswordViewModel.swift */; };
 		2B42017BD6F0D30ECAEC28E3 /* Pods_Homesheff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */; };
 		A403097421794F71001397EE /* UserDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A403097321794F71001397EE /* UserDetailModal.swift */; };
 		A403097621795046001397EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A403097521795046001397EE /* User.swift */; };
@@ -73,6 +74,7 @@
 		142C8C2521C44E9500C04619 /* FindChefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefCell.swift; sourceTree = "<group>"; };
 		149EA07421D15D54004DD3E5 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		149EA07821D2D51E004DD3E5 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		149EA07A21D42525004DD3E5 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.release.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.release.xcconfig"; sourceTree = "<group>"; };
 		76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homesheff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A403097321794F71001397EE /* UserDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModal.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				149EA07421D15D54004DD3E5 /* ForgotPasswordViewController.swift */,
+				149EA07A21D42525004DD3E5 /* ForgotPasswordViewModel.swift */,
 			);
 			path = ForgotPassword;
 			sourceTree = "<group>";
@@ -581,6 +584,7 @@
 				E9D2700A214B13F40087F476 /* UIView+Extension.swift in Sources */,
 				A4AA640F2173FF4E007D83F2 /* SignInViewModel.swift in Sources */,
 				A403097421794F71001397EE /* UserDetailModal.swift in Sources */,
+				149EA07B21D42525004DD3E5 /* ForgotPasswordViewModel.swift in Sources */,
 				A49D341D215AF21700AA24CF /* UITableViewGenericId.swift in Sources */,
 				E9D14B522147BEFF009A57A1 /* AppDelegate.swift in Sources */,
 				A4C92498216ECAB000F3BBDE /* SelectedServiceTableViewCell.swift in Sources */,
