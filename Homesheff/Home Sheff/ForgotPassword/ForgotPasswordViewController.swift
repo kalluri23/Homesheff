@@ -14,12 +14,13 @@ class ForgotPasswordViewController: UIViewController {
     @IBOutlet weak var primaryLabel: UILabel!
     @IBOutlet weak var secondaryLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var sendButton: SpinningButton!
     @IBOutlet var forgotPasswordViewModel: ForgotPasswordViewModel!
     
     //TODO: Need to change these images when we get from Sakura
     let lockImage = UIImage(named: "lock")
     let sentImage = UIImage(named: "done")
+    let errorImage = UIImage(named: "error")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,13 @@ class ForgotPasswordViewController: UIViewController {
         self.imageView.image = sentImage
         self.primaryLabel.text = "Email sent"
         self.secondaryLabel.text = "If the email you entered matches our records, you will short receive a link to reset to your password."
-        self.sendButton(isEnabled: false)
+        self.textField.resignFirstResponder()
+    }
+    
+    private func confiugreErrorScreen() {
+        self.imageView.image = errorImage
+        self.primaryLabel.text = "Error sending email"
+        self.secondaryLabel.text = "We are unable to send email at this time. It is possible that email you enterd is not registered with us"
         self.textField.resignFirstResponder()
     }
     
@@ -56,16 +63,25 @@ class ForgotPasswordViewController: UIViewController {
         self.sendButton.alpha = isEnabled ? 1.0 : 0.5
     }
     
-    //TODO: Add the backend code to send email
-    @IBAction func sendButtonTapped(_ sender: UIButton, forEvent event: UIEvent) {
+    /**
+    Method to call forgotPassword Endpoint using email
+    */
+    private func callForgotPasswordAPI() {
+        self.sendButton.showLoading()
         forgotPasswordViewModel.forgotPassword(envelop: forgotPasswordViewModel.forgotPasswordEnvelop(email: self.textField.text!), completion: {[unowned self] isSuccess in
+            self.sendButton(isEnabled: false)
+            self.sendButton.hideLoading()
             if (isSuccess) {
                 self.confiugreSentScreen()
             }else {
-               print("error occured")
+                self.confiugreErrorScreen()
             }
             
         })
+    }
+    
+    @IBAction func sendButtonTapped() {
+        callForgotPasswordAPI()
     }
     
 
@@ -90,7 +106,7 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let emailText = textField.text, emailText.isValidEmail() {
             self.sendButton(isEnabled:true)
-            confiugreSentScreen()
+            callForgotPasswordAPI()
             return true
         }else {
             self.sendButton(isEnabled:false)

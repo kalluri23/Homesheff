@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1060,7 +1060,7 @@
                                     <constraint firstItem="MPD-ph-kZ7" firstAttribute="leading" secondItem="kcB-zU-Sln" secondAttribute="leading" id="uRZ-qk-QWt"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgR-Rw-zcM">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgR-Rw-zcM" customClass="SpinningButton" customModule="Homesheff" customModuleProvider="target">
                                 <rect key="frame" x="30" y="433" width="315" height="35"/>
                                 <color key="backgroundColor" red="0.48627450980392156" green="0.69411764705882351" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1077,7 +1077,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="sendButtonTapped:forEvent:" destination="IgS-rJ-YDf" eventType="touchUpInside" id="6DO-D0-dZS"/>
+                                    <action selector="sendButtonTapped" destination="IgS-rJ-YDf" eventType="touchUpInside" id="9EY-0Q-aZp"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="2eP-b9-0Wc">
@@ -1111,7 +1111,7 @@
                         <outlet property="imageView" destination="2eP-b9-0Wc" id="swO-bQ-2Zm"/>
                         <outlet property="primaryLabel" destination="nfB-Br-Rpf" id="CYM-WU-qHK"/>
                         <outlet property="secondaryLabel" destination="3zo-yd-9Ls" id="xN8-5p-FSq"/>
-                        <outlet property="sendButton" destination="vgR-Rw-zcM" id="1ft-6h-o4r"/>
+                        <outlet property="sendButton" destination="vgR-Rw-zcM" id="JBz-eV-AW4"/>
                         <outlet property="textField" destination="NZo-he-GI9" id="hFS-Mf-Ona"/>
                     </connections>
                 </viewController>
@@ -4496,15 +4496,15 @@ AAAAAAAAAAAAAALRRQ
 </mutableData>
         </image>
         <image name="leaves-background" width="375" height="125"/>
-        <image name="lock" width="36" height="36"/>
-        <image name="my-account-nonselected" width="50" height="50"/>
-        <image name="my-account-selected" width="50" height="50"/>
+        <image name="lock" width="73" height="85"/>
+        <image name="my-account-nonselected" width="25" height="25"/>
+        <image name="my-account-selected" width="25" height="25"/>
         <image name="pencil-icon" width="11" height="11"/>
         <image name="pencil-icon-background-circle" width="33" height="33"/>
         <image name="plantarian-profileimg" width="90" height="90"/>
         <image name="search" width="20" height="20"/>
-        <image name="search-nonselected" width="50" height="50"/>
-        <image name="search-selected" width="50" height="50"/>
+        <image name="search-nonselected" width="25" height="25"/>
+        <image name="search-selected" width="25" height="25"/>
         <image name="soma-kun" width="225" height="225"/>
     </resources>
 </document>
