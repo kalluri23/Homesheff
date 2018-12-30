@@ -35,7 +35,7 @@
 		A4C924B72172C3D000F3BBDE /* APIEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C924B32172C3D000F3BBDE /* APIEndPoints.swift */; };
 		A4C924B82172C3D000F3BBDE /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C924B42172C3D000F3BBDE /* APIManager.swift */; };
 		A4C924B92172C3D000F3BBDE /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C924B52172C3D000F3BBDE /* Requestable.swift */; };
-		A4C924BC2173990B00F3BBDE /* ChefDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C924BB2173990B00F3BBDE /* ChefDetailsViewController.swift */; };
+		A4C924BC2173990B00F3BBDE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C924BB2173990B00F3BBDE /* ProfileViewController.swift */; };
 		A4C924BE21739D0000F3BBDE /* UserAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C924BD21739D0000F3BBDE /* UserAccountViewController.swift */; };
 		A4C924C52173A41700F3BBDE /* UserAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C924C32173A41700F3BBDE /* UserAccountCell.swift */; };
 		A4C924C62173A41700F3BBDE /* UserAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C924C42173A41700F3BBDE /* UserAccountCell.xib */; };
@@ -100,7 +100,7 @@
 		A4C924B32172C3D000F3BBDE /* APIEndPoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIEndPoints.swift; sourceTree = "<group>"; };
 		A4C924B42172C3D000F3BBDE /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		A4C924B52172C3D000F3BBDE /* Requestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
-		A4C924BB2173990B00F3BBDE /* ChefDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefDetailsViewController.swift; sourceTree = "<group>"; };
+		A4C924BB2173990B00F3BBDE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A4C924BD21739D0000F3BBDE /* UserAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountViewController.swift; sourceTree = "<group>"; };
 		A4C924C32173A41700F3BBDE /* UserAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountCell.swift; sourceTree = "<group>"; };
 		A4C924C42173A41700F3BBDE /* UserAccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserAccountCell.xib; sourceTree = "<group>"; };
@@ -279,7 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				A4AA64052173BE76007D83F2 /* ChefDetailsModel.swift */,
-				A4C924BB2173990B00F3BBDE /* ChefDetailsViewController.swift */,
+				A4C924BB2173990B00F3BBDE /* ProfileViewController.swift */,
 				A4AA63FD2173B6E5007D83F2 /* ProfileGenericTableViewCell.swift */,
 				A4AA63FE2173B6E5007D83F2 /* ProfileGenericTableViewCell.xib */,
 				A4AA64012173B703007D83F2 /* ProfileDetailedTableViewCell.swift */,
@@ -554,7 +554,7 @@
 				E4350836218E8E4C00C33719 /* UserProfileViewModel.swift in Sources */,
 				E975B6122160156000BE6DD2 /* SignUpContentTableViewCell.swift in Sources */,
 				A453503C2185310D005748D3 /* CustomImageView.swift in Sources */,
-				A4C924BC2173990B00F3BBDE /* ChefDetailsViewController.swift in Sources */,
+				A4C924BC2173990B00F3BBDE /* ProfileViewController.swift in Sources */,
 				A4C924B72172C3D000F3BBDE /* APIEndPoints.swift in Sources */,
 				A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */,
 				A49D34152156E91500AA24CF /* FindCheifViewModel.swift in Sources */,

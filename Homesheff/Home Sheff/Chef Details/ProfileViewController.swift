@@ -1,5 +1,5 @@
 //
-//  ChefDetailsViewController.swift
+//  ProfileViewController.swift
 //  Homesheff
 //
 //  Created by Anurag Yadev on 10/14/18.
@@ -10,38 +10,66 @@ import UIKit
 
 // convert this into MVVM
 
-class ChefDetailsViewController: UIViewController {
+enum ProfileType {
+    case cheffDetails
+    case myAccount
+}
+
+class ProfileViewController: UIViewController {
 
     @IBOutlet weak var profilePictureImageView: CustomImageView!
-    
+    @IBOutlet weak var profileBgView: CustomImageView!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var chefServiceTableView: UITableView!
-
     @IBOutlet weak var navigationTitleLbl: UILabel!
+    @IBOutlet weak var contactCheff: UIButton!
     var chefServiceData = ChefServiceModel()
     var chefInfo: Chef?
+    var profileType: ProfileType?
     
-    
+    @IBOutlet weak var profileEditButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         setProfilePicture()
-         navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
-         emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
-         chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
-        
+        chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
     }
     
-    private func setProfilePicture() {
-        profilePictureImageView.loadImageWithUrlString(urlString: chefInfo?.imageURL ?? "")
-        profilePictureImageView.layer.cornerRadius = profilePictureImageView.frame.size.width / 2;
-        profilePictureImageView.clipsToBounds = true;
-        profilePictureImageView.layer.borderWidth = 3.0;
-        profilePictureImageView.layer.borderColor = UIColor.white.cgColor
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hiding navigation since controller has its own navigation bar
+        self.navigationController?.isNavigationBarHidden = true
+        // Refresh profile after edit
+        if profileType == ProfileType.myAccount {
+            self.contactCheff.alpha = 0.0
+            self.profileEditButton.alpha = 0.0
+            self.chefInfo = Chef(user:User.defaultUser.currentUser!)
+            setProfileAndBgPicture()
+            navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
+            emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
+        }
+    }
+    
+    private func setProfileAndBgPicture() {
+        
+        if(chefInfo?.imageURL != nil) {
+            chefServiceData.downloadImage(imageName: "\(chefInfo?.id ?? 0)_ProfilePhoto") { (image) in
+                self.profilePictureImageView.image = image
+                self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width / 2
+                self.profilePictureImageView.clipsToBounds = true;
+                self.profilePictureImageView.layer.borderWidth = 3.0
+                self.profilePictureImageView.layer.borderColor = UIColor.white.cgColor
+            }
+        }
+        
+        if(chefInfo?.coverURL != nil) {
+            chefServiceData.downloadImage(imageName: "\(chefInfo?.id ?? 0)_CoverPhoto") { (image) in
+               self.profileBgView.image = image
+            }
+        }
     }
     
     @IBAction func dismissViewController(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     //This is temp , need to change based on archi.
     
@@ -91,6 +119,11 @@ class ChefDetailsViewController: UIViewController {
         }
     }
     
+    @IBAction func editProfile(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
     private func sendAnEmail() {
         
         if let url = URL(string: "mailto:\(chefInfo?.email ?? "")") {
@@ -104,7 +137,7 @@ class ChefDetailsViewController: UIViewController {
 }
 
 
-extension ChefDetailsViewController: UITableViewDataSource,UITableViewDelegate {
+extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -142,6 +175,8 @@ extension ChefDetailsViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "SERVICES"
     }
+    
+    
     
 //    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 //        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
