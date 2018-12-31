@@ -10,8 +10,9 @@ import Foundation
 import Alamofire
 import AlamofireImage
 
+
 class APIManager {
-    
+    static let  baseUrl = "http://api.dev.homesheff.com/v1"
     typealias LoginSuccessHanlder = (Bool) -> Void
     func signInApi(requestEnvelop:Requestable, completion: @escaping LoginSuccessHanlder)  {
         
@@ -187,6 +188,77 @@ extension APIManager {
         let url = "http://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
         imageCache.removeImage(withIdentifier: url)
     }
+}
+
+// refactor below to be generic image upload if possible
+
+extension APIManager {
+    
+    func savePhotoToGallery(_ photo: UIImage, completionHandler: @escaping(_ success: Bool) -> Void) {
+        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            let imageData = UIImageJPEGRepresentation(photo, 0.1)
+            if let imageData = imageData {
+                multipartFormData.append(imageData, withName: "file", fileName: "file.jpeg",  mimeType: "image/jpeg")
+            }
+        }, usingThreshold: UInt64.init(), to: "\(APIManager.baseUrl)/savePhotoToGallery/\(459)", method: .post, headers: headers) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseString { response in
+                    if response.value == "File is uploaded successfully" {
+                        completionHandler(true)
+                    }
+                    else {
+                        completionHandler(false)
+                    }
+                }
+            case .failure(_):
+                completionHandler(false)
+            }
+        }
+    }
+    
+    func getPhotoGallery(for userId: String, completion: @escaping ([PhotoData]?) -> Void) {
+        let url = "\(APIManager.baseUrl)/getAllPhotoGallery/\(userId)"
+        
+        Alamofire.request(url).responseData { (response) in
+            switch response.result  {
+                case .success:
+                    if response.result.value != nil {
+                        do {
+                            print(response.result)
+                            let jsonDecoder = JSONDecoder()
+                            let list = try jsonDecoder.decode([PhotoData].self, from: response.data!)
+                            completion(list)
+                        }
+                        catch {
+                            print(error)
+                        }
+                    }
+                
+                case .failure(let error):
+                    print(error)
+            }
+        }
+    }
+    
+    func deletePhotoFromGallery(photoId: String, completion: @escaping (_ success: Bool) -> Void) {
+        let url = "\(APIManager.baseUrl)/deletePhotoFromGallery/\(photoId)"
+        Alamofire.request(url).responseData { (response) in
+            switch response.result  {
+            case .success:
+                if response.result.value != nil {
+                    print(response.result)
+                    completion(true)
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 }
 
 extension UInt64 {

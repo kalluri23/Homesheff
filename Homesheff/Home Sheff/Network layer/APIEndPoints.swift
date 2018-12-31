@@ -47,6 +47,24 @@ struct UpdateUserPreferencesEnvelop:Requestable {
     var pathType : ServicePath
 }
 
+struct GetPhotoGallery: Requestable {
+    var apiPath: String { return "getAllPhotoGallery" }
+    var httpType: HttpType { return .get}
+    var pathType: ServicePath
+}
+
+struct SavePhotoToGallery: Requestable {
+    var apiPath: String { return "savePhotoToGallery" }
+    var httpType: HttpType { return .post}
+    var pathType: ServicePath
+}
+
+struct DeletePhotoFromGallery: Requestable {
+    var apiPath: String { return "deletePhotoFromGallery" }
+    var httpType: HttpType { return .delete}
+    var pathType: ServicePath
+}
+
 /*
  ALL services post dictionary is mentioned under enum switch statement.
  These cases get their values in ViewController (or respective controller or other class).
@@ -74,6 +92,7 @@ internal enum ServicePath:ParameterBodyMaker {
             
         case .updateUserPreferenceCall(let firstName, let lastName, let headline, let phoneNo, let location, let zipCode, let services, let isChef, let isCustomer):
             return ["firstName": firstName ?? "", "lastName": lastName ?? "" , "phone": phoneNo ?? "" , "headertext": headline ?? "", "phoneNo": phoneNo ?? "", "location": location ?? "", "zipCode": zipCode ?? "", "services": services ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
+            
         }
     }
     

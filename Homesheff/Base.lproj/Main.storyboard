@@ -61,7 +61,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1bU-pX-waH" customClass="HSTextField" customModule="Homesheff" customModuleProvider="target">
-                                <rect key="frame" x="40" y="347" width="295" height="20"/>
+                                <rect key="frame" x="40" y="303" width="295" height="20"/>
                                 <color key="backgroundColor" red="0.48627450979999998" green="0.69411764710000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="rGJ-uA-exs"/>
@@ -1000,7 +1000,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nfB-Br-Rpf">
-                                <rect key="frame" x="133.5" y="258" width="108" height="21.5"/>
+                                <rect key="frame" x="133.5" y="214" width="108" height="21.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="108" id="c5K-Il-twm"/>
                                 </constraints>
@@ -1009,7 +1009,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3zo-yd-9Ls">
-                                <rect key="frame" x="87.5" y="299.5" width="200" height="19.5"/>
+                                <rect key="frame" x="87.5" y="255.5" width="200" height="19.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="nig-fE-eLe"/>
                                 </constraints>
@@ -1018,7 +1018,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcB-zU-Sln">
-                                <rect key="frame" x="30" y="359" width="315" height="44"/>
+                                <rect key="frame" x="30" y="315" width="315" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPD-ph-kZ7">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="12"/>
@@ -1061,7 +1061,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgR-Rw-zcM">
-                                <rect key="frame" x="30" y="433" width="315" height="35"/>
+                                <rect key="frame" x="30" y="389" width="315" height="35"/>
                                 <color key="backgroundColor" red="0.48627450980392156" green="0.69411764705882351" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Xwf-nA-48j"/>
@@ -1081,7 +1081,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="2eP-b9-0Wc">
-                                <rect key="frame" x="133.5" y="120" width="108" height="108"/>
+                                <rect key="frame" x="133.5" y="76" width="108" height="108"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="108" id="F6g-m1-IDq"/>
                                     <constraint firstAttribute="height" constant="108" id="Ohp-AY-1Ww"/>
@@ -1207,7 +1207,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LeE-d7-KD0" customClass="PhotosCollectionView" customModule="Homesheff" customModuleProvider="target">
-                                <rect key="frame" x="8" y="120" width="367" height="547"/>
+                                <rect key="frame" x="8" y="120" width="367" height="503"/>
                                 <color key="backgroundColor" red="0.83921568629999999" green="0.84705882349999995" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PXk-3j-rWj">
                                     <size key="itemSize" width="112" height="100"/>
@@ -1236,6 +1236,14 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6PF-by-cNG" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="165.5" y="311.5" width="44" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Jzl-ae-nmf"/>
+                                    <constraint firstAttribute="height" constant="44" id="ScX-ve-vab"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.83921568629999999" green="0.84705882349999995" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1243,14 +1251,25 @@
                             <constraint firstItem="LeE-d7-KD0" firstAttribute="leading" secondItem="6qD-4F-07P" secondAttribute="leading" constant="8" id="11x-Rj-Thq"/>
                             <constraint firstItem="dNa-Ge-IN5" firstAttribute="leading" secondItem="6qD-4F-07P" secondAttribute="leading" id="CoI-TP-fiI"/>
                             <constraint firstItem="dNa-Ge-IN5" firstAttribute="top" secondItem="6qD-4F-07P" secondAttribute="top" id="CxB-sp-j4P"/>
+                            <constraint firstItem="6PF-by-cNG" firstAttribute="centerX" secondItem="ohT-cm-b9x" secondAttribute="centerX" id="JNW-0L-7SO"/>
                             <constraint firstItem="LeE-d7-KD0" firstAttribute="bottom" secondItem="6qD-4F-07P" secondAttribute="bottom" id="Pbb-hU-v03"/>
                             <constraint firstItem="dNa-Ge-IN5" firstAttribute="trailing" secondItem="6qD-4F-07P" secondAttribute="trailing" id="Q3z-Xb-KcU"/>
                             <constraint firstItem="LeE-d7-KD0" firstAttribute="trailing" secondItem="6qD-4F-07P" secondAttribute="trailing" id="kNB-VM-blx"/>
+                            <constraint firstItem="6PF-by-cNG" firstAttribute="centerY" secondItem="ohT-cm-b9x" secondAttribute="centerY" id="rbS-2z-9ld"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6qD-4F-07P"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pyM-qn-4go"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="pyM-qn-4go">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="d9v-Uc-UQ3">
+                            <connections>
+                                <action selector="savePhotosToGallery:" destination="eF8-k6-tGP" id="DN3-Mo-h7t"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="6PF-by-cNG" id="qQa-4c-jW1"/>
                         <outlet property="addPhotosBtn" destination="4kL-Nq-S0n" id="o99-jC-CF8"/>
                         <outlet property="photosCollectionView" destination="LeE-d7-KD0" id="3qO-ai-4Ma"/>
                     </connections>

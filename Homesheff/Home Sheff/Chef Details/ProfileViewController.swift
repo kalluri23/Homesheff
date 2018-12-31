@@ -31,7 +31,6 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         setProfilePicture()
         chefServiceTableView.register(PhotoGalleryCell.nib, forCellReuseIdentifier: PhotoGalleryCell.reuseIdentifier)
         chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
     }

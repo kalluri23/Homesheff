@@ -8,17 +8,24 @@
 
 import UIKit
 import Photos
+import NVActivityIndicatorView
 
 class AddPhotosController: UIViewController {
     
     @IBOutlet weak var addPhotosBtn: UIButton!
     @IBOutlet weak var photosCollectionView: PhotosCollectionView!
+    
+    @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     var imagePicker = UIImagePickerController()
+    let apiHandler = APIManager()
     var photoCollectionViewModel: PhotosCollectionViewModel!
     let photoEditor = Bundle.main.loadNibNamed("ImageEditor", owner: ImageEditor(), options: nil)![0] as? ImageEditor
-    
+    static var uploadedImageCount = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.color = .black
+        activityIndicator.type = .ballClipRotate
         imagePicker.delegate = self
         photoEditor?.scrollView.delegate = photoEditor
         PhotosCollectionViewModel.shared.reloadCollectionView = { [weak self] in
@@ -118,7 +125,36 @@ class AddPhotosController: UIViewController {
              completionHandler!(false)
         }
     }
+    
+    @IBAction func savePhotosToGallery(_ sender: Any) {
+        self.uploadImages { (status) in
+            if status {
+                print("image uploaded")
+            } else {
+                print("image failed upload")
+            }
+        }
+    }
+    
+    func uploadImages(completion: @escaping (_ sucess: Bool) -> Void) {
+        self.activityIndicator.startAnimating()
+        let serialQueue = DispatchQueue(label: "serialQueue")
+        for eachImage  in PhotosCollectionViewModel.shared.imageList {
+            serialQueue.async{
+                self.apiHandler.savePhotoToGallery(eachImage) { (status) in
+                    AddPhotosController.uploadedImageCount = AddPhotosController.uploadedImageCount + 1
+                    if AddPhotosController.uploadedImageCount == PhotosCollectionViewModel.shared.imageList.count {
+                        self.activityIndicator.stopAnimating()
+                        completion(true)
+                    }
+                }
+            }
+        }
+    }
+    
 }
+
+
 
 extension AddPhotosController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
