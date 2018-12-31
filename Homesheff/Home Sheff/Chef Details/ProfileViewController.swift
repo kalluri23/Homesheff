@@ -39,6 +39,7 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         // Hiding navigation since controller has its own navigation bar
         self.navigationController?.isNavigationBarHidden = true
+        
         // Refresh profile after edit
         if profileType == ProfileType.myAccount {
             self.contactCheff.alpha = 0.0
@@ -48,6 +49,10 @@ class ProfileViewController: UIViewController {
             navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
             emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
         }
+    }
+    
+    private func getGalleryPhotos() {
+    
     }
     
     private func setProfileAndBgPicture() {

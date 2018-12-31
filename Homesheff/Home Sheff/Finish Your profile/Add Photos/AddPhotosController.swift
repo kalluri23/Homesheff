@@ -142,10 +142,14 @@ class AddPhotosController: UIViewController {
         for eachImage  in PhotosCollectionViewModel.shared.imageList {
             serialQueue.async{
                 self.apiHandler.savePhotoToGallery(eachImage) { (status) in
-                    AddPhotosController.uploadedImageCount = AddPhotosController.uploadedImageCount + 1
-                    if AddPhotosController.uploadedImageCount == PhotosCollectionViewModel.shared.imageList.count {
-                        self.activityIndicator.stopAnimating()
-                        completion(true)
+                    if status {
+                        AddPhotosController.uploadedImageCount = AddPhotosController.uploadedImageCount + 1
+                        if AddPhotosController.uploadedImageCount == PhotosCollectionViewModel.shared.imageList.count {
+                            self.activityIndicator.stopAnimating()
+                            completion(true)
+                        }
+                    } else {
+                         completion(false)
                     }
                 }
             }

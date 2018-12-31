@@ -19,7 +19,9 @@ struct ChefServices {
 class ChefServiceModel {
   
     var chefService: [ChefServices]
-    let apiHandler = APIManager()
+    private let apiHandler = APIManager()
+    
+    var reloadTableView: (() -> Void)?
     init() {
          chefService = [ChefServices(name: "Meal Prep", serviceLocation: "in your home", servicePrice: "", imageName: "mealprep-icon"),
         ChefServices(name: "Catering", serviceLocation: "Delivered to your home", servicePrice: "", imageName: "catering-icon"),
@@ -37,4 +39,14 @@ class ChefServiceModel {
             }
         }
     }
+    
+//    func getPhotosToGallery(completion: @escaping (UIImage) -> ()) {
+//        apiHandler.getPhotoGallery(for: User.defaultUser.currentUser) { (photoData) in
+//            
+//        }
+//    
+//    }
+    
+    
+    
 }

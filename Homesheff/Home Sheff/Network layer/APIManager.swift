@@ -205,14 +205,24 @@ extension APIManager {
         }, usingThreshold: UInt64.init(), to: "\(APIManager.baseUrl)/savePhotoToGallery/\(459)", method: .post, headers: headers) { (result) in
             switch result {
             case .success(let upload, _, _):
-                upload.responseString { response in
-                    if response.value == "File is uploaded successfully" {
-                        completionHandler(true)
-                    }
-                    else {
-                        completionHandler(false)
-                    }
-                }
+                print ("image uploded")
+                                upload.responseString { response in
+                                    if response.value == "File is uploaded successfully" {
+//                                        completionHandler(true)
+                                    }
+                                    else {
+                                        completionHandler(false)
+                                    }
+                                }
+                completionHandler(true)
+//                upload.responseString { response in
+//                    if response.value == "File is uploaded successfully" {
+//                        completionHandler(true)
+//                    }
+//                    else {
+//                        completionHandler(false)
+//                    }
+//                }
             case .failure(_):
                 completionHandler(false)
             }
@@ -220,7 +230,8 @@ extension APIManager {
     }
     
     func getPhotoGallery(for userId: String, completion: @escaping ([PhotoData]?) -> Void) {
-        let url = "\(APIManager.baseUrl)/getAllPhotoGallery/\(userId)"
+        
+        let url = "\(APIManager.baseUrl)/getAllPhotoGallery/\(457)"
         
         Alamofire.request(url).responseData { (response) in
             switch response.result  {
