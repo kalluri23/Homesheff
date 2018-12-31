@@ -21,6 +21,11 @@ class UserAccountViewController: UIViewController {
         super.viewDidLoad()
         userAccountVC.register(UserAccountCell.nib, forCellReuseIdentifier: UserAccountCell.reuseIdentifier)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
 
     private func didTapTermsAndCondition(isTermsAndCondition: Bool) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "TermsAndConditionViewControllerID") as! TermsAndConditionViewController
@@ -65,7 +70,8 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
         
         if dataArray[indexPath.section][indexPath.row] == "Version" {
             cell.detailedLabel.isHidden = false
-            cell.detailedLabel.text = "1.4"
+            let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+            cell.detailedLabel.text = appVersion
         }
         
         return cell
@@ -82,8 +88,18 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
         
         // This is temp , need to tie state with enum and data source
         if dataArray[indexPath.section][indexPath.row] == "Profile" {
-            let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+            
+            if (User.defaultUser.currentUser != nil) && (User.defaultUser.currentUser?.isChef)! {
+                let vc = storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+                vc.profileType = .myAccount
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+               let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            // vc.chefInfo = Chef(user:User.defaultUser.currentUser!)
+//
+//            let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
         }
         else if dataArray[indexPath.section][indexPath.row] == "Terms of Services" {
             self.didTapTermsAndCondition(isTermsAndCondition: true)
