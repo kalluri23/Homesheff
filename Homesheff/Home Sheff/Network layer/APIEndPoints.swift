@@ -35,6 +35,18 @@ struct ForgotPasswordEnvelop:Requestable {
     var pathType : ServicePath
 }
 
+struct ValidateCodeEnvelop:Requestable {
+    var apiPath:String { return "validateCode/" + pathType.serviceEndpoint() }
+    var httpType:HttpType { return .get }
+    var pathType : ServicePath
+}
+
+struct ResetPasswordEnvelop:Requestable {
+    var apiPath:String { return "resetPassword" }
+    var httpType:HttpType { return .post }
+    var pathType : ServicePath
+}
+
 struct SignUpEnvelop:Requestable {
     var apiPath:String { return "saveUserInformation" }
     var httpType:HttpType { return .post }
@@ -64,6 +76,8 @@ internal enum ServicePath:ParameterBodyMaker {
     case signInCall(userName: String, password: String)
     case signUpCall(email: String, password: String, phoneNo: String?, firstName: String, lastName: String, isChef: Bool, isCustomer: Bool, imageUrl: String, zipCode: String)
     case forgotPassword(email: String)
+    case resetPassword(email:String, code:String, password:String)
+    case validate(email:String, code:String)
     case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: String?, isChef: Bool?, isCustomer: Bool?)
     
     func httpBodyEnvelop()->[String:Any]? {
@@ -78,8 +92,11 @@ internal enum ServicePath:ParameterBodyMaker {
             
         case .signUpCall(email: let email, password: let password, phoneNo: let phoneNo, firstName: let firstName, lastName: let lastName, isChef: let isChef, isCustomer: let isCustomer, imageUrl: let imageUrl, zipCode: let zipCode):
             return ["email": email, "password": password, "phone": phoneNo ?? "", "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, zipCode: "zipCode"]
-        case .forgotPassword:
+        case .forgotPassword, .validate:
             return nil
+        
+        case .resetPassword(email: let email, code: let code, password: let password):
+            return ["email": email, "code": code, "password": password]
             
         case .updateUserPreferenceCall(let firstName, let lastName, let headline, let phoneNo, let location, let zipCode, let services, let isChef, let isCustomer):
             return ["firstName": firstName ?? "", "lastName": lastName ?? "" , "phone": phoneNo ?? "" , "headertext": headline ?? "", "phoneNo": phoneNo ?? "", "location": location ?? "", "zipCode": zipCode ?? "", "services": services ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
@@ -93,6 +110,8 @@ internal enum ServicePath:ParameterBodyMaker {
         switch self {
         case .forgotPassword(email: let email):
             return email
+        case .validate(email: let email, code: let code):
+            return email+"/"+code
         default:
             return "/"
         }

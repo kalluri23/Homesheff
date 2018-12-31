@@ -34,7 +34,7 @@ class APIManager {
         }
     }
     
-    func forgotPassword(requestEnvelop:Requestable, completion: @escaping (Bool)->Void) {
+    func forgotPasswordApi(requestEnvelop:Requestable, completion: @escaping (Bool)->Void) {
         let request = Alamofire.request(requestEnvelop.requestURL()!, headers: requestEnvelop.httpHeaders())
         request.validate()
             .responseString{ (response) -> Void in
@@ -55,6 +55,53 @@ class APIManager {
                     completion(false)
                 }
         }
+    }
+    
+    func validateCodeApi(requestEnvelop:Requestable, completion: @escaping (Bool)->Void) {
+        let request = Alamofire.request(requestEnvelop.requestURL()!, headers: requestEnvelop.httpHeaders())
+        request.validate()
+            .responseString{ (response) -> Void in
+                
+                switch response.result{
+                case .success:
+                    if let resultValue = response.result.value
+                    {
+                        print(resultValue)
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                case .failure:
+                    if let error = response.error {
+                        print(error.localizedDescription)
+                    }
+                    completion(false)
+                }
+        }
+    }
+    
+    func resetPasswordApi(requestEnvelop:Requestable, completion: @escaping (Bool) -> Void)  {
+        let request = Alamofire.request(requestEnvelop.requestURL()!, method: .post, parameters: requestEnvelop.pathType.httpBodyEnvelop()!, encoding: JSONEncoding.default, headers: requestEnvelop.httpHeaders()!)
+        request.validate()
+            .responseString{ (response) -> Void in
+                
+                switch response.result{
+                case .success:
+                    if let resultValue = response.result.value
+                    {
+                        print(resultValue)
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                case .failure:
+                    if let error = response.error {
+                        print(error.localizedDescription)
+                    }
+                    completion(false)
+                }
+        }
+        
     }
     
     func signUpCall(requestEnvelop:Requestable, completion: @escaping (Bool) -> Void)  {

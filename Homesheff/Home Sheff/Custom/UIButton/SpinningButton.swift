@@ -50,4 +50,9 @@ class SpinningButton: UIButton {
         let yCenterConstraint = NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: activityIndicator, attribute: .centerY, multiplier: 1, constant: 0)
         self.addConstraint(yCenterConstraint)
     }
+    
+    public func isEnabled(_ isEnabled : Bool) {
+        self.isEnabled = isEnabled
+        self.alpha = isEnabled ? 1.0 : 0.5
+    }
 }
