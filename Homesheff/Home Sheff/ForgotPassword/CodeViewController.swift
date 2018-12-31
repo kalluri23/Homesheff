@@ -40,26 +40,30 @@ class CodeViewController: UIViewController {
         self.continueButton.showLoading()
         self.textField.resignFirstResponder()
         codeViewModel.validateCode(envelop: codeViewModel.validateCodeEnvelop(email: email!, code: textField.text!), completion: {[unowned self] isSuccess in
-            self.continueButton.isEnabled(false)
-            self.continueButton.hideLoading()
-            if (isSuccess) {
-               self.performSegue(withIdentifier: "ResetPasswordSegue", sender: self)
-            }else {
-                //Show failure alert here
-                print("error validating code")
+            DispatchQueue.main.async {
+                self.continueButton.isEnabled(false)
+                self.continueButton.hideLoading()
+                if (isSuccess) {
+                    self.performSegue(withIdentifier: "ResetPasswordSegue", sender: self)
+                }else {
+                    self.showAlertWith(alertTitle: "The numbers you have entered does not match your goiven code")
+                    print("error validating code")
+                }
             }
-            
         })
     }
     
     private func callForgotPasswordAPI() {
+        self.continueButton.showLoading()
         codeViewModel.forgotPassword(envelop: codeViewModel.forgotPasswordEnvelop(email: email!), completion: {[unowned self] isSuccess in
-            if (isSuccess) {
-                //Show success alert
-            }else {
-                //Show failure alert
+            DispatchQueue.main.async {
+                if (isSuccess) {
+                    self.continueButton.hideLoading()
+                    self.showAlertWith(alertTitle: "Code has been resent")
+                }else {
+                    self.showAlertWith(alertTitle: "Error", alertBody: "Unable to re-send code")
+                }
             }
-            
         })
     }
     

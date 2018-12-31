@@ -15,6 +15,8 @@
 		14E2ABB421DAAB31005673CA /* CodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2ABB121DAAB31005673CA /* CodeViewController.swift */; };
 		14E2ABB521DAAB31005673CA /* ForgotPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14E2ABB221DAAB31005673CA /* ForgotPassword.storyboard */; };
 		14E2ABB621DAAB31005673CA /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2ABB321DAAB31005673CA /* ResetPasswordViewController.swift */; };
+		14E2ABB821DABB0B005673CA /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2ABB721DABB0B005673CA /* UIViewController+Extension.swift */; };
+		14E2ABBB21DACE89005673CA /* SecureTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2ABBA21DACE89005673CA /* SecureTextField.swift */; };
 		2B42017BD6F0D30ECAEC28E3 /* Pods_Homesheff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */; };
 		A403097421794F71001397EE /* UserDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A403097321794F71001397EE /* UserDetailModal.swift */; };
 		A403097621795046001397EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A403097521795046001397EE /* User.swift */; };
@@ -78,6 +80,8 @@
 		14E2ABB121DAAB31005673CA /* CodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
 		14E2ABB221DAAB31005673CA /* ForgotPassword.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ForgotPassword.storyboard; sourceTree = "<group>"; };
 		14E2ABB321DAAB31005673CA /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		14E2ABB721DABB0B005673CA /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		14E2ABBA21DACE89005673CA /* SecureTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextField.swift; sourceTree = "<group>"; };
 		17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.release.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.release.xcconfig"; sourceTree = "<group>"; };
 		76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homesheff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A403097321794F71001397EE /* UserDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModal.swift; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 		14E2ABA721D8592E005673CA /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				14E2ABB921DACE70005673CA /* UITextField */,
 				14E2ABA821D85951005673CA /* UIButton */,
 			);
 			path = Custom;
@@ -174,6 +179,14 @@
 				14E2ABA921D8599B005673CA /* SpinningButton.swift */,
 			);
 			path = UIButton;
+			sourceTree = "<group>";
+		};
+		14E2ABB921DACE70005673CA /* UITextField */ = {
+			isa = PBXGroup;
+			children = (
+				14E2ABBA21DACE89005673CA /* SecureTextField.swift */,
+			);
+			path = UITextField;
 			sourceTree = "<group>";
 		};
 		A49D340B2156E74A00AA24CF /* Boiler Plate */ = {
@@ -275,6 +288,7 @@
 				A49D341C215AF21700AA24CF /* UITableViewGenericId.swift */,
 				149EA07821D2D51E004DD3E5 /* String+Extension.swift */,
 				E4D0450221D85D92005ADA8A /* UIColor+Extension.swift */,
+				14E2ABB721DABB0B005673CA /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -545,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14E2ABB821DABB0B005673CA /* UIViewController+Extension.swift in Sources */,
 				E4D0450321D85D92005ADA8A /* UIColor+Extension.swift in Sources */,
 				E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */,
 				A4AA64032173B704007D83F2 /* ProfileDetailedTableViewCell.swift in Sources */,
@@ -562,6 +577,7 @@
 				A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */,
 				A49D34152156E91500AA24CF /* FindCheifViewModel.swift in Sources */,
 				14E2ABB621DAAB31005673CA /* ResetPasswordViewController.swift in Sources */,
+				14E2ABBB21DACE89005673CA /* SecureTextField.swift in Sources */,
 				A4AA64062173BE76007D83F2 /* ChefDetailsModel.swift in Sources */,
 				E975B60D2160133100BE6DD2 /* ChefFieldsCell.swift in Sources */,
 				E975B609216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift in Sources */,

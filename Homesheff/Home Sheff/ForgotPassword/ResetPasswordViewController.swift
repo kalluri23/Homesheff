@@ -14,13 +14,14 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var passwordRulesLabel: UILabel!
     @IBOutlet var resetPasswordViewModel: ForgotPasswordViewModel!
     @IBOutlet weak var continueButton: SpinningButton!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textField: SecureTextField!
     
     var email: String!
     var code: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.textField.showsAccessoryImage = true
         assert((email != nil && code != nil), "Code and Email should be passed to this view controller to reach this screen")
         // Do any additional setup after loading the view.
     }
@@ -38,6 +39,7 @@ class ResetPasswordViewController: UIViewController {
         self.continueButton.isEnabled(false)
         self.infoLabel.text = "Create a new passwsord. You'll use this password to access your HomeSheff account"
         self.passwordRulesLabel.text = "Password must have atleast one uppercase character, one lowercase  character, one digit and 8 characters long"
+        
         self.textField.becomeFirstResponder()
     }
     
@@ -55,14 +57,20 @@ class ResetPasswordViewController: UIViewController {
         self.continueButton.showLoading()
         self.textField.resignFirstResponder()
         resetPasswordViewModel.resetPassword(envelop: resetPasswordViewModel.resetPasswordEnvelop(email: email!, code: code!, password: textField.text!), completion: {[unowned self] isSuccess in
-            self.continueButton.hideLoading()
-            self.continueButton.isEnabled(false)
-            if (isSuccess) {
-                self.navigationController?.popToRootViewController(animated: true)
-            }else {
-                //Show failure alert
+            DispatchQueue.main.async {
+                self.continueButton.hideLoading()
+                self.continueButton.isEnabled(false)
+                if (isSuccess) {
+                    self.showAlertWith(alertTitle: "Your password has been reset successfully. Please continue login.", action: {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    })
+                    self.navigationController?.popToRootViewController(animated: true)
+                }else {
+                    self.showAlertWith(alertTitle: "Error", alertBody: "Unable to reset your password at this time. Pldease try again later", action: {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    })
+                }
             }
-            
         })
     }
 
