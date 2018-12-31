@@ -148,8 +148,11 @@ class CreateAccountController: UIViewController {
     }
     
     private func navigateToFinishYourProfile() {
-        let vc =  storyboard?.instantiateViewController(withIdentifier: "finishProfileID")
-        self.navigationController?.pushViewController(vc!, animated: true)
+        
+        let storyboard = UIStoryboard(name: "FinishYourProfile", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FinishYourProfile") as! FinishYourProfileController
+        let finishYourProfileNC = UINavigationController(rootViewController: vc)
+        self.present(finishYourProfileNC, animated: true, completion: nil)
     }
     
     private func navigateToBaseTabBar() {

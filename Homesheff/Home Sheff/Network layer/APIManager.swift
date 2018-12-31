@@ -162,7 +162,7 @@ extension APIManager {
             if let imageData = imageData {
                 multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "image/jpeg")
             }
-        }, usingThreshold: UInt64.init(), to: "http://api.dev.homesheff.com/v1/uploadFile", method: .post, headers: headers) { (result) in
+        }, usingThreshold: UInt64.init(), to: "https://api.dev.homesheff.com/v1/uploadFile", method: .post, headers: headers) { (result) in
             switch result {
             case .success(let upload, _, _):
                 upload.responseString { response in
@@ -180,7 +180,7 @@ extension APIManager {
     }
     
     func retrieveImage(for imageName: String, completion: @escaping (UIImage?) -> Void) {
-        let url = "http://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
+        let url = "https://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
         Alamofire.request(url).responseData { (response) in
             if response.error == nil {
                 print(response.result)
@@ -207,7 +207,7 @@ extension APIManager {
     }
     
     func resetCacheFor(imageName: String) {
-        let url = "http://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
+        let url = "https://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
         imageCache.removeImage(withIdentifier: url)
     }
 }

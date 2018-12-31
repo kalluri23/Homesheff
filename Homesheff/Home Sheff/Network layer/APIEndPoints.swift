@@ -65,6 +65,7 @@ internal enum ServicePath:ParameterBodyMaker {
     case signUpCall(email: String, password: String, phoneNo: String?, firstName: String, lastName: String, isChef: Bool, isCustomer: Bool, imageUrl: String, zipCode: String)
     case forgotPassword(email: String)
     case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: String?, isChef: Bool?, isCustomer: Bool?)
+    case finishYourProfileCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, isChef: Bool?, isCustomer: Bool?)
     
     func httpBodyEnvelop()->[String:Any]? {
         
@@ -83,6 +84,9 @@ internal enum ServicePath:ParameterBodyMaker {
             
         case .updateUserPreferenceCall(let firstName, let lastName, let headline, let phoneNo, let location, let zipCode, let services, let isChef, let isCustomer):
             return ["firstName": firstName ?? "", "lastName": lastName ?? "" , "phone": phoneNo ?? "" , "headertext": headline ?? "", "phoneNo": phoneNo ?? "", "location": location ?? "", "zipCode": zipCode ?? "", "services": services ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
+            
+        case .finishYourProfileCall(let firstName, let lastName, let headline, let phoneNo, let location, let isChef, let isCustomer):
+            return ["firstName": firstName ?? "", "lastName": lastName ?? "" , "phone": phoneNo ?? "" , "headertext": headline ?? "", "phoneNo": phoneNo ?? "", "location": location ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
         }
     }
     
