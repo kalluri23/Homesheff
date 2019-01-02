@@ -20,10 +20,10 @@ class FinishYourProfileViewModel {
     }
     
     func validateUserInput() -> Bool {
-        if userEnteredData.count < profileFields.count {
-            return false
+        if let firstName = userEnteredData[profileFields[0]], let email = userEnteredData[profileFields[4]], firstName.count > 0, email.count > 0 {
+            return true
         }
-        return true
+        return false
     }
     
     func getUserData(_ value: String) -> String {
