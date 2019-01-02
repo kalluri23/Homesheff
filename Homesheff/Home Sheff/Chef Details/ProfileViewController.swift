@@ -25,26 +25,20 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var chefServiceTableView: UITableView!
     @IBOutlet weak var navigationTitleLbl: UILabel!
     @IBOutlet weak var contactCheff: UIButton!
+    @IBOutlet weak var headerLbl: UILabel!
+    
     var chefServiceData = ChefServiceModel()
     var chefInfo: Chef?
     var profileType: ProfileType?
     
     @IBOutlet weak var profileEditButton: UIButton!
-    var aboutChef: String = """
-                                         I am an avid plant-based chef who enjoys meal-prepping every week.
-                                          It's a great way to jump start the week especially if your weeks are crazy busy
-                                          like mine are! I like to spend my time teaching others how to meal prep also - it really is
-                                          a total life save if you don't have much time to spare for cooking or don't want to spend that
-                                          much time doing it during the week! Cooking has always been a life long passion of mine and I love
-                                          getting share any/all parts of that experience with friends, family, and eveyone who is also interested in the art of cooking.
-                                       """
+    var aboutChef: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setProfileAndBgPicture()
+        updateChefDetails()
         chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
         chefServiceTableView.register(AboutTableViewCell.nib, forCellReuseIdentifier: AboutTableViewCell.reuseIdentifier)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,12 +48,19 @@ class ProfileViewController: UIViewController {
         // Refresh profile after edit
         if profileType == ProfileType.myAccount {
             self.contactCheff.alpha = 0.0
-            self.profileEditButton.alpha = 0.0
             self.chefInfo = Chef(user:User.defaultUser.currentUser!)
-            setProfileAndBgPicture()
-            navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
-            emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
+            updateChefDetails()
+        } else {
+             self.profileEditButton.alpha = 0.0
         }
+    }
+    
+    private func updateChefDetails() {
+        setProfileAndBgPicture()
+        navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
+        emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
+        headerLbl.text = "\(chefInfo?.headertext ?? "")"
+        self.chefServiceTableView.reloadData()
     }
     
     private func setProfileAndBgPicture() {
@@ -153,7 +154,10 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        if chefInfo?.about != nil {
+            return 2
+        }
+        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -187,7 +191,6 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
             case 0:
                 let profileCell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
                 profileCell.chefDetails = chefServiceData.chefService[indexPath.row]
-                
                 profileCell.partCount1.isHidden = true
                 profileCell.partyCount2.isHidden = true
                 profileCell.partyCount3.isHidden = true
@@ -197,7 +200,7 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
             case 1:
                 let aboutCell: AboutTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
                 aboutCell.delegate = self
-                aboutCell.aboutChef = aboutChef
+                aboutCell.aboutChef = (chefInfo?.about)!
                 return aboutCell
             default:
                 return cell
@@ -242,7 +245,6 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
 extension ProfileViewController: AboutCellDelegate {
     
     func viewMoreClicked() {
-        self.navigationController?.pushViewController(AboutChefController.create(aboutChef: aboutChef), animated: true)
-         // self.present(AboutChefController.create(aboutChef: aboutChef), animated: true, completion: nil)
+        self.navigationController?.pushViewController(AboutChefController.create(aboutChef: (chefInfo?.about)!), animated: true)
     }
 }

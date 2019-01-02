@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eYM-TP-8yv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -989,6 +989,7 @@
                         <outlet property="chefServiceTableView" destination="cQ4-nx-b36" id="z26-q6-ajE"/>
                         <outlet property="contactCheff" destination="Dgo-cA-ERy" id="Vqj-PB-jmZ"/>
                         <outlet property="emailLabel" destination="1Ub-vV-E7I" id="F36-wS-78z"/>
+                        <outlet property="headerLbl" destination="IOr-c0-H1j" id="xxK-gX-2bC"/>
                         <outlet property="navigationTitleLbl" destination="BnT-md-so9" id="Qzf-st-sju"/>
                         <outlet property="profileBgView" destination="szh-lA-CbX" id="ds6-KN-RNF"/>
                         <outlet property="profileEditButton" destination="tfo-NB-il0" id="tXN-Ul-9vZ"/>
@@ -4381,8 +4382,8 @@ AAAAAAAAAAAAAALRRQ
         <image name="pencil-icon-background-circle" width="33" height="33"/>
         <image name="plantarian-profileimg" width="90" height="90"/>
         <image name="search" width="20" height="20"/>
-        <image name="search-nonselected" width="25" height="25"/>
-        <image name="search-selected" width="25" height="25"/>
+        <image name="search-nonselected" width="50" height="50"/>
+        <image name="search-selected" width="50" height="50"/>
         <image name="soma-kun" width="225" height="225"/>
     </resources>
 </document>
