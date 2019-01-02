@@ -27,7 +27,7 @@ struct ConfigEndPoints {
       
       switch self {
       case .Debug, .Dev:
-        return "http://api.dev.homesheff.com/v1/"
+        return "https://api.dev.homesheff.com/v1/"
       case .Prod:
         return "Here we can add our production URL"
       }
