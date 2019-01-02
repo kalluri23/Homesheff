@@ -62,10 +62,10 @@ class FinishYourProfileController : UIViewController, UINavigationControllerDele
     }
     
     private func finishUserProfileEnvelop() -> Requestable? {
-        
+
         let user = User.defaultUser.currentUser
         if viewModel.validateUserInput() {
-            let finishYourProfileSearchPath = ServicePath.finishYourProfileCall(firstName: viewModel.userEnteredData[viewModel.profileFields[0]] , lastName: viewModel.userEnteredData[viewModel.profileFields[1]], headline: viewModel.userEnteredData[viewModel.profileFields[2]], phoneNo: viewModel.userEnteredData[viewModel.profileFields[3]], location: viewModel.userEnteredData[viewModel.profileFields[4]], isChef: user?.isChef, isCustomer: user?.isCustomer)
+            let finishYourProfileSearchPath = ServicePath.finishYourProfileCall(firstName: viewModel.userEnteredData[viewModel.profileFields[0]] , lastName: viewModel.userEnteredData[viewModel.profileFields[1]], headline: viewModel.userEnteredData[viewModel.profileFields[2]], about: viewModel.userEnteredData[viewModel.profileFields[3]], email: viewModel.userEnteredData[viewModel.profileFields[4]], location: viewModel.userEnteredData[viewModel.profileFields[5]], phoneNo: viewModel.userEnteredData[viewModel.profileFields[6]], isChef: user?.isChef, isCustomer: user?.isCustomer)
             let path = "updateUserPreferences/" + "\(user?.id ?? 0)"
             let updateUserProfile = UpdateUserPreferencesEnvelop(apiPath: path, pathType: finishYourProfileSearchPath)
             return updateUserProfile
