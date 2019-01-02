@@ -31,6 +31,7 @@ class FindChefsViewController: UIViewController {
         // comment below since findchief is already an outlet
         //findCheifViewModel = FindCheifViewModel()
         self.findCheifViewModel.reloadTableView!()
+        self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.navigationItem.hidesBackButton = true
     }
     
