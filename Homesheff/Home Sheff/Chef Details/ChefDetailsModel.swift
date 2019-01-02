@@ -40,12 +40,13 @@ class ChefServiceModel {
         }
     }
     
-//    func getPhotosToGallery(completion: @escaping (UIImage) -> ()) {
-//        apiHandler.getPhotoGallery(for: User.defaultUser.currentUser) { (photoData) in
-//            
+    func getPhotosToGallery(completion: @escaping (UIImage) -> ()) {
+        let userId = User.defaultUser.currentUser?.id
+//        apiHandler.getPhotoGallery(for: ) { (photoData) in
+//
 //        }
-//    
-//    }
+
+    }
     
     
     

@@ -196,11 +196,11 @@ extension APIManager {
     
     func savePhotoToGallery(_ photo: UIImage, completionHandler: @escaping(_ success: Bool) -> Void) {
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
-
+        let fileName = "\(UUID().uuidString).jpeg"
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             let imageData = UIImageJPEGRepresentation(photo, 0.1)
             if let imageData = imageData {
-                multipartFormData.append(imageData, withName: "file", fileName: "file.jpeg",  mimeType: "image/jpeg")
+                multipartFormData.append(imageData, withName: "file", fileName: fileName,  mimeType: "image/jpeg")
             }
         }, usingThreshold: UInt64.init(), to: "\(APIManager.baseUrl)/savePhotoToGallery/\(459)", method: .post, headers: headers) { (result) in
             switch result {
@@ -211,7 +211,7 @@ extension APIManager {
 //                                        completionHandler(true)
                                     }
                                     else {
-                                        completionHandler(false)
+//                                        completionHandler(false)
                                     }
                                 }
                 completionHandler(true)
