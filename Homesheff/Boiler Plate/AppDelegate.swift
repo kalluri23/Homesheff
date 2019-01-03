@@ -56,11 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //user previously logged in to app
         if UserDefaults.standard.bool(forKey: "userLoggedIn") {
             self.window = UIWindow(frame: UIScreen.main.bounds)
-            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabBarControllerId")
-            
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
         }else { //user does not have a session before

@@ -19,17 +19,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jcs-Ib-c1x">
-                                <rect key="frame" x="0.0" y="30" width="375" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="10" y="30" width="355" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.83921568629999999" green="0.84705882349999995" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="pCW-tK-Rrb" firstAttribute="trailing" secondItem="Jcs-Ib-c1x" secondAttribute="trailing" id="1KI-1R-FWj"/>
+                            <constraint firstItem="Jcs-Ib-c1x" firstAttribute="leading" secondItem="pCW-tK-Rrb" secondAttribute="leading" constant="10" id="Jc8-Am-PHD"/>
                             <constraint firstItem="Jcs-Ib-c1x" firstAttribute="top" secondItem="pCW-tK-Rrb" secondAttribute="top" constant="10" id="RUc-4a-k0b"/>
-                            <constraint firstItem="Jcs-Ib-c1x" firstAttribute="leading" secondItem="pCW-tK-Rrb" secondAttribute="leading" id="q7P-fq-Vz7"/>
+                            <constraint firstItem="Jcs-Ib-c1x" firstAttribute="trailing" secondItem="pCW-tK-Rrb" secondAttribute="trailing" constant="-10" id="jfi-lF-8JX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pCW-tK-Rrb"/>
                     </view>

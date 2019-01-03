@@ -73,6 +73,8 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
                     cheffCell.cheffImageView.image = image
                     self.findCheifViewModel?.prepareProfileImageView(imageView: cheffCell.cheffImageView)
                 })
+            } else {
+                cheffCell.cheffImageView.image = UIImage(named: "sheffs_list_placeholder")
             }
              return cheffCell
         }

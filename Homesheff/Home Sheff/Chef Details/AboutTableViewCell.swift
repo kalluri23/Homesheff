@@ -18,6 +18,15 @@ class AboutTableViewCell: UITableViewCell {
     @IBOutlet weak var aboutLbl: UILabel!
     @IBOutlet weak var transparentView: UIView!
     @IBOutlet weak var viewMoreBtn: UIButton!
+    @IBOutlet weak var viewMoreView: UIView!
+    var showMoreButton: Bool? {
+        didSet {
+            if self.showMoreButton! {
+                self.viewMoreView.alpha = 1.0
+                self.transparentView.alpha = 0.8
+            }
+        }
+    }
     
     weak var delegate: AboutCellDelegate?
     var aboutChef: String? {
@@ -25,8 +34,12 @@ class AboutTableViewCell: UITableViewCell {
             aboutLbl.text = aboutChef
         }
     }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.viewMoreView.alpha = 0.0
+        self.transparentView.alpha = 0.0
         // Initialization code
     }
 

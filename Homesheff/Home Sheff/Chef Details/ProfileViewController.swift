@@ -26,12 +26,12 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var navigationTitleLbl: UILabel!
     @IBOutlet weak var contactCheff: UIButton!
     @IBOutlet weak var headerLbl: UILabel!
-    
+    @IBOutlet weak var profileEditButton: UIButton!
+
     var chefServiceData = ChefServiceModel()
     var chefInfo: Chef?
     var profileType: ProfileType?
-    
-    @IBOutlet weak var profileEditButton: UIButton!
+    var aboutSectionHeight: CGFloat = 0.0
     var aboutChef: String = ""
     
     override func viewDidLoad() {
@@ -179,7 +179,7 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
         case 0:
             return 55
         case 1:
-            return 150
+            return CGFloat(self.aboutSectionHeight)
         default:
             return 0
         }
@@ -201,6 +201,13 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
                 let aboutCell: AboutTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
                 aboutCell.delegate = self
                 aboutCell.aboutChef = (chefInfo?.about)!
+                let aboutHeight = chefInfo?.about?.height(withConstrainedWidth: (view.frame.width - 20), font: UIFont.systemFont(ofSize: 16))
+                if CGFloat(100.0).isLess(than: aboutHeight!) {
+                    aboutCell.showMoreButton = true
+                    self.aboutSectionHeight = 155
+                } else {
+                    self.aboutSectionHeight = aboutHeight!
+                }
                 return aboutCell
             default:
                 return cell
@@ -218,6 +225,10 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
         }
         
     }
+    
+//    func calculateHeightOfAbout() -> CGFloat {
+//
+//    }
     
     
     

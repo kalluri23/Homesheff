@@ -25,7 +25,12 @@ class APIManager {
                 switch response.result{
                 case .success:
                     if response.result.value != nil {
-                        completion(User.defaultUser.createUser(data: response.data))
+                        if User.defaultUser.createUser(data: response.data) {
+                            UserDefaults.standard.set(User.defaultUser.currentUser!.id, forKey: "userId")
+                            completion(true)
+                        } else {
+                             completion(false)
+                        }
                         
                     }
                 case .failure:

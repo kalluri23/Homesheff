@@ -19,7 +19,7 @@ class ChefCell: UITableViewCell {
     
     var chef: Chef? {
         didSet{
-            cheffImageView.loadImageWithUrlString(urlString: chef?.imageURL ?? placeholderImageUrl)
+            // cheffImageView.loadImageWithUrlString(urlString: chef?.imageURL ?? placeholderImageUrl)
             chefName.text = chef?.firstName
             chefLocation.text = "Virginia, USA"
             chefRate.text = ""

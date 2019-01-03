@@ -34,10 +34,18 @@ class UserAccountViewController: UIViewController {
     }
     
     private func didTapSignOut() {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "SignInID") as! SignInViewController
-        self.navigationController?.present(vc, animated: true, completion: {
-            UserDefaults.standard.set(false, forKey: "userLoggedIn")
-        })
+        let viewControllers = self.navigationController?.viewControllers
+        
+        for viewController in viewControllers! {
+            if viewController.isKind(of: SignInViewController.self) {
+                UserDefaults.standard.set(false, forKey: "userLoggedIn")
+                self.navigationController?.popToViewController(viewController, animated: true)
+            }
+        }
+//
+//        let vc = storyboard?.instantiateViewController(withIdentifier: "SignInID") as! SignInViewController
+//        self.navigationController?.present(vc, animated: true, completion: {
+//        })
         
     }
 }

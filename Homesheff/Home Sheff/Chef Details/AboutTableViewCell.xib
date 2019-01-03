@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="164.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gao-7s-deV">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gao-7s-deV">
                         <rect key="frame" x="8" y="8" width="359" height="148.5"/>
                         <string key="text">sdfsdfsndfsdkfsfsdfsdfs sdfsdfsndfsdkfsfsdfsdfs sdfsdfsndfsdkfsfsdfsdfs sdfsdfsndfsdkfsfsdfsdfs sdfsdfsndfsdkfsfsdfsdfs sdfsdfsndfsdkfsfsdfsdfs sdfsdfsndfsdkfsfsdfsdfs</string>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -86,6 +86,7 @@
                 <outlet property="aboutLbl" destination="gao-7s-deV" id="H2Q-ey-hZs"/>
                 <outlet property="transparentView" destination="GJT-9u-VZ8" id="bGt-Xd-S7M"/>
                 <outlet property="viewMoreBtn" destination="eKC-1p-nXn" id="sQt-M5-Tkb"/>
+                <outlet property="viewMoreView" destination="xCd-rZ-4ZA" id="udO-8i-UTU"/>
             </connections>
             <point key="canvasLocation" x="135.19999999999999" y="-53.523238380809602"/>
         </tableViewCell>
