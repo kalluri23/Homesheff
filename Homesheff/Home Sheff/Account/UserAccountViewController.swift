@@ -35,18 +35,21 @@ class UserAccountViewController: UIViewController {
     
     private func didTapSignOut() {
         let viewControllers = self.navigationController?.viewControllers
-        
         for viewController in viewControllers! {
+            UserDefaults.standard.set(false, forKey: "userLoggedIn")
             if viewController.isKind(of: SignInViewController.self) {
                 UserDefaults.standard.set(false, forKey: "userLoggedIn")
                 self.navigationController?.popToViewController(viewController, animated: true)
-            }
+            } else {
+                let vc = storyboard?.instantiateViewController(withIdentifier: "SignInID") as! SignInViewController
+                let navigationController = UINavigationController(rootViewController: vc)
+                let appdelegate = UIApplication.shared.delegate as! AppDelegate
+                UINavigationBar.appearance().barTintColor = UIColor(red: 136/255.0, green: 176/255.0, blue: 74/255.0, alpha: 1.0)
+                navigationController.navigationBar.tintColor = UIColor.white;
+                UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor.white]
+                appdelegate.window!.rootViewController = navigationController
+             }
         }
-//
-//        let vc = storyboard?.instantiateViewController(withIdentifier: "SignInID") as! SignInViewController
-//        self.navigationController?.present(vc, animated: true, completion: {
-//        })
-        
     }
 }
 
