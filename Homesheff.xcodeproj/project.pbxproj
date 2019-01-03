@@ -511,7 +511,6 @@
 				14E2ABB521DAAB31005673CA /* ForgotPassword.storyboard in Resources */,
 				A4AA64002173B6E5007D83F2 /* ProfileGenericTableViewCell.xib in Resources */,
 				A4AA64042173B704007D83F2 /* ProfileDetailedTableViewCell.xib in Resources */,
-				A4C9249D216ED7BD00F3BBDE /* CollectionReusableView.xib in Resources */,
 				DA91FB1D21B303510065C1BD /* ChefDetails.storyboard in Resources */,
 				A4C924C62173A41700F3BBDE /* UserAccountCell.xib in Resources */,
 				DA91FB1921B210A00065C1BD /* AboutTableViewCell.xib in Resources */,

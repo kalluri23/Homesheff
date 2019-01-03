@@ -27,7 +27,10 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var contactCheff: UIButton!
     @IBOutlet weak var headerLbl: UILabel!
     @IBOutlet weak var profileEditButton: UIButton!
-
+    @IBOutlet weak var contactButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var contactButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var contactButtonBottomConstraint: NSLayoutConstraint!
+    
     var chefServiceData = ChefServiceModel()
     var chefInfo: Chef?
     var profileType: ProfileType?
@@ -48,6 +51,9 @@ class ProfileViewController: UIViewController {
         // Refresh profile after edit
         if profileType == ProfileType.myAccount {
             self.contactCheff.alpha = 0.0
+            self.contactButtonHeight.constant = 0.0
+            self.contactButtonConstraint.constant = 0.0
+            self.contactButtonBottomConstraint.constant = 0.0
             self.chefInfo = Chef(user:User.defaultUser.currentUser!)
             updateChefDetails()
         } else {

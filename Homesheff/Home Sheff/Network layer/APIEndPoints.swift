@@ -65,6 +65,12 @@ struct UpdateUserPreferencesEnvelop:Requestable {
     var pathType : ServicePath
 }
 
+struct GetUserById: Requestable {
+    var apiPath: String { return "getUserById/" + pathType.serviceEndpoint() }
+    var httpType: HttpType { return .get }
+    var pathType: ServicePath
+}
+
 /*
  ALL services post dictionary is mentioned under enum switch statement.
  These cases get their values in ViewController (or respective controller or other class).
@@ -77,6 +83,7 @@ internal enum ServicePath:ParameterBodyMaker {
     case signUpCall(email: String, password: String, phoneNo: String?, firstName: String, lastName: String, isChef: Bool, isCustomer: Bool, imageUrl: String, zipCode: String)
     case forgotPassword(email: String)
     case resetPassword(email:String, code:String, password:String)
+    case getUserById(userId: Int)
     case validate(email:String, code:String)
     case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: String?, isChef: Bool?, isCustomer: Bool?)
     case finishYourProfileCall(firstName: String?, lastName: String?, headline: String?, about: String?, email: String?, location: String?, phoneNo: String?, isChef: Bool?, isCustomer: Bool?)
@@ -93,7 +100,7 @@ internal enum ServicePath:ParameterBodyMaker {
             
         case .signUpCall(email: let email, password: let password, phoneNo: let phoneNo, firstName: let firstName, lastName: let lastName, isChef: let isChef, isCustomer: let isCustomer, imageUrl: let imageUrl, zipCode: let zipCode):
             return ["email": email, "password": password, "phone": phoneNo ?? "", "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, zipCode: "zipCode"]
-        case .forgotPassword, .validate:
+        case .forgotPassword, .validate, .getUserById:
             return nil
         
         case .resetPassword(email: let email, code: let code, password: let password):
@@ -116,6 +123,8 @@ internal enum ServicePath:ParameterBodyMaker {
             return email
         case .validate(email: let email, code: let code):
             return email+"/"+code
+        case .getUserById(userId: let userId):
+            return "?userId=\(userId)"
         default:
             return "/"
         }

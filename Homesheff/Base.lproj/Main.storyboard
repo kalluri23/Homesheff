@@ -987,6 +987,9 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="chefServiceTableView" destination="cQ4-nx-b36" id="z26-q6-ajE"/>
+                        <outlet property="contactButtonBottomConstraint" destination="Yvm-ba-K74" id="KNc-BJ-AX4"/>
+                        <outlet property="contactButtonConstraint" destination="EuJ-9r-QtG" id="PvJ-Ev-1Zt"/>
+                        <outlet property="contactButtonHeight" destination="dWb-oa-wBv" id="MUb-lk-QMm"/>
                         <outlet property="contactCheff" destination="Dgo-cA-ERy" id="Vqj-PB-jmZ"/>
                         <outlet property="emailLabel" destination="1Ub-vV-E7I" id="F36-wS-78z"/>
                         <outlet property="headerLbl" destination="IOr-c0-H1j" id="xxK-gX-2bC"/>
