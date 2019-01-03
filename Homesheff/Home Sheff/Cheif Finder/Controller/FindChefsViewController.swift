@@ -31,6 +31,7 @@ class FindChefsViewController: UIViewController {
         // comment below since findchief is already an outlet
         //findCheifViewModel = FindCheifViewModel()
         self.findCheifViewModel.reloadTableView!()
+        self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.navigationItem.hidesBackButton = true
     }
     
@@ -72,6 +73,8 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
                     cheffCell.cheffImageView.image = image
                     self.findCheifViewModel?.prepareProfileImageView(imageView: cheffCell.cheffImageView)
                 })
+            } else {
+                cheffCell.cheffImageView.image = UIImage(named: "sheffs_list_placeholder")
             }
              return cheffCell
         }
