@@ -26,6 +26,7 @@ class APIManager {
                 case .success:
                     if response.result.value != nil {
                         if User.defaultUser.createUser(data: response.data) {
+                            UserDefaults.standard.set(true, forKey: "userLoggedIn")
                             UserDefaults.standard.set(User.defaultUser.currentUser!.id, forKey: "userId")
                             completion(true)
                         } else {
@@ -169,6 +170,28 @@ class APIManager {
     }
   }
     
+    func getUserById(requestEnvelop:Requestable, completion: @escaping LoginSuccessHanlder) {
+        let request = Alamofire.request(
+            requestEnvelop.requestURL()!,
+            parameters: requestEnvelop.pathType.httpBodyEnvelop(),
+            headers: requestEnvelop.httpHeaders())
+        request.validate()
+            .responseString { response  in
+                
+                switch response.result{
+                case .success:
+                    if response.result.value != nil {
+                        if User.defaultUser.createUser(data: response.data) {
+                            completion(true)
+                        } else {
+                            completion(false)
+                        }
+                    }
+                case .failure:
+                    completion(false)
+                }
+        }
+    }
     
     func updateUserPreferenceCall(requestEnvelop:Requestable, completion: @escaping (Bool) -> Void)  {
         

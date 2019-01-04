@@ -14,6 +14,16 @@ class SignInViewModel {
         apiHandler.signInApi(requestEnvelop: envelop, completion: completion)
     }
     
+    func autoSignIn(envelop:Requestable, completion: @escaping (Bool) -> Void) {
+        apiHandler.getUserById(requestEnvelop: envelop, completion: completion)
+    }
+    
+    func autoSignInEnvelop(userId: Int) -> Requestable {
+        let searchPath = ServicePath.getUserById(userId: userId)
+        let userEnvelop = GetUserById(pathType: searchPath)
+        return userEnvelop
+    }
+    
     func signInEnvelop(userName: String, password: String) -> Requestable {
         
         let userListSearchPath = ServicePath.signInCall(userName: userName, password: password)

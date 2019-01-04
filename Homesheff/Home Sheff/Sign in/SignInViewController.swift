@@ -94,7 +94,6 @@ class SignInViewController: UIViewController {
                 if isSuccess{
                     
                     //TODO: Manage session time out from API --later
-                    UserDefaults.standard.set(true, forKey: "userLoggedIn")
                     
                     let baseTabbar = self?.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
                     self?.present(baseTabbar, animated: false, completion: nil)
