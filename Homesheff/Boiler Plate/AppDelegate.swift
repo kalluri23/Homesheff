@@ -8,14 +8,13 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-import FacebookCore
-
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+      let viewModel = SignInViewModel()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -24,8 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ConfigEndPoints.shared.initialize()
         IQKeyboardManager.shared.enable = true
-        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        self.setInitialScreen()
        // IQKeyboardManager.shared().isEnabled = true
+        loadFacebook(application: application, options: launchOptions)
         return true
     }
 
@@ -50,15 +50,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        
-        let appId: String = SDKSettings.appId
-        if url.scheme != nil && url.scheme!.hasPrefix("fb\(appId)") && url.host ==  "authorize" {
-            return SDKApplicationDelegate.shared.application(app, open: url, options: options)
-        }
-        return false
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        let handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        return handled
     }
 
+    /** Check if user is logged in and set the initial content screen
+    */
+    private func setInitialScreen() {
+        //user previously logged in to app
+        if UserDefaults.standard.bool(forKey: "userLoggedIn") {
+            
+            viewModel.autoSignIn(envelop: viewModel.autoSignInEnvelop(userId:UserDefaults.standard.integer(forKey: "userId") )) { (success) in
+                
+                if success {
+                   self.goToCheffList()
+                } else {
+                    self.goToSiginView()
+                }
+            }
+        } else { //user does not have a session before
+            goToSiginView()
+        }
+    }
+    
+    private func goToCheffList() {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabBarControllerId")
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+    }
+    
+    private func goToSiginView() {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateInitialViewController()
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+    }
+    
+    private func loadFacebook(application: UIApplication, options: [AnyHashable : Any]?) {
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: options)
+        FBSDKSettings.setAppID("295227917866107")
+    }
 }
 

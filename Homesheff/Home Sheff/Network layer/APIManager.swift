@@ -14,25 +14,101 @@ class APIManager {
     
     typealias LoginSuccessHanlder = (Bool) -> Void
     func signInApi(requestEnvelop:Requestable, completion: @escaping LoginSuccessHanlder)  {
-        
-        Alamofire.request(
+        let request = Alamofire.request(
             requestEnvelop.requestURL()!,
             parameters: requestEnvelop.pathType.httpBodyEnvelop(),
-            headers: requestEnvelop.httpHeaders()).validate()
+            headers: requestEnvelop.httpHeaders())
+        request.validate()
             .responseString { response  in
                 
-               // if response.result == "null" {}
+                // if response.result == "null" {}
                 switch response.result{
-                   case .success:
+                case .success:
                     if response.result.value != nil {
-                     completion(User.defaultUser.createUser(data: response.data))
+                        if User.defaultUser.createUser(data: response.data) {
+                            UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                            UserDefaults.standard.set(User.defaultUser.currentUser!.id, forKey: "userId")
+                            completion(true)
+                        } else {
+                             completion(false)
+                        }
                         
                     }
-                      case .failure:
+                case .failure:
                     completion(false)
                 }
+        }
     }
-}
+    
+    func forgotPasswordApi(requestEnvelop:Requestable, completion: @escaping (Bool)->Void) {
+        let request = Alamofire.request(requestEnvelop.requestURL()!, headers: requestEnvelop.httpHeaders())
+        request.validate()
+            .responseString{ (response) -> Void in
+                
+                switch response.result{
+                case .success:
+                    if let resultValue = response.result.value
+                    {
+                        print(resultValue)
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                case .failure:
+                    if let error = response.error {
+                        print(error.localizedDescription)
+                    }
+                    completion(false)
+                }
+        }
+    }
+    
+    func validateCodeApi(requestEnvelop:Requestable, completion: @escaping (Bool)->Void) {
+        let request = Alamofire.request(requestEnvelop.requestURL()!, headers: requestEnvelop.httpHeaders())
+        request.validate()
+            .responseString{ (response) -> Void in
+                
+                switch response.result{
+                case .success:
+                    if let resultValue = response.result.value
+                    {
+                        print(resultValue)
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                case .failure:
+                    if let error = response.error {
+                        print(error.localizedDescription)
+                    }
+                    completion(false)
+                }
+        }
+    }
+    
+    func resetPasswordApi(requestEnvelop:Requestable, completion: @escaping (Bool) -> Void)  {
+        let request = Alamofire.request(requestEnvelop.requestURL()!, method: .post, parameters: requestEnvelop.pathType.httpBodyEnvelop()!, encoding: JSONEncoding.default, headers: requestEnvelop.httpHeaders()!)
+        request.validate()
+            .responseString{ (response) -> Void in
+                
+                switch response.result{
+                case .success:
+                    if let resultValue = response.result.value
+                    {
+                        print(resultValue)
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                case .failure:
+                    if let error = response.error {
+                        print(error.localizedDescription)
+                    }
+                    completion(false)
+                }
+        }
+        
+    }
     
     func signUpCall(requestEnvelop:Requestable, completion: @escaping (Bool) -> Void)  {
         
@@ -94,6 +170,28 @@ class APIManager {
     }
   }
     
+    func getUserById(requestEnvelop:Requestable, completion: @escaping LoginSuccessHanlder) {
+        let request = Alamofire.request(
+            requestEnvelop.requestURL()!,
+            parameters: requestEnvelop.pathType.httpBodyEnvelop(),
+            headers: requestEnvelop.httpHeaders())
+        request.validate()
+            .responseString { response  in
+                
+                switch response.result{
+                case .success:
+                    if response.result.value != nil {
+                        if User.defaultUser.createUser(data: response.data) {
+                            completion(true)
+                        } else {
+                            completion(false)
+                        }
+                    }
+                case .failure:
+                    completion(false)
+                }
+        }
+    }
     
     func updateUserPreferenceCall(requestEnvelop:Requestable, completion: @escaping (Bool) -> Void)  {
         
@@ -139,7 +237,7 @@ extension APIManager {
             if let imageData = imageData {
                 multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "image/jpeg")
             }
-        }, usingThreshold: UInt64.init(), to: "http://api.dev.homesheff.com/v1/uploadFile", method: .post, headers: headers) { (result) in
+        }, usingThreshold: UInt64.init(), to: "https://api.dev.homesheff.com/v1/uploadFile", method: .post, headers: headers) { (result) in
             switch result {
             case .success(let upload, _, _):
                 upload.responseString { response in
@@ -157,7 +255,7 @@ extension APIManager {
     }
     
     func retrieveImage(for imageName: String, completion: @escaping (UIImage?) -> Void) {
-        let url = "http://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
+        let url = "https://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
         Alamofire.request(url).responseData { (response) in
             if response.error == nil {
                 print(response.result)
@@ -184,7 +282,7 @@ extension APIManager {
     }
     
     func resetCacheFor(imageName: String) {
-        let url = "http://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
+        let url = "https://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
         imageCache.removeImage(withIdentifier: url)
     }
 }

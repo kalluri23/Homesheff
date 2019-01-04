@@ -21,6 +21,11 @@ class UserAccountViewController: UIViewController {
         super.viewDidLoad()
         userAccountVC.register(UserAccountCell.nib, forCellReuseIdentifier: UserAccountCell.reuseIdentifier)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
 
     private func didTapTermsAndCondition(isTermsAndCondition: Bool) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "TermsAndConditionViewControllerID") as! TermsAndConditionViewController
@@ -29,11 +34,22 @@ class UserAccountViewController: UIViewController {
     }
     
     private func didTapSignOut() {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "SignInID") as! SignInViewController
-        self.navigationController?.present(vc, animated: true, completion: {
+        let viewControllers = self.navigationController?.viewControllers
+        for viewController in viewControllers! {
             UserDefaults.standard.set(false, forKey: "userLoggedIn")
-        })
-        
+            if viewController.isKind(of: SignInViewController.self) {
+                UserDefaults.standard.set(false, forKey: "userLoggedIn")
+                self.navigationController?.popToViewController(viewController, animated: true)
+            } else {
+                let vc = storyboard?.instantiateViewController(withIdentifier: "SignInID") as! SignInViewController
+                let navigationController = UINavigationController(rootViewController: vc)
+                let appdelegate = UIApplication.shared.delegate as! AppDelegate
+                UINavigationBar.appearance().barTintColor = UIColor(red: 136/255.0, green: 176/255.0, blue: 74/255.0, alpha: 1.0)
+                navigationController.navigationBar.tintColor = UIColor.white;
+                UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor.white]
+                appdelegate.window!.rootViewController = navigationController
+             }
+        }
     }
 }
 
@@ -65,7 +81,8 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
         
         if dataArray[indexPath.section][indexPath.row] == "Version" {
             cell.detailedLabel.isHidden = false
-            cell.detailedLabel.text = "1.4"
+            let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+            cell.detailedLabel.text = appVersion
         }
         
         return cell
@@ -82,8 +99,18 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
         
         // This is temp , need to tie state with enum and data source
         if dataArray[indexPath.section][indexPath.row] == "Profile" {
-            let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+            
+            if (User.defaultUser.currentUser != nil) && (User.defaultUser.currentUser?.isChef)! {
+                let vc = storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+                vc.profileType = .myAccount
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+               let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            // vc.chefInfo = Chef(user:User.defaultUser.currentUser!)
+//
+//            let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
         }
         else if dataArray[indexPath.section][indexPath.row] == "Terms of Services" {
             self.didTapTermsAndCondition(isTermsAndCondition: true)

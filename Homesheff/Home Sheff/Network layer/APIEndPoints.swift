@@ -29,6 +29,24 @@ struct SignInEnvelop:Requestable {
     var pathType : ServicePath
 }
 
+struct ForgotPasswordEnvelop:Requestable {
+    var apiPath:String { return "forgotPassword/" + pathType.serviceEndpoint() }
+    var httpType:HttpType { return .get }
+    var pathType : ServicePath
+}
+
+struct ValidateCodeEnvelop:Requestable {
+    var apiPath:String { return "validateCode/" + pathType.serviceEndpoint() }
+    var httpType:HttpType { return .get }
+    var pathType : ServicePath
+}
+
+struct ResetPasswordEnvelop:Requestable {
+    var apiPath:String { return "resetPassword" }
+    var httpType:HttpType { return .post }
+    var pathType : ServicePath
+}
+
 struct SignUpEnvelop:Requestable {
     var apiPath:String { return "saveUserInformation" }
     var httpType:HttpType { return .post }
@@ -47,6 +65,12 @@ struct UpdateUserPreferencesEnvelop:Requestable {
     var pathType : ServicePath
 }
 
+struct GetUserById: Requestable {
+    var apiPath: String { return "getUserById/" + pathType.serviceEndpoint() }
+    var httpType: HttpType { return .get }
+    var pathType: ServicePath
+}
+
 /*
  ALL services post dictionary is mentioned under enum switch statement.
  These cases get their values in ViewController (or respective controller or other class).
@@ -57,7 +81,12 @@ internal enum ServicePath:ParameterBodyMaker {
     case listOfUsers(userType: String)
     case signInCall(userName: String, password: String)
     case signUpCall(email: String, password: String, phoneNo: String?, firstName: String, lastName: String, isChef: Bool, isCustomer: Bool, imageUrl: String, zipCode: String)
+    case forgotPassword(email: String)
+    case resetPassword(email:String, code:String, password:String)
+    case getUserById(userId: Int)
+    case validate(email:String, code:String)
     case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: String?, isChef: Bool?, isCustomer: Bool?)
+    case finishYourProfileCall(firstName: String?, lastName: String?, headline: String?, about: String?, email: String?, location: String?, phoneNo: String?, isChef: Bool?, isCustomer: Bool?)
     
     func httpBodyEnvelop()->[String:Any]? {
         
@@ -71,9 +100,33 @@ internal enum ServicePath:ParameterBodyMaker {
             
         case .signUpCall(email: let email, password: let password, phoneNo: let phoneNo, firstName: let firstName, lastName: let lastName, isChef: let isChef, isCustomer: let isCustomer, imageUrl: let imageUrl, zipCode: let zipCode):
             return ["email": email, "password": password, "phone": phoneNo ?? "", "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, zipCode: "zipCode"]
+        case .forgotPassword, .validate, .getUserById:
+            return nil
+        
+        case .resetPassword(email: let email, code: let code, password: let password):
+            return ["email": email, "code": code, "password": password]
             
         case .updateUserPreferenceCall(let firstName, let lastName, let headline, let phoneNo, let location, let zipCode, let services, let isChef, let isCustomer):
-            return ["firstName": firstName ?? "", "lastName": lastName ?? "" , "phone": phoneNo ?? "" , "headertext": headline ?? "", "phoneNo": phoneNo ?? "", "location": location ?? "", "zipCode": zipCode ?? "", "services": services ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
+            return ["firstName": firstName ?? "", "lastName": lastName ?? "" , "phone": phoneNo ?? "" , "headertext": headline ?? "", "location": location ?? "", "zipCode": zipCode ?? "", "services": services ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
+            
+        case .finishYourProfileCall(let firstName, let lastName, let headline, let about, let email, let location, let phoneNo, let isChef, let isCustomer):
+            return ["firstName": firstName ?? "", "lastName": lastName ?? "", "headertext": headline ?? "", "about": about ?? "",  "email": email ?? "", "location": location ?? "", "phone": phoneNo ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
+        }
+    }
+    
+    /**
+    Method to update the request url
+    */
+    func serviceEndpoint() -> String {
+        switch self {
+        case .forgotPassword(email: let email):
+            return email
+        case .validate(email: let email, code: let code):
+            return email+"/"+code
+        case .getUserById(userId: let userId):
+            return "?userId=\(userId)"
+        default:
+            return "/"
         }
     }
     

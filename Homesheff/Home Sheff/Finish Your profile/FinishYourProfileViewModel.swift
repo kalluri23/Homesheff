@@ -2,72 +2,56 @@
 //  FinishYourProfileViewModel.swift
 //  Homesheff
 //
-//  Created by Dimitrios Papageorgiou on 10/3/18.
+//  Created by Anurag Pandey on 12/29/18.
 //  Copyright © 2018 Dimitrios Papageorgiou. All rights reserved.
 //
 
 import Foundation
+import UIKit
 
-protocol FinishYourProfileFieldsViewModelItem {
-    var type: FinishYourProfileFieldItemType { get }
-    var rowCount: Int { get }
-}
-
-class FinishYourProfileViewModel: NSObject {
-    
-    let fieldData = FinishYourProfileFields()
-    var fields = [FinishYourProfileFieldsViewModelItem]()
+class FinishYourProfileViewModel {
     let apiHandler = APIManager()
-    
-    override init() {
-        
-        if  !fieldData.genericFields.isEmpty {
-            let genericFields = FinishGenericFieldItem(genericData: fieldData.genericFields)
-            fields.append(genericFields)
-        }
-        
-        let selectedFields = SelectedServiceFieldItem(addserviceData:fieldData.service!)
-            fields.append(selectedFields)
-    }
+    let profileFields = ["FIRST NAME", "LAST NAME", "HEADLINE", "ABOUT", "EMAIL", "LOCATION", "PHONE"]
+    let title = "Finish Your Profile"
+    var userEnteredData = [String: String]()
     
     func finishUserProfile(envelop:Requestable, completion: @escaping (Bool) -> Void ) {
         apiHandler.updateUserPreferenceCall(requestEnvelop: envelop, completion: completion)
     }
     
-    
-}
-
-class FinishGenericFieldItem: FinishYourProfileFieldsViewModelItem {
-    
-    var genericData: [GenericField]
-    
-    var type: FinishYourProfileFieldItemType {
-        return .genericField
+    func validateUserInput() -> Bool {
+        if let firstName = userEnteredData[profileFields[0]], let email = userEnteredData[profileFields[4]], firstName.count > 0, email.count > 0 {
+            return true
+        }
+        return false
     }
     
-    var rowCount: Int {
-        return genericData.count
-    }
-    
-    init(genericData: [GenericField]) {
-        self.genericData = genericData
-    }
-}
-
-class SelectedServiceFieldItem: FinishYourProfileFieldsViewModelItem {
-    
-    var addServices: AddServiceFields
-    
-    var type: FinishYourProfileFieldItemType {
+    func getUserData(_ value: String) -> String {
         
-        return .selectedServicesCollectionViewField
-    }
-    
-    var rowCount: Int {
-       return 1
-    }
-    
-    init(addserviceData: AddServiceFields) {
-        self.addServices = addserviceData
+        //Return the user entered value for fields if present
+        if let userData = userEnteredData[value], userData != "" {
+            return userData
+        }
+        
+        //Fill the dafault values if user didn't enter enything yet
+        switch value {
+        case "FIRST NAME":
+            let firstName = User.defaultUser.currentUser?.firstName ?? ""
+            userEnteredData[value] = firstName
+            return firstName
+            
+        case "LAST NAME":
+            let lastName = User.defaultUser.currentUser?.lastName ?? ""
+            userEnteredData[value] = lastName
+            return lastName
+            
+        case "EMAIL":
+            let email = User.defaultUser.currentUser?.email ?? ""
+            userEnteredData[value] = email
+            return email
+            
+        default:
+            return userEnteredData[value] ?? ""
+        }
     }
 }

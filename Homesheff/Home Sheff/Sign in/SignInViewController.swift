@@ -33,7 +33,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var forgotYourPasswordButton: UIButton!
     @IBOutlet weak var createYourAccountButton: UIButton!
     @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
-    @IBOutlet weak var facebookButton: UIButton!
+    @IBOutlet weak var facebookButton: FacebookButton!
     
     let viewModel = SignInViewModel()
    
@@ -55,7 +55,6 @@ class SignInViewController: UIViewController {
         
         passwordTextField.setPadding()
         passwordTextField.bottomBorderWhite()
-        forgotYourPasswordButton.isHidden = true
        
     }
     
@@ -64,9 +63,9 @@ class SignInViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
         if FBSDKAccessToken.current() != nil {
-            self.facebookButton.setTitle("Logout", for: .normal)
+            self.facebookButton.setTitle(withText:"Logout")
         } else {
-            self.facebookButton.setTitle("SignIn With Facebook", for: .normal)
+            self.facebookButton.setTitle(withText:"Sign In With Facebook")
         }
     }
     
@@ -84,25 +83,26 @@ class SignInViewController: UIViewController {
     @IBAction func didTapSignIn(_ sender: UIButton) {
         callLoginAPI()
     }
-    
-    @IBAction @objc func facebookButtonTapped(_ sender: UIButton) {
+    @IBAction func facebookButtonTapped(_ sender: FacebookButton) {
         let loginManager = FBSDKLoginManager()
         if FBSDKAccessToken.current() != nil {
-            // TODO: Implement Homesheff code to logout of app
+            //FIXME: - Implement code here to directly sign in user to app
             loginManager.logOut()
-            self.facebookButton.setTitle("SignIn With Facebook", for: .normal)
+            sender.setTitle(withText:"Sign in with Facebook")
         } else {
-            // TODO: Implement Homesheff code to login to app
+            sender.showActivity()
             loginManager.loginBehavior = .systemAccount
             loginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self, handler: { (result, error) in
                 if let loginError = error {
                     print(loginError.localizedDescription)
                     loginManager.logOut()
-                    self.facebookButton.setTitle("SignIn With Facebook", for: .normal)
+                    sender.setTitle(withText:"Sign in with Facebook")
                 }else {
+                    // TODO: Implement Homesheff code to login to app
                     if let loginResult = result {
                         print(loginResult.token)
-                        self.facebookButton.setTitle("Logout", for: .normal)
+                        sender.setTitle(withText:"Logout")
+                        sender.hideActivity()
                     }
                 }
             })
@@ -126,7 +126,7 @@ class SignInViewController: UIViewController {
                 if isSuccess{
                     
                     //TODO: Manage session time out from API --later
-                    UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                    
                     let baseTabbar = self?.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
                     self?.present(baseTabbar, animated: false, completion: nil)
                 } else {
