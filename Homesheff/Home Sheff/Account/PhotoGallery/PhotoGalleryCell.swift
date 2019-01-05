@@ -8,18 +8,22 @@
 
 import UIKit
 
+protocol PhotoGalleryDelegate: AnyObject {
+    func editPhotosClicked()
+}
+
 class PhotoGalleryCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    weak var delegate: PhotoGalleryDelegate?
     var isEditable:Bool = false
-    var photoList = [UIImage]()
+    var photoList = [PhotoData]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        // Initialization code
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -41,7 +45,7 @@ class PhotoGalleryCell: UITableViewCell {
     }
     
     @IBAction func editPhotos() {
-        
+        self.delegate?.editPhotosClicked()
     }
 
 }
@@ -53,9 +57,9 @@ extension PhotoGalleryCell: UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let galleryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionCell", for: indexPath) as! PhotoCollectionCell
-        galleryCell.imageView!.image = self.photoList[indexPath.row]
+        let photoData = self.photoList[indexPath.row]
+        galleryCell.imageView?.loadImageWithUrlString(urlString: photoData.imageUrl!)
         return galleryCell
-        
     }
     
 }

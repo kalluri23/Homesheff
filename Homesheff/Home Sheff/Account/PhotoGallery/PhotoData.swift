@@ -10,18 +10,8 @@ import UIKit
 
 struct PhotoData: Codable {
     var id: Int
-    var firstName: String?
-    var lastName: String?
-    var password: String?
-    var email: String?
-    var phone: String?
-    var zipcode: String?
-    var signUpDate: String?
-    var isChef: Bool?
-    var isCustomer: Bool?
-    var isActive: Bool?
-    var imageURL: String?
-    var photos: [String]?
-    var coverURL: String?
-
+    var userPreferenceId: Int?
+    var imageUrl: String?
+    var thumbnailUrl: String?
+    var createdDate: String?
 }

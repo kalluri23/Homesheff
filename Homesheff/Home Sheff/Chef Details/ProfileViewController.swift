@@ -8,7 +8,7 @@
 
 import UIKit
 
-    
+
 
 // convert this into MVVM
 
@@ -46,8 +46,11 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        chefServiceTableView.register(PhotoGalleryCell.nib, forCellReuseIdentifier: PhotoGalleryCell.reuseIdentifier)
-        updateChefDetails()
+//        chefServiceTableView.register(PhotoGalleryCell.nib, forCellReuseIdentifier: PhotoGalleryCell.reuseIdentifier)
+        if profileType == ProfileType.cheffDetails {
+             updateChefDetails()
+        }
+       
         chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
         chefServiceTableView.register(AboutTableViewCell.nib, forCellReuseIdentifier: AboutTableViewCell.reuseIdentifier)
     }
@@ -71,7 +74,12 @@ class ProfileViewController: UIViewController {
     }
     
     private func getGalleryPhotos() {
-
+        chefServiceData.getPhotosToGallery(envelop: chefServiceData.getPhotosToGalleryEnvelop(userId: (User.defaultUser.currentUser?.id)!)) { (photoData) in
+            User.defaultUser.currentUser?.photoGallery = photoData
+            self.chefInfo?.photoGallery = photoData
+            self.updateSections()
+            self.chefServiceTableView.reloadData()
+        }
     }
     
     private func updateChefDetails() {
@@ -79,14 +87,19 @@ class ProfileViewController: UIViewController {
         navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
         emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
         headerLbl.text = "\(chefInfo?.headertext ?? "")"
-        if chefInfo?.about != nil && chefInfo?.photoGallery != nil && chefInfo?.photoGallery.count > 0 {
-            self.profileSections = [.photoGalleryType, .aboutType, .servicesType]
-        } else if (chefInfo?.about != nil) {
-            self.profileSections = [.aboutType, .servicesType]
-        } else {
-           self.profileSections = [.servicesType]
-        }
+        updateSections()
+        getGalleryPhotos()
         self.chefServiceTableView.reloadData()
+    }
+    
+    private func updateSections() {
+        if chefInfo?.about != nil && chefInfo?.photoGallery != nil && (chefInfo?.photoGallery!.count)! > 0 {
+        self.profileSections = [.photoGalleryType,  .servicesType, .aboutType]
+        } else if (chefInfo?.about != nil) {
+        self.profileSections = [ .servicesType, .aboutType]
+        } else {
+        self.profileSections = [.servicesType]
+        }
     }
     
     private func setProfileAndBgPicture() {
@@ -185,17 +198,11 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch self.profileSections[section] {
-            
-            case .aboutType:
+            case .aboutType, .photoGalleryType:
                 return 1
-            case .photoGalleryType:
-                return chefInfo.photoGallery.count
             case .servicesType:
                 return chefServiceData.chefService.count
-            default:
-                return 0
          }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -207,9 +214,7 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
             case .photoGalleryType:
                 return 120
             case .servicesType:
-                return  120
-            default:
-                return 0
+                return  55
         }
     }
     
@@ -231,7 +236,8 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
             return aboutCell
         case .photoGalleryType:
             let photoGalleryCell = tableView.dequeueReusableCell(withIdentifier: PhotoGalleryCell.reuseIdentifier, for: indexPath) as! PhotoGalleryCell
-            photoGalleryCell.photoList = []
+            photoGalleryCell.photoList = (User.defaultUser.currentUser?.photoGallery)!
+            photoGalleryCell.delegate = self
             return photoGalleryCell
         case .servicesType:
             let cell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
@@ -242,52 +248,22 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
             cell.partyCount3.isHidden = true
             cell.servicePriceLabel.isHidden = true
             return cell
-        default:
-            return UITableViewCell()
         }
         
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?{
         
         
-        switch self.profileSections[ indexPath.section] {
-            
-        case .aboutType:
-            return  "About"
-        case .photoGalleryType:
-            return "PHOTOS"
-        case .servicesType:
-            return  "SERVICES"
-        default:
-            return ""
+        switch self.profileSections[section] {
+            case .aboutType:
+                return  "About"
+            case .photoGalleryType:
+                return "PHOTOS"
+            case .servicesType:
+                return  "SERVICES"
         }
         
     }
-    
-//    func calculateHeightOfAbout() -> CGFloat {
-//
-//    }
-    
-    
-    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
-//        footerView.backgroundColor = UIColor.blue
-//        return footerView
-//    }
-//
-//    // set height for footer
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 40
-//    }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if dataArray[indexPath.section][indexPath.row] == "Profile" {
-//            let vc = storyboard?.instantiateViewController(withIdentifier: "ChefDetailsVCID") as! ChefDetailsViewController
-//            self.navigationController?.pushViewController(vc, animated: true)
-//            
-//        }
-//    }
     
 }
 
@@ -295,5 +271,14 @@ extension ProfileViewController: AboutCellDelegate {
     
     func viewMoreClicked() {
         self.navigationController?.pushViewController(AboutChefController.create(aboutChef: (chefInfo?.about)!), animated: true)
+    }
+}
+
+extension ProfileViewController: PhotoGalleryDelegate {
+    
+    func editPhotosClicked() {
+        
+        let vc = AddPhotosController.create(photoData: (User.defaultUser.currentUser?.photoGallery)!)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

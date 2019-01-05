@@ -35,7 +35,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6E9-VI-fuM">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6E9-VI-fuM" customClass="CustomImageView" customModule="Homesheff" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                         </imageView>
                                     </subviews>
@@ -48,7 +48,7 @@
                                 </constraints>
                                 <size key="customSize" width="120" height="120"/>
                                 <connections>
-                                    <outlet property="imageView" destination="6E9-VI-fuM" id="Nyy-99-uBL"/>
+                                    <outlet property="imageView" destination="6E9-VI-fuM" id="kwa-pl-XyP"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

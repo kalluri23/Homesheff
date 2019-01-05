@@ -35,10 +35,18 @@ class AddPhotosController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    static func create(photoData:[PhotoData]) -> AddPhotosController {
+        let storyboard = UIStoryboard(name: "FinishYourProfile", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AddPhotosController") as!  AddPhotosController
+        return vc
+    }
+     
     override func viewWillAppear(_ animated: Bool) {
         self.photosCollectionView.delegate = self.photosCollectionView
         self.photosCollectionView.dataSource = self.photosCollectionView
         self.photosCollectionView.collectionDelegate = self
+        self.navigationController?.isNavigationBarHidden = false
     }
     
    
@@ -127,13 +135,13 @@ class AddPhotosController: UIViewController {
     }
     
     @IBAction func savePhotosToGallery(_ sender: Any) {
-        self.uploadImages { (status) in
-            if status {
-                print("image uploaded")
-            } else {
-                print("image failed upload")
-            }
-        }
+//        self.uploadImages { (status) in
+//            if status {
+//                print("image uploaded")
+//            } else {
+//                print("image failed upload")
+//            }
+//        }
     }
     
     func uploadImages(completion: @escaping (_ sucess: Bool) -> Void) {
@@ -141,7 +149,7 @@ class AddPhotosController: UIViewController {
         let serialQueue = DispatchQueue(label: "serialQueue")
         for eachImage  in PhotosCollectionViewModel.shared.imageList {
             serialQueue.async{
-                self.apiHandler.savePhotoToGallery(eachImage) { (status) in
+                self.apiHandler.savePhotoToGallery(eachImage) { (imageData,status)  in
                     if status {
                         AddPhotosController.uploadedImageCount = AddPhotosController.uploadedImageCount + 1
                         if AddPhotosController.uploadedImageCount == PhotosCollectionViewModel.shared.imageList.count {
@@ -167,11 +175,9 @@ extension AddPhotosController: UIImagePickerControllerDelegate, UINavigationCont
         DispatchQueue.main.async {
             if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
                 self.dismiss(animated: true, completion: { () -> Void in
-                    PhotosCollectionViewModel.shared.adddImage(image: image)
-                     PhotosCollectionViewModel.shared.reloadCollectionView!()
+                     PhotosCollectionViewModel.shared.uploadImage(image: image)
                 })
             }
-           
         }
     }
     

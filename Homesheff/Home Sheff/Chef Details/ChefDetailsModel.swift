@@ -40,14 +40,14 @@ class ChefServiceModel {
         }
     }
     
-    func getPhotosToGallery(completion: @escaping (UIImage) -> ()) {
-        let userId = User.defaultUser.currentUser?.id
-//        apiHandler.getPhotoGallery(for: ) { (photoData) in
-//
-//        }
-
+    func getPhotosToGalleryEnvelop(userId: Int) -> Requestable {
+        let searchPath = ServicePath.getPhotoGallery(userId: userId)
+        let photoGalleryEnvelop = GetPhotoGallery(pathType: searchPath)
+        return photoGalleryEnvelop
     }
-    
-    
+
+    func getPhotosToGallery(envelop:Requestable, completion: @escaping ([PhotoData]?) -> Void) {
+        apiHandler.getPhotoGallery(requestEnvelop: envelop, completion: completion)
+    }
     
 }

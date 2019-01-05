@@ -17,9 +17,10 @@ class PhotosCollectionView: UICollectionView {
     weak var collectionDelegate: PhotosCollectionViewDelegate?
 
    var imageList = [UIImage]()
+    var photoData = [PhotoData]()
     let noPhotosView = Bundle.main.loadNibNamed("EmptyCollectionView", owner: EmptyCollectionView(), options: nil)![0] as? UIView
     override func awakeFromNib() {
-        self.addSubview(noPhotosView!)
+       // self.addSubview(noPhotosView!)
     }
     
 }
@@ -34,17 +35,21 @@ extension PhotosCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
             return PhotosCollectionViewModel.shared.numberOfRows
         }
         self.noPhotosView!.alpha = 0
+        self.sendSubview(toBack: self.noPhotosView!)
         return PhotosCollectionViewModel.shared.numberOfRows
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.collectionDelegate?.cellClicked(clickedImage: PhotosCollectionViewModel.shared.imageList[indexPath.row])
+        let cell =  collectionView.cellForItem(at: indexPath) as! PhotoCollectionCell
+        self.collectionDelegate?.cellClicked(clickedImage: (cell.imageView?.image)!)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let photoCell:PhotosCollectionViewCell  = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCollectionViewCell", for: indexPath) as! PhotosCollectionViewCell
-        photoCell.imageView.image = PhotosCollectionViewModel.shared.imageList[indexPath.row]
+    
+        let photoCell:PhotoCollectionCell  = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionCell", for: indexPath) as! PhotoCollectionCell
+        let photoData = PhotosCollectionViewModel.shared.getPhotoAtIndex(index: indexPath.row)
+        photoCell.imageView?.loadImageWithUrlString(urlString: photoData.imageUrl!)
+        // photoCell.imageView.image = PhotosCollectionViewModel.shared.imageList[indexPath.row]
         return photoCell
     }
     

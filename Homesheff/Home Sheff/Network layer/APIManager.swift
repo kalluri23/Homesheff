@@ -292,7 +292,7 @@ extension APIManager {
 
 extension APIManager {
     
-    func savePhotoToGallery(_ photo: UIImage, completionHandler: @escaping(_ success: Bool) -> Void) {
+    func savePhotoToGallery(_ photo: UIImage, completionHandler: @escaping(_ photoData: PhotoData?, _ success: Bool) -> Void) {
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
         let fileName = "\(UUID().uuidString).jpeg"
         Alamofire.upload(multipartFormData: { (multipartFormData) in
@@ -304,51 +304,52 @@ extension APIManager {
             switch result {
             case .success(let upload, _, _):
                 print ("image uploded")
-                                upload.responseString { response in
-                                    if response.value == "File is uploaded successfully" {
-//                                        completionHandler(true)
-                                    }
-                                    else {
-//                                        completionHandler(false)
-                                    }
-                                }
-                completionHandler(true)
-//                upload.responseString { response in
-//                    if response.value == "File is uploaded successfully" {
-//                        completionHandler(true)
-//                    }
-//                    else {
-//                        completionHandler(false)
-//                    }
-//                }
+                upload.responseString { response in
+                    do {
+                        print(response.result)
+                        let jsonDecoder = JSONDecoder()
+                        let photoData = try jsonDecoder.decode(PhotoData.self, from: response.data!)
+                        completionHandler(photoData, true)
+                    }
+                    catch {
+                        print(error)
+                        completionHandler(nil, false)
+                    }
+                }
             case .failure(_):
-                completionHandler(false)
+                completionHandler(nil, false)
             }
         }
     }
     
-    func getPhotoGallery(for userId: String, completion: @escaping ([PhotoData]?) -> Void) {
+    func getPhotoGallery(requestEnvelop:Requestable, completion: @escaping ([PhotoData]?) -> Void)  {
         
-        let url = "\(APIManager.baseUrl)/getAllPhotoGallery/\(457)"
+        let method = requestEnvelop.httpType.rawValue
+        let type = HTTPMethod(rawValue: method)
         
-        Alamofire.request(url).responseData { (response) in
-            switch response.result  {
-                case .success:
-                    if response.result.value != nil {
-                        do {
-                            print(response.result)
-                            let jsonDecoder = JSONDecoder()
-                            let list = try jsonDecoder.decode([PhotoData].self, from: response.data!)
-                            completion(list)
+        Alamofire.request(
+            requestEnvelop.requestURL()!,
+            method: type!,
+            parameters: requestEnvelop.pathType.httpBodyEnvelop(),
+            encoding: JSONEncoding.default,
+            headers: requestEnvelop.httpHeaders()).responseString { (response) in
+                switch response.result  {
+                    case .success:
+                        if response.result.value != nil {
+                            do {
+                                print(response.result)
+                                let jsonDecoder = JSONDecoder()
+                                let list = try jsonDecoder.decode([PhotoData].self, from: response.data!)
+                                completion(list)
+                            }
+                            catch {
+                                print(error)
+                            }
                         }
-                        catch {
-                            print(error)
-                        }
-                    }
-                
-                case .failure(let error):
-                    print(error)
-            }
+                    
+                    case .failure(let error):
+                        print(error)
+                }
         }
     }
     
