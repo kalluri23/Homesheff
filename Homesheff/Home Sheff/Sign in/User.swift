@@ -43,6 +43,9 @@ import Foundation
     let imageURL: String?
     var services: String?
     var location: String?
+    var about: String?
+    var headertext: String?
+    var photoGallery: [PhotoData]?
 }
 
 

@@ -14,7 +14,7 @@ import IQKeyboardManagerSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+      let viewModel = SignInViewModel()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -54,26 +54,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     private func setInitialScreen() {
         //user previously logged in to app
-//        if UserDefaults.standard.bool(forKey: "userLoggedIn") {
-//            self.window = UIWindow(frame: UIScreen.main.bounds)
-//
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//
-//            let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabBarControllerId")
-//
-//            self.window?.rootViewController = initialViewController
-//            self.window?.makeKeyAndVisible()
-//        }else { //user does not have a session before
-            self.window = UIWindow(frame: UIScreen.main.bounds)
+        if UserDefaults.standard.bool(forKey: "userLoggedIn") {
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let initialViewController = storyboard.instantiateInitialViewController()
-            
-            self.window?.rootViewController = initialViewController
-            self.window?.makeKeyAndVisible()
-            
-//        }
+            viewModel.autoSignIn(envelop: viewModel.autoSignInEnvelop(userId:UserDefaults.standard.integer(forKey: "userId") )) { (success) in
+                
+                if success {
+                   self.goToCheffList()
+                } else {
+                    self.goToSiginView()
+                }
+            }
+        } else { //user does not have a session before
+            goToSiginView()
+        }
+    }
+    
+    private func goToCheffList() {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainTabBarControllerId")
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+    }
+    
+    private func goToSiginView() {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateInitialViewController()
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
     }
 }
 

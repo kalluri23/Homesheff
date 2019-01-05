@@ -80,6 +80,9 @@ struct SavePhotoToGallery: Requestable {
 struct DeletePhotoFromGallery: Requestable {
     var apiPath: String { return "deletePhotoFromGallery" }
     var httpType: HttpType { return .delete}
+struct GetUserById: Requestable {
+    var apiPath: String { return "getUserById/" + pathType.serviceEndpoint() }
+    var httpType: HttpType { return .get }
     var pathType: ServicePath
 }
 
@@ -95,9 +98,10 @@ internal enum ServicePath:ParameterBodyMaker {
     case signUpCall(email: String, password: String, phoneNo: String?, firstName: String, lastName: String, isChef: Bool, isCustomer: Bool, imageUrl: String, zipCode: String)
     case forgotPassword(email: String)
     case resetPassword(email:String, code:String, password:String)
+    case getUserById(userId: Int)
     case validate(email:String, code:String)
     case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: String?, isChef: Bool?, isCustomer: Bool?)
-    case finishYourProfileCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, isChef: Bool?, isCustomer: Bool?)
+    case finishYourProfileCall(firstName: String?, lastName: String?, headline: String?, about: String?, email: String?, location: String?, phoneNo: String?, isChef: Bool?, isCustomer: Bool?)
     
     func httpBodyEnvelop()->[String:Any]? {
         
@@ -111,17 +115,17 @@ internal enum ServicePath:ParameterBodyMaker {
             
         case .signUpCall(email: let email, password: let password, phoneNo: let phoneNo, firstName: let firstName, lastName: let lastName, isChef: let isChef, isCustomer: let isCustomer, imageUrl: let imageUrl, zipCode: let zipCode):
             return ["email": email, "password": password, "phone": phoneNo ?? "", "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, zipCode: "zipCode"]
-        case .forgotPassword, .validate:
+        case .forgotPassword, .validate, .getUserById:
             return nil
         
         case .resetPassword(email: let email, code: let code, password: let password):
             return ["email": email, "code": code, "password": password]
             
         case .updateUserPreferenceCall(let firstName, let lastName, let headline, let phoneNo, let location, let zipCode, let services, let isChef, let isCustomer):
-            return ["firstName": firstName ?? "", "lastName": lastName ?? "" , "phone": phoneNo ?? "" , "headertext": headline ?? "", "phoneNo": phoneNo ?? "", "location": location ?? "", "zipCode": zipCode ?? "", "services": services ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
+            return ["firstName": firstName ?? "", "lastName": lastName ?? "" , "phone": phoneNo ?? "" , "headertext": headline ?? "", "location": location ?? "", "zipCode": zipCode ?? "", "services": services ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
             
-        case .finishYourProfileCall(let firstName, let lastName, let headline, let phoneNo, let location, let isChef, let isCustomer):
-            return ["firstName": firstName ?? "", "lastName": lastName ?? "" , "phone": phoneNo ?? "" , "headertext": headline ?? "", "phoneNo": phoneNo ?? "", "location": location ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
+        case .finishYourProfileCall(let firstName, let lastName, let headline, let about, let email, let location, let phoneNo, let isChef, let isCustomer):
+            return ["firstName": firstName ?? "", "lastName": lastName ?? "", "headertext": headline ?? "", "about": about ?? "",  "email": email ?? "", "location": location ?? "", "phone": phoneNo ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
         }
     }
     
@@ -134,6 +138,8 @@ internal enum ServicePath:ParameterBodyMaker {
             return email
         case .validate(email: let email, code: let code):
             return email+"/"+code
+        case .getUserById(userId: let userId):
+            return "?userId=\(userId)"
         default:
             return "/"
         }

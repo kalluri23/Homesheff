@@ -8,11 +8,19 @@
 
 import UIKit
 
+    
+
 // convert this into MVVM
 
 enum ProfileType {
     case cheffDetails
     case myAccount
+}
+
+enum ProfileTableViewCellType {
+    case photoGalleryType
+    case aboutType
+    case servicesType
 }
 
 class ProfileViewController: UIViewController {
@@ -23,16 +31,25 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var chefServiceTableView: UITableView!
     @IBOutlet weak var navigationTitleLbl: UILabel!
     @IBOutlet weak var contactCheff: UIButton!
+    @IBOutlet weak var headerLbl: UILabel!
+    @IBOutlet weak var profileEditButton: UIButton!
+    @IBOutlet weak var contactButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var contactButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var contactButtonBottomConstraint: NSLayoutConstraint!
+    
     var chefServiceData = ChefServiceModel()
     var chefInfo: Chef?
     var profileType: ProfileType?
-    
-    @IBOutlet weak var profileEditButton: UIButton!
+    var aboutSectionHeight: CGFloat = 0.0
+    var aboutChef: String = ""
+    var profileSections = [ProfileTableViewCellType]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         chefServiceTableView.register(PhotoGalleryCell.nib, forCellReuseIdentifier: PhotoGalleryCell.reuseIdentifier)
+        updateChefDetails()
         chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
+        chefServiceTableView.register(AboutTableViewCell.nib, forCellReuseIdentifier: AboutTableViewCell.reuseIdentifier)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,16 +60,33 @@ class ProfileViewController: UIViewController {
         // Refresh profile after edit
         if profileType == ProfileType.myAccount {
             self.contactCheff.alpha = 0.0
-            self.profileEditButton.alpha = 0.0
+            self.contactButtonHeight.constant = 0.0
+            self.contactButtonConstraint.constant = 0.0
+            self.contactButtonBottomConstraint.constant = 0.0
             self.chefInfo = Chef(user:User.defaultUser.currentUser!)
-            setProfileAndBgPicture()
-            navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
-            emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
+            updateChefDetails()
+        } else {
+             self.profileEditButton.alpha = 0.0
         }
     }
     
     private func getGalleryPhotos() {
+
+    }
     
+    private func updateChefDetails() {
+        setProfileAndBgPicture()
+        navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
+        emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
+        headerLbl.text = "\(chefInfo?.headertext ?? "")"
+        if chefInfo?.about != nil && chefInfo?.photoGallery != nil && chefInfo?.photoGallery.count > 0 {
+            self.profileSections = [.photoGalleryType, .aboutType, .servicesType]
+        } else if (chefInfo?.about != nil) {
+            self.profileSections = [.aboutType, .servicesType]
+        } else {
+           self.profileSections = [.servicesType]
+        }
+        self.chefServiceTableView.reloadData()
     }
     
     private func setProfileAndBgPicture() {
@@ -146,62 +180,93 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return self.profileSections.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            return chefServiceData.chefService.count
-        default:
-            return 0
-        }
+        
+        switch self.profileSections[section] {
+            
+            case .aboutType:
+                return 1
+            case .photoGalleryType:
+                return chefInfo.photoGallery.count
+            case .servicesType:
+                return chefServiceData.chefService.count
+            default:
+                return 0
+         }
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-            case 0:
+        
+        switch self.profileSections[ indexPath.section] {
+            
+            case .aboutType:
+                return  CGFloat(self.aboutSectionHeight)
+            case .photoGalleryType:
                 return 120
+            case .servicesType:
+                return  120
             default:
-                return 55
-
+                return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath.section {
-            case 0:
-                 let photoGalleryCell = tableView.dequeueReusableCell(withIdentifier: PhotoGalleryCell.reuseIdentifier, for: indexPath) as! PhotoGalleryCell
-                 photoGalleryCell.photoList = []
-                 return photoGalleryCell
-            case 1:
-                let cell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
-                cell.chefDetails = chefServiceData.chefService[indexPath.row]
-                
-                cell.partCount1.isHidden = true
-                cell.partyCount2.isHidden = true
-                cell.partyCount3.isHidden = true
-                cell.servicePriceLabel.isHidden = true
-             return cell
-            default:
-               return  UITableViewCell()
+        switch self.profileSections[ indexPath.section] {
+            
+        case .aboutType:
+            let aboutCell: AboutTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
+            aboutCell.delegate = self
+            aboutCell.aboutChef = (chefInfo?.about)!
+            let aboutHeight = chefInfo?.about?.height(withConstrainedWidth: (view.frame.width - 20), font: UIFont.systemFont(ofSize: 16))
+            if CGFloat(100.0).isLess(than: aboutHeight!) {
+                aboutCell.showMoreButton = true
+                self.aboutSectionHeight = 155
+            } else {
+                self.aboutSectionHeight = aboutHeight!
+            }
+            return aboutCell
+        case .photoGalleryType:
+            let photoGalleryCell = tableView.dequeueReusableCell(withIdentifier: PhotoGalleryCell.reuseIdentifier, for: indexPath) as! PhotoGalleryCell
+            photoGalleryCell.photoList = []
+            return photoGalleryCell
+        case .servicesType:
+            let cell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
+            cell.chefDetails = chefServiceData.chefService[indexPath.row]
+            
+            cell.partCount1.isHidden = true
+            cell.partyCount2.isHidden = true
+            cell.partyCount3.isHidden = true
+            cell.servicePriceLabel.isHidden = true
+            return cell
+        default:
+            return UITableViewCell()
         }
+        
     }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?{
         
-        switch section {
-        case 0:
-            return "SERVICES"
-        case 1:
+        
+        switch self.profileSections[ indexPath.section] {
+            
+        case .aboutType:
+            return  "About"
+        case .photoGalleryType:
             return "PHOTOS"
+        case .servicesType:
+            return  "SERVICES"
         default:
             return ""
         }
+        
     }
+    
+//    func calculateHeightOfAbout() -> CGFloat {
+//
+//    }
     
     
     
@@ -224,4 +289,11 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
 //        }
 //    }
     
+}
+
+extension ProfileViewController: AboutCellDelegate {
+    
+    func viewMoreClicked() {
+        self.navigationController?.pushViewController(AboutChefController.create(aboutChef: (chefInfo?.about)!), animated: true)
+    }
 }
