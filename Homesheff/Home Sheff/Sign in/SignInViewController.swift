@@ -62,11 +62,6 @@ class SignInViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        if FBSDKAccessToken.current() != nil {
-            self.facebookButton.setTitle(withText:"Logout")
-        } else {
-            self.facebookButton.setTitle(withText:"Sign In With Facebook")
-        }
     }
     
     //reappears navigation bar on next page
@@ -83,33 +78,17 @@ class SignInViewController: UIViewController {
     @IBAction func didTapSignIn(_ sender: UIButton) {
         callLoginAPI()
     }
+    
     @IBAction func facebookButtonTapped(_ sender: FacebookButton) {
-        let loginManager = FBSDKLoginManager()
-        if FBSDKAccessToken.current() != nil {
-            //FIXME: - Implement code here to directly sign in user to app
-            loginManager.logOut()
-            sender.setTitle(withText:"Sign in with Facebook")
-        } else {
-            sender.showActivity()
-            loginManager.loginBehavior = .systemAccount
-            loginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self, handler: { (result, error) in
-                if let loginError = error {
-                    print(loginError.localizedDescription)
-                    loginManager.logOut()
-                    sender.setTitle(withText:"Sign in with Facebook")
-                }else {
-                    // TODO: Implement Homesheff code to login to app
-                    if let loginResult = result {
-                        print(loginResult.token)
-                        sender.setTitle(withText:"Logout")
-                        sender.hideActivity()
-                    }
-                }
-            })
-        }
+        self.startFacebookFlow(sender: sender)
+    }
+    
+    @IBAction func createAccountTapped() {
+        self.performSegue(withIdentifier: "CreateAccountSegue", sender: self)
     }
     
     
+    //MARK: - Helper functions
     private func isTextFieldHasText() -> Bool {
         if usernameTextField.text?.isEmpty ?? false || passwordTextField.text?.isEmpty ?? false {
             return false
@@ -137,6 +116,37 @@ class SignInViewController: UIViewController {
         } else {
             self.showAlert(title: "Oops!", message: "Please check your email address & password")
         }
+    }
+    
+    private func startFacebookFlow(sender: FacebookButton) {
+        let loginManager = FBSDKLoginManager()
+        guard let currentUser = FBSDKAccessToken.current() else {
+            sender.showActivity()
+            loginManager.loginBehavior = .systemAccount
+            loginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self, handler: { [unowned self] (result, error) in
+                sender.hideActivity()
+                if let loginError = error {
+                    print(loginError.localizedDescription)
+                    loginManager.logOut()
+                    sender.setTitle(withText:"Sign in with Facebook")
+                    self.showAlertWith(alertTitle: "Facebook Login Error", alertBody: "Unable to access your facebook account. Please try again.", action: {
+                        loginManager.logOut()
+                    })
+                }else {
+                    if let loginResult = result {
+                        if !loginResult.isCancelled {
+                            self.createAccountTapped()
+                        }else {
+                            print(loginResult.token)
+                            print(loginResult.grantedPermissions)
+                            print(loginResult.declinedPermissions)
+                        }
+                    }
+                }
+            })
+            return
+        }
+        self.createAccountTapped()
     }
 }
 
