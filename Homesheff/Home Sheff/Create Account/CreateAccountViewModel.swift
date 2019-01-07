@@ -23,6 +23,12 @@ class CreateAccountViewModel: NSObject {
         apiHandler.signUpCall(requestEnvelop: envelop, completion: completion)
     }
     
+    func signUpEnvelop(_ basicDetails: Details) -> Requestable {
+        let signupSearchPath = ServicePath.signUpCall(email: basicDetails.email, password: basicDetails.password, phoneNo: basicDetails.phoneNo, firstName: basicDetails.firstName, lastName: basicDetails.lastName, isChef: basicDetails.isChef, isCustomer: basicDetails.isCustomer, imageUrl: basicDetails.imageUrl, zipCode: basicDetails.zipCode)
+        let signupEnvelop = SaveUserPreferencesEnvelop(pathType: signupSearchPath)
+        return signupEnvelop
+    }
+    
     override init() {
         
         if  !fieldData.genericFields.isEmpty {

@@ -23,46 +23,42 @@ extension UITextField{
 
 class CreateAccountController: UIViewController {
     
+    //MARK: - IBOutlets
     @IBOutlet weak var createAccountTableView: UITableView!
     @IBOutlet weak var termsAndConditionsLabel: UILabel!
+    @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
+    @IBOutlet weak var signUpButton: SpinningButton!
+    @IBOutlet weak var signInViewModel: SignInViewModel!
+    @IBOutlet weak var createAccountViewModel: CreateAccountViewModel!
+    
+    //MARK: - Private properties
     private let unSelectedCheckboxImage = UIImage(named: "checkbox-blank")
     private let selectedCheckboxImage = UIImage(named: "checkbox-selected")
     
-    var email: String?
-    var password: String?
-    var firstName: String?
-    var lastName: String?
-    var phoneNo: String?
-    var isChef = false
-    var isCustomer = false
-    var imageUrl = "https://png.icons8.com/color/2x/person-male.png"
-    var zipCode = "20017"
+    //MARK: - Basic Details
+    var basicDetails: Details!
     
-    @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
-
+    //MARK: - Facebook Properties
+    var isFaceBookSignUp = false
     
-    private let viewModel = CreateAccountViewModel()
-    private let signInViewModel = SignInViewModel()
-    
-    @IBOutlet weak var signUpButton: UIButton!
-    
+    //MARK: - Selectors
     @objc func checkBoxTapped(_ sender: UIButton){
         if sender.isSelected {
             sender.isSelected = false
             sender.setImage(unSelectedCheckboxImage, for: .normal)
-        }
-        else {
+        }else {
             sender.isSelected = true
             sender.setImage(selectedCheckboxImage, for: .normal)
         }
-        
         if sender.tag == 1 {
-            isChef = sender.isSelected
+            basicDetails.isChef = sender.isSelected
         } else {
-            isCustomer = sender.isSelected
+            basicDetails.isCustomer = sender.isSelected
         }
+        self.signUpButton.isEnabled(validateFields())
     }
     
+    //MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -80,6 +76,10 @@ class CreateAccountController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
          super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
+        if isFaceBookSignUp{
+            prePopulate(email: basicDetails.email, firstName: basicDetails.firstName, lastName: basicDetails.lastName)
+        }
+        self.signUpButton.isEnabled(false)
     }
     
     override func didReceiveMemoryWarning() {
@@ -95,61 +95,56 @@ class CreateAccountController: UIViewController {
         })
     }
     
-    @IBAction func callSignupAPI() {
-       
-        self.view.endEditing(true) // Force end editing to get the last generic field user entry
-        let item = viewModel.fields[0]
-        if item.type == .genericField {
-              if let item = item as? GenericFieldItem {
-                for value in item.genericData {
-                    switch value.placeHolder {
-                    case "Email":
-                        email = value.name
-                    case "Password":
-                        password = value.name
-                    case "First Name":
-                        firstName = value.name
-                    case "Phone No":
-                        phoneNo = value.name
-                    case "Last Name":
-                        lastName = value.name
-                    default:
-                        print(value.name)
-                    }
+    deinit {
+        print("Create Account VC deinit called")
+    }
+    
+    //MARK: - IBActions
+    @IBAction func signUpButtonTapped() {
+        self.callSignupAPI()
+    }
+    
+    //MARK: - Helper Functions
+    private func prePopulate(email:String, firstName:String, lastName:String) {
+        if let fieldItems = createAccountViewModel.fields[0] as? GenericFieldItem {
+            for (index, itemData) in fieldItems.genericData.enumerated() {
+                switch itemData.placeHolder {
+                case "Email":
+                    fieldItems.genericData[index].name = email
+                case "First Name":
+                    fieldItems.genericData[index].name = firstName
+                case "Last Name":
+                    fieldItems.genericData[index].name = lastName
+                default:
+                    fieldItems.genericData[index].name = ""
+                }
+            }
+        }
+        self.createAccountTableView.reloadData()
+    }
+    
+    /** Enumerate through view model data to find if all the fields are valid
+    */
+    private func validateFields() -> Bool {
+        var isValidField = true
+        if let fieldItems = createAccountViewModel.fields[0] as? GenericFieldItem {
+            for (index, itemData) in fieldItems.genericData.enumerated() {
+                switch itemData.placeHolder {
+                case "Email":
+                    isValidField = fieldItems.genericData[index].name.isValidEmail() && isValidField
+                case "First Name":
+                    isValidField = !fieldItems.genericData[index].name.isEmpty && isValidField
+                case "Last Name":
+                    isValidField = !fieldItems.genericData[index].name.isEmpty && isValidField
+                case "Password":
+                    isValidField = fieldItems.genericData[index].name.isValidPassword() && isValidField
+                default:
+                    break
                 }
             }
         }
         
-        signupAPI()
-    }
-    
-    private func signupAPI() {
-        
-        if isTextFieldHasText() {
-            loadingIndicator.startAnimating()
-            
-            viewModel.signUp(envelop: signUpEnvelop()) { [weak self] isSuccess in
-                
-                if isSuccess{
-                    // Login again
-                    // TODO: Make common Signin api call
-                    self?.callLoginAPI()
-                } else {
-                    self?.loadingIndicator.stopAnimating()
-                    self?.showAlert(title: "Oops!", message: "Please check your details")
-                }
-                
-            }
-        } else {
-            self.showAlert(title: "Oops!", message: "Please check your details")
-        }
-    }
-    
-    private func isTextFieldHasText() -> Bool {
-        if email?.isEmpty ?? false || password?.isEmpty ?? false || phoneNo?.isEmpty ?? false || (isChef == false && isCustomer == false) {
-            return false
-        }
-        return true
+        return isValidField && (basicDetails.isChef || basicDetails.isCustomer)
     }
     
     private func navigateToFinishYourProfile() {
@@ -165,54 +160,73 @@ class CreateAccountController: UIViewController {
         self.present(baseTabbar, animated: true, completion: nil)
     }
     
-   private func signUpEnvelop() -> Requestable {
+    private func update(textField: UITextField) {
+        if let item = createAccountViewModel.fields[0] as? GenericFieldItem, let text = textField.text {
+            item.genericData[textField.tag].name = text
+            switch item.genericData[textField.tag].placeHolder {
+            case "Email":
+                basicDetails.email = text
+            case "Password":
+                basicDetails.password = text
+            case "First Name":
+                basicDetails.firstName = text
+            case "Last Name":
+                basicDetails.lastName = text
+            default:
+                print(text)
+            }
+        }
+        self.signUpButton.isEnabled(validateFields())
         
-    let signupSearchPath = ServicePath.signUpCall(email: email!, password: password!, phoneNo: phoneNo, firstName: firstName!, lastName: lastName!, isChef: isChef, isCustomer: isCustomer, imageUrl: imageUrl, zipCode: zipCode)
-        let signupEnvelop = SaveUserPreferencesEnvelop(pathType: signupSearchPath)
-        
-        return signupEnvelop
+    }
+    
+    //MARK: - API Methods
+    private func callSignupAPI() {
+        loadingIndicator.startAnimating()
+        createAccountViewModel.signUp(envelop: createAccountViewModel.signUpEnvelop(basicDetails)) { [unowned self] isSuccess in
+            if isSuccess{
+                self.callLoginAPI()
+            } else {
+                self.loadingIndicator.stopAnimating()
+                self.showAlert(title: "Oops!", message: "Please check your details")
+            }
+            
+        }
     }
     
     private func callLoginAPI() {
-        if isTextFieldHasText() {
-            loadingIndicator.startAnimating()
-            signInViewModel.signInApi(envelop:signInViewModel.signInEnvelop(userName: email!, password: password!)) { [weak self] isSuccess in
-                
-                if isSuccess{
-                    
-                    //TODO: Manage session time out from API --later
-                    UserDefaults.standard.set(true, forKey: "userLoggedIn")
-                    
-                    if let isCustomer = self?.isCustomer, isCustomer {
-                        self?.navigateToBaseTabBar()
-                    } else {
-                        self?.navigateToFinishYourProfile()
-                    }
-                    
+        loadingIndicator.startAnimating()
+        signInViewModel.signInApi(envelop:signInViewModel.signInEnvelop(userName: basicDetails.email, password: basicDetails.password)) { [unowned self] isSuccess in
+            self.loadingIndicator.stopAnimating()
+            if isSuccess{
+                UserDefaults.standard.set(true, forKey: "userLoggedIn")
+                if self.basicDetails.isCustomer {
+                    self.navigateToBaseTabBar()
                 } else {
-                    self?.showAlert(title: "Oops!", message: "Please check your email address & password")
+                    self.navigateToFinishYourProfile()
                 }
-                self?.loadingIndicator.stopAnimating()
+                
+            } else {
+                self.showAlert(title: "Oops!", message: "Please check your email address & password")
             }
-        } else {
-            self.showAlert(title: "Oops!", message: "Please check your email address & password")
         }
     }
 }
 
+//MARK: - TableView Data Source Delegate
 extension CreateAccountController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.fields.count
+        return createAccountViewModel.fields.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.fields[section].rowCount
+        return createAccountViewModel.fields[section].rowCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let item = viewModel.fields[indexPath.section]
+        let item = createAccountViewModel.fields[indexPath.section]
         
         switch item.type {
         case .genericField:
@@ -240,6 +254,7 @@ extension CreateAccountController: UITableViewDataSource {
     }
 }
 
+//MARK: - TableView Delegate
 extension CreateAccountController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -256,22 +271,28 @@ extension CreateAccountController: UITableViewDelegate {
     }
 }
 
-//TODO: Move it cell class
+//MARK: - TextField Delegate
 extension CreateAccountController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        if viewModel.fields[0].type == .genericField {
-            
-            if let item = viewModel.fields[0] as? GenericFieldItem {
-                item.genericData[textField.tag].name = textField.text ?? ""
-                
-                print(item.genericData[textField.tag].name)
-            }
-        }
+        update(textField: textField)
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        update(textField: textField)
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    /* //FIXME: - Handle this delegate to imrove experience
+     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+     update(textField: textField)
+     return true
+     }
+     */
 }
 
+//MARK: - Attributed Text Configuration functions
 extension CreateAccountController {
     
     func setTermsAndConditions() {

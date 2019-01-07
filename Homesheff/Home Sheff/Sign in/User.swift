@@ -69,3 +69,37 @@ final class User {
         }
    }
 }
+
+struct Details {
+    var firstName: String
+    var lastName: String
+    var email: String
+    var password: String
+    var imageUrl: String
+    var zipCode: String
+    var phoneNo: String
+    var isChef: Bool
+    var isCustomer: Bool
+    init(_ dictionary: [String : Any]) {
+        firstName = dictionary["first_name"] as! String
+        lastName = dictionary["last_name"] as! String
+        email = dictionary["email"] as! String
+        password = ""
+        imageUrl = "https://png.icons8.com/color/2x/person-male.png"
+        zipCode = "20017"
+        phoneNo = ""
+        isChef = false
+        isCustomer = false
+    }
+    init() {
+        firstName = ""
+        lastName = ""
+        email = ""
+        password = ""
+        imageUrl = "https://png.icons8.com/color/2x/person-male.png"
+        zipCode = "20017"
+        phoneNo = ""
+        isChef = false
+        isCustomer = false
+    }
+}

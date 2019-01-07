@@ -139,7 +139,7 @@
                                             <color key="titleColor" red="0.2901960784" green="0.43921568630000002" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="createAccountTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="NhU-fX-8vv"/>
+                                            <action selector="createAccountTappedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ORB-ub-x2H"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -198,11 +198,13 @@
                         <outlet property="loadingIndicator" destination="Uyp-eG-ewk" id="wVX-Tq-KUq"/>
                         <outlet property="passwordTextField" destination="1bU-pX-waH" id="yIe-8Y-Pkc"/>
                         <outlet property="signInButton" destination="qwq-v1-iua" id="Smp-y5-ady"/>
+                        <outlet property="signInViewModel" destination="mzP-93-NjX" id="byx-jS-V5i"/>
                         <outlet property="usernameTextField" destination="GhX-0b-RfX" id="hCN-5u-PvU"/>
                         <segue destination="b0G-q1-e5l" kind="show" identifier="CreateAccountSegue" id="pYN-2g-NQc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <customObject id="mzP-93-NjX" customClass="SignInViewModel" customModule="Homesheff" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="733.60000000000002" y="-203.74812593703149"/>
         </scene>
@@ -1092,7 +1094,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <viewLayoutGuide key="safeArea" id="qUp-Oo-PFM"/>
                         <color key="tintColor" red="1" green="0.99998801950000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <color key="barTintColor" red="0.53163719180000002" green="0.69031125309999997" blue="0.29009753469999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.53333333333333333" green="0.69019607843137254" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -1161,23 +1163,23 @@
                                     <constraint firstAttribute="width" constant="44" id="izn-BJ-uiG"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELY-Ya-qlE">
-                                <rect key="frame" x="19" y="618" width="336" height="35"/>
-                                <color key="backgroundColor" red="0.57364708238258455" green="0.75896567953419569" blue="0.54890192356806322" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELY-Ya-qlE" customClass="SpinningButton" customModule="Homesheff" customModuleProvider="target">
+                                <rect key="frame" x="40" y="575" width="295" height="52"/>
+                                <color key="backgroundColor" red="0.53333333333333333" green="0.69019607843137254" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="WKP-PW-DHy"/>
+                                    <constraint firstAttribute="height" constant="52" id="WKP-PW-DHy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="0.97553803809999995" green="0.97553803809999995" blue="0.97553803809999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="17"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="callSignupAPI" destination="b0G-q1-e5l" eventType="touchUpInside" id="duu-cO-qY6"/>
+                                    <action selector="signUpButtonTapped" destination="b0G-q1-e5l" eventType="touchUpInside" id="lv0-VC-VMT"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up, I agree to the Terms if Service and Privacy Statement, and consent to receiving email communication." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLY-d4-hga">
@@ -1192,15 +1194,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.9242808997328511" green="0.9242808997328511" blue="0.9242808997328511" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="cDC-d3-CDo" firstAttribute="trailing" secondItem="ELY-Ya-qlE" secondAttribute="trailing" constant="20" id="6rf-Y5-JzL"/>
+                            <constraint firstItem="cDC-d3-CDo" firstAttribute="trailing" secondItem="ELY-Ya-qlE" secondAttribute="trailing" constant="40" id="6rf-Y5-JzL"/>
                             <constraint firstItem="6tw-k4-jEO" firstAttribute="trailing" secondItem="cDC-d3-CDo" secondAttribute="trailing" id="G3W-n2-4c7"/>
                             <constraint firstItem="6tw-k4-jEO" firstAttribute="leading" secondItem="cDC-d3-CDo" secondAttribute="leading" id="Haq-wa-ALJ"/>
                             <constraint firstItem="vLY-d4-hga" firstAttribute="top" secondItem="6tw-k4-jEO" secondAttribute="bottom" constant="25" id="LAf-2C-cFZ"/>
-                            <constraint firstItem="ELY-Ya-qlE" firstAttribute="leading" secondItem="cDC-d3-CDo" secondAttribute="leading" constant="19" id="YPF-iD-8yF"/>
+                            <constraint firstItem="ELY-Ya-qlE" firstAttribute="leading" secondItem="cDC-d3-CDo" secondAttribute="leading" constant="40" id="YPF-iD-8yF"/>
                             <constraint firstItem="gaP-W3-jHb" firstAttribute="centerY" secondItem="cDC-d3-CDo" secondAttribute="centerY" id="Yz5-v3-bpe"/>
                             <constraint firstItem="gaP-W3-jHb" firstAttribute="centerX" secondItem="cDC-d3-CDo" secondAttribute="centerX" id="ca0-R4-oHD"/>
                             <constraint firstItem="6tw-k4-jEO" firstAttribute="top" secondItem="cDC-d3-CDo" secondAttribute="top" constant="8" id="lfd-Q2-aKi"/>
-                            <constraint firstItem="cDC-d3-CDo" firstAttribute="bottom" secondItem="ELY-Ya-qlE" secondAttribute="bottom" constant="14" id="p4p-Q0-HsE"/>
+                            <constraint firstItem="cDC-d3-CDo" firstAttribute="bottom" secondItem="ELY-Ya-qlE" secondAttribute="bottom" constant="40" id="p4p-Q0-HsE"/>
                             <constraint firstItem="cDC-d3-CDo" firstAttribute="trailing" secondItem="vLY-d4-hga" secondAttribute="trailing" constant="18" id="uYH-tT-tde"/>
                             <constraint firstItem="vLY-d4-hga" firstAttribute="leading" secondItem="cDC-d3-CDo" secondAttribute="leading" constant="18" id="wWd-6g-hu5"/>
                         </constraints>
@@ -1210,11 +1212,16 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="createAccountTableView" destination="6tw-k4-jEO" id="cy8-7R-jQK"/>
+                        <outlet property="createAccountViewModel" destination="8f6-rr-MpK" id="bk4-Nv-qvh"/>
                         <outlet property="loadingIndicator" destination="gaP-W3-jHb" id="Aw2-Qz-jq4"/>
+                        <outlet property="signInViewModel" destination="wRT-UT-41s" id="AGD-6T-kv3"/>
+                        <outlet property="signUpButton" destination="ELY-Ya-qlE" id="qiw-Nm-OVv"/>
                         <outlet property="termsAndConditionsLabel" destination="vLY-d4-hga" id="yS8-FW-mxW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1S3-Xr-pO0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="wRT-UT-41s" customClass="SignInViewModel" customModule="Homesheff" customModuleProvider="target"/>
+                <customObject id="8f6-rr-MpK" customClass="CreateAccountViewModel" customModule="Homesheff" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="775.20000000000005" y="705.69715142428788"/>
         </scene>
