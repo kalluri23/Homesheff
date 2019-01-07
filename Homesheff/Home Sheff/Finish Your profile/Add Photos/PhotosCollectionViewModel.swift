@@ -29,20 +29,40 @@ class PhotosCollectionViewModel: NSObject {
     func adddImage(imageData:
         PhotoData) {
         self.photoData.append(imageData)
+        User.defaultUser.currentUser?.photoGallery = self.photoData
+    }
+    
+    func removeImageData(photoId: Int) {
+        self.photoData.removeAll { (data) -> Bool in
+            data.id == photoId
+        }
+        User.defaultUser.currentUser?.photoGallery = self.photoData
     }
     
     func getPhotoAtIndex(index: Int) -> PhotoData {
         return self.photoData[index]
     }
     
-    func uploadImage(image: UIImage) {
-        self.apiHandler.savePhotoToGallery(image) { (photoData, status)  in
+    func uploadImage(image: UIImage, completion: @escaping (Bool) -> ()) {
+        self.apiHandler.savePhotoToGallery(image, userId: (User.defaultUser.currentUser?.id)!) { (photoData, status)  in
             if status {
                 self.adddImage(imageData: photoData!)
                 self.reloadCollectionView!()
+                completion(true)
             } else {
-                
+                completion(false)
             }
         }
     }
+    
+    func deletePhotosFromGalleryEnvelop(photoId: Int) -> Requestable {
+        let searchPath = ServicePath.deletePhotoFromGallery(photoId: photoId)
+        let photoGalleryEnvelop = DeletePhotoFromGallery(pathType: searchPath)
+        return photoGalleryEnvelop
+    }
+    
+    func  deletePhotosFromGallery(envelop:Requestable, completion: @escaping (Bool) -> Void) {
+        apiHandler.deletePhotoFromGallery(requestEnvelop: envelop, completion: completion)
+    }
+
 }

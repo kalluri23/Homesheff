@@ -78,7 +78,7 @@ struct SavePhotoToGallery: Requestable {
 }
 
 struct DeletePhotoFromGallery: Requestable {
-    var apiPath: String { return "deletePhotoFromGallery" }
+    var apiPath: String { return "deletePhotoFromGallery/" + pathType.serviceEndpoint() }
     var httpType: HttpType { return .delete}
     var pathType: ServicePath
 }
@@ -102,6 +102,7 @@ internal enum ServicePath:ParameterBodyMaker {
     case resetPassword(email:String, code:String, password:String)
     case getUserById(userId: Int)
     case getPhotoGallery(userId: Int)
+    case deletePhotoFromGallery(photoId: Int)
     case validate(email:String, code:String)
     case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: String?, isChef: Bool?, isCustomer: Bool?)
     case finishYourProfileCall(firstName: String?, lastName: String?, headline: String?, about: String?, email: String?, location: String?, phoneNo: String?, isChef: Bool?, isCustomer: Bool?)
@@ -118,7 +119,7 @@ internal enum ServicePath:ParameterBodyMaker {
             
         case .signUpCall(email: let email, password: let password, phoneNo: let phoneNo, firstName: let firstName, lastName: let lastName, isChef: let isChef, isCustomer: let isCustomer, imageUrl: let imageUrl, zipCode: let zipCode):
             return ["email": email, "password": password, "phone": phoneNo ?? "", "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, zipCode: "zipCode"]
-        case .forgotPassword, .validate, .getUserById, .getPhotoGallery:
+        case .forgotPassword, .validate, .getUserById, .getPhotoGallery, .deletePhotoFromGallery:
             return nil
         
         case .resetPassword(email: let email, code: let code, password: let password):
@@ -145,6 +146,8 @@ internal enum ServicePath:ParameterBodyMaker {
             return "?userId=\(userId)"
         case .getPhotoGallery(userId: let userId):
             return "\(userId)"
+        case .deletePhotoFromGallery(photoId: let photoId):
+            return "\(photoId)"
         default:
             return "/"
         }

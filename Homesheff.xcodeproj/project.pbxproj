@@ -27,7 +27,7 @@
 		A4AA64002173B6E5007D83F2 /* ProfileGenericTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4AA63FE2173B6E5007D83F2 /* ProfileGenericTableViewCell.xib */; };
 		A4AA64032173B704007D83F2 /* ProfileDetailedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA64012173B703007D83F2 /* ProfileDetailedTableViewCell.swift */; };
 		A4AA64042173B704007D83F2 /* ProfileDetailedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4AA64022173B704007D83F2 /* ProfileDetailedTableViewCell.xib */; };
-		A4AA64062173BE76007D83F2 /* ChefDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA64052173BE76007D83F2 /* ChefDetailsModel.swift */; };
+		A4AA64062173BE76007D83F2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA64052173BE76007D83F2 /* ProfileViewModel.swift */; };
 		A4AA64092173CC5C007D83F2 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA64082173CC5C007D83F2 /* UserProfileViewController.swift */; };
 		A4AA640C2173CD57007D83F2 /* UserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA640A2173CD57007D83F2 /* UserProfileTableViewCell.swift */; };
 		A4AA640D2173CD57007D83F2 /* UserProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4AA640B2173CD57007D83F2 /* UserProfileTableViewCell.xib */; };
@@ -54,6 +54,8 @@
 		DA5C7E4D21C1F6D6003656BE /* ImageEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C7E4C21C1F6D6003656BE /* ImageEditor.swift */; };
 		DA8BE00F21E11D3D003CB039 /* FinishYourProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8BE00E21E11D3D003CB039 /* FinishYourProfileViewModel.swift */; };
 		DA8BE01121E11EB2003CB039 /* FinishYourProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8BE01021E11EB2003CB039 /* FinishYourProfileController.swift */; };
+		DA8BE01621E2B5B8003CB039 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8BE01421E2B5B8003CB039 /* ProfileHeaderCell.swift */; };
+		DA8BE01721E2B5B8003CB039 /* ProfileHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA8BE01521E2B5B8003CB039 /* ProfileHeaderCell.xib */; };
 		DA91FB1921B210A00065C1BD /* AboutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA91FB1821B210A00065C1BD /* AboutTableViewCell.xib */; };
 		DA91FB1B21B21E240065C1BD /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91FB1A21B21E240065C1BD /* AboutTableViewCell.swift */; };
 		DA91FB1D21B303510065C1BD /* ChefDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA91FB1C21B303510065C1BD /* ChefDetails.storyboard */; };
@@ -109,7 +111,7 @@
 		A4AA63FE2173B6E5007D83F2 /* ProfileGenericTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileGenericTableViewCell.xib; sourceTree = "<group>"; };
 		A4AA64012173B703007D83F2 /* ProfileDetailedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailedTableViewCell.swift; sourceTree = "<group>"; };
 		A4AA64022173B704007D83F2 /* ProfileDetailedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileDetailedTableViewCell.xib; sourceTree = "<group>"; };
-		A4AA64052173BE76007D83F2 /* ChefDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChefDetailsModel.swift; sourceTree = "<group>"; };
+		A4AA64052173BE76007D83F2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		A4AA64082173CC5C007D83F2 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		A4AA640A2173CD57007D83F2 /* UserProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A4AA640B2173CD57007D83F2 /* UserProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileTableViewCell.xib; sourceTree = "<group>"; };
@@ -137,6 +139,8 @@
 		DA5C7E4C21C1F6D6003656BE /* ImageEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditor.swift; sourceTree = "<group>"; };
 		DA8BE00E21E11D3D003CB039 /* FinishYourProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishYourProfileViewModel.swift; sourceTree = "<group>"; };
 		DA8BE01021E11EB2003CB039 /* FinishYourProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishYourProfileController.swift; sourceTree = "<group>"; };
+		DA8BE01421E2B5B8003CB039 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
+		DA8BE01521E2B5B8003CB039 /* ProfileHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderCell.xib; sourceTree = "<group>"; };
 		DA91FB1821B210A00065C1BD /* AboutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutTableViewCell.xib; sourceTree = "<group>"; };
 		DA91FB1A21B21E240065C1BD /* AboutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewCell.swift; sourceTree = "<group>"; };
 		DA91FB1C21B303510065C1BD /* ChefDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChefDetails.storyboard; sourceTree = "<group>"; };
@@ -347,15 +351,12 @@
 		A4AA64072173CC17007D83F2 /* Chef Details */ = {
 			isa = PBXGroup;
 			children = (
-				A4AA64052173BE76007D83F2 /* ChefDetailsModel.swift */,
+				DA8BE01821E2B844003CB039 /* ViewModel */,
+				DA8BE01321E2B504003CB039 /* View */,
 				A4C924BB2173990B00F3BBDE /* ProfileViewController.swift */,
 				A4AA63FD2173B6E5007D83F2 /* ProfileGenericTableViewCell.swift */,
-				A4AA63FE2173B6E5007D83F2 /* ProfileGenericTableViewCell.xib */,
 				A4AA64012173B703007D83F2 /* ProfileDetailedTableViewCell.swift */,
-				A4AA64022173B704007D83F2 /* ProfileDetailedTableViewCell.xib */,
-				DA91FB1821B210A00065C1BD /* AboutTableViewCell.xib */,
 				DA91FB1A21B21E240065C1BD /* AboutTableViewCell.swift */,
-				DA91FB1C21B303510065C1BD /* ChefDetails.storyboard */,
 				DA91FB2021B3042E0065C1BD /* AboutChefController.swift */,
 			);
 			path = "Chef Details";
@@ -429,6 +430,27 @@
 				E4D044FE21D84C38005ADA8A /* FinishYourProfileViewModel.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		DA8BE01321E2B504003CB039 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A4AA63FE2173B6E5007D83F2 /* ProfileGenericTableViewCell.xib */,
+				DA91FB1821B210A00065C1BD /* AboutTableViewCell.xib */,
+				A4AA64022173B704007D83F2 /* ProfileDetailedTableViewCell.xib */,
+				DA91FB1C21B303510065C1BD /* ChefDetails.storyboard */,
+				DA8BE01421E2B5B8003CB039 /* ProfileHeaderCell.swift */,
+				DA8BE01521E2B5B8003CB039 /* ProfileHeaderCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DA8BE01821E2B844003CB039 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A4AA64052173BE76007D83F2 /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		DAC5944021D836AB004AC6D4 /* PhotoGallery */ = {
@@ -590,6 +612,7 @@
 				E9D14B572147BF00009A57A1 /* Main.storyboard in Resources */,
 				E975B60E2160133100BE6DD2 /* ChefFieldsCell.xib in Resources */,
 				E975B6132160156000BE6DD2 /* SignUpContentTableViewCell.xib in Resources */,
+				DA8BE01721E2B5B8003CB039 /* ProfileHeaderCell.xib in Resources */,
 				E4D0450121D84C61005ADA8A /* FinishYourProfile.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -670,7 +693,7 @@
 				14E2ABB621DAAB31005673CA /* ResetPasswordViewController.swift in Sources */,
 				14E2ABBB21DACE89005673CA /* SecureTextField.swift in Sources */,
 				DA91FB1B21B21E240065C1BD /* AboutTableViewCell.swift in Sources */,
-				A4AA64062173BE76007D83F2 /* ChefDetailsModel.swift in Sources */,
+				A4AA64062173BE76007D83F2 /* ProfileViewModel.swift in Sources */,
 				E975B60D2160133100BE6DD2 /* ChefFieldsCell.swift in Sources */,
 				E975B609216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift in Sources */,
 				142C8C2621C44E9500C04619 /* FindChefCell.swift in Sources */,
@@ -680,6 +703,7 @@
 				A4C9249F2172AFB800F3BBDE /* BaseTabbarController.swift in Sources */,
 				E9182438214EA22A009F62CE /* Chef.swift in Sources */,
 				E4D044FB21D84A9F005ADA8A /* FinishYourProfileCell.swift in Sources */,
+				DA8BE01621E2B5B8003CB039 /* ProfileHeaderCell.swift in Sources */,
 				A403097621795046001397EE /* User.swift in Sources */,
 				DA240C7621C070C90004474B /* PhotosCollectionViewModel.swift in Sources */,
 				149EA07621D15D54004DD3E5 /* ForgotPasswordViewController.swift in Sources */,

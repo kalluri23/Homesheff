@@ -12,7 +12,7 @@ import AlamofireImage
 
 
 class APIManager {
-    static let  baseUrl = "http://api.dev.homesheff.com/v1"
+    static let  baseUrl = "https://api.dev.homesheff.com/v1"
     typealias LoginSuccessHanlder = (Bool) -> Void
     func signInApi(requestEnvelop:Requestable, completion: @escaping LoginSuccessHanlder)  {
         let request = Alamofire.request(
@@ -292,15 +292,14 @@ extension APIManager {
 
 extension APIManager {
     
-    func savePhotoToGallery(_ photo: UIImage, completionHandler: @escaping(_ photoData: PhotoData?, _ success: Bool) -> Void) {
+    func savePhotoToGallery(_ photo: UIImage, userId: Int, completionHandler: @escaping(_ photoData: PhotoData?, _ success: Bool) -> Void) {
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
-        let fileName = "\(UUID().uuidString).jpeg"
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             let imageData = UIImageJPEGRepresentation(photo, 0.1)
             if let imageData = imageData {
-                multipartFormData.append(imageData, withName: "file", fileName: fileName,  mimeType: "image/jpeg")
+                multipartFormData.append(imageData, withName: "file", fileName: "file.jpeg",  mimeType: "image/jpeg")
             }
-        }, usingThreshold: UInt64.init(), to: "\(APIManager.baseUrl)/savePhotoToGallery/\(459)", method: .post, headers: headers) { (result) in
+        }, usingThreshold: UInt64.init(), to: "\(APIManager.baseUrl)/savePhotoToGallery/\(userId)", method: .post, headers: headers) { (result) in
             switch result {
             case .success(let upload, _, _):
                 print ("image uploded")
@@ -353,17 +352,28 @@ extension APIManager {
         }
     }
     
-    func deletePhotoFromGallery(photoId: String, completion: @escaping (_ success: Bool) -> Void) {
-        let url = "\(APIManager.baseUrl)/deletePhotoFromGallery/\(photoId)"
-        Alamofire.request(url).responseData { (response) in
+    func deletePhotoFromGallery(requestEnvelop:Requestable, completion: @escaping (_ success: Bool) -> Void) {
+        let method = requestEnvelop.httpType.rawValue
+        let type = HTTPMethod(rawValue: method)
+        
+        Alamofire.request(
+            requestEnvelop.requestURL()!,
+            method: type!,
+            parameters: requestEnvelop.pathType.httpBodyEnvelop(),
+            encoding: JSONEncoding.default,
+            headers: requestEnvelop.httpHeaders()
+        ).responseData { (response) in
             switch response.result  {
             case .success:
                 if response.result.value != nil {
                     print(response.result)
                     completion(true)
+                } else {
+                    completion(false)
                 }
                 
             case .failure(let error):
+                completion(false)
                 print(error)
             }
         }

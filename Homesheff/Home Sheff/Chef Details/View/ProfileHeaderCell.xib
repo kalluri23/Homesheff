@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileHeaderCell" rowHeight="212" id="KGk-i7-Jjw" customClass="ProfileHeaderCell" customModule="Homesheff" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="408" height="212"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="408" height="211.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tsI-fJ-qy8">
+                        <rect key="frame" x="0.0" y="0.0" width="408" height="220.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_background_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="bHZ-n7-h20" customClass="CustomImageView" customModule="Homesheff" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="408" height="100.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="oWn-bf-Yat"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sheff_profile_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="rX9-S2-GiC" customClass="CustomImageView" customModule="Homesheff" customModuleProvider="target">
+                                <rect key="frame" x="154" y="30.5" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="3FF-Oy-Wcm"/>
+                                    <constraint firstAttribute="width" constant="100" id="QDo-UO-vOk"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Love meal-preps. And all things green." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BD8-9D-ydM">
+                                <rect key="frame" x="66.5" y="138.5" width="275" height="19"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SvP-Mt-3cc">
+                                <rect key="frame" x="5" y="162.5" width="398" height="17"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="ashley.smith85@gmail.com * 703-231-7898 ">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7U-Ey-EDp">
+                                <rect key="frame" x="367" y="179.5" width="33" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="G80-RP-8C4"/>
+                                    <constraint firstAttribute="width" constant="33" id="cB2-Ea-5hM"/>
+                                    <constraint firstAttribute="height" constant="33" id="hrz-tV-kVg"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="33" id="j8C-yE-8rj"/>
+                                </constraints>
+                                <state key="normal" image="pencil-icon" backgroundImage="pencil-icon-background-circle"/>
+                                <connections>
+                                    <action selector="editProfile:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eP2-ve-2PU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.99998801950000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="SvP-Mt-3cc" firstAttribute="centerX" secondItem="tsI-fJ-qy8" secondAttribute="centerX" id="7gS-pZ-ZQY"/>
+                            <constraint firstAttribute="bottom" secondItem="v7U-Ey-EDp" secondAttribute="bottom" constant="8" id="FIo-2G-N6H"/>
+                            <constraint firstAttribute="trailing" secondItem="SvP-Mt-3cc" secondAttribute="trailing" constant="5" id="N1l-S9-Jai"/>
+                            <constraint firstItem="BD8-9D-ydM" firstAttribute="top" secondItem="rX9-S2-GiC" secondAttribute="bottom" constant="8" id="W9h-hW-6B0"/>
+                            <constraint firstItem="rX9-S2-GiC" firstAttribute="top" secondItem="tsI-fJ-qy8" secondAttribute="top" constant="30" id="X9e-cq-oFD"/>
+                            <constraint firstItem="bHZ-n7-h20" firstAttribute="leading" secondItem="tsI-fJ-qy8" secondAttribute="leading" id="Z9e-bp-h0L"/>
+                            <constraint firstItem="bHZ-n7-h20" firstAttribute="top" secondItem="tsI-fJ-qy8" secondAttribute="top" id="ZtG-4Q-Ece"/>
+                            <constraint firstItem="SvP-Mt-3cc" firstAttribute="top" secondItem="BD8-9D-ydM" secondAttribute="bottom" constant="5" id="gVG-DB-Omp"/>
+                            <constraint firstAttribute="trailing" secondItem="v7U-Ey-EDp" secondAttribute="trailing" constant="8" id="kjb-vL-zgH"/>
+                            <constraint firstAttribute="height" constant="220" id="mRR-Cl-FFf"/>
+                            <constraint firstItem="rX9-S2-GiC" firstAttribute="centerX" secondItem="tsI-fJ-qy8" secondAttribute="centerX" id="rQK-fV-xBC"/>
+                            <constraint firstItem="BD8-9D-ydM" firstAttribute="centerX" secondItem="tsI-fJ-qy8" secondAttribute="centerX" id="zLE-k8-FVl"/>
+                            <constraint firstAttribute="trailing" secondItem="bHZ-n7-h20" secondAttribute="trailing" id="zbz-LL-eA9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="tsI-fJ-qy8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="H8g-h9-teF"/>
+                    <constraint firstAttribute="bottom" secondItem="tsI-fJ-qy8" secondAttribute="bottom" id="Hwb-ei-co0"/>
+                    <constraint firstItem="tsI-fJ-qy8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Uyt-y7-8Z3"/>
+                    <constraint firstAttribute="trailing" secondItem="tsI-fJ-qy8" secondAttribute="trailing" id="Zf2-Ep-oVV"/>
+                    <constraint firstAttribute="trailing" secondItem="tsI-fJ-qy8" secondAttribute="trailing" id="nrb-yj-JKW"/>
+                    <constraint firstItem="tsI-fJ-qy8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="rN8-VQ-Z8Q"/>
+                    <constraint firstAttribute="bottom" secondItem="tsI-fJ-qy8" secondAttribute="bottom" id="ylM-lc-Da1"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="profileBgView" destination="bHZ-n7-h20" id="YrP-0H-pdl"/>
+                <outlet property="profileContact" destination="SvP-Mt-3cc" id="JU5-6B-AE5"/>
+                <outlet property="profileHeading" destination="BD8-9D-ydM" id="hsA-Xh-omx"/>
+                <outlet property="profileImgView" destination="rX9-S2-GiC" id="Ke3-ND-sin"/>
+            </connections>
+            <point key="canvasLocation" x="-377.60000000000002" y="35.982008995502248"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="pencil-icon" width="11" height="11"/>
+        <image name="pencil-icon-background-circle" width="33" height="33"/>
+        <image name="profile_background_placeholder" width="375" height="124"/>
+        <image name="sheff_profile_placeholder" width="70" height="70"/>
+    </resources>
+</document>

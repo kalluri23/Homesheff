@@ -47,6 +47,7 @@ class AddPhotosController: UIViewController {
         self.photosCollectionView.dataSource = self.photosCollectionView
         self.photosCollectionView.collectionDelegate = self
         self.navigationController?.isNavigationBarHidden = false
+        self.title = "Add Photos"
     }
     
    
@@ -135,33 +136,7 @@ class AddPhotosController: UIViewController {
     }
     
     @IBAction func savePhotosToGallery(_ sender: Any) {
-//        self.uploadImages { (status) in
-//            if status {
-//                print("image uploaded")
-//            } else {
-//                print("image failed upload")
-//            }
-//        }
-    }
-    
-    func uploadImages(completion: @escaping (_ sucess: Bool) -> Void) {
-        self.activityIndicator.startAnimating()
-        let serialQueue = DispatchQueue(label: "serialQueue")
-        for eachImage  in PhotosCollectionViewModel.shared.imageList {
-            serialQueue.async{
-                self.apiHandler.savePhotoToGallery(eachImage) { (imageData,status)  in
-                    if status {
-                        AddPhotosController.uploadedImageCount = AddPhotosController.uploadedImageCount + 1
-                        if AddPhotosController.uploadedImageCount == PhotosCollectionViewModel.shared.imageList.count {
-                            self.activityIndicator.stopAnimating()
-                            completion(true)
-                        }
-                    } else {
-                         completion(false)
-                    }
-                }
-            }
-        }
+
     }
     
 }
@@ -170,12 +145,14 @@ class AddPhotosController: UIViewController {
 
 extension AddPhotosController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         DispatchQueue.main.async {
             if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
                 self.dismiss(animated: true, completion: { () -> Void in
-                     PhotosCollectionViewModel.shared.uploadImage(image: image)
+                    self.activityIndicator.startAnimating()
+                    PhotosCollectionViewModel.shared.uploadImage(image: image, completion: { (success) in
+                        self.activityIndicator.stopAnimating()
+                    })
                 })
             }
         }
@@ -188,8 +165,9 @@ extension AddPhotosController: UIImagePickerControllerDelegate, UINavigationCont
 
 extension AddPhotosController: PhotosCollectionViewDelegate {
     
-    func cellClicked(clickedImage: UIImage) {
+    func cellClicked(clickedImage: UIImage, imageId: Int) {
         photoEditor?.imageView.image = clickedImage
+        photoEditor?.imageId = imageId
         self.view.addSubview(photoEditor!)
         self.navigationController?.isNavigationBarHidden = true
         self.view.bringSubview(toFront: photoEditor!)
@@ -197,14 +175,24 @@ extension AddPhotosController: PhotosCollectionViewDelegate {
 }
 
 extension AddPhotosController: ImageEditorDelegate {
-    func optionsClicked() {
+    func optionsClicked(imageId: Int) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: { _ in
+            self.activityIndicator.startAnimating()
+            PhotosCollectionViewModel.shared.deletePhotosFromGallery(envelop: PhotosCollectionViewModel.shared.deletePhotosFromGalleryEnvelop(photoId: imageId) , completion: { (success) in
+                if success {
+                    self.activityIndicator.stopAnimating()
+                    PhotosCollectionViewModel.shared.removeImageData(photoId: imageId)
+                    PhotosCollectionViewModel.shared.reloadCollectionView!()
+                    self.photoEditor?.removeFromSuperview()
+                    self.navigationController?.isNavigationBarHidden = false
+                }
+            })
         }))
         
-        alert.addAction(UIAlertAction(title: "Resize", style: .default, handler: { _ in
-            
-        }))
+//        alert.addAction(UIAlertAction(title: "Resize", style: .default, handler: { _ in
+//
+//        }))
         
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ImageEditorDelegate: class {
-    func optionsClicked()
+    func optionsClicked(imageId: Int)
     func closeClicked()
 }
 
@@ -18,11 +18,12 @@ class ImageEditor: UIView {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var optionsBtn: UIButton!
-     @IBOutlet weak var closeBtn: UIButton!
+    @IBOutlet weak var closeBtn: UIButton!
     weak var delegate: ImageEditorDelegate?
+    var imageId: Int?
 
     @IBAction func optionsClicked(_ sender: Any) {
-        self.delegate?.optionsClicked()
+        self.delegate?.optionsClicked(imageId: self.imageId!)
     }
     
     

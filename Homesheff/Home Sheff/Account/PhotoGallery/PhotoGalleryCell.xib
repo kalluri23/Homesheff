@@ -38,16 +38,26 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6E9-VI-fuM" customClass="CustomImageView" customModule="Homesheff" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                         </imageView>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dPx-Nr-1qc">
+                                            <rect key="frame" x="50" y="50" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="E3z-8A-ysJ"/>
+                                                <constraint firstAttribute="height" constant="20" id="dTE-Yn-Der"/>
+                                            </constraints>
+                                        </activityIndicatorView>
                                     </subviews>
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="6E9-VI-fuM" secondAttribute="trailing" id="0d5-1e-H43"/>
+                                    <constraint firstItem="dPx-Nr-1qc" firstAttribute="centerY" secondItem="1aJ-WZ-SDV" secondAttribute="centerY" id="6XP-ha-QJN"/>
                                     <constraint firstItem="6E9-VI-fuM" firstAttribute="top" secondItem="1aJ-WZ-SDV" secondAttribute="top" id="88H-IS-byo"/>
+                                    <constraint firstItem="dPx-Nr-1qc" firstAttribute="centerX" secondItem="1aJ-WZ-SDV" secondAttribute="centerX" id="K1b-C5-yMe"/>
                                     <constraint firstItem="6E9-VI-fuM" firstAttribute="leading" secondItem="1aJ-WZ-SDV" secondAttribute="leading" id="i5D-4g-Ooo"/>
                                     <constraint firstAttribute="bottom" secondItem="6E9-VI-fuM" secondAttribute="bottom" id="ou2-51-i6C"/>
                                 </constraints>
                                 <size key="customSize" width="120" height="120"/>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="dPx-Nr-1qc" id="O2u-RE-NCN"/>
                                     <outlet property="imageView" destination="6E9-VI-fuM" id="kwa-pl-XyP"/>
                                 </connections>
                             </collectionViewCell>

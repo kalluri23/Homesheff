@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PhotosCollectionViewDelegate: class {
-    func cellClicked(clickedImage: UIImage)
+    func cellClicked(clickedImage: UIImage, imageId: Int)
 }
 
 class PhotosCollectionView: UICollectionView {
@@ -20,7 +20,7 @@ class PhotosCollectionView: UICollectionView {
     var photoData = [PhotoData]()
     let noPhotosView = Bundle.main.loadNibNamed("EmptyCollectionView", owner: EmptyCollectionView(), options: nil)![0] as? UIView
     override func awakeFromNib() {
-       // self.addSubview(noPhotosView!)
+        self.addSubview(noPhotosView!)
     }
     
 }
@@ -35,22 +35,26 @@ extension PhotosCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
             return PhotosCollectionViewModel.shared.numberOfRows
         }
         self.noPhotosView!.alpha = 0
-        self.sendSubview(toBack: self.noPhotosView!)
         return PhotosCollectionViewModel.shared.numberOfRows
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell =  collectionView.cellForItem(at: indexPath) as! PhotoCollectionCell
-        self.collectionDelegate?.cellClicked(clickedImage: (cell.imageView?.image)!)
+        self.collectionDelegate?.cellClicked(clickedImage: (cell.imageView?.image)!, imageId: cell.tag)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
         let photoCell:PhotoCollectionCell  = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionCell", for: indexPath) as! PhotoCollectionCell
+       
         let photoData = PhotosCollectionViewModel.shared.getPhotoAtIndex(index: indexPath.row)
-        photoCell.imageView?.loadImageWithUrlString(urlString: photoData.imageUrl!)
-        // photoCell.imageView.image = PhotosCollectionViewModel.shared.imageList[indexPath.row]
+        photoCell.tag = photoData.id
+        photoCell.imageView?.loadImageWithUrlString(urlString: photoData.imageUrl!, completion: { (success) in
+            
+        })
         return photoCell
     }
+    
+    
     
 }

@@ -58,7 +58,10 @@ extension PhotoGalleryCell: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let galleryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionCell", for: indexPath) as! PhotoCollectionCell
         let photoData = self.photoList[indexPath.row]
-        galleryCell.imageView?.loadImageWithUrlString(urlString: photoData.imageUrl!)
+        galleryCell.activityIndicator?.startAnimating()
+        galleryCell.imageView?.loadImageWithUrlString(urlString: photoData.imageUrl!, completion: { (success) in
+            galleryCell.activityIndicator?.stopAnimating()
+        })
         return galleryCell
     }
     
