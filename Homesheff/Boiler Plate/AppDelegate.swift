@@ -8,7 +8,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         self.setInitialScreen()
        // IQKeyboardManager.shared().isEnabled = true
+        loadFacebook(application: application, options: launchOptions)
         return true
     }
 
@@ -48,6 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        let handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        return handled
     }
 
     /** Check if user is logged in and set the initial content screen
@@ -83,6 +89,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let initialViewController = storyboard.instantiateInitialViewController()
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
+    }
+    
+    private func loadFacebook(application: UIApplication, options: [AnyHashable : Any]?) {
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: options)
+        FBSDKSettings.setAppID("295227917866107")
     }
 }
 

@@ -98,21 +98,35 @@
                             <constraint firstItem="6Gt-Lz-Sqd" firstAttribute="leading" secondItem="77O-2w-aHS" secondAttribute="leading" id="wuy-KX-rCq"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no photos in your gallery yet." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSm-aU-hIk">
+                        <rect key="frame" x="10" y="51" width="357" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="vuq-ao-x4e"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="JZJ-8v-X4d" firstAttribute="top" secondItem="77O-2w-aHS" secondAttribute="bottom" constant="11" id="4yh-FW-eVd"/>
+                    <constraint firstAttribute="trailing" secondItem="tSm-aU-hIk" secondAttribute="trailing" constant="8" id="9BX-ud-I4a"/>
                     <constraint firstAttribute="trailing" secondItem="77O-2w-aHS" secondAttribute="trailing" constant="8" id="UKI-UK-bQF"/>
                     <constraint firstItem="JZJ-8v-X4d" firstAttribute="leading" secondItem="51M-5j-7Ez" secondAttribute="leading" constant="10" id="gib-Lc-HzV"/>
                     <constraint firstAttribute="bottom" secondItem="JZJ-8v-X4d" secondAttribute="bottom" id="h3D-Me-xYt"/>
                     <constraint firstItem="77O-2w-aHS" firstAttribute="top" secondItem="51M-5j-7Ez" secondAttribute="top" constant="10" id="mak-MO-fe0"/>
                     <constraint firstAttribute="trailing" secondItem="JZJ-8v-X4d" secondAttribute="trailing" id="pmN-vp-1fY"/>
+                    <constraint firstItem="tSm-aU-hIk" firstAttribute="top" secondItem="77O-2w-aHS" secondAttribute="bottom" constant="8" id="qyj-cG-QkM"/>
                     <constraint firstItem="77O-2w-aHS" firstAttribute="leading" secondItem="51M-5j-7Ez" secondAttribute="leading" constant="10" id="x1S-1b-3PT"/>
+                    <constraint firstItem="tSm-aU-hIk" firstAttribute="leading" secondItem="51M-5j-7Ez" secondAttribute="leading" constant="10" id="xdE-y8-i0p"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="JZJ-8v-X4d" id="3au-YO-ozH"/>
                 <outlet property="heightConstraint" destination="TOF-40-10w" id="CqH-yJ-Pu7"/>
+                <outlet property="noPhotosLbl" destination="tSm-aU-hIk" id="IDv-3i-dhp"/>
             </connections>
+            <point key="canvasLocation" x="138.40000000000001" y="153.82308845577214"/>
         </tableViewCell>
     </objects>
     <resources>

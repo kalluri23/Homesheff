@@ -8,6 +8,7 @@
 
 import UIKit
 import NVActivityIndicatorView
+import FBSDKLoginKit
 
 extension UITextField{
     
@@ -32,18 +33,13 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var forgotYourPasswordButton: UIButton!
     @IBOutlet weak var createYourAccountButton: UIButton!
     @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
+    @IBOutlet weak var facebookButton: FacebookButton!
+    @IBOutlet weak var signInViewModel: SignInViewModel!
     
-    let viewModel = SignInViewModel()
-   
+    var fbDetails: Details!
+    //MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-              //TODO: Manage session time out from API --later
-        /*if UserDefaults.standard.bool(forKey: "userLoggedIn") == true {
-            let baseTabbar = self.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
-            self.present(baseTabbar, animated: false, completion: nil)
-        }*/
-        
         loadingIndicator.color = .black
         loadingIndicator.type = .ballClipRotate
         
@@ -57,13 +53,15 @@ class SignInViewController: UIViewController {
        
     }
     
-    //hides navigation bar on SignIn screen
+    /** hides navigation bar on SignIn screen
+    */
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    //reappears navigation bar on next page
+    /** reappears navigation bar on next page
+    */
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -73,11 +71,34 @@ class SignInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let createAccountVC = segue.destination as! CreateAccountController
+        if let source = sender, source is FacebookButton {
+            createAccountVC.isFaceBookSignUp = true
+            createAccountVC.basicDetails = self.fbDetails
+        }else {
+            createAccountVC.basicDetails = Details()
+        }
+    }
+    
+    //MARK: - IBActions
 
     @IBAction func didTapSignIn(_ sender: UIButton) {
         callLoginAPI()
     }
     
+    @IBAction func facebookButtonTapped(_ sender: FacebookButton) {
+        self.startFacebookFlow(sender: sender)
+    }
+    
+    @IBAction func createAccountTapped(sender: Any) {
+       self.performSegue(withIdentifier: "CreateAccountSegue", sender: sender)
+    }
+    
+    //MARK: - Helper functions
     private func isTextFieldHasText() -> Bool {
         if usernameTextField.text?.isEmpty ?? false || passwordTextField.text?.isEmpty ?? false {
             return false
@@ -89,7 +110,7 @@ class SignInViewController: UIViewController {
         
         if isTextFieldHasText() {
             loadingIndicator.startAnimating()
-            viewModel.signInApi(envelop: viewModel.signInEnvelop(userName: usernameTextField.text!, password: passwordTextField.text!)) { [weak self] isSuccess in
+            signInViewModel.signInApi(envelop: signInViewModel.signInEnvelop(userName: usernameTextField.text!, password: passwordTextField.text!)) { [weak self] isSuccess in
                 
                 if isSuccess{
                     
@@ -104,6 +125,68 @@ class SignInViewController: UIViewController {
             }
         } else {
             self.showAlert(title: "Oops!", message: "Please check your email address & password")
+        }
+    }
+    
+    private func startFacebookFlow(sender: FacebookButton) {
+        let loginManager = FBSDKLoginManager()
+        guard let currentUser = FBSDKAccessToken.current() else {
+            sender.showActivity()
+            loginManager.loginBehavior = .systemAccount
+            loginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self, handler: { [unowned self] (result, error) in
+                sender.hideActivity()
+                if let loginError = error {
+                    print(loginError.localizedDescription)
+                    loginManager.logOut()
+                    sender.setTitle(withText:"Sign in with Facebook")
+                    self.showAlertWith(alertTitle: "Facebook Login Error", alertBody: "Unable to access your facebook account. Please try again.", action: {
+                        loginManager.logOut()
+                    })
+                }else {
+                    if let loginResult = result {
+                        if !loginResult.isCancelled {
+                            self.getFBDetails {[unowned self] (fbDetails) in
+                               self.fbDetails = fbDetails
+                               self.createAccountTapped(sender: sender)
+                            }
+                        }else {
+                            print(loginResult.token)
+                            print(loginResult.grantedPermissions)
+                            print(loginResult.declinedPermissions)
+                        }
+                    }
+                }
+            })
+            return
+        }
+        self.getFBDetails {[unowned self] (fbDetails) in
+            if let declinedPermissions = currentUser.declinedPermissions, !declinedPermissions.isEmpty {
+                print(declinedPermissions)
+            }else {
+                self.fbDetails = fbDetails
+                self.createAccountTapped(sender: sender)
+            }
+        }
+    }
+    
+    /** Get Email, First Name and Last Name of the user to pre-populate on sign up screen
+    */
+    private func getFBDetails(completion: @escaping (Details) -> Void) {
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "first_name, last_name, email"]).start { [unowned self]  _, result, error in
+            if let detailsError = error {
+               print(detailsError.localizedDescription)
+                self.showAlertWith(alertTitle: "Facebook Login Error", alertBody: "Unable to access your facebook account. Please try again.")
+            }else {
+                if let fbDetails = result as? [String : Any],
+                   let email = fbDetails["email"] as? String,
+                   let first_name = fbDetails["first_name"],
+                   let last_name = fbDetails["last_name"] {
+                    print("\(email) \(first_name) \(last_name)")
+                    completion(Details(fbDetails))
+                }else {
+                    print("fbdetails are emty")
+                }
+            }
         }
     }
 }

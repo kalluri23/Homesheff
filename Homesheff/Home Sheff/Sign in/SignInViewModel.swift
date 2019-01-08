@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SignInViewModel {
+class SignInViewModel : NSObject{
     let apiHandler = APIManager()
     func signInApi(envelop:Requestable, completion: @escaping (Bool) -> Void ) {
         apiHandler.signInApi(requestEnvelop: envelop, completion: completion)

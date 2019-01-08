@@ -16,12 +16,25 @@ class PhotoGalleryCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var noPhotosLbl: UILabel!
+    var noPhotosLabel:UILabel?
+    
     weak var delegate: PhotoGalleryDelegate?
     var isEditable:Bool = false
-    var photoList = [PhotoData]()
+    var photoList: [PhotoData] = [PhotoData]() {
+        didSet {
+            if photoList.count == 0 {
+                noPhotosLabel!.text = "No photos available"
+                self.addSubview(noPhotosLabel!)
+            } else {
+                noPhotosLabel!.removeFromSuperview()
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.noPhotosLabel = UILabel(frame: CGRect(x:10, y:55, width:self.collectionView.frame.width, height: 21))
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
     }
@@ -52,6 +65,7 @@ class PhotoGalleryCell: UITableViewCell {
 
 extension PhotoGalleryCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return self.photoList.count
     }
     

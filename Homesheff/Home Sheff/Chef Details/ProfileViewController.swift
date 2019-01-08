@@ -17,17 +17,12 @@ enum ProfileType {
 
 class ProfileViewController: UIViewController {
 
-    @IBOutlet weak var profilePictureImageView: CustomImageView!
-    @IBOutlet weak var profileBgView: CustomImageView!
-    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var chefServiceTableView: UITableView!
     @IBOutlet weak var navigationTitleLbl: UILabel!
     @IBOutlet weak var contactCheff: UIButton!
-    @IBOutlet weak var headerLbl: UILabel!
-    @IBOutlet weak var profileEditButton: UIButton!
-    @IBOutlet weak var contactButtonConstraint: NSLayoutConstraint!
     @IBOutlet weak var contactButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var contactButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var profileTableViewBottom: NSLayoutConstraint!
     
     var chefServiceData = ProfileViewModel()
     var chefInfo: Chef?
@@ -49,15 +44,17 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         // Hiding navigation since controller has its own navigation bar
         self.navigationController?.isNavigationBarHidden = true
+        if profileType == ProfileType.myAccount {
+            //Hide contact button when myaccount
+            contactCheff.alpha = 0.0
+            chefInfo = Chef(user:User.defaultUser.currentUser!)
+        } else {
+            self.profileTableViewBottom.constant = -55
+        }
         profileSections  = chefServiceData.prepareSections
         navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
        self.chefServiceTableView.reloadData()
-        if profileType == ProfileType.myAccount {
-//            self.contactCheff.alpha = 0.0
-//            self.contactButtonHeight.constant = 0.0
-        } else {
-             self.profileEditButton.alpha = 0.0
-        }
+        
     }
     
     @IBAction func dismissViewController(_ sender: Any) {
@@ -144,7 +141,11 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
             case .aboutType:
                 return  CGFloat(self.aboutSectionHeight)
             case .photoGalleryType:
-                return 160
+                let photosList = (User.defaultUser.currentUser?.photoGallery)!
+                if photosList.count > 0 {
+                    return 160
+                }
+                return 80
             case .servicesType:
                 return  55
         }
@@ -168,20 +169,19 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
                 headerCell.profileHeading.text = chefInfo?.headertext
                 headerCell.profileContact.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
                 headerCell.delegate = self
+                if profileType != .myAccount {
+                    headerCell.profileEditBtn.alpha = 0.0
+                }
                 DispatchQueue.global(qos: .background).async {
-                    if(self.chefInfo?.imageURL != nil) {
-                        self.chefServiceData.downloadImage(imageName: "\(self.chefInfo?.id ?? 0)_ProfilePhoto") { (image) in
-                            DispatchQueue.main.async {
-                                headerCell.profileImgView.image = image
-                            }
+                    self.chefServiceData.downloadImage(imageName: "\(self.chefInfo?.id ?? 0)_ProfilePhoto") { (image) in
+                        DispatchQueue.main.async {
+                            headerCell.profileImgView.image = image
                         }
                     }
-                    if(self.chefInfo?.coverURL != nil) {
-                        self.chefServiceData.downloadImage(imageName: "\(self.chefInfo?.id ?? 0)_CoverPhoto") { (image) in
-                             DispatchQueue.main.async {
-                                self.profileBgView.image = image
-                             }
-                        }
+                    self.chefServiceData.downloadImage(imageName: "\(self.chefInfo?.id ?? 0)_CoverPhoto") { (image) in
+                         DispatchQueue.main.async {
+                             headerCell.profileBgView.image = image
+                         }
                     }
                 }
                 

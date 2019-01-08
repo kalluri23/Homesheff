@@ -41,7 +41,7 @@ class ProfileViewModel {
         if chefInfo?.about != nil && chefInfo?.photoGallery != nil && (chefInfo?.photoGallery!.count)! > 0 {
             return [.headerType, .photoGalleryType,  .servicesType, .aboutType]
         } else if (chefInfo?.about != nil) {
-            return [.headerType, .servicesType, .aboutType]
+            return [.headerType, .photoGalleryType, .servicesType, .aboutType]
         } else {
             return [.headerType, .servicesType]
         }

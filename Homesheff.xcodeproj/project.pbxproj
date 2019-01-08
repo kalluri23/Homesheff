@@ -17,6 +17,8 @@
 		14E2ABB621DAAB31005673CA /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2ABB321DAAB31005673CA /* ResetPasswordViewController.swift */; };
 		14E2ABB821DABB0B005673CA /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2ABB721DABB0B005673CA /* UIViewController+Extension.swift */; };
 		14E2ABBB21DACE89005673CA /* SecureTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2ABBA21DACE89005673CA /* SecureTextField.swift */; };
+		14E2ABBD21DFF4D3005673CA /* FacebookButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2ABBC21DFF4D3005673CA /* FacebookButton.swift */; };
+		14E2ABBF21DFF4F8005673CA /* FacebookButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E2ABBE21DFF4F8005673CA /* FacebookButton.xib */; };
 		2B42017BD6F0D30ECAEC28E3 /* Pods_Homesheff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */; };
 		A403097421794F71001397EE /* UserDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A403097321794F71001397EE /* UserDetailModal.swift */; };
 		A403097621795046001397EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A403097521795046001397EE /* User.swift */; };
@@ -100,6 +102,8 @@
 		14E2ABB321DAAB31005673CA /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		14E2ABB721DABB0B005673CA /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		14E2ABBA21DACE89005673CA /* SecureTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextField.swift; sourceTree = "<group>"; };
+		14E2ABBC21DFF4D3005673CA /* FacebookButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookButton.swift; sourceTree = "<group>"; };
+		14E2ABBE21DFF4F8005673CA /* FacebookButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FacebookButton.xib; sourceTree = "<group>"; };
 		17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.release.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.release.xcconfig"; sourceTree = "<group>"; };
 		76D12E3DE46BB8C8E4DE3E01 /* Pods_Homesheff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homesheff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A403097321794F71001397EE /* UserDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModal.swift; sourceTree = "<group>"; };
@@ -214,6 +218,8 @@
 			isa = PBXGroup;
 			children = (
 				14E2ABA921D8599B005673CA /* SpinningButton.swift */,
+				14E2ABBC21DFF4D3005673CA /* FacebookButton.swift */,
+				14E2ABBE21DFF4F8005673CA /* FacebookButton.xib */,
 			);
 			path = UIButton;
 			sourceTree = "<group>";
@@ -547,7 +553,7 @@
 				E9D14B4A2147BEFF009A57A1 /* Sources */,
 				E9D14B4B2147BEFF009A57A1 /* Frameworks */,
 				E9D14B4C2147BEFF009A57A1 /* Resources */,
-				FF0931C13AE6977E31412309 /* [CP] Embed Pods Frameworks */,
+				ADD1414AE232AEFFF2F3ED7D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -611,6 +617,7 @@
 				DA91FB1921B210A00065C1BD /* AboutTableViewCell.xib in Resources */,
 				E9D14B572147BF00009A57A1 /* Main.storyboard in Resources */,
 				E975B60E2160133100BE6DD2 /* ChefFieldsCell.xib in Resources */,
+				14E2ABBF21DFF4F8005673CA /* FacebookButton.xib in Resources */,
 				E975B6132160156000BE6DD2 /* SignUpContentTableViewCell.xib in Resources */,
 				DA8BE01721E2B5B8003CB039 /* ProfileHeaderCell.xib in Resources */,
 				E4D0450121D84C61005ADA8A /* FinishYourProfile.storyboard in Resources */,
@@ -638,22 +645,40 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FF0931C13AE6977E31412309 /* [CP] Embed Pods Frameworks */ = {
+		ADD1414AE232AEFFF2F3ED7D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 			);
@@ -718,6 +743,7 @@
 				E4D0450521D97FE1005ADA8A /* FinishYourProfileExpandedCell.swift in Sources */,
 				E90730F72151DA1E00995103 /* LocationServicesRatesViewController.swift in Sources */,
 				A4C924B62172C3D000F3BBDE /* ConfigEndPoints.swift in Sources */,
+				14E2ABBD21DFF4D3005673CA /* FacebookButton.swift in Sources */,
 				A4AA63FF2173B6E5007D83F2 /* ProfileGenericTableViewCell.swift in Sources */,
 				A4C924B82172C3D000F3BBDE /* APIManager.swift in Sources */,
 				DA240C7021C03C5D0004474B /* AddPhotosController.swift in Sources */,

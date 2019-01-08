@@ -20,6 +20,7 @@ class ProfileHeaderCell: UITableViewCell {
     @IBOutlet weak var profileHeading: UILabel!
     @IBOutlet weak var profileContact: UILabel!
     
+    @IBOutlet weak var profileEditBtn: UIButton!
     weak var delegate: ProfileHeaderDelegate?
     
     override func awakeFromNib() {

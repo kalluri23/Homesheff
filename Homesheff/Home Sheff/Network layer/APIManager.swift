@@ -116,12 +116,13 @@ class APIManager {
         let method = requestEnvelop.httpType.rawValue
         let type = HTTPMethod(rawValue: method)
         
-        Alamofire.request(
+       let request = Alamofire.request(
             requestEnvelop.requestURL()!,
             method: type!,
             parameters: requestEnvelop.pathType.httpBodyEnvelop(),
             encoding: JSONEncoding.default,
             headers: requestEnvelop.httpHeaders())
+        request.validate()
             .responseString { (response) -> Void in
                 
                 switch response.result{

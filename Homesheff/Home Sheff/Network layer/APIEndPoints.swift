@@ -118,7 +118,7 @@ internal enum ServicePath:ParameterBodyMaker {
             return ["username": userName, "password": password]
             
         case .signUpCall(email: let email, password: let password, phoneNo: let phoneNo, firstName: let firstName, lastName: let lastName, isChef: let isChef, isCustomer: let isCustomer, imageUrl: let imageUrl, zipCode: let zipCode):
-            return ["email": email, "password": password, "phone": phoneNo ?? "", "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, zipCode: "zipCode"]
+            return ["email": email, "password": password, "phone": phoneNo ?? "", "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, "zipCode": zipCode]
         case .forgotPassword, .validate, .getUserById, .getPhotoGallery, .deletePhotoFromGallery:
             return nil
         

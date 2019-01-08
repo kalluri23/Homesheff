@@ -100,6 +100,7 @@
             <connections>
                 <outlet property="profileBgView" destination="bHZ-n7-h20" id="YrP-0H-pdl"/>
                 <outlet property="profileContact" destination="SvP-Mt-3cc" id="JU5-6B-AE5"/>
+                <outlet property="profileEditBtn" destination="v7U-Ey-EDp" id="F7T-Yq-bJt"/>
                 <outlet property="profileHeading" destination="BD8-9D-ydM" id="hsA-Xh-omx"/>
                 <outlet property="profileImgView" destination="rX9-S2-GiC" id="Ke3-ND-sin"/>
             </connections>

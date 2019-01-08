@@ -166,6 +166,7 @@ extension AddPhotosController: UIImagePickerControllerDelegate, UINavigationCont
 extension AddPhotosController: PhotosCollectionViewDelegate {
     
     func cellClicked(clickedImage: UIImage, imageId: Int) {
+        photoEditor?.frame = self.view.frame
         photoEditor?.imageView.image = clickedImage
         photoEditor?.imageId = imageId
         self.view.addSubview(photoEditor!)
