@@ -18,6 +18,16 @@ class AddPhotosController: UIViewController {
     @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     var imagePicker = UIImagePickerController()
     let apiHandler = APIManager()
+    let signInViewModel = SignInViewModel()
+
+    var hideRightBarButton: Bool = false {
+        didSet {
+            if  self.hideRightBarButton {
+                self.navigationItem.rightBarButtonItem?.isEnabled = false
+                self.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
+            }
+        }
+    }
     var photoCollectionViewModel: PhotosCollectionViewModel!
     let photoEditor = Bundle.main.loadNibNamed("ImageEditor", owner: ImageEditor(), options: nil)![0] as? ImageEditor
     static var uploadedImageCount = 0
@@ -36,7 +46,7 @@ class AddPhotosController: UIViewController {
     }
     
     
-    static func create(photoData:[PhotoData]) -> AddPhotosController {
+    static func create() -> AddPhotosController {
         let storyboard = UIStoryboard(name: "FinishYourProfile", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AddPhotosController") as!  AddPhotosController
         return vc
@@ -135,8 +145,13 @@ class AddPhotosController: UIViewController {
         }
     }
     
-    @IBAction func savePhotosToGallery(_ sender: Any) {
-
+    @IBAction func navigateToChefList(_ sender: Any) {
+        self.signInViewModel.autoSignIn(envelop: self.signInViewModel.autoSignInEnvelop(userId:UserDefaults.standard.integer(forKey: "userId") )) { (success) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "MainTabBarControllerId") as! BaseTabbarController
+            self.present(vc, animated: true, completion: nil)
+        }
+       
     }
     
 }

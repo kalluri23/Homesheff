@@ -70,6 +70,7 @@ struct Chef: Codable {
     var coverURL: String?
     var about: String?
     var headertext: String?
+    var location: String?
     var photoGallery: [PhotoData]?
 
     init(user: UserModel) {
@@ -88,5 +89,6 @@ struct Chef: Codable {
         self.about = user.about
         self.headertext = user.headertext
         self.photoGallery = user.photoGallery
+        self.location = user.location
     }
 }

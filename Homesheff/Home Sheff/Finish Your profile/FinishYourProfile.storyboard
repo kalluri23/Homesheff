@@ -243,10 +243,22 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="112" height="100"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="v3d-ct-ca6">
+                                                    <rect key="frame" x="40" y="40" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="j50-vY-Luk"/>
+                                                        <constraint firstAttribute="height" constant="20" id="xmT-pS-8L7"/>
+                                                    </constraints>
+                                                </activityIndicatorView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="v3d-ct-ca6" firstAttribute="centerY" secondItem="QTQ-C1-Ige" secondAttribute="centerY" id="Gbt-kv-dLg"/>
+                                            <constraint firstItem="v3d-ct-ca6" firstAttribute="centerX" secondItem="QTQ-C1-Ige" secondAttribute="centerX" id="RdJ-B9-heV"/>
+                                        </constraints>
                                         <size key="customSize" width="100" height="100"/>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="v3d-ct-ca6" id="2lO-nM-YeN"/>
                                             <outlet property="imageView" destination="fbQ-t9-cgO" id="BLp-K0-Kgn"/>
                                         </connections>
                                     </collectionViewCell>
@@ -279,7 +291,7 @@
                     <navigationItem key="navigationItem" id="aBJ-Fj-kNN">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="cIg-Bk-GsH">
                             <connections>
-                                <action selector="savePhotosToGallery:" destination="YHs-0g-jjz" id="RNG-Vr-AZp"/>
+                                <action selector="navigateToChefList:" destination="YHs-0g-jjz" id="j8u-RF-gXP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

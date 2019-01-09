@@ -47,12 +47,13 @@ class ProfileViewController: UIViewController {
         if profileType == ProfileType.myAccount {
             //Hide contact button when myaccount
             contactCheff.alpha = 0.0
+            contactButtonHeight.constant = 0
             chefInfo = Chef(user:User.defaultUser.currentUser!)
         } else {
             self.profileTableViewBottom.constant = -55
         }
         profileSections  = chefServiceData.prepareSections
-        navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
+        navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "") \n\(chefInfo?.location ?? "")"
        self.chefServiceTableView.reloadData()
         
     }
@@ -137,7 +138,7 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
         
         switch self.profileSections[ indexPath.section] {
             case .headerType:
-                return 240
+                return 215
             case .aboutType:
                 return  CGFloat(self.aboutSectionHeight)
             case .photoGalleryType:
@@ -195,7 +196,7 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
                     aboutCell.showMoreButton = true
                     self.aboutSectionHeight = 155
                 } else {
-                    self.aboutSectionHeight = aboutHeight!
+                    self.aboutSectionHeight = aboutHeight! + 20
                 }
                 return aboutCell
             case .photoGalleryType:
@@ -241,7 +242,8 @@ extension ProfileViewController: AboutCellDelegate {
 extension ProfileViewController: PhotoGalleryDelegate {
     
     func editPhotosClicked() {
-        let vc = AddPhotosController.create(photoData: (User.defaultUser.currentUser?.photoGallery)!)
+        let vc = AddPhotosController.create()
+        vc.hideRightBarButton = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

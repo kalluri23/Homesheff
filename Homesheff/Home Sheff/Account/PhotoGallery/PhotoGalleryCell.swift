@@ -75,6 +75,7 @@ extension PhotoGalleryCell: UICollectionViewDelegate, UICollectionViewDataSource
         galleryCell.activityIndicator?.startAnimating()
         galleryCell.imageView?.loadImageWithUrlString(urlString: photoData.imageUrl!, completion: { (success) in
             galleryCell.activityIndicator?.stopAnimating()
+            galleryCell.activityIndicator?.alpha = 0.0
         })
         return galleryCell
     }

@@ -49,8 +49,10 @@ extension PhotosCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
        
         let photoData = PhotosCollectionViewModel.shared.getPhotoAtIndex(index: indexPath.row)
         photoCell.tag = photoData.id
+        photoCell.activityIndicator?.startAnimating()
         photoCell.imageView?.loadImageWithUrlString(urlString: photoData.imageUrl!, completion: { (success) in
-            
+           photoCell.activityIndicator?.stopAnimating()
+           photoCell.activityIndicator?.alpha = 0
         })
         return photoCell
     }
