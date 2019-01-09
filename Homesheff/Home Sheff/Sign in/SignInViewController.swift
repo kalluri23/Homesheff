@@ -133,7 +133,7 @@ class SignInViewController: UIViewController {
         guard let currentUser = FBSDKAccessToken.current() else {
             sender.showActivity()
             loginManager.loginBehavior = .systemAccount
-            loginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self, handler: { [unowned self] (result, error) in
+            loginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self, handler: { [unowned self] (result, error) in
                 sender.hideActivity()
                 if let loginError = error {
                     print(loginError.localizedDescription)
@@ -172,7 +172,7 @@ class SignInViewController: UIViewController {
     /** Get Email, First Name and Last Name of the user to pre-populate on sign up screen
     */
     private func getFBDetails(completion: @escaping (Details) -> Void) {
-        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "first_name, last_name, email"]).start { [unowned self]  _, result, error in
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "first_name, last_name, email, picture.type(small)"]).start { [unowned self]  _, result, error in
             if let detailsError = error {
                print(detailsError.localizedDescription)
                 self.showAlertWith(alertTitle: "Facebook Login Error", alertBody: "Unable to access your facebook account. Please try again.")
@@ -182,6 +182,12 @@ class SignInViewController: UIViewController {
                    let first_name = fbDetails["first_name"],
                    let last_name = fbDetails["last_name"] {
                     print("\(email) \(first_name) \(last_name)")
+                    if let imageJSON = fbDetails["picture"] as? Dictionary<String,Any>,
+                       let imageURLJSON = imageJSON["data"] as? Dictionary<String,Any>,
+                       let imageURL = imageURLJSON["url"] as? String{
+                        print(imageURL)
+                    }
+                    
                     completion(Details(fbDetails))
                 }else {
                     print("fbdetails are emty")
