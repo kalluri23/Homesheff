@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class UserAccountViewController: UIViewController {
     
     // Change it to VM later //*
     @IBOutlet weak var userAccountVC: UITableView!
+    var chefServiceData = ProfileViewModel()
+    @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     
     let dataArray = [["Profile"],["Version","Privacy Policy","Terms of Services","Sign Out"]]
     @IBOutlet weak var nameLabel: UILabel!
@@ -19,6 +22,8 @@ class UserAccountViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.color = .black
+        activityIndicator.type = .ballClipRotate
         userAccountVC.register(UserAccountCell.nib, forCellReuseIdentifier: UserAccountCell.reuseIdentifier)
     }
     
@@ -95,22 +100,27 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
         return "SETTINGS"
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // This is temp , need to tie state with enum and data source
+        // Temp getting data from API.. gallery data should come with initial profile data
         if dataArray[indexPath.section][indexPath.row] == "Profile" {
-            
-            if (User.defaultUser.currentUser != nil) && (User.defaultUser.currentUser?.isChef)! {
-                let vc = storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-                vc.profileType = .myAccount
-                self.navigationController?.pushViewController(vc, animated: true)
-            } else {
-               let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
-                self.navigationController?.pushViewController(vc, animated: true)
+            activityIndicator.startAnimating()
+            chefServiceData.getPhotosToGallery(envelop: chefServiceData.getPhotosToGalleryEnvelop(userId: (User.defaultUser.currentUser?.id)!)) { (photoData) in
+                self.activityIndicator.stopAnimating()
+                User.defaultUser.currentUser?.photoGallery = photoData
+                if (User.defaultUser.currentUser != nil) && (User.defaultUser.currentUser?.isChef)! {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+                    vc.chefInfo = Chef(user:User.defaultUser.currentUser!)
+                    vc.profileType = .myAccount
+                    vc.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
             }
-            // vc.chefInfo = Chef(user:User.defaultUser.currentUser!)
-//
-//            let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
         }
         else if dataArray[indexPath.section][indexPath.row] == "Terms of Services" {
             self.didTapTermsAndCondition(isTermsAndCondition: true)

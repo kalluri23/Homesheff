@@ -85,6 +85,10 @@ extension UserProfileViewController: UITableViewDataSource,UITableViewDelegate {
         return data.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       return 80
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: UserProfileTableViewCell = userProfileTableView.dequeueReusableCell(for: indexPath)
