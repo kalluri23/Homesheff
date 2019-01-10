@@ -7,7 +7,7 @@ variables:
   LANG: "en_US.UTF-8"
 
 before_script:
-  - apt-get update && apt-get -y install ruby
+  - sudo apt-get update && sudo apt-get -y install ruby
   - gem install bundler
   - bundle install
 
