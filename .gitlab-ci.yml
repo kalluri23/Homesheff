@@ -34,5 +34,5 @@ test_flight_build:
   tags:
     - ios
   only:
-     - /^release-.*$/
-     - master
+     - merge_requests
+     - develop
