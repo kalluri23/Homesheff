@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 // convert this into MVVM
 
 enum ProfileType {
@@ -19,27 +17,25 @@ enum ProfileType {
 
 class ProfileViewController: UIViewController {
 
-    @IBOutlet weak var profilePictureImageView: CustomImageView!
-    @IBOutlet weak var profileBgView: CustomImageView!
-    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var chefServiceTableView: UITableView!
     @IBOutlet weak var navigationTitleLbl: UILabel!
     @IBOutlet weak var contactCheff: UIButton!
-    @IBOutlet weak var headerLbl: UILabel!
-    @IBOutlet weak var profileEditButton: UIButton!
-    @IBOutlet weak var contactButtonConstraint: NSLayoutConstraint!
     @IBOutlet weak var contactButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var contactButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var profileTableViewBottom: NSLayoutConstraint!
     
-    var chefServiceData = ChefServiceModel()
+    var chefServiceData = ProfileViewModel()
     var chefInfo: Chef?
     var profileType: ProfileType?
     var aboutSectionHeight: CGFloat = 0.0
     var aboutChef: String = ""
+    var profileSections = [ProfileTableViewCellType]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateChefDetails()
+        chefServiceTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNonzeroMagnitude))
+        chefServiceData.chefInfo = self.chefInfo
+        chefServiceTableView.register(ProfileHeaderCell.nib, forCellReuseIdentifier: ProfileHeaderCell.reuseIdentifier)
         chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
         chefServiceTableView.register(AboutTableViewCell.nib, forCellReuseIdentifier: AboutTableViewCell.reuseIdentifier)
     }
@@ -48,44 +44,18 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         // Hiding navigation since controller has its own navigation bar
         self.navigationController?.isNavigationBarHidden = true
-        // Refresh profile after edit
         if profileType == ProfileType.myAccount {
-            self.contactCheff.alpha = 0.0
-            self.contactButtonHeight.constant = 0.0
-            self.contactButtonConstraint.constant = 0.0
-            self.contactButtonBottomConstraint.constant = 0.0
-            self.chefInfo = Chef(user:User.defaultUser.currentUser!)
-            updateChefDetails()
+            //Hide contact button when myaccount
+            contactCheff.alpha = 0.0
+            contactButtonHeight.constant = 0
+            chefInfo = Chef(user:User.defaultUser.currentUser!)
         } else {
-             self.profileEditButton.alpha = 0.0
+            self.profileTableViewBottom.constant = -55
         }
-    }
-    
-    private func updateChefDetails() {
-        setProfileAndBgPicture()
-        navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "")"
-        emailLabel.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
-        headerLbl.text = "\(chefInfo?.headertext ?? "")"
-        self.chefServiceTableView.reloadData()
-    }
-    
-    private func setProfileAndBgPicture() {
+        profileSections  = chefServiceData.prepareSections
+        navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "") \n\(chefInfo?.location ?? "")"
+       self.chefServiceTableView.reloadData()
         
-        if(chefInfo?.imageURL != nil) {
-            chefServiceData.downloadImage(imageName: "\(chefInfo?.id ?? 0)_ProfilePhoto") { (image) in
-                self.profilePictureImageView.image = image
-                self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width / 2
-                self.profilePictureImageView.clipsToBounds = true;
-                self.profilePictureImageView.layer.borderWidth = 3.0
-                self.profilePictureImageView.layer.borderColor = UIColor.white.cgColor
-            }
-        }
-        
-        if(chefInfo?.coverURL != nil) {
-            chefServiceData.downloadImage(imageName: "\(chefInfo?.id ?? 0)_CoverPhoto") { (image) in
-               self.profileBgView.image = image
-            }
-        }
     }
     
     @IBAction func dismissViewController(_ sender: Any) {
@@ -98,15 +68,12 @@ class ProfileViewController: UIViewController {
         let optionMenu = UIAlertController(title: nil, message: "Choose how you would like to contact this sheff", preferredStyle: .actionSheet)
         
         let call = UIAlertAction(title: "Call", style: .default){ [weak self] (alert) -> Void in
-          
             self?.makeACall()
         }
         let iMessage = UIAlertAction(title: "iMessage", style: .default){ [weak self] (alert) -> Void in
-            
             self?.sendAMessage()
         }
         let email = UIAlertAction(title: "Email", style: .default){ [weak self] (alert) -> Void in
-            
             self?.sendAnEmail()
         }
         
@@ -139,11 +106,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    @IBAction func editProfile(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
-        self.navigationController?.pushViewController(vc, animated: true)
-        
-    }
     private func sendAnEmail() {
         
         if let url = URL(string: "mailto:\(chefInfo?.email ?? "")") {
@@ -160,50 +122,72 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if chefInfo?.about != nil {
-            return 2
-        }
-        return 1
+        return self.profileSections.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return chefServiceData.chefService.count
-        case 1:
-            return 1
-        default:
-            return 0
-        }
         
+        switch self.profileSections[section] {
+            case .aboutType, .photoGalleryType, .headerType:
+                return 1
+            case .servicesType:
+                return chefServiceData.chefService.count
+         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        /*if indexPath.row == 1{
-            return 120
-        }*/
-        switch indexPath.section {
-        case 0:
-            return 55
-        case 1:
-            return CGFloat(self.aboutSectionHeight)
-        default:
-            return 0
+        
+        switch self.profileSections[ indexPath.section] {
+            case .headerType:
+                return 215
+            case .aboutType:
+                return  CGFloat(self.aboutSectionHeight)
+            case .photoGalleryType:
+                let photosList = (User.defaultUser.currentUser?.photoGallery)!
+                if photosList.count > 0 {
+                    return 160
+                }
+                return 80
+            case .servicesType:
+                return  55
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch self.profileSections[section] {
+            case .headerType:
+                return 0
+            default:
+                return 30
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = UITableViewCell()
-        switch indexPath.section {
-            case 0:
-                let profileCell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
-                profileCell.chefDetails = chefServiceData.chefService[indexPath.row]
-                profileCell.partCount1.isHidden = true
-                profileCell.partyCount2.isHidden = true
-                profileCell.partyCount3.isHidden = true
-                profileCell.servicePriceLabel.isHidden = true
-                return profileCell
+        
+        switch self.profileSections[ indexPath.section] {
             
-            case 1:
+            case .headerType:
+                let headerCell: ProfileHeaderCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
+                headerCell.profileHeading.text = chefInfo?.headertext
+                headerCell.profileContact.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
+                headerCell.delegate = self
+                if profileType != .myAccount {
+                    headerCell.profileEditBtn.alpha = 0.0
+                }
+                DispatchQueue.global(qos: .background).async {
+                    self.chefServiceData.downloadImage(imageName: "\(self.chefInfo?.id ?? 0)_ProfilePhoto") { (image) in
+                        DispatchQueue.main.async {
+                            headerCell.profileImgView.image = image
+                        }
+                    }
+                    self.chefServiceData.downloadImage(imageName: "\(self.chefInfo?.id ?? 0)_CoverPhoto") { (image) in
+                         DispatchQueue.main.async {
+                             headerCell.profileBgView.image = image
+                         }
+                    }
+                }
+                
+                return headerCell
+            case .aboutType:
                 let aboutCell: AboutTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
                 aboutCell.delegate = self
                 aboutCell.aboutChef = (chefInfo?.about)!
@@ -212,56 +196,61 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
                     aboutCell.showMoreButton = true
                     self.aboutSectionHeight = 155
                 } else {
-                    self.aboutSectionHeight = aboutHeight!
+                    self.aboutSectionHeight = aboutHeight! + 20
                 }
                 return aboutCell
-            default:
+            case .photoGalleryType:
+                let photoGalleryCell = tableView.dequeueReusableCell(withIdentifier: PhotoGalleryCell.reuseIdentifier, for: indexPath) as! PhotoGalleryCell
+                photoGalleryCell.photoList = (User.defaultUser.currentUser?.photoGallery)!
+                photoGalleryCell.delegate = self
+                 DispatchQueue.main.async {
+                    photoGalleryCell.collectionView.reloadData()
+                }
+                return photoGalleryCell
+            case .servicesType:
+                let cell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
+                cell.chefDetails = chefServiceData.chefService[indexPath.row]
+                
+                cell.partCount1.isHidden = true
+                cell.partyCount2.isHidden = true
+                cell.partyCount3.isHidden = true
+                cell.servicePriceLabel.isHidden = true
                 return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-            case 0:
-                return "SERVICES"
-            case 1:
-                return "About"
-            default:
-                return ""
         }
         
     }
-    
-//    func calculateHeightOfAbout() -> CGFloat {
-//
-//    }
-    
-    
-    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
-//        footerView.backgroundColor = UIColor.blue
-//        return footerView
-//    }
-//
-//    // set height for footer
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 40
-//    }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if dataArray[indexPath.section][indexPath.row] == "Profile" {
-//            let vc = storyboard?.instantiateViewController(withIdentifier: "ChefDetailsVCID") as! ChefDetailsViewController
-//            self.navigationController?.pushViewController(vc, animated: true)
-//            
-//        }
-//    }
-    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?{
+        
+        switch self.profileSections[section] {
+            case .aboutType:
+                return  "About"
+            case .photoGalleryType, .headerType:
+                return ""
+            case .servicesType:
+                return  "SERVICES"
+        }
+    }
 }
 
 extension ProfileViewController: AboutCellDelegate {
     
     func viewMoreClicked() {
         self.navigationController?.pushViewController(AboutChefController.create(aboutChef: (chefInfo?.about)!), animated: true)
+    }
+}
+
+extension ProfileViewController: PhotoGalleryDelegate {
+    
+    func editPhotosClicked() {
+        let vc = AddPhotosController.create()
+        vc.hideRightBarButton = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension ProfileViewController: ProfileHeaderDelegate {
+    func editProfileHeader() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -45,6 +45,7 @@ import Foundation
     var location: String?
     var about: String?
     var headertext: String?
+    var photoGallery: [PhotoData]?
 }
 
 

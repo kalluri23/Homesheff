@@ -52,9 +52,8 @@ class FinishYourProfileController : UIViewController, UINavigationControllerDele
         }
         viewModel.finishUserProfile(envelop: finishUserProfileEnvelop) { (success) in
             if success {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "MainTabBarControllerId") as! BaseTabbarController
-                self.present(vc, animated: true, completion: nil)
+                let vc = AddPhotosController.create()
+                self.navigationController?.pushViewController(vc, animated: true)
             } else {
                 self.showAlert(title: "Oops!", message: "Please check your details")
             }

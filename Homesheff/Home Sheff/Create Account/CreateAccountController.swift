@@ -150,7 +150,7 @@ class CreateAccountController: UIViewController {
     private func navigateToFinishYourProfile() {
         
         let storyboard = UIStoryboard(name: "FinishYourProfile", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "FinishYourProfile") as! FinishYourProfileController
+        let vc = storyboard.instantiateViewController(withIdentifier: "FinishYourProfile") as!  FinishYourProfileController
         let finishYourProfileNC = UINavigationController(rootViewController: vc)
         self.present(finishYourProfileNC, animated: true, completion: nil)
     }
