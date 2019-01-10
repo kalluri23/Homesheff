@@ -7,7 +7,7 @@ variables:
   LANG: "en_US.UTF-8"
 
 before_script:
-  - \curl -sSL https://get.rvm.io | bash -s stable --ruby
+  - apt-get update && apt-get -y install ruby
   - gem install bundler
   - bundle install
 
