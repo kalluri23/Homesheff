@@ -258,14 +258,31 @@ extension APIManager {
     
     func retrieveImage(for imageName: String, completion: @escaping (UIImage?) -> Void) {
         let url = "https://api.dev.homesheff.com/v1/downloadFile/\(imageName)"
-        Alamofire.request(url).responseData { (response) in
+        let request = Alamofire.request(url)
+        request.validate()
+        request.responseData { (response) in
             if response.error == nil {
                 print(response.result)
                 // Show the downloaded image:
+                if let data = response.data, let image = UIImage(data: data) {
+                    completion(image)
+                    self.cache(image, for: url)
+                }
+            }
+        }
+    }
+    
+    func downLoadFBProfileImage(from url: String, completion: @escaping (UIImage?) -> Void) {
+        Alamofire.request(url).responseData { (response) in
+            if response.error == nil {
+                print(response.result)
                 if let data = response.data {
                     completion(UIImage(data: data))
-                    self.cache(UIImage(data: data), for: url)
+                }else {
+                    completion(nil)
                 }
+            }else {
+                completion(nil)
             }
         }
     }

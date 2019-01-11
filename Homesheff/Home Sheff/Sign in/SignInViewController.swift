@@ -177,20 +177,10 @@ class SignInViewController: UIViewController {
                print(detailsError.localizedDescription)
                 self.showAlertWith(alertTitle: "Facebook Login Error", alertBody: "Unable to access your facebook account. Please try again.")
             }else {
-                if let fbDetails = result as? [String : Any],
-                   let email = fbDetails["email"] as? String,
-                   let first_name = fbDetails["first_name"],
-                   let last_name = fbDetails["last_name"] {
-                    print("\(email) \(first_name) \(last_name)")
-                    if let imageJSON = fbDetails["picture"] as? Dictionary<String,Any>,
-                       let imageURLJSON = imageJSON["data"] as? Dictionary<String,Any>,
-                       let imageURL = imageURLJSON["url"] as? String{
-                        print(imageURL)
-                    }
-                    
+                if let fbDetails = result as? [String : Any]{
                     completion(Details(fbDetails))
                 }else {
-                    print("fbdetails are emty")
+                    self.showAlertWith(alertTitle: "Facebook Login Error", alertBody: "We are unable to access your facebook profile at this time. Please try again.")
                 }
             }
         }

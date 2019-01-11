@@ -86,7 +86,13 @@ struct Details {
         lastName = dictionary["last_name"] as! String
         email = dictionary["email"] as! String
         password = ""
-        imageUrl = "https://png.icons8.com/color/2x/person-male.png"
+        if let imageJSON = dictionary["picture"] as? Dictionary<String,Any>,
+            let imageURLJSON = imageJSON["data"] as? Dictionary<String,Any>,
+            let imageURL = imageURLJSON["url"] as? String{
+            imageUrl = imageURL
+        }else {
+            imageUrl = "https://png.icons8.com/color/2x/person-male.png"
+        }
         zipCode = "20017"
         phoneNo = ""
         isChef = false

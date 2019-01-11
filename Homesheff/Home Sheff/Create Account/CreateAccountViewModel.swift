@@ -20,10 +20,10 @@ class CreateAccountViewModel: NSObject {
     let apiHandler = APIManager()
     
     func signUp(envelop:Requestable, completion: @escaping (Bool) -> Void ) {
-        apiHandler.signUpCall(requestEnvelop: envelop, completion: completion)
+        apiHandler.signUpCall(requestEnvelop: envelop, completion:completion)
     }
     
-    func signUpEnvelop(_ basicDetails: Details) -> Requestable {
+    func signUpEnvelop(basicDetails:Details) -> Requestable {
         let signupSearchPath = ServicePath.signUpCall(email: basicDetails.email, password: basicDetails.password, phoneNo: basicDetails.phoneNo, firstName: basicDetails.firstName, lastName: basicDetails.lastName, isChef: basicDetails.isChef, isCustomer: basicDetails.isCustomer, imageUrl: basicDetails.imageUrl, zipCode: basicDetails.zipCode)
         let signupEnvelop = SaveUserPreferencesEnvelop(pathType: signupSearchPath)
         return signupEnvelop

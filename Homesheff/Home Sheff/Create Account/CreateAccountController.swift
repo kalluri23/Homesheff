@@ -183,7 +183,7 @@ class CreateAccountController: UIViewController {
     //MARK: - API Methods
     private func callSignupAPI() {
         loadingIndicator.startAnimating()
-        createAccountViewModel.signUp(envelop: createAccountViewModel.signUpEnvelop(basicDetails)) { [unowned self] isSuccess in
+        createAccountViewModel.signUp(envelop: createAccountViewModel.signUpEnvelop(basicDetails: basicDetails)) { [unowned self] isSuccess in
             if isSuccess{
                 self.callLoginAPI()
             } else {
@@ -200,15 +200,33 @@ class CreateAccountController: UIViewController {
             self.loadingIndicator.stopAnimating()
             if isSuccess{
                 UserDefaults.standard.set(true, forKey: "userLoggedIn")
-                if self.basicDetails.isCustomer {
-                    self.navigateToBaseTabBar()
-                } else {
-                    self.navigateToFinishYourProfile()
-                }
+                self.createAccountViewModel.apiHandler.downLoadFBProfileImage(from: self.basicDetails.imageUrl, completion: { [unowned self] image in
+                    if let fbProfileImage = image {
+                        self.createAccountViewModel.apiHandler.uploadPhoto(fbProfileImage, fileName: "\(User.defaultUser.currentUser!.id!)_ProfilePhoto", completionHandler: { [unowned self] isSuccess in
+                            if isSuccess {
+                                self.showNextScreen()
+                            }else {
+                                self.showAlertWith(alertTitle: "Warning", alertBody: "Unable to set profile picture at this time. Please set your photo manually in settings.", action: { [unowned self] in
+                                    self.showNextScreen()
+                                })
+                            }
+                        })
+                    }else {
+                        self.showNextScreen()
+                    }
+                })
                 
             } else {
                 self.showAlert(title: "Oops!", message: "Please check your email address & password")
             }
+        }
+    }
+    
+    private func showNextScreen() {
+        if self.basicDetails.isCustomer {
+            self.navigateToBaseTabBar()
+        } else {
+            self.navigateToFinishYourProfile()
         }
     }
 }
