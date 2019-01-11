@@ -99,6 +99,15 @@ class CreateAccountController: UIViewController {
         print("Create Account VC deinit called")
     }
     
+    //MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier, identifier == "FinishYourProfileSegue", let profileImage = sender as? UIImage {
+            let finishProfileVC = segue.destination as! FinishYourProfileController
+            finishProfileVC.profilePicImage = profileImage
+        }
+    }
+    
     //MARK: - IBActions
     @IBAction func signUpButtonTapped() {
         self.callSignupAPI()
@@ -147,19 +156,6 @@ class CreateAccountController: UIViewController {
         return isValidField && (basicDetails.isChef || basicDetails.isCustomer)
     }
     
-    private func navigateToFinishYourProfile() {
-        
-        let storyboard = UIStoryboard(name: "FinishYourProfile", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "FinishYourProfile") as!  FinishYourProfileController
-        let finishYourProfileNC = UINavigationController(rootViewController: vc)
-        self.present(finishYourProfileNC, animated: true, completion: nil)
-    }
-    
-    private func navigateToBaseTabBar() {
-        let baseTabbar = self.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
-        self.present(baseTabbar, animated: true, completion: nil)
-    }
-    
     private func update(textField: UITextField) {
         if let item = createAccountViewModel.fields[0] as? GenericFieldItem, let text = textField.text {
             item.genericData[textField.tag].name = text
@@ -177,7 +173,15 @@ class CreateAccountController: UIViewController {
             }
         }
         self.signUpButton.isEnabled(validateFields())
-        
+    }
+    
+    private func showNextScreen(profileImage: UIImage? = nil) {
+        if self.basicDetails.isCustomer { //Show home screen
+            let baseTabbar = self.storyboard?.instantiateViewController(withIdentifier:"MainTabBarControllerId") as! BaseTabbarController
+            self.present(baseTabbar, animated: true, completion: nil)
+        } else if self.basicDetails.isChef { // Show finish cheff profile screen
+            self.performSegue(withIdentifier: "FinishYourProfileSegue", sender: profileImage)
+        }
     }
     
     //MARK: - API Methods
@@ -204,7 +208,7 @@ class CreateAccountController: UIViewController {
                     if let fbProfileImage = image {
                         self.createAccountViewModel.apiHandler.uploadPhoto(fbProfileImage, fileName: "\(User.defaultUser.currentUser!.id!)_ProfilePhoto", completionHandler: { [unowned self] isSuccess in
                             if isSuccess {
-                                self.showNextScreen()
+                                self.showNextScreen(profileImage: fbProfileImage)
                             }else {
                                 self.showAlertWith(alertTitle: "Warning", alertBody: "Unable to set profile picture at this time. Please set your photo manually in settings.", action: { [unowned self] in
                                     self.showNextScreen()
@@ -219,14 +223,6 @@ class CreateAccountController: UIViewController {
             } else {
                 self.showAlert(title: "Oops!", message: "Please check your email address & password")
             }
-        }
-    }
-    
-    private func showNextScreen() {
-        if self.basicDetails.isCustomer {
-            self.navigateToBaseTabBar()
-        } else {
-            self.navigateToFinishYourProfile()
         }
     }
 }
@@ -302,7 +298,7 @@ extension CreateAccountController: UITextFieldDelegate {
         return true
     }
     
-    /* //FIXME: - Handle this delegate to imrove experience
+    /* //FIXME: - Handle this delegate to improve experience
      func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
      update(textField: textField)
      return true

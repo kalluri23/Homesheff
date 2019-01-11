@@ -17,10 +17,16 @@ class FinishYourProfileController : UIViewController, UINavigationControllerDele
     private let viewModel = FinishYourProfileViewModel()
     private let userProfileViewwModel = UserProfileViewModel()
     private var isProfilePhotoSelected = false
+    var profilePicImage : UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUIElements()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        profileImage.image = profilePicImage
     }
     
     override func viewDidLayoutSubviews(){
@@ -52,8 +58,7 @@ class FinishYourProfileController : UIViewController, UINavigationControllerDele
         }
         viewModel.finishUserProfile(envelop: finishUserProfileEnvelop) { (success) in
             if success {
-                let vc = AddPhotosController.create()
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.performSegue(withIdentifier: "AddPhotosSegue", sender: self)
             } else {
                 self.showAlert(title: "Oops!", message: "Please check your details")
             }

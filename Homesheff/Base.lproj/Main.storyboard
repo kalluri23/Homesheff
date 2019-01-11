@@ -438,7 +438,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nbN-ur-r9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2040.8" y="693.10344827586209"/>
+            <point key="canvasLocation" x="2338" y="692"/>
         </scene>
         <!--Location Services Rates View Controller-->
         <scene sceneID="zzP-8k-ich">
@@ -469,7 +469,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uMf-4l-Jbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2351" y="1450"/>
+            <point key="canvasLocation" x="2647" y="1449"/>
         </scene>
         <!--Terms And Condition View Controller-->
         <scene sceneID="q9A-Ym-Agz">
@@ -541,7 +541,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggY-Ai-CVV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3218.840579710145" y="1409.5982142857142"/>
+            <point key="canvasLocation" x="-340" y="692"/>
         </scene>
         <!--Find Sheffs-->
         <scene sceneID="p4y-2Z-yL0">
@@ -739,7 +739,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d11-8L-Lw4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1520" y="1460"/>
+            <point key="canvasLocation" x="1817" y="1459"/>
         </scene>
         <!--My Account-->
         <scene sceneID="S89-KJ-1yD">
@@ -1256,7 +1256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aMk-5H-Ck3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3218" y="706"/>
+            <point key="canvasLocation" x="3514" y="705"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LbQ-U0-Xe1">
@@ -1390,13 +1390,22 @@
                         <outlet property="signInViewModel" destination="wRT-UT-41s" id="AGD-6T-kv3"/>
                         <outlet property="signUpButton" destination="ELY-Ya-qlE" id="qiw-Nm-OVv"/>
                         <outlet property="termsAndConditionsLabel" destination="vLY-d4-hga" id="yS8-FW-mxW"/>
+                        <segue destination="uOb-qu-9BY" kind="show" identifier="FinishYourProfileSegue" id="CRM-wl-E92"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1S3-Xr-pO0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="wRT-UT-41s" customClass="SignInViewModel" customModule="Homesheff" customModuleProvider="target"/>
                 <customObject id="8f6-rr-MpK" customClass="CreateAccountViewModel" customModule="Homesheff" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="775.20000000000005" y="705.69715142428788"/>
+            <point key="canvasLocation" x="734" y="693"/>
+        </scene>
+        <!--FinishYourProfile-->
+        <scene sceneID="kUG-ga-fXF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FinishYourProfile" id="uOb-qu-9BY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aMJ-KB-1fr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="734" y="1278"/>
         </scene>
         <!--Find Chef-->
         <scene sceneID="hVt-Rl-ynj">
@@ -1454,14 +1463,14 @@
         <image name="HomeSheff_Icon_Grey" width="118" height="113"/>
         <image name="back-arrow" width="12" height="18"/>
         <image name="lock" width="73" height="85"/>
-        <image name="my-account-nonselected" width="50" height="50"/>
-        <image name="my-account-selected" width="50" height="50"/>
+        <image name="my-account-nonselected" width="25" height="25"/>
+        <image name="my-account-selected" width="25" height="25"/>
         <image name="pencil-icon" width="11" height="11"/>
         <image name="pencil-icon-background-circle" width="33" height="33"/>
         <image name="profile_background_placeholder" width="375" height="124"/>
         <image name="search" width="20" height="20"/>
-        <image name="search-nonselected" width="50" height="50"/>
-        <image name="search-selected" width="50" height="50"/>
+        <image name="search-nonselected" width="25" height="25"/>
+        <image name="search-selected" width="25" height="25"/>
         <image name="sheff_profile_placeholder" width="70" height="70"/>
         <image name="sheffs_list_placeholder" width="55" height="55"/>
     </resources>
