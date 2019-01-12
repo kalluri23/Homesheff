@@ -1,26 +1,37 @@
+# Ruby
+.bundle/
+
 # Xcode
-.DS_Store
 build/
+DerivedData
+Local
+profile
 *.pbxuser
 !default.pbxuser
 *.mode1v3
 !default.mode1v3
 *.mode2v3
 !default.mode2v3
+*.moved-aside
 *.perspectivev3
 !default.perspectivev3
+*.xccheckout
 *.xcworkspace
 !default.xcworkspace
 xcuserdata
-profile
-*.moved-aside
-DerivedData
-.idea/
-Local
+*.xcscmblueprint
+*.xcuserstate
 
 # Pods
-Pods
-Podfile.lock
+Pods/
 
-# vim
+# Fastlane
+fastlane/screenshots
+fastlane/report.xml
+
+# Vim
 *~
+
+# Other
+.DS_Store
+.idea/
