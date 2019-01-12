@@ -8,9 +8,9 @@ pod 'IQKeyboardManagerSwift'
 pod 'Alamofire'
 pod 'NVActivityIndicatorView'
 pod 'AlamofireImage'
-pod 'FacebookCore'
-pod 'FacebookLogin'
-pod 'FacebookShare'
+pod 'FacebookCore', '~> 0.5.0'
+pod 'FacebookLogin', '~> 0.5.0'
+pod 'FacebookShare', '~> 0.5.0'
   # Pods for Homesheff
 
 end
