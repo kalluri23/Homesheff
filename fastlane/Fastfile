@@ -16,10 +16,17 @@ fastlane_version "2.66.2"
 default_platform :ios
 
 platform :ios do
+  before_all do     
+    ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "cmnz-mjlf-wyoq-qnsv"
+  end
   desc "Push a new beta build to TestFlight"
   lane :beta do
     cocoapods
-    build_app(workspace: "Homesheff.xcworkspace", scheme: "Homesheff", xcargs: "-allowProvisioningUpdates")
+    build_app(workspace: "Homesheff.xcworkspace", scheme: "Homesheff", export_options: {
+                provisioningProfiles: {
+                    "com.homesheff.appstore" => "HomeSheffAppstore",
+                }
+            })
     upload_to_testflight
   end
 end
