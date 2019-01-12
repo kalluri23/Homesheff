@@ -35,5 +35,5 @@ test_flight_build:
   tags:
     - ios
   only:
-     #- merge_requests
-     #- develop
+     - merge_requests
+     - develop
