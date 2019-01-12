@@ -22,11 +22,7 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     cocoapods
-    build_app(workspace: "Homesheff.xcworkspace", scheme: "Homesheff", export_options: {
-                provisioningProfiles: {
-                    "com.homesheff.appstore" => "HomeSheffAppstore",
-                }
-            })
+    build_app(workspace: "Homesheff.xcworkspace", scheme: "Homesheff", xcargs: "-allowProvisioningUpdates")
     upload_to_testflight
   end
 end
