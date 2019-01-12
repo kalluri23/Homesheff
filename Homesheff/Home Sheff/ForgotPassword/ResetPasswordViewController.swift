@@ -79,7 +79,7 @@ class ResetPasswordViewController: UIViewController {
 extension ResetPasswordViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let text = textField.text, text.isValidPassword() {
+        if let text = textField.text, (text+string).isValidPassword(), (text.count + string.count) >= 8 {
             self.continueButton.isEnabled(true)
         }else {
             self.continueButton.isEnabled(false)

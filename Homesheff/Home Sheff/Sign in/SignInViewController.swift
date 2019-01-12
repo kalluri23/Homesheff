@@ -75,12 +75,16 @@ class SignInViewController: UIViewController {
     //MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let createAccountVC = segue.destination as! CreateAccountController
-        if let source = sender, source is FacebookButton {
-            createAccountVC.isFaceBookSignUp = true
-            createAccountVC.basicDetails = self.fbDetails
-        }else {
-            createAccountVC.basicDetails = Details()
+        if let segueIdentifier = segue.identifier {
+            if segueIdentifier == "CreateAccountSegue" {
+                let createAccountVC = segue.destination as! CreateAccountController
+                if let source = sender, source is FacebookButton {
+                    createAccountVC.isFaceBookSignUp = true
+                    createAccountVC.basicDetails = self.fbDetails
+                }else {
+                    createAccountVC.basicDetails = Details()
+                }
+            }
         }
     }
     
