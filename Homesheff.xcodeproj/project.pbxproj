@@ -8,9 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		142C8C2621C44E9500C04619 /* FindChefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C8C2521C44E9500C04619 /* FindChefCell.swift */; };
+		1432E10C21EF952F00446425 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432E10B21EF952F00446425 /* LocationCell.swift */; };
+		1432E10F21EFFC8A00446425 /* LocationTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432E10E21EFFC8A00446425 /* LocationTextCell.swift */; };
 		149EA07621D15D54004DD3E5 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149EA07421D15D54004DD3E5 /* ForgotPasswordViewController.swift */; };
 		149EA07921D2D51E004DD3E5 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149EA07821D2D51E004DD3E5 /* String+Extension.swift */; };
 		149EA07B21D42525004DD3E5 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149EA07A21D42525004DD3E5 /* ForgotPasswordViewModel.swift */; };
+		14B63EDD21EE967F0078AEBA /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B63EDC21EE967F0078AEBA /* LocationSearchController.swift */; };
+		14B63EDF21EE96A30078AEBA /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B63EDE21EE96A30078AEBA /* LocationSearchViewModel.swift */; };
+		14B63EE121EE96D10078AEBA /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B63EE021EE96D10078AEBA /* Location.swift */; };
 		14E2ABAA21D8599B005673CA /* SpinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2ABA921D8599B005673CA /* SpinningButton.swift */; };
 		14E2ABB421DAAB31005673CA /* CodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2ABB121DAAB31005673CA /* CodeViewController.swift */; };
 		14E2ABB521DAAB31005673CA /* ForgotPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14E2ABB221DAAB31005673CA /* ForgotPassword.storyboard */; };
@@ -92,9 +97,14 @@
 
 /* Begin PBXFileReference section */
 		142C8C2521C44E9500C04619 /* FindChefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefCell.swift; sourceTree = "<group>"; };
+		1432E10B21EF952F00446425 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		1432E10E21EFFC8A00446425 /* LocationTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTextCell.swift; sourceTree = "<group>"; };
 		149EA07421D15D54004DD3E5 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		149EA07821D2D51E004DD3E5 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		149EA07A21D42525004DD3E5 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		14B63EDC21EE967F0078AEBA /* LocationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
+		14B63EDE21EE96A30078AEBA /* LocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewModel.swift; sourceTree = "<group>"; };
+		14B63EE021EE96D10078AEBA /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		14E2ABA921D8599B005673CA /* SpinningButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningButton.swift; sourceTree = "<group>"; };
 		14E2ABB121DAAB31005673CA /* CodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
 		14E2ABB221DAAB31005673CA /* ForgotPassword.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ForgotPassword.storyboard; sourceTree = "<group>"; };
@@ -203,6 +213,17 @@
 			path = ForgotPassword;
 			sourceTree = "<group>";
 		};
+		14B63EDB21EE96390078AEBA /* LocationSearch */ = {
+			isa = PBXGroup;
+			children = (
+				14B63EDC21EE967F0078AEBA /* LocationSearchController.swift */,
+				14B63EDE21EE96A30078AEBA /* LocationSearchViewModel.swift */,
+				14B63EE021EE96D10078AEBA /* Location.swift */,
+				1432E10B21EF952F00446425 /* LocationCell.swift */,
+			);
+			path = LocationSearch;
+			sourceTree = "<group>";
+		};
 		14E2ABA721D8592E005673CA /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,12 +293,14 @@
 		A49D340E2156E86600AA24CF /* Finish Your profile */ = {
 			isa = PBXGroup;
 			children = (
+				14B63EDB21EE96390078AEBA /* LocationSearch */,
 				DA8BE01021E11EB2003CB039 /* FinishYourProfileController.swift */,
 				DA8BE00E21E11D3D003CB039 /* FinishYourProfileViewModel.swift */,
 				DA240C6E21C03C180004474B /* Add Photos */,
 				E9836C5E2165A8C0004554D4 /* View */,
 				E4D0450021D84C61005ADA8A /* FinishYourProfile.storyboard */,
 				E4D044FA21D84A9F005ADA8A /* FinishYourProfileCell.swift */,
+				1432E10E21EFFC8A00446425 /* LocationTextCell.swift */,
 				E4D0450421D97FE1005ADA8A /* FinishYourProfileExpandedCell.swift */,
 			);
 			path = "Finish Your profile";
@@ -701,6 +724,8 @@
 				DA8BE01121E11EB2003CB039 /* FinishYourProfileController.swift in Sources */,
 				A453503C2185310D005748D3 /* CustomImageView.swift in Sources */,
 				A4C924BC2173990B00F3BBDE /* ProfileViewController.swift in Sources */,
+				14B63EDF21EE96A30078AEBA /* LocationSearchViewModel.swift in Sources */,
+				1432E10F21EFFC8A00446425 /* LocationTextCell.swift in Sources */,
 				A4C924B72172C3D000F3BBDE /* APIEndPoints.swift in Sources */,
 				A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */,
 				A49D34152156E91500AA24CF /* FindCheifViewModel.swift in Sources */,
@@ -713,9 +738,11 @@
 				142C8C2621C44E9500C04619 /* FindChefCell.swift in Sources */,
 				A4D45760217CEDDC002E4588 /* TermsAndConditionViewController.swift in Sources */,
 				14E2ABB421DAAB31005673CA /* CodeViewController.swift in Sources */,
+				1432E10C21EF952F00446425 /* LocationCell.swift in Sources */,
 				DA91FB2121B3042E0065C1BD /* AboutChefController.swift in Sources */,
 				A4C9249F2172AFB800F3BBDE /* BaseTabbarController.swift in Sources */,
 				E9182438214EA22A009F62CE /* Chef.swift in Sources */,
+				14B63EE121EE96D10078AEBA /* Location.swift in Sources */,
 				E4D044FB21D84A9F005ADA8A /* FinishYourProfileCell.swift in Sources */,
 				DA8BE01621E2B5B8003CB039 /* ProfileHeaderCell.swift in Sources */,
 				A403097621795046001397EE /* User.swift in Sources */,
@@ -737,6 +764,7 @@
 				DA240C7021C03C5D0004474B /* AddPhotosController.swift in Sources */,
 				E975B606216005C400BE6DD2 /* FieldsModel.swift in Sources */,
 				A4C924C52173A41700F3BBDE /* UserAccountCell.swift in Sources */,
+				14B63EDD21EE967F0078AEBA /* LocationSearchController.swift in Sources */,
 				E9D2700A214B13F40087F476 /* UIView+Extension.swift in Sources */,
 				A4AA640F2173FF4E007D83F2 /* SignInViewModel.swift in Sources */,
 				A403097421794F71001397EE /* UserDetailModal.swift in Sources */,

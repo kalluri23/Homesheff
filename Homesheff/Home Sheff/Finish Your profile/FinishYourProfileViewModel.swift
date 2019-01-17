@@ -54,4 +54,8 @@ class FinishYourProfileViewModel {
             return userEnteredData[value] ?? ""
         }
     }
+    
+    func setUserData(for field: String, value: String) {
+        userEnteredData[field] = value
+    }
 }

@@ -13,6 +13,7 @@ import AlamofireImage
 
 class APIManager {
     static let  baseUrl = "https://api.dev.homesheff.com/v1"
+    
     typealias LoginSuccessHanlder = (Bool) -> Void
     func signInApi(requestEnvelop:Requestable, completion: @escaping LoginSuccessHanlder)  {
         let request = Alamofire.request(
@@ -60,6 +61,42 @@ class APIManager {
                         print(error.localizedDescription)
                     }
                     completion(false)
+                }
+        }
+    }
+    
+    func searchApi(location: String, completion: @escaping ([Location]?)->Void) {
+        let requestURL = "https://dev.servpal.com/api/search/location"
+        let requestHeaders = ["Content-Type": "application/json", "X-Requested-With":"XMLHttpRequest"]
+        let request = Alamofire.request(
+            requestURL,
+            parameters:["q":location],
+            headers: requestHeaders)
+        request.validate()
+            .responseString{ (response) -> Void in
+                
+                switch response.result{
+                case .success:
+                    if let resultValue = response.result.value, let data = response.data
+                    {
+                        do {
+                            let decoder = JSONDecoder()
+                            let locations = try decoder.decode([Location].self, from:
+                                data) //Decode JSON Response Data
+                            completion(locations)
+                        } catch let parsingError {
+                            print(parsingError.localizedDescription)
+                            completion(nil)
+                        }
+                        print(resultValue)
+                    } else {
+                        completion(nil)
+                    }
+                case .failure:
+                    if let error = response.error {
+                        print(error.localizedDescription)
+                    }
+                    completion(nil)
                 }
         }
     }
@@ -210,7 +247,8 @@ class APIManager {
                 
                 switch response.result{
                 case .success:
-                    if let resultValue = response.result.value, resultValue == "success" {
+                    if let resultValue = response.result.value {
+                        print(resultValue)
                         completion(true)
                     } else {
                         completion(false)
