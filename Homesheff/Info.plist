@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.6</string>
+	<string>1.0.7</string>
 	<key>FacebookAppID</key>
 	<string>295227917866107</string>
 	<key>FacebookDisplayName</key>
@@ -59,6 +59,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs to access to camera to capture food photos </string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Used to find cheffs near your location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs to access your photos to upload your profile picture</string>
 	<key>UILaunchStoryboardName</key>
@@ -80,7 +82,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Used to find cheffs near your location</string>
 </dict>
 </plist>
