@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import MapKit
 
-class FinishYourProfileController : UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class FinishYourProfileController : UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, LocationSelectionDelegate {
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var coverImage: UIImageView!
@@ -18,10 +19,23 @@ class FinishYourProfileController : UIViewController, UINavigationControllerDele
     private let userProfileViewwModel = UserProfileViewModel()
     private var isProfilePhotoSelected = false
     var profilePicImage : UIImage?
+    let locationManager = CLLocationManager()
+    let reverseGeoCoder = CLGeocoder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUIElements()
+        locationManager.delegate = self
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined, .denied:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse, .authorizedAlways:
+            if let currentLocation = locationManager.location {
+                updateLocationCell(location: currentLocation)
+            }
+        default :
+            break
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +46,15 @@ class FinishYourProfileController : UIViewController, UINavigationControllerDele
     override func viewDidLayoutSubviews(){
         finishYourProfileTableView.frame = CGRect(x: finishYourProfileTableView.frame.origin.x, y: finishYourProfileTableView.frame.origin.y, width: finishYourProfileTableView.frame.size.width, height: finishYourProfileTableView.contentSize.height)
         finishYourProfileTableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueIdentifier = segue.identifier, segueIdentifier == "LocationSearchSegue" {
+            let locationVC = segue.destination as! LocationSearchController
+            if locationVC.locationSelectDelegate == nil {
+                locationVC.locationSelectDelegate = self
+            }
+        }
     }
     
     func configureUIElements() {
@@ -78,9 +101,33 @@ class FinishYourProfileController : UIViewController, UINavigationControllerDele
             return nil
         }
     }
+    
+    func userDidselect(location: Location) {
+        if let locationCell = self.finishYourProfileTableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? LocationTextCell {
+            locationCell.fieldValue.text = "\(location.city),\(location.state)"
+            viewModel.setUserData(for: viewModel.profileFields[5], value: locationCell.fieldValue.text ?? "")
+        }
+    }
+    
+    private func updateLocationCell(location: CLLocation ) {
+        reverseGeoCoder.reverseGeocodeLocation(location)
+        { [unowned self] (placemarks, error) -> Void in
+            if let reverGeoError = error {
+                print(reverGeoError.localizedDescription)
+            }else
+            {
+                if let currentPm = placemarks, let statePm = currentPm.first, let state = statePm.administrativeArea, let city = statePm.locality {
+                    if let locationCell = self.finishYourProfileTableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? LocationTextCell {
+                        locationCell.fieldValue.text = "\(city),\(state)"
+                        self.viewModel.setUserData(for: self.viewModel.profileFields[5], value: locationCell.fieldValue.text ?? "")
+                    }
+                }
+            }
+        }
+    }
 }
 
-extension FinishYourProfileController: UITableViewDataSource, UITableViewDelegate {
+extension FinishYourProfileController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.profileFields.count
@@ -93,6 +140,12 @@ extension FinishYourProfileController: UITableViewDataSource, UITableViewDelegat
             cell.fieldName.text = viewModel.profileFields[indexPath.row]
             cell.fieldValue.text = viewModel.getUserData(viewModel.profileFields[indexPath.row])
             cell.fieldValue.tag = indexPath.row
+            return cell
+        } else if indexPath.row == 5 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LocationTextCell", for: indexPath) as! LocationTextCell
+            cell.fieldValue.tag = indexPath.row
+            cell.fieldName.text = viewModel.profileFields[indexPath.row]
+            cell.fieldValue.text = viewModel.getUserData(viewModel.profileFields[indexPath.row])
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FinishYourProfileCell", for: indexPath) as! FinishYourProfileCell
@@ -112,6 +165,15 @@ extension FinishYourProfileController: UITableViewDataSource, UITableViewDelegat
             return 110
         }
         return 70.0
+    }
+}
+
+extension FinishYourProfileController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if viewModel.profileFields[indexPath.row] == "LOCATION" {
+            self.performSegue(withIdentifier: "LocationSearchSegue", sender: self)
+        }
     }
     
 }
@@ -170,6 +232,16 @@ extension FinishYourProfileController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if let textViewtextViewtextView = textView.text {
             viewModel.userEnteredData[viewModel.profileFields[textView.tag]] = textViewtextViewtextView
+        }
+    }
+}
+
+extension FinishYourProfileController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            if let currentLocation = manager.location {
+                  updateLocationCell(location: currentLocation)
+                }
         }
     }
 }
