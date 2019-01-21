@@ -15,9 +15,11 @@ class LocationCell: UITableViewCell {
     
     var location: Location? {
         didSet {
-            self.cityLabel.text = location?.city
-            self.stateLabel.text = location?.state
-            self.zipCodeLabel.text = location?.zip
+            if let location = self.location {
+                self.cityLabel.text = location.city
+                self.stateLabel.text = "\(location.state),"
+                self.zipCodeLabel.text = location.zip
+            }
         }
     }
     

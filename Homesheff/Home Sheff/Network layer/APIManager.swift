@@ -65,6 +65,36 @@ class APIManager {
         }
     }
     
+    func searchServicesApi(requestEnvelop:Requestable, completion: @escaping ([ChefService]?, Bool)->Void) {
+        let request = Alamofire.request(requestEnvelop.requestURL()!)
+        request.validate()
+            .responseString{ (response) -> Void in
+                switch response.result{
+                case .success:
+                    if let resultValue = response.result.value, let data = response.data
+                    {
+                        do {
+                            let decoder = JSONDecoder()
+                            let services = try decoder.decode([ChefService].self, from:
+                                data) //Decode JSON Response Data
+                            completion(services, true)
+                        } catch let parsingError {
+                            print(parsingError.localizedDescription)
+                            completion(nil, false)
+                        }
+                        print(resultValue)
+                    } else {
+                        completion(nil, false)
+                    }
+                case .failure:
+                    if let error = response.error {
+                        print(error.localizedDescription)
+                    }
+                    completion(nil, false)
+                }
+        }
+    }
+    
     func searchApi(location: String, completion: @escaping ([Location]?)->Void) {
         let requestURL = "https://dev.servpal.com/api/search/location"
         let requestHeaders = ["Content-Type": "application/json", "X-Requested-With":"XMLHttpRequest"]

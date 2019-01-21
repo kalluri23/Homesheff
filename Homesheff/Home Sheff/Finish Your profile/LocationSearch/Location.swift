@@ -12,4 +12,6 @@ struct Location: Codable {
     let city: String
     let state: String
     let zip: String
+    let latitude: String
+    let longitude: String
 }

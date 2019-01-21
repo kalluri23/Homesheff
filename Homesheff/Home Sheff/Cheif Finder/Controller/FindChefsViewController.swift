@@ -13,9 +13,14 @@ class FindChefsViewController: UIViewController {
     
     @IBOutlet weak var chefTableView: UITableView!
     @IBOutlet weak var findCheifViewModel: FindCheifViewModel!
+    @IBOutlet weak var locationSearchViewModel: LocationSearchViewModel!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
     
     var profileViewModel = ProfileViewModel()
+    var locationSearchisActive = false
+    var selectedLocation: (lat: String,lon: String) = ("","")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,58 +38,69 @@ class FindChefsViewController: UIViewController {
         self.findCheifViewModel.reloadTableView!()
         self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.navigationItem.hidesBackButton = true
+        setCurrentLocation()
+        self.locationSearchisActive = false
     }
     
     func viewModelBinding()  {
-        findCheifViewModel?.reloadTableView = { [weak self] in
+        findCheifViewModel?.reloadTableView = { [unowned self] in
             DispatchQueue.main.async {
-                //Reload only content section to do not resign first responser
-                self?.chefTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
-                self?.loadingIndicator.stopAnimating()
+                self.chefTableView.reloadData()
+                self.loadingIndicator.stopAnimating()
             }
         }
+        locationSearchViewModel.reloadTableView = findCheifViewModel.reloadTableView
+    }
+    
+    private func setCurrentLocation() {
+        LocationManager.shared.requestForLocation()
+        self.locationTextField.text = "Current Location"
+        self.selectedLocation = ("\(LocationManager.shared.currentLocation.coordinate.latitude)", "\(LocationManager.shared.currentLocation.coordinate.longitude)")
     }
 }
 
 extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return findCheifViewModel.numberOfSections
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }else {
-            return findCheifViewModel.numberOfRows
-        }
+        return locationSearchisActive ? locationSearchViewModel.numberOfRows : findCheifViewModel.numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let searchCell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! FindChefCell
-            return searchCell
-        } else {
-
-            let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefCell", for: indexPath) as! ChefCell
-            cheffCell.chef = findCheifViewModel?.cheifObjectAtIndex(index: indexPath.row)
-            if (cheffCell.chef?.imageURL != nil) {
-                findCheifViewModel?.downloadImage(imageName: "\(cheffCell.chef?.id ?? 0)_ProfilePhoto", completion: { (image) in
-                    cheffCell.cheffImageView.image = image
-                    self.findCheifViewModel?.prepareProfileImageView(imageView: cheffCell.cheffImageView)
-                })
-            } else {
-                cheffCell.cheffImageView.image = UIImage(named: "sheffs_list_placeholder")
+        if locationSearchisActive {
+            let locationCell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
+            locationCell.location = locationSearchViewModel.locations[indexPath.row]
+            return locationCell
+        }else {
+            switch findCheifViewModel.searchType {
+            case .searchByFirstName:
+                let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefCell", for: indexPath) as! ChefCell
+                cheffCell.chef = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
+                return cheffCell
+            case .searchByLocation:
+                let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefLocationCell", for: indexPath) as! CheffLocationCell
+                cheffCell.chefService = findCheifViewModel.cheifServiceObjectAt(index: indexPath.row)
+                return cheffCell
             }
-             return cheffCell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-        self.loadingIndicator.startAnimating()
-        profileViewModel.getPhotosToGallery(envelop:
-             profileViewModel.getPhotosToGalleryEnvelop(userId: (User.defaultUser.currentUser?.id)!)) { (photoData) in
+        if locationSearchisActive {
+            let selectedLocation = locationSearchViewModel.locations[indexPath.row]
+            locationTextField.text = "\(selectedLocation.city),\(selectedLocation.state)"
+            locationTextField.resignFirstResponder()
+            self.selectedLocation.lat = selectedLocation.latitude
+            self.selectedLocation.lon = selectedLocation.longitude
+            locationSearchisActive = false
+            
+        }else {
+            self.loadingIndicator.startAnimating()
+            profileViewModel.getPhotosToGallery(envelop:
+            profileViewModel.getPhotosToGalleryEnvelop(userId: (User.defaultUser.currentUser?.id)!)) { (photoData) in
                 self.loadingIndicator.stopAnimating()
                 User.defaultUser.currentUser?.photoGallery = photoData
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
@@ -98,10 +114,42 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            cell.separatorInset = UIEdgeInsetsMake(0, 60, 0, 10)
-        }else {
-            cell.separatorInset = UIEdgeInsetsMake(0, 10, 0, 10)
+        cell.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20)
+    }
+}
+
+extension FindChefsViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.tag == kFindCheffTextFieldTag {
+            self.locationSearchisActive = false
+            if let _ = locationTextField.text {// Search with custom location
+                self.findCheifViewModel.searchType = .searchByLocation
+                if let chefFieldText = textField.text {
+                    let searchText = chefFieldText + string
+                    self.findCheifViewModel.searchServices(searchText: searchText, latitude: self.selectedLocation.lat, longitude: self.selectedLocation.lon)
+                }else {
+                    self.findCheifViewModel.searchServices(searchText: string, latitude: self.selectedLocation.lat, longitude: self.selectedLocation.lon)
+                }
+            }else {//Search with current location
+                self.findCheifViewModel.searchType = .searchByFirstName
+                if let chefFieldText = textField.text {
+                    let searchText = chefFieldText + string
+                    self.findCheifViewModel.searchListOfUser(matchingString: searchText)
+                }else {
+                    self.findCheifViewModel.searchListOfUser(matchingString: string)
+                }
+            }
+            
+        }else if textField.tag == kSearchLocationTextFieldTag {//Search a location
+            self.locationSearchisActive = true
+            if let locationText = textField.text {
+                let searchText = locationText + string
+                self.locationSearchViewModel.searchLocation(query: searchText)
+            }else {
+                self.locationSearchViewModel.searchLocation(query: string)
+            }
         }
+        
+        return true
     }
 }

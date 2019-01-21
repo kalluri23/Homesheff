@@ -88,6 +88,12 @@ struct GetUserById: Requestable {
     var pathType: ServicePath
 }
 
+struct SearchServices: Requestable {
+    var apiPath: String { return "searchServices/" + pathType.serviceEndpoint() }
+    var httpType: HttpType { return .get }
+    var pathType: ServicePath
+}
+
 /*
  ALL services post dictionary is mentioned under enum switch statement.
  These cases get their values in ViewController (or respective controller or other class).
@@ -106,6 +112,7 @@ internal enum ServicePath:ParameterBodyMaker {
     case validate(email:String, code:String)
     case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: String?, isChef: Bool?, isCustomer: Bool?)
     case finishYourProfileCall(firstName: String?, lastName: String?, headline: String?, about: String?, email: String?, location: String?, phoneNo: String?, isChef: Bool?, isCustomer: Bool?)
+    case searchServices(searchString: String, lat:String, lon: String)
     
     func httpBodyEnvelop()->[String:Any]? {
         
@@ -130,6 +137,8 @@ internal enum ServicePath:ParameterBodyMaker {
             
         case .finishYourProfileCall(let firstName, let lastName, let headline, let about, let email, let location, let phoneNo, let isChef, let isCustomer):
             return ["firstName": firstName ?? "", "lastName": lastName ?? "", "headertext": headline ?? "", "about": about ?? "",  "email": email ?? "", "location": location ?? "", "phone": phoneNo ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
+        case .searchServices:
+            return nil
         }
     }
     
@@ -148,6 +157,8 @@ internal enum ServicePath:ParameterBodyMaker {
             return "\(userId)"
         case .deletePhotoFromGallery(photoId: let photoId):
             return "\(photoId)"
+        case .searchServices(searchString: let searchText, lat: let latitute, lon: let longitude):
+            return "\(searchText)/\(latitute)/\(longitude)"
         default:
             return "/"
         }

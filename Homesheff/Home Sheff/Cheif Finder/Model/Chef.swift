@@ -92,3 +92,12 @@ struct Chef: Codable {
         self.location = user.location
     }
 }
+
+struct ChefService: Codable {
+    let firstName : String
+    let lastName : String
+    let distance : String
+    let id : String
+    let location: String
+    let serviceName : String
+}

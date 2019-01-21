@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		142C8C2621C44E9500C04619 /* FindChefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C8C2521C44E9500C04619 /* FindChefCell.swift */; };
 		1432E10C21EF952F00446425 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432E10B21EF952F00446425 /* LocationCell.swift */; };
 		1432E10F21EFFC8A00446425 /* LocationTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432E10E21EFFC8A00446425 /* LocationTextCell.swift */; };
+		1432E11321F116CC00446425 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432E11221F116CC00446425 /* LocationManager.swift */; };
+		1432E11521F1AB5A00446425 /* CheffLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432E11421F1AB5A00446425 /* CheffLocationCell.swift */; };
+		1432E11821F52B3400446425 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432E11721F52B3400446425 /* GlobalConstants.swift */; };
 		149EA07621D15D54004DD3E5 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149EA07421D15D54004DD3E5 /* ForgotPasswordViewController.swift */; };
 		149EA07921D2D51E004DD3E5 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149EA07821D2D51E004DD3E5 /* String+Extension.swift */; };
 		149EA07B21D42525004DD3E5 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149EA07A21D42525004DD3E5 /* ForgotPasswordViewModel.swift */; };
@@ -96,9 +98,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		142C8C2521C44E9500C04619 /* FindChefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindChefCell.swift; sourceTree = "<group>"; };
 		1432E10B21EF952F00446425 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		1432E10E21EFFC8A00446425 /* LocationTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTextCell.swift; sourceTree = "<group>"; };
+		1432E11221F116CC00446425 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		1432E11421F1AB5A00446425 /* CheffLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheffLocationCell.swift; sourceTree = "<group>"; };
+		1432E11721F52B3400446425 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		149EA07421D15D54004DD3E5 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		149EA07821D2D51E004DD3E5 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		149EA07A21D42525004DD3E5 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
@@ -201,6 +205,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1432E11121F116B000446425 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				1432E11221F116CC00446425 /* LocationManager.swift */,
+			);
+			path = LocationManager;
+			sourceTree = "<group>";
+		};
+		1432E11621F52B1800446425 /* Globals */ = {
+			isa = PBXGroup;
+			children = (
+				1432E11721F52B3400446425 /* GlobalConstants.swift */,
+			);
+			path = Globals;
+			sourceTree = "<group>";
+		};
 		149EA07321D15C5E004DD3E5 /* ForgotPassword */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +284,8 @@
 		A49D340C2156E76200AA24CF /* Home Sheff */ = {
 			isa = PBXGroup;
 			children = (
+				1432E11621F52B1800446425 /* Globals */,
+				1432E11121F116B000446425 /* LocationManager */,
 				14E2ABA721D8592E005673CA /* Custom */,
 				A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */,
 				A4D4575E217CECCC002E4588 /* Account */,
@@ -486,7 +508,7 @@
 			isa = PBXGroup;
 			children = (
 				E9182432214E97F0009F62CE /* ChefCell.swift */,
-				142C8C2521C44E9500C04619 /* FindChefCell.swift */,
+				1432E11421F1AB5A00446425 /* CheffLocationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -717,6 +739,7 @@
 				DAB7AD8121D01B4C006E43A3 /* PhotoCollectionCell.swift in Sources */,
 				DA240C7421C03EDA0004474B /* PhotosCollectionViewCell.swift in Sources */,
 				A4AA64092173CC5C007D83F2 /* UserProfileViewController.swift in Sources */,
+				1432E11521F1AB5A00446425 /* CheffLocationCell.swift in Sources */,
 				E9182433214E97F0009F62CE /* ChefCell.swift in Sources */,
 				DA240C7221C03E980004474B /* PhotosCollectionView.swift in Sources */,
 				E4350836218E8E4C00C33719 /* UserProfileViewModel.swift in Sources */,
@@ -735,7 +758,6 @@
 				A4AA64062173BE76007D83F2 /* ProfileViewModel.swift in Sources */,
 				E975B60D2160133100BE6DD2 /* ChefFieldsCell.swift in Sources */,
 				E975B609216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift in Sources */,
-				142C8C2621C44E9500C04619 /* FindChefCell.swift in Sources */,
 				A4D45760217CEDDC002E4588 /* TermsAndConditionViewController.swift in Sources */,
 				14E2ABB421DAAB31005673CA /* CodeViewController.swift in Sources */,
 				1432E10C21EF952F00446425 /* LocationCell.swift in Sources */,
@@ -751,6 +773,7 @@
 				E9D2700821499C130087F476 /* CreateAccountController.swift in Sources */,
 				DAB7AD7F21D0191F006E43A3 /* PhotoGalleryCell.swift in Sources */,
 				14E2ABAA21D8599B005673CA /* SpinningButton.swift in Sources */,
+				1432E11321F116CC00446425 /* LocationManager.swift in Sources */,
 				149EA07921D2D51E004DD3E5 /* String+Extension.swift in Sources */,
 				DA8BE00F21E11D3D003CB039 /* FinishYourProfileViewModel.swift in Sources */,
 				A4C924B92172C3D000F3BBDE /* Requestable.swift in Sources */,
@@ -762,6 +785,7 @@
 				A4AA63FF2173B6E5007D83F2 /* ProfileGenericTableViewCell.swift in Sources */,
 				A4C924B82172C3D000F3BBDE /* APIManager.swift in Sources */,
 				DA240C7021C03C5D0004474B /* AddPhotosController.swift in Sources */,
+				1432E11821F52B3400446425 /* GlobalConstants.swift in Sources */,
 				E975B606216005C400BE6DD2 /* FieldsModel.swift in Sources */,
 				A4C924C52173A41700F3BBDE /* UserAccountCell.swift in Sources */,
 				14B63EDD21EE967F0078AEBA /* LocationSearchController.swift in Sources */,
