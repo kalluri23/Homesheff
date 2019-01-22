@@ -98,17 +98,19 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
             locationSearchisActive = false
             
         }else {
-            self.loadingIndicator.startAnimating()
-            profileViewModel.getPhotosToGallery(envelop:
-            profileViewModel.getPhotosToGalleryEnvelop(userId: (User.defaultUser.currentUser?.id)!)) { (photoData) in
-                self.loadingIndicator.stopAnimating()
-                User.defaultUser.currentUser?.photoGallery = photoData
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-                vc.chefInfo = self.findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
-                vc.profileType = .cheffDetails
-                vc.hidesBottomBarWhenPushed = true
-                tableView.deselectRow(at: indexPath, animated: true)
-                self.navigationController?.pushViewController(vc, animated: true)
+            if self.findCheifViewModel.searchType == .searchByFirstName {
+                self.loadingIndicator.startAnimating()
+                profileViewModel.getPhotosToGallery(envelop:
+                profileViewModel.getPhotosToGalleryEnvelop(userId: (User.defaultUser.currentUser?.id)!)) { (photoData) in
+                    self.loadingIndicator.stopAnimating()
+                    User.defaultUser.currentUser?.photoGallery = photoData
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+                    vc.chefInfo = self.findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
+                    vc.profileType = .cheffDetails
+                    vc.hidesBottomBarWhenPushed = true
+                    tableView.deselectRow(at: indexPath, animated: true)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
             }
         }
     }
@@ -150,6 +152,31 @@ extension FindChefsViewController: UITextFieldDelegate {
             }
         }
         
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        if textField.tag == kFindCheffTextFieldTag {
+            self.nameTextField.resignFirstResponder()
+            self.nameTextField.text = nil
+            self.findCheifViewModel.searchType = .searchByFirstName
+            self.findCheifViewModel.searchListOfUser()
+            return false
+        }
+        if textField.tag == kSearchLocationTextFieldTag {
+            self.locationTextField.resignFirstResponder()
+            self.locationTextField.text = "Current Location"
+            self.selectedLocation = ("\(LocationManager.shared.currentLocation.coordinate.latitude)", "\(LocationManager.shared.currentLocation.coordinate.longitude)")
+            self.findCheifViewModel.searchType = .searchByFirstName
+            self.locationSearchisActive = false
+            self.findCheifViewModel.searchListOfUser()
+            return false
+        }
         return true
     }
 }
