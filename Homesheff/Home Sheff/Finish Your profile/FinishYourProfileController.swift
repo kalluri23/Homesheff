@@ -81,7 +81,9 @@ class FinishYourProfileController : UIViewController, UINavigationControllerDele
         }
         viewModel.finishUserProfile(envelop: finishUserProfileEnvelop) { (success) in
             if success {
-                self.performSegue(withIdentifier: "AddPhotosSegue", sender: self)
+                //self.performSegue(withIdentifier: "AddPhotosSegue", sender: self)
+                self.performSegue(withIdentifier: "AddServicesSegue", sender: self)
+                
             } else {
                 self.showAlert(title: "Oops!", message: "Please check your details")
             }

@@ -55,6 +55,8 @@ class CreateAccountController: UIViewController {
         } else {
             basicDetails.isCustomer = sender.isSelected
         }
+        
+        view.endEditing(true)
         self.signUpButton.isEnabled(validateFields())
     }
     
