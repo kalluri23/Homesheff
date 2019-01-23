@@ -145,6 +145,7 @@
                         <outlet property="noServicesView" destination="Pyv-8r-jbH" id="eS6-eL-LZX"/>
                         <outlet property="servicesTableView" destination="I9m-ii-mfj" id="7xf-Hc-Yn4"/>
                         <segue destination="2UU-3c-YW8" kind="show" identifier="editService" id="Ir1-Gl-Nvv"/>
+                        <segue destination="MWW-mS-3gx" kind="show" identifier="AddPhotos" id="zXn-9L-dzy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H9T-In-Q3J" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -293,7 +294,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cKC-Zg-C2x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5428" y="322"/>
+            <point key="canvasLocation" x="5668" y="318"/>
         </scene>
         <!--Service List View Controller-->
         <scene sceneID="blg-5H-tMI">
@@ -373,6 +374,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GPo-Rj-edm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3648.8000000000002" y="679.61019490254876"/>
+        </scene>
+        <!--AddPhotos-->
+        <scene sceneID="TTp-TU-2LO">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="AddPhotosController" storyboardName="AddPhotos" id="MWW-mS-3gx" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s9A-eR-yfw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5209" y="-52"/>
         </scene>
         <!--Edit Service View Controller-->
         <scene sceneID="gca-nc-QjM">
@@ -516,7 +525,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhq-YV-Dtu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5428" y="1039"/>
+            <point key="canvasLocation" x="5668" y="1061"/>
         </scene>
     </scenes>
     <resources>

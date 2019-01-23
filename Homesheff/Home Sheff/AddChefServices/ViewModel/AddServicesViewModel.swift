@@ -20,7 +20,7 @@ class AddServicesViewModel {
     }
     
     func getServicesEnvelop() -> Requestable {
-        let userId = "\(User.defaultUser.currentUser?.id ?? 168)"
+        let userId = "\(User.defaultUser.currentUser?.id ?? 0)"
         let getServicesPath = ServicePath.getServices(userId: userId)
         let getServicesEnvelop = GetServicesEnvelop(pathType: getServicesPath)
         return getServicesEnvelop

@@ -20,7 +20,7 @@ class AddNewServiceViewModel {
     }
     
     func addServiceEnvelop(name: String, description: String?) -> Requestable {
-        let addServicePath = ServicePath.addService(name: name, description: description, userPreferenceId: User.defaultUser.currentUser?.id ?? 168)
+        let addServicePath = ServicePath.addService(name: name, description: description, userPreferenceId: User.defaultUser.currentUser?.id ?? 0)
         let addServiceEnvelop = AddServiceEnvelop(pathType: addServicePath)
         return addServiceEnvelop
     }

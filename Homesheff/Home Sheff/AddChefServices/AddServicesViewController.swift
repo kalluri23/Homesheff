@@ -20,6 +20,8 @@ class AddServicesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(nextTapped))
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +41,11 @@ class AddServicesViewController: UIViewController {
         if let editServiceVC = segue.destination as? EditServiceViewController {
             editServiceVC.serviceToEdit = serviceToEdit
         }
+    }
+    
+    @objc private func nextTapped() {
+        
+        self.performSegue(withIdentifier: "AddPhotos", sender: self)
     }
 }
 

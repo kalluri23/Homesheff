@@ -52,6 +52,7 @@
 		A4C924C62173A41700F3BBDE /* UserAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C924C42173A41700F3BBDE /* UserAccountCell.xib */; };
 		A4D45760217CEDDC002E4588 /* TermsAndConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */; };
 		A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */; };
+		C703080521F81EBB006A5325 /* AddPhotos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C703080421F81EBB006A5325 /* AddPhotos.storyboard */; };
 		C7520DC021EBBCC7001D29F3 /* ChefServices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7520DBF21EBBCC7001D29F3 /* ChefServices.storyboard */; };
 		C7520DC221EBC103001D29F3 /* AddServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7520DC121EBC103001D29F3 /* AddServicesViewController.swift */; };
 		C782EC9021EECFAF00AAEC1D /* AddNewServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782EC8F21EECFAF00AAEC1D /* AddNewServiceViewController.swift */; };
@@ -157,6 +158,7 @@
 		A4C924C42173A41700F3BBDE /* UserAccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserAccountCell.xib; sourceTree = "<group>"; };
 		A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionViewController.swift; sourceTree = "<group>"; };
 		A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
+		C703080421F81EBB006A5325 /* AddPhotos.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddPhotos.storyboard; sourceTree = "<group>"; };
 		C7520DBF21EBBCC7001D29F3 /* ChefServices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChefServices.storyboard; sourceTree = "<group>"; };
 		C7520DC121EBC103001D29F3 /* AddServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddServicesViewController.swift; sourceTree = "<group>"; };
 		C782EC8F21EECFAF00AAEC1D /* AddNewServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewServiceViewController.swift; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				DA240C7121C03E980004474B /* PhotosCollectionView.swift */,
 				DA240C7321C03EDA0004474B /* PhotosCollectionViewCell.swift */,
 				DA240C7521C070C90004474B /* PhotosCollectionViewModel.swift */,
+				C703080421F81EBB006A5325 /* AddPhotos.storyboard */,
 			);
 			path = "Add Photos";
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 				14E2ABBF21DFF4F8005673CA /* FacebookButton.xib in Resources */,
 				E975B6132160156000BE6DD2 /* SignUpContentTableViewCell.xib in Resources */,
 				DA8BE01721E2B5B8003CB039 /* ProfileHeaderCell.xib in Resources */,
+				C703080521F81EBB006A5325 /* AddPhotos.storyboard in Resources */,
 				E4D0450121D84C61005ADA8A /* FinishYourProfile.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
