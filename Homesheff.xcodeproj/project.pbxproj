@@ -52,6 +52,19 @@
 		A4C924C62173A41700F3BBDE /* UserAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C924C42173A41700F3BBDE /* UserAccountCell.xib */; };
 		A4D45760217CEDDC002E4588 /* TermsAndConditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */; };
 		A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */; };
+		C7520DC021EBBCC7001D29F3 /* ChefServices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7520DBF21EBBCC7001D29F3 /* ChefServices.storyboard */; };
+		C7520DC221EBC103001D29F3 /* AddServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7520DC121EBC103001D29F3 /* AddServicesViewController.swift */; };
+		C782EC9021EECFAF00AAEC1D /* AddNewServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782EC8F21EECFAF00AAEC1D /* AddNewServiceViewController.swift */; };
+		C782EC9221EED10700AAEC1D /* ServiceNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782EC9121EED10700AAEC1D /* ServiceNameCell.swift */; };
+		C782EC9421EED11600AAEC1D /* ServiceDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782EC9321EED11600AAEC1D /* ServiceDescriptionCell.swift */; };
+		C782EC9621EEF75000AAEC1D /* ServiceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782EC9521EEF75000AAEC1D /* ServiceListViewController.swift */; };
+		C782EC9921F54B5900AAEC1D /* ServiceListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782EC9821F54B5900AAEC1D /* ServiceListCell.swift */; };
+		C782EC9B21F68FBE00AAEC1D /* AddedServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782EC9A21F68FBE00AAEC1D /* AddedServiceCell.swift */; };
+		C782EC9D21F6929600AAEC1D /* AddServicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782EC9C21F6929600AAEC1D /* AddServicesViewModel.swift */; };
+		C782ECA221F69C6B00AAEC1D /* GetServicesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782ECA121F69C6B00AAEC1D /* GetServicesModel.swift */; };
+		C782ECA521F6ABCF00AAEC1D /* AddNewServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782ECA421F6ABCF00AAEC1D /* AddNewServiceViewModel.swift */; };
+		C782ECA721F6D9DF00AAEC1D /* EditServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782ECA621F6D9DF00AAEC1D /* EditServiceViewController.swift */; };
+		C782ECA921F6E04000AAEC1D /* EditServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C782ECA821F6E04000AAEC1D /* EditServiceViewModel.swift */; };
 		DA240C7021C03C5D0004474B /* AddPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA240C6F21C03C5D0004474B /* AddPhotosController.swift */; };
 		DA240C7221C03E980004474B /* PhotosCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA240C7121C03E980004474B /* PhotosCollectionView.swift */; };
 		DA240C7421C03EDA0004474B /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA240C7321C03EDA0004474B /* PhotosCollectionViewCell.swift */; };
@@ -144,6 +157,19 @@
 		A4C924C42173A41700F3BBDE /* UserAccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserAccountCell.xib; sourceTree = "<group>"; };
 		A4D4575F217CEDDC002E4588 /* TermsAndConditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionViewController.swift; sourceTree = "<group>"; };
 		A4FFD77A21605AD9008E49F0 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
+		C7520DBF21EBBCC7001D29F3 /* ChefServices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChefServices.storyboard; sourceTree = "<group>"; };
+		C7520DC121EBC103001D29F3 /* AddServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddServicesViewController.swift; sourceTree = "<group>"; };
+		C782EC8F21EECFAF00AAEC1D /* AddNewServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewServiceViewController.swift; sourceTree = "<group>"; };
+		C782EC9121EED10700AAEC1D /* ServiceNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceNameCell.swift; sourceTree = "<group>"; };
+		C782EC9321EED11600AAEC1D /* ServiceDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDescriptionCell.swift; sourceTree = "<group>"; };
+		C782EC9521EEF75000AAEC1D /* ServiceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListViewController.swift; sourceTree = "<group>"; };
+		C782EC9821F54B5900AAEC1D /* ServiceListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceListCell.swift; sourceTree = "<group>"; };
+		C782EC9A21F68FBE00AAEC1D /* AddedServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedServiceCell.swift; sourceTree = "<group>"; };
+		C782EC9C21F6929600AAEC1D /* AddServicesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddServicesViewModel.swift; sourceTree = "<group>"; };
+		C782ECA121F69C6B00AAEC1D /* GetServicesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetServicesModel.swift; sourceTree = "<group>"; };
+		C782ECA421F6ABCF00AAEC1D /* AddNewServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewServiceViewModel.swift; sourceTree = "<group>"; };
+		C782ECA621F6D9DF00AAEC1D /* EditServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditServiceViewController.swift; sourceTree = "<group>"; };
+		C782ECA821F6E04000AAEC1D /* EditServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditServiceViewModel.swift; sourceTree = "<group>"; };
 		C8CB94F0F399356DEC3B25B7 /* Pods-Homesheff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homesheff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Homesheff/Pods-Homesheff.debug.xcconfig"; sourceTree = "<group>"; };
 		DA240C6F21C03C5D0004474B /* AddPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosController.swift; sourceTree = "<group>"; };
 		DA240C7121C03E980004474B /* PhotosCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionView.swift; sourceTree = "<group>"; };
@@ -296,6 +322,7 @@
 				149EA07321D15C5E004DD3E5 /* ForgotPassword */,
 				A49D340D2156E85900AA24CF /* Create Account */,
 				A49D340E2156E86600AA24CF /* Finish Your profile */,
+				C7520DBE21EBBC93001D29F3 /* AddChefServices */,
 				A49D34112156E8A800AA24CF /* Cheif Finder */,
 			);
 			path = "Home Sheff";
@@ -318,12 +345,12 @@
 				14B63EDB21EE96390078AEBA /* LocationSearch */,
 				DA8BE01021E11EB2003CB039 /* FinishYourProfileController.swift */,
 				DA8BE00E21E11D3D003CB039 /* FinishYourProfileViewModel.swift */,
-				DA240C6E21C03C180004474B /* Add Photos */,
-				E9836C5E2165A8C0004554D4 /* View */,
 				E4D0450021D84C61005ADA8A /* FinishYourProfile.storyboard */,
 				E4D044FA21D84A9F005ADA8A /* FinishYourProfileCell.swift */,
 				1432E10E21EFFC8A00446425 /* LocationTextCell.swift */,
 				E4D0450421D97FE1005ADA8A /* FinishYourProfileExpandedCell.swift */,
+				DA240C6E21C03C180004474B /* Add Photos */,
+				E9836C5E2165A8C0004554D4 /* View */,
 			);
 			path = "Finish Your profile";
 			sourceTree = "<group>";
@@ -443,6 +470,50 @@
 				17004620FF1562822144357B /* Pods-Homesheff.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		C7520DBE21EBBC93001D29F3 /* AddChefServices */ = {
+			isa = PBXGroup;
+			children = (
+				C782ECA321F6ABB800AAEC1D /* ViewModel */,
+				C782ECA021F69C4A00AAEC1D /* Model */,
+				C782EC9721F54ADC00AAEC1D /* View */,
+				C7520DC121EBC103001D29F3 /* AddServicesViewController.swift */,
+				C782EC8F21EECFAF00AAEC1D /* AddNewServiceViewController.swift */,
+				C782EC9521EEF75000AAEC1D /* ServiceListViewController.swift */,
+				C782ECA621F6D9DF00AAEC1D /* EditServiceViewController.swift */,
+			);
+			path = AddChefServices;
+			sourceTree = "<group>";
+		};
+		C782EC9721F54ADC00AAEC1D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C782EC9121EED10700AAEC1D /* ServiceNameCell.swift */,
+				C782EC9321EED11600AAEC1D /* ServiceDescriptionCell.swift */,
+				C7520DBF21EBBCC7001D29F3 /* ChefServices.storyboard */,
+				C782EC9821F54B5900AAEC1D /* ServiceListCell.swift */,
+				C782EC9A21F68FBE00AAEC1D /* AddedServiceCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C782ECA021F69C4A00AAEC1D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C782ECA121F69C6B00AAEC1D /* GetServicesModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C782ECA321F6ABB800AAEC1D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C782EC9C21F6929600AAEC1D /* AddServicesViewModel.swift */,
+				C782ECA421F6ABCF00AAEC1D /* AddNewServiceViewModel.swift */,
+				C782ECA821F6E04000AAEC1D /* EditServiceViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		DA240C6E21C03C180004474B /* Add Photos */ = {
@@ -644,6 +715,7 @@
 				E975B60A216009D100BE6DD2 /* GenericFieldsCellTableViewCell.xib in Resources */,
 				14E2ABB521DAAB31005673CA /* ForgotPassword.storyboard in Resources */,
 				A4AA64002173B6E5007D83F2 /* ProfileGenericTableViewCell.xib in Resources */,
+				C7520DC021EBBCC7001D29F3 /* ChefServices.storyboard in Resources */,
 				A4AA64042173B704007D83F2 /* ProfileDetailedTableViewCell.xib in Resources */,
 				DA5C7E4B21C1F567003656BE /* ImageEditor.xib in Resources */,
 				DA91FB1D21B303510065C1BD /* ChefDetails.storyboard in Resources */,
@@ -730,12 +802,16 @@
 			files = (
 				14E2ABB821DABB0B005673CA /* UIViewController+Extension.swift in Sources */,
 				E4D0450321D85D92005ADA8A /* UIColor+Extension.swift in Sources */,
+				C782EC9421EED11600AAEC1D /* ServiceDescriptionCell.swift in Sources */,
 				E9182431214E924F009F62CE /* FindChefsViewController.swift in Sources */,
+				C782EC9B21F68FBE00AAEC1D /* AddedServiceCell.swift in Sources */,
 				A4AA64032173B704007D83F2 /* ProfileDetailedTableViewCell.swift in Sources */,
 				DA5C7E4921C1ECCB003656BE /* EmptyCollectionView.swift in Sources */,
+				C782EC9621EEF75000AAEC1D /* ServiceListViewController.swift in Sources */,
 				A4C924BE21739D0000F3BBDE /* UserAccountViewController.swift in Sources */,
 				DA25642521B4787600681C5D /* HSTextField.swift in Sources */,
 				A4AA640C2173CD57007D83F2 /* UserProfileTableViewCell.swift in Sources */,
+				C782ECA721F6D9DF00AAEC1D /* EditServiceViewController.swift in Sources */,
 				DAB7AD8121D01B4C006E43A3 /* PhotoCollectionCell.swift in Sources */,
 				DA240C7421C03EDA0004474B /* PhotosCollectionViewCell.swift in Sources */,
 				A4AA64092173CC5C007D83F2 /* UserProfileViewController.swift in Sources */,
@@ -750,12 +826,15 @@
 				14B63EDF21EE96A30078AEBA /* LocationSearchViewModel.swift in Sources */,
 				1432E10F21EFFC8A00446425 /* LocationTextCell.swift in Sources */,
 				A4C924B72172C3D000F3BBDE /* APIEndPoints.swift in Sources */,
+				C782EC9921F54B5900AAEC1D /* ServiceListCell.swift in Sources */,
 				A4FFD77B21605AD9008E49F0 /* CreateAccountViewModel.swift in Sources */,
 				A49D34152156E91500AA24CF /* FindCheifViewModel.swift in Sources */,
 				14E2ABB621DAAB31005673CA /* ResetPasswordViewController.swift in Sources */,
+				C782ECA221F69C6B00AAEC1D /* GetServicesModel.swift in Sources */,
 				14E2ABBB21DACE89005673CA /* SecureTextField.swift in Sources */,
 				DA91FB1B21B21E240065C1BD /* AboutTableViewCell.swift in Sources */,
 				A4AA64062173BE76007D83F2 /* ProfileViewModel.swift in Sources */,
+				C782ECA521F6ABCF00AAEC1D /* AddNewServiceViewModel.swift in Sources */,
 				E975B60D2160133100BE6DD2 /* ChefFieldsCell.swift in Sources */,
 				E975B609216009D100BE6DD2 /* GenericFieldsCellTableViewCell.swift in Sources */,
 				A4D45760217CEDDC002E4588 /* TermsAndConditionViewController.swift in Sources */,
@@ -768,6 +847,7 @@
 				E4D044FB21D84A9F005ADA8A /* FinishYourProfileCell.swift in Sources */,
 				DA8BE01621E2B5B8003CB039 /* ProfileHeaderCell.swift in Sources */,
 				A403097621795046001397EE /* User.swift in Sources */,
+				C782EC9D21F6929600AAEC1D /* AddServicesViewModel.swift in Sources */,
 				DA240C7621C070C90004474B /* PhotosCollectionViewModel.swift in Sources */,
 				149EA07621D15D54004DD3E5 /* ForgotPasswordViewController.swift in Sources */,
 				E9D2700821499C130087F476 /* CreateAccountController.swift in Sources */,
@@ -779,14 +859,17 @@
 				A4C924B92172C3D000F3BBDE /* Requestable.swift in Sources */,
 				E9D14B542147BEFF009A57A1 /* SignInViewController.swift in Sources */,
 				DAC5944221D83717004AC6D4 /* PhotoData.swift in Sources */,
+				C7520DC221EBC103001D29F3 /* AddServicesViewController.swift in Sources */,
 				E4D0450521D97FE1005ADA8A /* FinishYourProfileExpandedCell.swift in Sources */,
 				A4C924B62172C3D000F3BBDE /* ConfigEndPoints.swift in Sources */,
+				C782EC9021EECFAF00AAEC1D /* AddNewServiceViewController.swift in Sources */,
 				14E2ABBD21DFF4D3005673CA /* FacebookButton.swift in Sources */,
 				A4AA63FF2173B6E5007D83F2 /* ProfileGenericTableViewCell.swift in Sources */,
 				A4C924B82172C3D000F3BBDE /* APIManager.swift in Sources */,
 				DA240C7021C03C5D0004474B /* AddPhotosController.swift in Sources */,
 				1432E11821F52B3400446425 /* GlobalConstants.swift in Sources */,
 				E975B606216005C400BE6DD2 /* FieldsModel.swift in Sources */,
+				C782EC9221EED10700AAEC1D /* ServiceNameCell.swift in Sources */,
 				A4C924C52173A41700F3BBDE /* UserAccountCell.swift in Sources */,
 				14B63EDD21EE967F0078AEBA /* LocationSearchController.swift in Sources */,
 				E9D2700A214B13F40087F476 /* UIView+Extension.swift in Sources */,
@@ -795,6 +878,7 @@
 				149EA07B21D42525004DD3E5 /* ForgotPasswordViewModel.swift in Sources */,
 				A49D341D215AF21700AA24CF /* UITableViewGenericId.swift in Sources */,
 				E9D14B522147BEFF009A57A1 /* AppDelegate.swift in Sources */,
+				C782ECA921F6E04000AAEC1D /* EditServiceViewModel.swift in Sources */,
 				DA5C7E4D21C1F6D6003656BE /* ImageEditor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
