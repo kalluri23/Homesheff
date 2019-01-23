@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="366" y="188"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Cheff Details View Controller-->
         <scene sceneID="SZt-FZ-6AF">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9hj-jd-n5l" customClass="ProfileViewController" customModule="Homesheff" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheffDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9hj-jd-n5l" customClass="CheffDetailsViewController" customModule="Homesheff" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eu5-Os-cpj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -153,7 +153,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <viewLayoutGuide key="safeArea" id="6XF-Vr-LDV"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoGalleryCell" rowHeight="182" id="ptR-qg-AtU" customClass="PhotoGalleryCell" customModule="Homesheff" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoGalleryCell" rowHeight="182" id="ptR-qg-AtU" customClass="PhotoGalleryCell" customModule="Homesheff" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="182"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ptR-qg-AtU" id="enx-H3-sZH">

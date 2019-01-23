@@ -13,12 +13,12 @@ class FindChefsViewController: UIViewController {
     
     @IBOutlet weak var chefTableView: UITableView!
     @IBOutlet weak var findCheifViewModel: FindCheifViewModel!
+    @IBOutlet weak var profileViewModel: CheffDetailsViewModel!
     @IBOutlet weak var locationSearchViewModel: LocationSearchViewModel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
     
-    var profileViewModel = ProfileViewModel()
     var locationSearchisActive = false
     var selectedLocation: (lat: String,lon: String) = ("","")
     
@@ -42,7 +42,14 @@ class FindChefsViewController: UIViewController {
         self.locationSearchisActive = false
     }
     
-    func viewModelBinding()  {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueIdentifier = segue.identifier, segueIdentifier == UIStoryboardSegue.cheffDetailsSegue, let cheffObject = sender as? Chef {
+            let cheffDetailVC = segue.destination as! CheffDetailsViewController
+            cheffDetailVC.chefInfo = cheffObject
+        }
+    }
+    
+    private func viewModelBinding()  {
         findCheifViewModel?.reloadTableView = { [unowned self] in
             DispatchQueue.main.async {
                 self.chefTableView.reloadData()
@@ -100,16 +107,12 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
         }else {
             if self.findCheifViewModel.searchType == .searchByFirstName {
                 self.loadingIndicator.startAnimating()
+                var selectedCheffObject = self.findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
                 profileViewModel.getPhotosToGallery(envelop:
-                profileViewModel.getPhotosToGalleryEnvelop(userId: (User.defaultUser.currentUser?.id)!)) { (photoData) in
+                profileViewModel.getPhotosToGalleryEnvelop(userId: selectedCheffObject.id)) { (photoData) in
                     self.loadingIndicator.stopAnimating()
-                    User.defaultUser.currentUser?.photoGallery = photoData
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-                    vc.chefInfo = self.findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
-                    vc.profileType = .cheffDetails
-                    vc.hidesBottomBarWhenPushed = true
-                    tableView.deselectRow(at: indexPath, animated: true)
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    selectedCheffObject.photoGallery = photoData
+                    self.performSegue(withIdentifier: UIStoryboardSegue.cheffDetailsSegue, sender: selectedCheffObject)
                 }
             }
         }

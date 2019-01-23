@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  CheffDetailsViewController.swift
 //  Homesheff
 //
 //  Created by Anurag Yadev on 10/14/18.
@@ -8,14 +8,7 @@
 
 import UIKit
 
-// convert this into MVVM
-
-enum ProfileType {
-    case cheffDetails
-    case myAccount
-}
-
-class ProfileViewController: UIViewController {
+class CheffDetailsViewController: UIViewController {
 
     @IBOutlet weak var chefServiceTableView: UITableView!
     @IBOutlet weak var navigationTitleLbl: UILabel!
@@ -23,10 +16,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var contactButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var contactButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileTableViewBottom: NSLayoutConstraint!
-    
-    var chefServiceData = ProfileViewModel()
+    @IBOutlet weak var cheffDetailsViewModel: CheffDetailsViewModel!
+
     var chefInfo: Chef?
-    var profileType: ProfileType?
     var aboutSectionHeight: CGFloat = 0.0
     var aboutChef: String = ""
     var profileSections = [ProfileTableViewCellType]()
@@ -34,7 +26,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         chefServiceTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNonzeroMagnitude))
-        chefServiceData.chefInfo = self.chefInfo
+        cheffDetailsViewModel.chefInfo = self.chefInfo
         chefServiceTableView.register(ProfileHeaderCell.nib, forCellReuseIdentifier: ProfileHeaderCell.reuseIdentifier)
         chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
         chefServiceTableView.register(AboutTableViewCell.nib, forCellReuseIdentifier: AboutTableViewCell.reuseIdentifier)
@@ -44,15 +36,7 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         // Hiding navigation since controller has its own navigation bar
         self.navigationController?.isNavigationBarHidden = true
-        if profileType == ProfileType.myAccount {
-            //Hide contact button when myaccount
-            contactCheff.alpha = 0.0
-            contactButtonHeight.constant = 0
-            chefInfo = Chef(user:User.defaultUser.currentUser!)
-        } else {
-            self.profileTableViewBottom.constant = -55
-        }
-        profileSections  = chefServiceData.prepareSections
+        profileSections  = cheffDetailsViewModel.prepareSections
         navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "") \n\(chefInfo?.location ?? "")"
        self.chefServiceTableView.reloadData()
         
@@ -119,7 +103,7 @@ class ProfileViewController: UIViewController {
 }
 
 
-extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
+extension CheffDetailsViewController: UITableViewDataSource,UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.profileSections.count
@@ -130,7 +114,7 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
             case .aboutType, .photoGalleryType, .headerType:
                 return 1
             case .servicesType:
-                return chefServiceData.chefService.count
+                return cheffDetailsViewModel.chefService.count
          }
     }
     
@@ -142,9 +126,12 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
             case .aboutType:
                 return  CGFloat(self.aboutSectionHeight)
             case .photoGalleryType:
-                let photosList = (User.defaultUser.currentUser?.photoGallery)!
-                if photosList.count > 0 {
-                    return 160
+                if let photosList = self.chefInfo?.photoGallery {
+                    if photosList.count > 0 {
+                        return 160
+                    }else {
+                        return 80
+                    }
                 }
                 return 80
             case .servicesType:
@@ -170,16 +157,14 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
                 headerCell.profileHeading.text = chefInfo?.headertext
                 headerCell.profileContact.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
                 headerCell.delegate = self
-                if profileType != .myAccount {
-                    headerCell.profileEditBtn.alpha = 0.0
-                }
+                headerCell.profileEditBtn.alpha = 0.0
                 DispatchQueue.global(qos: .background).async {
-                    self.chefServiceData.downloadImage(imageName: "\(self.chefInfo?.id ?? 0)_ProfilePhoto") { (image) in
+                    self.cheffDetailsViewModel.downloadImage(imageName: "\(self.chefInfo?.id ?? 0)_ProfilePhoto") { (image) in
                         DispatchQueue.main.async {
                             headerCell.profileImgView.image = image
                         }
                     }
-                    self.chefServiceData.downloadImage(imageName: "\(self.chefInfo?.id ?? 0)_CoverPhoto") { (image) in
+                    self.cheffDetailsViewModel.downloadImage(imageName: "\(self.chefInfo?.id ?? 0)_CoverPhoto") { (image) in
                          DispatchQueue.main.async {
                              headerCell.profileBgView.image = image
                          }
@@ -201,7 +186,9 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
                 return aboutCell
             case .photoGalleryType:
                 let photoGalleryCell = tableView.dequeueReusableCell(withIdentifier: PhotoGalleryCell.reuseIdentifier, for: indexPath) as! PhotoGalleryCell
-                photoGalleryCell.photoList = (User.defaultUser.currentUser?.photoGallery)!
+                if let photoList = self.chefInfo?.photoGallery {
+                    photoGalleryCell.photoList = photoList
+                }
                 photoGalleryCell.delegate = self
                  DispatchQueue.main.async {
                     photoGalleryCell.collectionView.reloadData()
@@ -209,7 +196,7 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
                 return photoGalleryCell
             case .servicesType:
                 let cell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
-                cell.chefDetails = chefServiceData.chefService[indexPath.row]
+                cell.chefDetails = cheffDetailsViewModel.chefService[indexPath.row]
                 
                 cell.partCount1.isHidden = true
                 cell.partyCount2.isHidden = true
@@ -232,14 +219,14 @@ extension ProfileViewController: UITableViewDataSource,UITableViewDelegate {
     }
 }
 
-extension ProfileViewController: AboutCellDelegate {
+extension CheffDetailsViewController: AboutCellDelegate {
     
     func viewMoreClicked() {
         self.navigationController?.pushViewController(AboutChefController.create(aboutChef: (chefInfo?.about)!), animated: true)
     }
 }
 
-extension ProfileViewController: PhotoGalleryDelegate {
+extension CheffDetailsViewController: PhotoGalleryDelegate {
     
     func editPhotosClicked() {
         let vc = AddPhotosController.create()
@@ -248,7 +235,7 @@ extension ProfileViewController: PhotoGalleryDelegate {
     }
 }
 
-extension ProfileViewController: ProfileHeaderDelegate {
+extension CheffDetailsViewController: ProfileHeaderDelegate {
     func editProfileHeader() {
         let vc = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
         self.navigationController?.pushViewController(vc, animated: true)

@@ -13,7 +13,7 @@ class UserAccountViewController: UIViewController {
     
     // Change it to VM later //*
     @IBOutlet weak var userAccountVC: UITableView!
-    var chefServiceData = ProfileViewModel()
+    var chefServiceData = CheffDetailsViewModel()
     @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     
     let dataArray = [["Profile"],["Version","Privacy Policy","Terms of Services","Sign Out"]]
@@ -112,16 +112,7 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
             chefServiceData.getPhotosToGallery(envelop: chefServiceData.getPhotosToGalleryEnvelop(userId: (User.defaultUser.currentUser?.id)!)) { (photoData) in
                 self.activityIndicator.stopAnimating()
                 User.defaultUser.currentUser?.photoGallery = photoData
-                if (User.defaultUser.currentUser != nil) && (User.defaultUser.currentUser?.isChef)! {
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-                    vc.chefInfo = Chef(user:User.defaultUser.currentUser!)
-                    vc.profileType = .myAccount
-                    vc.hidesBottomBarWhenPushed = true
-                    self.navigationController?.pushViewController(vc, animated: true)
-                } else {
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
+                self.performSegue(withIdentifier: UIStoryboardSegue.userProfileSegue, sender: self)
             }
         }
         else if dataArray[indexPath.section][indexPath.row] == "Terms of Services" {

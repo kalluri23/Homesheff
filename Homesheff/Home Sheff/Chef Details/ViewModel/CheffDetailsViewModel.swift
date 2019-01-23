@@ -23,7 +23,7 @@ enum ProfileTableViewCellType {
     case servicesType
 }
 
-class ProfileViewModel {
+class CheffDetailsViewModel: NSObject {
   
     var chefService: [ChefServices]
     var chefInfo: Chef?
@@ -31,7 +31,7 @@ class ProfileViewModel {
     
     var reloadTableView: (() -> Void)?
     
-    init() {
+    override init() {
         chefService = [ChefServices(name: "Meal Prep", serviceLocation: "in your home", servicePrice: "", imageName: "mealprep-icon"),
                        ChefServices(name: "Catering", serviceLocation: "Delivered to your home", servicePrice: "", imageName: "catering-icon"),
                        ChefServices(name: "Grocery Shopping", serviceLocation: "Delivered to your home", servicePrice: "", imageName: "groceryshopping-icon")]

@@ -126,7 +126,7 @@ internal enum ServicePath:ParameterBodyMaker {
             
         case .signUpCall(email: let email, password: let password, phoneNo: let phoneNo, firstName: let firstName, lastName: let lastName, isChef: let isChef, isCustomer: let isCustomer, imageUrl: let imageUrl, zipCode: let zipCode):
             return ["email": email, "password": password, "phone": phoneNo ?? "", "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, "zipCode": zipCode]
-        case .forgotPassword, .validate, .getUserById, .getPhotoGallery, .deletePhotoFromGallery:
+        case .forgotPassword, .validate, .getUserById, .getPhotoGallery, .deletePhotoFromGallery, .searchServices:
             return nil
         
         case .resetPassword(email: let email, code: let code, password: let password):
@@ -137,8 +137,6 @@ internal enum ServicePath:ParameterBodyMaker {
             
         case .finishYourProfileCall(let firstName, let lastName, let headline, let about, let email, let location, let phoneNo, let isChef, let isCustomer):
             return ["firstName": firstName ?? "", "lastName": lastName ?? "", "headertext": headline ?? "", "about": about ?? "",  "email": email ?? "", "location": location ?? "", "phone": phoneNo ?? "", "isChef": isChef ?? "", "isCustomer": isCustomer ?? ""]
-        case .searchServices:
-            return nil
         }
     }
     
