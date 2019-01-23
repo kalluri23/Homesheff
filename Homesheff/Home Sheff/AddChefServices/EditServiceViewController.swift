@@ -12,7 +12,7 @@ import UIKit
 class EditServiceViewController : UIViewController, ServiceListDelegate {
     
     @IBOutlet weak var serviceTableView: UITableView!
-    let viewModel = EditServiceViewModel()
+    private let viewModel = EditServiceViewModel()
     var serviceToEdit: SheffService?
     private var selectedServiceName: String?
     private var serviceDescription: String?

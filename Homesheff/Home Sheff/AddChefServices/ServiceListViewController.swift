@@ -18,7 +18,9 @@ class ServiceListViewController: UIViewController {
     
     var delegate: ServiceListDelegate?
     @IBOutlet weak var serviceListTableView: UITableView!
-    let serviceList = ["ServiceName1", "ServiceName2", "ServiceName3"]
+    private let serviceList = ["Meal Planning", "Meal Preparation", "Grocery Shopping",
+                               "Dietary Planning", "Dietary Planning(Gluten free)", "Catering", "Health and Wellness Coaching",
+                               "Grocery Shopping Lessons", "Meal Planning Lessons", "Cooking Classes", "Transition services(Cleansing services)", "Transition services(Detoxing)", "Transition services(Veganizing the Kitchen)", "Holistic Healing", "Baking Services", "Weight Loss", "Muscle Building", "Sports and Recovery", "Disease Prevention and Reversal"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
