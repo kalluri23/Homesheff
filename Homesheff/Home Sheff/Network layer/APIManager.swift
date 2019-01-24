@@ -289,6 +289,88 @@ class APIManager {
         }
     }
     
+    func getServicesApi(requestEnvelop:Requestable, completion: @escaping ([SheffService]?)->Void) {
+        let request = Alamofire.request(requestEnvelop.requestURL()!, headers: requestEnvelop.httpHeaders())
+        request.validate()
+            .responseString { response in
+                do {
+                    print(response.result)
+                    let jsonDecoder = JSONDecoder()
+                    let serviceList = try jsonDecoder.decode([SheffService].self, from: response.data!)
+                    completion(serviceList)
+                }
+                catch {
+                    print(error)
+                    completion(nil)
+                }
+        }
+    }
+    
+    func addServiceApi(requestEnvelop:Requestable, completion: @escaping (SheffService?)->Void) {
+        
+        let method = requestEnvelop.httpType.rawValue
+        let type = HTTPMethod(rawValue: method)
+        let request = Alamofire.request(requestEnvelop.requestURL()!,method: type!,
+                                        parameters: requestEnvelop.pathType.httpBodyEnvelop(),
+                                        encoding: JSONEncoding.default, headers: requestEnvelop.httpHeaders())
+        request.validate()
+            .responseString { response in
+                do {
+                    print(response.result)
+                    let jsonDecoder = JSONDecoder()
+                    let addedService = try jsonDecoder.decode(SheffService.self, from: response.data!)
+                    completion(addedService)
+                }
+                catch {
+                    print(error)
+                    completion(nil)
+                }
+        }
+    }
+    
+    func editServiceApi(requestEnvelop:Requestable, completion: @escaping (Bool?)->Void) {
+        
+        let method = requestEnvelop.httpType.rawValue
+        let type = HTTPMethod(rawValue: method)
+        let request = Alamofire.request(requestEnvelop.requestURL()!,method: type!,
+                                        parameters: requestEnvelop.pathType.httpBodyEnvelop(),
+                                        encoding: JSONEncoding.default, headers: requestEnvelop.httpHeaders())
+        request.validate()
+            .responseString { response in
+                switch response.result{
+                case .success:
+                    if let resultValue = response.result.value, resultValue == "true" {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                case .failure:
+                    completion(false)
+                }
+        }
+    }
+    
+    func deleteServiceApi(requestEnvelop:Requestable, completion: @escaping (Bool?)->Void) {
+        
+        let method = requestEnvelop.httpType.rawValue
+        let type = HTTPMethod(rawValue: method)
+        let request = Alamofire.request(requestEnvelop.requestURL()!,method: type!, headers: requestEnvelop.httpHeaders())
+        request.validate()
+            .responseString { response in
+                switch response.result{
+                case .success:
+                    if let resultValue = response.result.value, resultValue == "true" {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                case .failure:
+                    completion(false)
+                }
+        }
+    }
+
+    
     let imageCache = AutoPurgingImageCache(
         memoryCapacity: UInt64(100).megabytes(),
         preferredMemoryUsageAfterPurge: UInt64(60).megabytes()
