@@ -40,7 +40,7 @@ class FinishYourProfileController : UIViewController, UINavigationControllerDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        profileImage.image = profilePicImage
+        //profileImage.image = profilePicImage
     }
     
     override func viewDidLayoutSubviews(){
