@@ -20,6 +20,7 @@ class UserAccountViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
 
+    //MARK:- Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.color = .black
@@ -31,7 +32,17 @@ class UserAccountViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
     }
+    
+    //MARK:- Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueIdentifier = segue.identifier, segueIdentifier == UIStoryboardSegue.userIsCheffProfileSegue, let cheffObject = sender as? Chef {
+            let cheffDetailVC = segue.destination as! CheffDetailsViewController
+            cheffDetailVC.chefInfo = cheffObject
+            cheffDetailVC.profileType = .myAccount
+        }
+    }
 
+    //MARK:- Selectors
     private func didTapTermsAndCondition(isTermsAndCondition: Bool) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "TermsAndConditionViewControllerID") as! TermsAndConditionViewController
            vc.isTermsAndCondition = isTermsAndCondition
@@ -104,15 +115,23 @@ extension UserAccountViewController: UITableViewDataSource,UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // This is temp , need to tie state with enum and data source
-        // Temp getting data from API.. gallery data should come with initial profile data
         if dataArray[indexPath.section][indexPath.row] == "Profile" {
-            activityIndicator.startAnimating()
-            chefServiceData.getPhotosToGallery(envelop: chefServiceData.getPhotosToGalleryEnvelop(userId: (User.defaultUser.currentUser?.id)!)) { (photoData) in
-                self.activityIndicator.stopAnimating()
-                User.defaultUser.currentUser?.photoGallery = photoData
-                self.performSegue(withIdentifier: UIStoryboardSegue.userProfileSegue, sender: self)
+            if let currentUser = User.defaultUser.currentUser, let userId = currentUser.id {
+                if let isCheff = currentUser.isChef, isCheff {
+                    activityIndicator.startAnimating()
+                    chefServiceData.getPhotosToGallery(envelop: chefServiceData.getPhotosToGalleryEnvelop(userId: userId)) { (photoData) in
+                        self.activityIndicator.stopAnimating()
+                        User.defaultUser.currentUser?.photoGallery = photoData
+                        let userCheff = Chef(user: currentUser)
+                        self.performSegue(withIdentifier: UIStoryboardSegue.userIsCheffProfileSegue, sender: userCheff)
+                        return
+                    }
+                }
+                
+                if let isCustomer = currentUser.isCustomer, isCustomer {
+                    self.performSegue(withIdentifier: UIStoryboardSegue.userProfileSegue, sender: self)
+                    return
+                }
             }
         }
         else if dataArray[indexPath.section][indexPath.row] == "Terms of Services" {

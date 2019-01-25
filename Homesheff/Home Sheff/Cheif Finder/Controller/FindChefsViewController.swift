@@ -46,6 +46,7 @@ class FindChefsViewController: UIViewController {
         if let segueIdentifier = segue.identifier, segueIdentifier == UIStoryboardSegue.cheffDetailsSegue, let cheffObject = sender as? Chef {
             let cheffDetailVC = segue.destination as! CheffDetailsViewController
             cheffDetailVC.chefInfo = cheffObject
+            cheffDetailVC.profileType = .cheffDetails
         }
     }
     

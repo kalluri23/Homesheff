@@ -12,4 +12,5 @@ import UIKit
 extension UIStoryboardSegue {
     static let cheffDetailsSegue = "CheffDetailsSegue"
     static let userProfileSegue = "UserProfileSegue"
+    static let userIsCheffProfileSegue = "UserIsCheffProfileSegue"
 }

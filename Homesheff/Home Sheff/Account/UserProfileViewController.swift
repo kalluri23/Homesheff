@@ -56,12 +56,16 @@ class UserProfileViewController: UIViewController {
     
     func updateUserProfileImage() {
         
-        viewModel.downloadImage(imageName: "\(chefUser?.id ?? 0)_ProfilePhoto") { (profilePhoto) in
-            self.userProfilePicture.image = profilePhoto
+        viewModel.downloadImage(imageName: "\(chefUser?.id ?? 0)_ProfilePhoto") {[unowned self] (profilePhoto) in
+            DispatchQueue.main.async {[unowned self] in
+                self.userProfilePicture.image = profilePhoto
+            }
         }
         
-        viewModel.downloadImage(imageName: "\(chefUser?.id ?? 0)_CoverPhoto") { (coverPhoto) in
-            self.userCoverPicture.image = coverPhoto
+        viewModel.downloadImage(imageName: "\(chefUser?.id ?? 0)_CoverPhoto") { [unowned self] (coverPhoto) in
+            DispatchQueue.main.async {[unowned self] in
+                self.userCoverPicture.image = coverPhoto
+            }
         }
     }
     

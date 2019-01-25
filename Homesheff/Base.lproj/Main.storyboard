@@ -658,6 +658,7 @@
                         <outlet property="activityIndicator" destination="aCF-8C-kP1" id="dpE-wu-HN7"/>
                         <outlet property="userAccountVC" destination="f2p-hg-hzE" id="n8Q-qC-3J0"/>
                         <segue destination="YNa-9R-VOy" kind="show" identifier="UserProfileSegue" id="c3k-aB-uZr"/>
+                        <segue destination="zc4-1T-JnA" kind="show" identifier="UserIsCheffProfileSegue" id="r0W-Nl-gXX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WMN-t8-t2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -952,7 +953,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OU0-Th-rFp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="AxD-F4-hlA" customClass="CheffDetailsViewModel" customModule="Homesheff" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="5896.8000000000002" y="-200.14992503748127"/>
+            <point key="canvasLocation" x="5897" y="-186"/>
         </scene>
         <!--Base Tabbar Controller-->
         <scene sceneID="Q65-GE-hAl">
@@ -1189,4 +1190,7 @@
         <image name="sheff_profile_placeholder" width="70" height="70"/>
         <image name="sheffs_list_placeholder" width="55" height="55"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="r0W-Nl-gXX"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum ProfileType {
+    case cheffDetails
+    case myAccount
+}
+
 class CheffDetailsViewController: UIViewController {
 
     @IBOutlet weak var chefServiceTableView: UITableView!
@@ -19,6 +24,7 @@ class CheffDetailsViewController: UIViewController {
     @IBOutlet weak var cheffDetailsViewModel: CheffDetailsViewModel!
 
     var chefInfo: Chef?
+    var profileType: ProfileType?
     var aboutSectionHeight: CGFloat = 0.0
     var aboutChef: String = ""
     var profileSections = [ProfileTableViewCellType]()
@@ -36,8 +42,16 @@ class CheffDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         // Hiding navigation since controller has its own navigation bar
         self.navigationController?.isNavigationBarHidden = true
+        if profileType == ProfileType.myAccount {
+            //Hide contact button when myaccount
+            contactCheff.alpha = 0.0
+            contactButtonHeight.constant = 0
+            navigationTitleLbl.text = "My Profile"
+        } else {
+            self.profileTableViewBottom.constant = -55
+            navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "") \n\(chefInfo?.location ?? "")"
+        }
         profileSections  = cheffDetailsViewModel.prepareSections
-        navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "") \n\(chefInfo?.location ?? "")"
        self.chefServiceTableView.reloadData()
         
     }
@@ -157,7 +171,9 @@ extension CheffDetailsViewController: UITableViewDataSource,UITableViewDelegate 
                 headerCell.profileHeading.text = chefInfo?.headertext
                 headerCell.profileContact.text = "\(chefInfo?.email ?? "") - \(chefInfo?.phone ?? "")"
                 headerCell.delegate = self
-                headerCell.profileEditBtn.alpha = 0.0
+                if profileType != .myAccount {
+                    headerCell.profileEditBtn.alpha = 0.0
+                }
                 DispatchQueue.global(qos: .background).async {
                     self.cheffDetailsViewModel.downloadImage(imageName: "\(self.chefInfo?.id ?? 0)_ProfilePhoto") { (image) in
                         DispatchQueue.main.async {
@@ -189,6 +205,11 @@ extension CheffDetailsViewController: UITableViewDataSource,UITableViewDelegate 
                 if let photoList = self.chefInfo?.photoGallery {
                     photoGalleryCell.photoList = photoList
                 }
+                if profileType != .myAccount {
+                    photoGalleryCell.isEditable = false
+                }else {
+                    photoGalleryCell.isEditable = true
+                }
                 photoGalleryCell.delegate = self
                  DispatchQueue.main.async {
                     photoGalleryCell.collectionView.reloadData()
@@ -211,10 +232,16 @@ extension CheffDetailsViewController: UITableViewDataSource,UITableViewDelegate 
         switch self.profileSections[section] {
             case .aboutType:
                 return  "About"
-            case .photoGalleryType, .headerType:
+        case .photoGalleryType:
+            if profileType == .myAccount {
+               return ""
+            }else {
+               return "Photos"
+            }
+            case .headerType:
                 return ""
             case .servicesType:
-                return  "SERVICES"
+                return  "Services"
         }
     }
 }
