@@ -22,7 +22,8 @@ class CheffDetailsViewController: UIViewController {
     @IBOutlet weak var contactButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileTableViewBottom: NSLayoutConstraint!
     @IBOutlet weak var cheffDetailsViewModel: CheffDetailsViewModel!
-
+    @IBOutlet weak var addServicesViewModel: AddServicesViewModel!
+    
     var chefInfo: Chef?
     var profileType: ProfileType?
     var aboutSectionHeight: CGFloat = 0.0
@@ -34,7 +35,6 @@ class CheffDetailsViewController: UIViewController {
         chefServiceTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNonzeroMagnitude))
         cheffDetailsViewModel.chefInfo = self.chefInfo
         chefServiceTableView.register(ProfileHeaderCell.nib, forCellReuseIdentifier: ProfileHeaderCell.reuseIdentifier)
-        chefServiceTableView.register(ProfileGenericTableViewCell.nib, forCellReuseIdentifier: ProfileGenericTableViewCell.reuseIdentifier)
         chefServiceTableView.register(AboutTableViewCell.nib, forCellReuseIdentifier: AboutTableViewCell.reuseIdentifier)
     }
     
@@ -52,8 +52,19 @@ class CheffDetailsViewController: UIViewController {
             navigationTitleLbl.text = "\(chefInfo?.firstName ?? "")  \(chefInfo?.lastName ?? "") \n\(chefInfo?.location ?? "")"
         }
         profileSections  = cheffDetailsViewModel.prepareSections
-       self.chefServiceTableView.reloadData()
-        
+        if let userId = self.chefInfo?.id {
+            DispatchQueue.global().async {
+                self.addServicesViewModel.getServices(envelop: self.addServicesViewModel.getServicesEnvelop(userId: "\(userId)"), completion: { [unowned self] cheffServices in
+                    if let services = cheffServices {
+                        self.cheffDetailsViewModel.chefServices = services
+                    }
+                    self.profileSections = self.cheffDetailsViewModel.prepareSections
+                    DispatchQueue.main.async {[unowned self] in
+                        self.chefServiceTableView.reloadData()
+                    }
+                })
+            }
+        }
     }
     
     @IBAction func dismissViewController(_ sender: Any) {
@@ -124,12 +135,7 @@ extension CheffDetailsViewController: UITableViewDataSource,UITableViewDelegate 
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        switch self.profileSections[section] {
-            case .aboutType, .photoGalleryType, .headerType:
-                return 1
-            case .servicesType:
-                return cheffDetailsViewModel.chefService.count
-         }
+        return self.cheffDetailsViewModel.numberOfRows(sectionType: self.profileSections[section])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -138,7 +144,7 @@ extension CheffDetailsViewController: UITableViewDataSource,UITableViewDelegate 
             case .headerType:
                 return 215
             case .aboutType:
-                return  CGFloat(self.aboutSectionHeight)
+                return  self.aboutSectionHeight
             case .photoGalleryType:
                 if let photosList = self.chefInfo?.photoGallery {
                     if photosList.count > 0 {
@@ -149,7 +155,7 @@ extension CheffDetailsViewController: UITableViewDataSource,UITableViewDelegate 
                 }
                 return 80
             case .servicesType:
-                return  55
+                return  60
         }
     }
     
@@ -191,13 +197,14 @@ extension CheffDetailsViewController: UITableViewDataSource,UITableViewDelegate 
             case .aboutType:
                 let aboutCell: AboutTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
                 aboutCell.delegate = self
-                aboutCell.aboutChef = (chefInfo?.about)!
+                aboutCell.aboutChef = (chefInfo?.about) ?? "Sheff information not available"
                 let aboutHeight = chefInfo?.about?.height(withConstrainedWidth: (view.frame.width - 20), font: UIFont.systemFont(ofSize: 16))
-                if CGFloat(100.0).isLess(than: aboutHeight!) {
+                
+                if CGFloat(100.0).isLess(than: aboutHeight ?? CGFloat(20.0)) {
                     aboutCell.showMoreButton = true
                     self.aboutSectionHeight = 155
                 } else {
-                    self.aboutSectionHeight = aboutHeight! + 20
+                    self.aboutSectionHeight = aboutHeight ?? CGFloat(20.0) + 20
                 }
                 return aboutCell
             case .photoGalleryType:
@@ -216,13 +223,13 @@ extension CheffDetailsViewController: UITableViewDataSource,UITableViewDelegate 
                 }
                 return photoGalleryCell
             case .servicesType:
-                let cell: ProfileGenericTableViewCell = chefServiceTableView.dequeueReusableCell(for: indexPath)
-                cell.chefDetails = cheffDetailsViewModel.chefService[indexPath.row]
-                
-                cell.partCount1.isHidden = true
-                cell.partyCount2.isHidden = true
-                cell.partyCount3.isHidden = true
-                cell.servicePriceLabel.isHidden = true
+                let cell = chefServiceTableView.dequeueReusableCell(withIdentifier: "CheffServicesCell", for: indexPath) as! CheffServicesCell
+                if let sheffServices = cheffDetailsViewModel.chefServices {
+                   cell.cheffService = sheffServices[indexPath.row]
+                }else {
+                    cell.serviceNameLabel.text = nil
+                    cell.serviceDescLabel.text = "Sheff services information not available"
+                }
                 return cell
         }
         

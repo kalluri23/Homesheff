@@ -262,6 +262,35 @@ class APIManager {
         }
     }
     
+    func getSheffById(requestEnvelop:Requestable, completion: @escaping (Chef?,Bool) -> Void) {
+        let request = Alamofire.request(
+            requestEnvelop.requestURL()!,
+            parameters: requestEnvelop.pathType.httpBodyEnvelop(),
+            headers: requestEnvelop.httpHeaders())
+        request.validate()
+            .responseString { response  in
+                switch response.result  {
+                    
+                case .success:
+                    if response.result.value != nil {
+                        
+                        do {
+                            let jsonDecoder = JSONDecoder()
+                            let sheff = try jsonDecoder.decode(Chef.self, from: response.data!)
+                            completion(sheff,true)
+                        }
+                        catch {
+                            print(error)
+                            completion(nil,false)
+                        }
+                    }
+                case .failure(let error):
+                    print(error)
+                    completion(nil,false)
+                }
+        }
+    }
+    
     func updateUserPreferenceCall(requestEnvelop:Requestable, completion: @escaping (Bool) -> Void)  {
         
         let method = requestEnvelop.httpType.rawValue

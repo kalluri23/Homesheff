@@ -79,6 +79,16 @@ class FindCheifViewModel: NSObject {
         })
     }
     
+    func getSheffById(envelop:Requestable, completion: @escaping (Chef?,Bool) -> Void) {
+        apiHandler.getSheffById(requestEnvelop: envelop, completion: completion)
+    }
+    
+    func getSheffByIdEnvelop(userId: Int) -> Requestable {
+        let searchPath = ServicePath.getUserById(userId: userId)
+        let userEnvelop = GetUserById(pathType: searchPath)
+        return userEnvelop
+    }
+    
     func userListEnvelop() -> Requestable {
         
         let userListSearchPath = ServicePath.listOfUsers(userType: "all")

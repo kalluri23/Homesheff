@@ -115,6 +115,21 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
                     selectedCheffObject.photoGallery = photoData
                     self.performSegue(withIdentifier: UIStoryboardSegue.cheffDetailsSegue, sender: selectedCheffObject)
                 }
+            }else if self.findCheifViewModel.searchType == .searchByLocation {
+                self.loadingIndicator.startAnimating()
+                let selectedCheffObject = self.findCheifViewModel.cheifServiceObjectAt(index: indexPath.row)
+                self.findCheifViewModel.getSheffById(envelop: self.findCheifViewModel.getSheffByIdEnvelop(userId: Int(selectedCheffObject.id) ?? 0), completion: {[unowned self] (sheff, isSuccess) in
+                    self.loadingIndicator.stopAnimating()
+                    if isSuccess, var sheffObject = sheff {
+                        self.loadingIndicator.startAnimating()
+                        self.profileViewModel.getPhotosToGallery(envelop:
+                        self.profileViewModel.getPhotosToGalleryEnvelop(userId: sheffObject.id)) { (photoData) in
+                            self.loadingIndicator.stopAnimating()
+                            sheffObject.photoGallery = photoData
+                            self.performSegue(withIdentifier: UIStoryboardSegue.cheffDetailsSegue, sender: sheffObject)
+                        }
+                    }
+                })
             }
         }
     }

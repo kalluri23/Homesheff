@@ -9,13 +9,6 @@
 import Foundation
 import UIKit
 
-struct ChefServices {
-    var name: String
-    var serviceLocation: String
-    var servicePrice: String
-    var imageName: String
-}
-
 enum ProfileTableViewCellType {
     case headerType
     case photoGalleryType
@@ -25,26 +18,14 @@ enum ProfileTableViewCellType {
 
 class CheffDetailsViewModel: NSObject {
   
-    var chefService: [ChefServices]
+    var chefServices: [SheffService]?
     var chefInfo: Chef?
     private let apiHandler = APIManager()
     
     var reloadTableView: (() -> Void)?
     
-    override init() {
-        chefService = [ChefServices(name: "Meal Prep", serviceLocation: "in your home", servicePrice: "", imageName: "mealprep-icon"),
-                       ChefServices(name: "Catering", serviceLocation: "Delivered to your home", servicePrice: "", imageName: "catering-icon"),
-                       ChefServices(name: "Grocery Shopping", serviceLocation: "Delivered to your home", servicePrice: "", imageName: "groceryshopping-icon")]
-    }
-    
     var prepareSections:[ProfileTableViewCellType] {
-        if chefInfo?.about != nil && chefInfo?.photoGallery != nil && (chefInfo?.photoGallery!.count)! > 0 {
-            return [.headerType, .photoGalleryType,  .servicesType, .aboutType]
-        } else if (chefInfo?.about != nil) {
-            return [.headerType, .photoGalleryType, .servicesType, .aboutType]
-        } else {
-            return [.headerType, .servicesType]
-        }
+        return [.headerType, .photoGalleryType, .servicesType, .aboutType]
     }
     
     /// returns counts of cheif to generate the rows
@@ -53,7 +34,10 @@ class CheffDetailsViewModel: NSObject {
             case .aboutType, .photoGalleryType, .headerType:
                 return 1
             case .servicesType:
-                return chefService.count
+                guard let services = chefServices else {
+                    return 1
+                }
+                return services.count
         }
     }
 
