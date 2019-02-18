@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import MapKit
 
 class LocationSearchViewModel: NSObject {
-    private let apiHandler = APIManager()
+
+    // private let apiHandler = APIManager()
+    
     var reloadTableView: (() -> Void)?
     
-    var locations = [Location]()
+    var searchResults = [MKMapItem]()
+
     /// return default number of section
     var numberOfSections: Int {
         return 1
@@ -20,18 +24,22 @@ class LocationSearchViewModel: NSObject {
     
     /// returns counts of cheif to generate the rows
     var numberOfRows: Int {
-        return locations.count
+        return searchResults.count
     }
     override init() {
         super.init()
     }
     
     func searchLocation(query:String) {
-        apiHandler.searchApi(location: query, completion: { [unowned self] (searchResults) in
-            if let locations = searchResults {
-                self.locations = locations
+        
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = query
+        let localSearch = MKLocalSearch(request: request)
+        localSearch.start { (response, error) in
+            if response?.mapItems.count != nil {
+                self.searchResults = (response?.mapItems)!
                 self.reloadTableView?()
             }
-        })
+        }
     }
 }

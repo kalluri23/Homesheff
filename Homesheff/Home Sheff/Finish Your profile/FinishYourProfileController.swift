@@ -104,9 +104,9 @@ class FinishYourProfileController : UIViewController, UINavigationControllerDele
         }
     }
     
-    func userDidselect(location: Location) {
+    func userDidselect(location: MKPlacemark) {
         if let locationCell = self.finishYourProfileTableView.cellForRow(at: IndexPath(row: 5, section: 0)) as? LocationTextCell {
-            locationCell.fieldValue.text = "\(location.city),\(location.state)"
+            locationCell.fieldValue.text = "\(location.locality ?? ""),\(location.administrativeArea ?? "")"
             viewModel.setUserData(for: viewModel.profileFields[5], value: locationCell.fieldValue.text ?? "")
         }
     }

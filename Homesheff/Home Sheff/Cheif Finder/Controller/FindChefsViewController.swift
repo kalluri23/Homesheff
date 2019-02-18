@@ -8,6 +8,7 @@
 
 import UIKit
 import NVActivityIndicatorView
+import MapKit
 
 class FindChefsViewController: UIViewController {
     
@@ -17,10 +18,11 @@ class FindChefsViewController: UIViewController {
     @IBOutlet weak var locationSearchViewModel: LocationSearchViewModel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var searchTypeControl: UISegmentedControl!
     @IBOutlet weak var loadingIndicator: NVActivityIndicatorView!
     
     var locationSearchisActive = false
-    var selectedLocation: (lat: String,lon: String) = ("","")
+    var selectedLocation: String = "Washington DC"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,10 @@ class FindChefsViewController: UIViewController {
         self.findCheifViewModel.reloadTableView!()
         self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.navigationItem.hidesBackButton = true
-        setCurrentLocation()
+        nameTextField.delegate = self
+        if(locationTextField.text == "" || locationTextField.text == nil) {
+            setCurrentLocation()
+        }
         self.locationSearchisActive = false
     }
     
@@ -61,10 +66,15 @@ class FindChefsViewController: UIViewController {
     }
     
     private func setCurrentLocation() {
-        LocationManager.shared.requestForLocation()
-        self.locationTextField.text = "Current Location"
-        self.selectedLocation = ("\(LocationManager.shared.currentLocation.coordinate.latitude)", "\(LocationManager.shared.currentLocation.coordinate.longitude)")
+         self.locationTextField.text = "Current Location"
+         // self.selectedLocation = ("\(LocationManager.shared.currentLocation.coordinate.latitude)", "\(LocationManager.shared.currentLocation.coordinate.longitude)")
     }
+    
+    
+    @IBAction func didSelectSegment(_ sender: Any) {
+        
+    }
+    
 }
 
 extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -80,33 +90,39 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if locationSearchisActive {
             let locationCell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
-            locationCell.location = locationSearchViewModel.locations[indexPath.row]
+            let mapItem = locationSearchViewModel.searchResults[indexPath.row]
+            locationCell.location = mapItem.placemark
             return locationCell
         }else {
             switch findCheifViewModel.searchType {
-            case .searchByFirstName:
+            case .searchByName:
                 let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefCell", for: indexPath) as! ChefCell
                 cheffCell.chef = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
                 return cheffCell
-            case .searchByLocation:
+            case .searchByLocation, .searchByServices:
                 let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefLocationCell", for: indexPath) as! CheffLocationCell
                 cheffCell.chefService = findCheifViewModel.cheifServiceObjectAt(index: indexPath.row)
                 return cheffCell
+                
             }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if locationSearchisActive {
-            let selectedLocation = locationSearchViewModel.locations[indexPath.row]
-            locationTextField.text = "\(selectedLocation.city),\(selectedLocation.state)"
+            let selectedLocation = locationSearchViewModel.searchResults[indexPath.row]
+            self.selectedLocation = "\(selectedLocation.placemark.locality ?? ""),\(selectedLocation.placemark.administrativeArea ?? "")"
+            locationTextField.text = self.selectedLocation
             locationTextField.resignFirstResponder()
-            self.selectedLocation.lat = selectedLocation.latitude
-            self.selectedLocation.lon = selectedLocation.longitude
             locationSearchisActive = false
+            if nameTextField.text != nil &&  nameTextField.text != "" && nameTextField.text != " " {
+                // searchBySelection(searchText:  nameTextField.text!)
+            } else {
+                self.findCheifViewModel.getSheffsByLocation(location: self.selectedLocation)
+            }
             
         }else {
-            if self.findCheifViewModel.searchType == .searchByFirstName {
+            if self.findCheifViewModel.searchType == .searchByName {
                 self.loadingIndicator.startAnimating()
                 var selectedCheffObject = self.findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
                 profileViewModel.getPhotosToGallery(envelop:
@@ -115,7 +131,7 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
                     selectedCheffObject.photoGallery = photoData
                     self.performSegue(withIdentifier: UIStoryboardSegue.cheffDetailsSegue, sender: selectedCheffObject)
                 }
-            }else if self.findCheifViewModel.searchType == .searchByLocation {
+            }else if self.findCheifViewModel.searchType == .searchByLocation ||  self.findCheifViewModel.searchType == .searchByServices{
                 self.loadingIndicator.startAnimating()
                 let selectedCheffObject = self.findCheifViewModel.cheifServiceObjectAt(index: indexPath.row)
                 self.findCheifViewModel.getSheffById(envelop: self.findCheifViewModel.getSheffByIdEnvelop(userId: Int(selectedCheffObject.id) ?? 0), completion: {[unowned self] (sheff, isSuccess) in
@@ -137,31 +153,30 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20)
     }
+    
+    func searchBySelection(searchText: String) {
+        
+         if searchTypeControl.selectedSegmentIndex == 0 {
+            self.findCheifViewModel.searchType = .searchByName
+             //self.findCheifViewModel.searchCheffByName(searchText: searchText, latitude: self.selectedLocation.lat, longitude: self.selectedLocation.lon)
+         } else if  searchTypeControl.selectedSegmentIndex == 1 {
+             self.findCheifViewModel.searchType = .searchByServices
+             //self.findCheifViewModel.searchServices(searchText: searchText, latitude: self.selectedLocation.lat, longitude: self.selectedLocation.lon)
+         }
+    }
 }
 
 extension FindChefsViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.tag == kFindCheffTextFieldTag {
-            self.locationSearchisActive = false
-            if let _ = locationTextField.text {// Search with custom location
-                self.findCheifViewModel.searchType = .searchByLocation
-                if let chefFieldText = textField.text {
-                    let searchText = chefFieldText + string
-                    self.findCheifViewModel.searchServices(searchText: searchText, latitude: self.selectedLocation.lat, longitude: self.selectedLocation.lon)
-                }else {
-                    self.findCheifViewModel.searchServices(searchText: string, latitude: self.selectedLocation.lat, longitude: self.selectedLocation.lon)
-                }
-            }else {//Search with current location
-                self.findCheifViewModel.searchType = .searchByFirstName
-                if let chefFieldText = textField.text {
-                    let searchText = chefFieldText + string
-                    self.findCheifViewModel.searchListOfUser(matchingString: searchText)
-                }else {
-                    self.findCheifViewModel.searchListOfUser(matchingString: string)
-                }
+             self.locationSearchisActive = false
+            if let chefFieldText = textField.text {
+                let searchText = chefFieldText + string
+                self.searchBySelection(searchText: searchText)
+            } else {
+                self.searchBySelection(searchText: string)
             }
-            
-        }else if textField.tag == kSearchLocationTextFieldTag {//Search a location
+        } else if textField.tag == kSearchLocationTextFieldTag {//Search a location
             self.locationSearchisActive = true
             if let locationText = textField.text {
                 let searchText = locationText + string
@@ -170,7 +185,6 @@ extension FindChefsViewController: UITextFieldDelegate {
                 self.locationSearchViewModel.searchLocation(query: string)
             }
         }
-        
         return true
     }
     
@@ -182,17 +196,17 @@ extension FindChefsViewController: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField.tag == kFindCheffTextFieldTag {
             self.nameTextField.resignFirstResponder()
-            self.nameTextField.text = nil
-            self.findCheifViewModel.searchType = .searchByFirstName
+            self.nameTextField.text = ""
+            self.findCheifViewModel.searchType = .searchByName
             self.findCheifViewModel.searchListOfUser()
             return false
         }
         if textField.tag == kSearchLocationTextFieldTag {
             self.locationTextField.resignFirstResponder()
-            self.locationTextField.text = "Current Location"
-            self.selectedLocation = ("\(LocationManager.shared.currentLocation.coordinate.latitude)", "\(LocationManager.shared.currentLocation.coordinate.longitude)")
-            self.findCheifViewModel.searchType = .searchByFirstName
-            self.locationSearchisActive = false
+            self.locationTextField.text = ""
+            self.selectedLocation = "Washington DC"
+            //self.findCheifViewModel.searchType = .searchByName
+            //self.locationSearchisActive = false
             self.findCheifViewModel.searchListOfUser()
             return false
         }

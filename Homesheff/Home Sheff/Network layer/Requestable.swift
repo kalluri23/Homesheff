@@ -35,7 +35,8 @@ extension Requestable {
   
   func requestURL()->URL? {
     if let path = self.basePath {
-      let fullPath = path+self.apiPath
+      let encodedPath = self.apiPath.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        let fullPath = path+encodedPath!
       return URL(string: fullPath)
     }
     

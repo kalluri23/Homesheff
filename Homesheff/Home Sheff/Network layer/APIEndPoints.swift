@@ -88,8 +88,15 @@ struct GetUserById: Requestable {
     var pathType: ServicePath
 }
 
+
 struct SearchServices: Requestable {
     var apiPath: String { return "searchServices/" + pathType.serviceEndpoint() }
+    var httpType: HttpType { return .get }
+    var pathType: ServicePath
+}
+
+struct SearchCheffByName: Requestable {
+    var apiPath: String { return "searchNames/" + pathType.serviceEndpoint() }
     var httpType: HttpType { return .get }
     var pathType: ServicePath
 }
@@ -118,6 +125,13 @@ struct DeleteServiceEnvelop: Requestable {
     var pathType: ServicePath
 }
 
+
+struct GetSheffsByLocationEnvelop: Requestable {
+    var apiPath: String { return "getAllSheffsByLocation/" + pathType.serviceEndpoint()}
+    var httpType: HttpType { return .get }
+    var pathType: ServicePath
+}
+
 /*
  ALL services post dictionary is mentioned under enum switch statement.
  These cases get their values in ViewController (or respective controller or other class).
@@ -137,10 +151,13 @@ internal enum ServicePath:ParameterBodyMaker {
     case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: String?, isChef: Bool?, isCustomer: Bool?)
     case finishYourProfileCall(firstName: String?, lastName: String?, headline: String?, about: String?, email: String?, location: String?, phoneNo: String?, isChef: Bool?, isCustomer: Bool?)
     case searchServices(searchString: String, lat:String, lon: String)
+    case searchCheffByName(searchString: String, lat:String, lon: String)
+    
     case getServices(userId: String)
     case addService(name: String, description: String?, userPreferenceId: Int)
     case editService(name: String, description: String?, serviceId: String)
     case deleteService(serviceId: String)
+    case getSheffsByLocation(location: String)
     
     
     func httpBodyEnvelop()->[String:Any]? {
@@ -155,7 +172,8 @@ internal enum ServicePath:ParameterBodyMaker {
             
         case .signUpCall(email: let email, password: let password, phoneNo: let phoneNo, firstName: let firstName, lastName: let lastName, isChef: let isChef, isCustomer: let isCustomer, imageUrl: let imageUrl, zipCode: let zipCode):
             return ["email": email, "password": password, "phone": phoneNo ?? "", "firstName": firstName, "lastName": lastName, "isChef": isChef, "isCustomer": isCustomer, "imageUrl": imageUrl, "zipCode": zipCode]
-        case .forgotPassword, .validate, .getUserById, .getPhotoGallery, .deletePhotoFromGallery, .getServices, .deleteService, .searchServices:
+        case .forgotPassword, .validate, .getUserById, .getPhotoGallery, .deletePhotoFromGallery, .getServices, .deleteService, .searchServices, .getSheffsByLocation,
+             .searchCheffByName:
             return nil
         
         case .resetPassword(email: let email, code: let code, password: let password):
@@ -192,12 +210,16 @@ internal enum ServicePath:ParameterBodyMaker {
             return "\(photoId)"
         case .searchServices(searchString: let searchText, lat: let latitute, lon: let longitude):
             return "\(searchText)/\(latitute)/\(longitude)"
+        case .searchCheffByName(searchString: let searchText, lat: let latitute, lon: let longitude):
+            return "\(searchText)/\(latitute)/\(longitude)"
         case .getServices(userId: let userId):
             return "\(userId)"
         case .editService(name: _, description: _, serviceId: let serviceId):
              return "\(serviceId)"
         case .deleteService(serviceId: let serviceId):
              return "\(serviceId)"
+        case .getSheffsByLocation(location: let location):
+            return "\(location)/"
         default:
             return "/"
         }

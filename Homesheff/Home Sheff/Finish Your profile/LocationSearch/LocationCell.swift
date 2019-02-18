@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import MapKit
 
 class LocationCell: UITableViewCell {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak var zipCodeLabel: UILabel!
     
-    var location: Location? {
+    var location: MKPlacemark? {
         didSet {
             if let location = self.location {
-                self.cityLabel.text = location.city
-                self.stateLabel.text = "\(location.state),"
-                self.zipCodeLabel.text = location.zip
+                self.cityLabel.text = location.locality
+                self.stateLabel.text = "\(location.administrativeArea ?? ""),"
+                self.zipCodeLabel.text = location.postalCode
             }
         }
     }
