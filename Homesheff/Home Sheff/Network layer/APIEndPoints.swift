@@ -150,8 +150,8 @@ internal enum ServicePath:ParameterBodyMaker {
     case validate(email:String, code:String)
     case updateUserPreferenceCall(firstName: String?, lastName: String?, headline: String?, phoneNo: String?, location: String?, zipCode: String?, services: String?, isChef: Bool?, isCustomer: Bool?)
     case finishYourProfileCall(firstName: String?, lastName: String?, headline: String?, about: String?, email: String?, location: String?, phoneNo: String?, isChef: Bool?, isCustomer: Bool?)
-    case searchServices(searchString: String, lat:String, lon: String)
-    case searchCheffByName(searchString: String, lat:String, lon: String)
+    case searchServices(searchString: String, location: String)
+    case searchCheffByName(searchString: String, location: String)
     
     case getServices(userId: String)
     case addService(name: String, description: String?, userPreferenceId: Int)
@@ -208,10 +208,10 @@ internal enum ServicePath:ParameterBodyMaker {
             return "\(userId)"
         case .deletePhotoFromGallery(photoId: let photoId):
             return "\(photoId)"
-        case .searchServices(searchString: let searchText, lat: let latitute, lon: let longitude):
-            return "\(searchText)/\(latitute)/\(longitude)"
-        case .searchCheffByName(searchString: let searchText, lat: let latitute, lon: let longitude):
-            return "\(searchText)/\(latitute)/\(longitude)"
+        case .searchServices(searchString: let searchText, location: let location):
+            return "\(searchText)/\(location)/"
+        case .searchCheffByName(searchString: let searchText, location: let location):
+            return "\(searchText)/\(location)/"
         case .getServices(userId: let userId):
             return "\(userId)"
         case .editService(name: _, description: _, serviceId: let serviceId):

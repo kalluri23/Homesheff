@@ -73,6 +73,14 @@ class FindChefsViewController: UIViewController {
     
     @IBAction func didSelectSegment(_ sender: Any) {
         
+        if (nameTextField.text != nil &&  nameTextField.text != "") {
+            self.searchBySelection(searchText: nameTextField.text!)
+        } else {
+            self.loadingIndicator.startAnimating()
+            self.findCheifViewModel.getSheffsByLocation(location: self.selectedLocation) { (status) in
+                self.loadingIndicator.stopAnimating()
+            }
+        }
     }
     
 }
@@ -95,15 +103,11 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
             return locationCell
         }else {
             switch findCheifViewModel.searchType {
-            case .searchByName:
-                let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefCell", for: indexPath) as! ChefCell
-                cheffCell.chef = findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
-                return cheffCell
-            case .searchByLocation, .searchByServices:
-                let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefLocationCell", for: indexPath) as! CheffLocationCell
-                cheffCell.chefService = findCheifViewModel.cheifServiceObjectAt(index: indexPath.row)
-                return cheffCell
-                
+                case .searchByName,
+                .searchByLocation, .searchByServices:
+                    let cheffCell = tableView.dequeueReusableCell(withIdentifier: "ChefLocationCell", for: indexPath) as! CheffLocationCell
+                    cheffCell.chefService = findCheifViewModel.cheifServiceObjectAt(index: indexPath.row)
+                    return cheffCell
             }
         }
     }
@@ -118,20 +122,13 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
             if nameTextField.text != nil &&  nameTextField.text != "" && nameTextField.text != " " {
                 // searchBySelection(searchText:  nameTextField.text!)
             } else {
-                self.findCheifViewModel.getSheffsByLocation(location: self.selectedLocation)
+                self.loadingIndicator.startAnimating()
+                self.findCheifViewModel.getSheffsByLocation(location: self.selectedLocation) { (status) in
+                    self.loadingIndicator.stopAnimating()
+                }
             }
             
-        }else {
-            if self.findCheifViewModel.searchType == .searchByName {
-                self.loadingIndicator.startAnimating()
-                var selectedCheffObject = self.findCheifViewModel.cheifObjectAtIndex(index: indexPath.row)
-                profileViewModel.getPhotosToGallery(envelop:
-                profileViewModel.getPhotosToGalleryEnvelop(userId: selectedCheffObject.id)) { (photoData) in
-                    self.loadingIndicator.stopAnimating()
-                    selectedCheffObject.photoGallery = photoData
-                    self.performSegue(withIdentifier: UIStoryboardSegue.cheffDetailsSegue, sender: selectedCheffObject)
-                }
-            }else if self.findCheifViewModel.searchType == .searchByLocation ||  self.findCheifViewModel.searchType == .searchByServices{
+        } else {
                 self.loadingIndicator.startAnimating()
                 let selectedCheffObject = self.findCheifViewModel.cheifServiceObjectAt(index: indexPath.row)
                 self.findCheifViewModel.getSheffById(envelop: self.findCheifViewModel.getSheffByIdEnvelop(userId: Int(selectedCheffObject.id) ?? 0), completion: {[unowned self] (sheff, isSuccess) in
@@ -146,7 +143,6 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                     }
                 })
-            }
         }
     }
     
@@ -155,14 +151,19 @@ extension FindChefsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func searchBySelection(searchText: String) {
-        
-         if searchTypeControl.selectedSegmentIndex == 0 {
-            self.findCheifViewModel.searchType = .searchByName
-             //self.findCheifViewModel.searchCheffByName(searchText: searchText, latitude: self.selectedLocation.lat, longitude: self.selectedLocation.lon)
-         } else if  searchTypeControl.selectedSegmentIndex == 1 {
-             self.findCheifViewModel.searchType = .searchByServices
-             //self.findCheifViewModel.searchServices(searchText: searchText, latitude: self.selectedLocation.lat, longitude: self.selectedLocation.lon)
-         }
+            if searchTypeControl.selectedSegmentIndex == 0 {
+                self.findCheifViewModel.searchType = .searchByName
+                self.loadingIndicator.startAnimating()
+                self.findCheifViewModel.searchCheffByName(searchText: searchText, location: self.selectedLocation) { (status) in
+                    self.loadingIndicator.stopAnimating()
+                }
+            } else if  searchTypeControl.selectedSegmentIndex == 1 {
+                self.findCheifViewModel.searchType = .searchByServices
+                self.loadingIndicator.startAnimating()
+                self.findCheifViewModel.searchServices(searchText: searchText, location: self.selectedLocation) { (status) in
+                    self.loadingIndicator.stopAnimating()
+                }
+            }
     }
 }
 
@@ -198,16 +199,20 @@ extension FindChefsViewController: UITextFieldDelegate {
             self.nameTextField.resignFirstResponder()
             self.nameTextField.text = ""
             self.findCheifViewModel.searchType = .searchByName
-            self.findCheifViewModel.searchListOfUser()
+            self.loadingIndicator.startAnimating()
+            self.findCheifViewModel.getSheffsByLocation(location: self.selectedLocation) { (status) in
+                 self.loadingIndicator.stopAnimating()
+            }
             return false
         }
         if textField.tag == kSearchLocationTextFieldTag {
             self.locationTextField.resignFirstResponder()
             self.locationTextField.text = ""
             self.selectedLocation = "Washington DC"
-            //self.findCheifViewModel.searchType = .searchByName
-            //self.locationSearchisActive = false
-            self.findCheifViewModel.searchListOfUser()
+            self.loadingIndicator.startAnimating()
+            self.findCheifViewModel.getSheffsByLocation(location: self.selectedLocation) { (status) in
+                self.loadingIndicator.stopAnimating()
+            }
             return false
         }
         return true

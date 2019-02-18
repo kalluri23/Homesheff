@@ -18,7 +18,7 @@ class CheffLocationCell: UITableViewCell {
     var chefService : ChefService? {
         didSet {
             if let cheff  = chefService {
-                firstName.text = "\(cheff.firstName), "
+                firstName.text = "\(cheff.firstName), \(cheff.lastName)"
                 distance.text = cheff.distance
                 location.text = cheff.location
                 profileImage.downloadProfileImage(withId: cheff.id)
