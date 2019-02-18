@@ -99,5 +99,5 @@ struct ChefService: Codable {
     let distance : String
     let id : String
     let location: String
-    let serviceName : String
+    let serviceName : String?
 }

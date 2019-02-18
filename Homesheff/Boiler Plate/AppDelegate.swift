@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.setInitialScreen()
        // IQKeyboardManager.shared().isEnabled = true
         loadFacebook(application: application, options: launchOptions)
+        // LocationManager.shared.requestForLocation()
         return true
     }
 

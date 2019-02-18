@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MapKit
 
 protocol LocationSelectionDelegate: class {
-    func userDidselect(location: Location)
+    func userDidselect(location: MKPlacemark)
 }
 
 class LocationSearchController: UIViewController {
@@ -49,7 +50,8 @@ extension LocationSearchController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let locationCell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
-        locationCell.location = locationSearchViewModel.locations[indexPath.row]
+        let mapItem = locationSearchViewModel.searchResults[indexPath.row]
+        locationCell.location = mapItem.placemark
         return locationCell
     }
 }
@@ -58,7 +60,8 @@ extension LocationSearchController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.navigationController?.popViewController(animated: true, completion: {[unowned self] in
             if let delegate = self.locationSelectDelegate {
-                delegate.userDidselect(location: self.locationSearchViewModel.locations[indexPath.row])
+                let mapItem = self.locationSearchViewModel.searchResults[indexPath.row]
+                delegate.userDidselect(location: mapItem.placemark)
             }
         })
     }

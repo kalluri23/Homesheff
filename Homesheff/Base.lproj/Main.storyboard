@@ -297,10 +297,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sbp-6w-6dJ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GyV-lz-qnf">
+                                        <rect key="frame" x="8" y="19" width="359" height="30"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="IC9-aA-suc">
+                                                <rect key="frame" x="0.0" y="0.0" width="359" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="EKy-MZ-gXL"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="By Name"/>
+                                                    <segment title="By Services"/>
+                                                </segments>
+                                                <color key="tintColor" red="0.4549019608" green="0.71372549019999998" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <connections>
+                                                    <action selector="didSelectSegment:" destination="flC-Se-m36" eventType="valueChanged" id="N1W-YH-Xzs"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="GRO-ri-9uN"/>
+                                            <constraint firstItem="IC9-aA-suc" firstAttribute="leading" secondItem="GyV-lz-qnf" secondAttribute="leading" id="QJz-ed-7AX"/>
+                                            <constraint firstAttribute="trailing" secondItem="IC9-aA-suc" secondAttribute="trailing" id="aLJ-sf-mAn"/>
+                                            <constraint firstItem="IC9-aA-suc" firstAttribute="top" secondItem="GyV-lz-qnf" secondAttribute="top" id="f7Q-qc-eDP"/>
+                                            <constraint firstAttribute="bottom" secondItem="IC9-aA-suc" secondAttribute="bottom" id="yGe-X8-ccJ"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b1f-fH-W3V">
-                                        <rect key="frame" x="20" y="20" width="335" height="30"/>
+                                        <rect key="frame" x="8" y="59" width="359" height="30"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="YHd-80-BEL">
                                                 <rect key="frame" x="10" y="5" width="20" height="20"/>
@@ -310,7 +337,7 @@
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qLT-3x-fOW">
-                                                <rect key="frame" x="40" y="0.0" width="295" height="30"/>
+                                                <rect key="frame" x="40" y="0.0" width="319" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" keyboardAppearance="light" returnKeyType="search" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
@@ -339,7 +366,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zkj-7O-aYA">
-                                        <rect key="frame" x="20" y="60" width="335" height="30"/>
+                                        <rect key="frame" x="8" y="99" width="359" height="30"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="0Az-ed-QML">
                                                 <rect key="frame" x="10" y="5" width="20" height="20"/>
@@ -349,7 +376,7 @@
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QmI-Jb-8cA">
-                                                <rect key="frame" x="40" y="0.0" width="295" height="30"/>
+                                                <rect key="frame" x="40" y="0.0" width="319" height="30"/>
                                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" keyboardAppearance="light" returnKeyType="search" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
@@ -380,17 +407,20 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Zkj-7O-aYA" firstAttribute="top" secondItem="b1f-fH-W3V" secondAttribute="bottom" constant="10" id="8fW-FL-asl"/>
-                                    <constraint firstAttribute="bottom" secondItem="Zkj-7O-aYA" secondAttribute="bottom" constant="20" id="ES2-O9-KQT"/>
-                                    <constraint firstItem="b1f-fH-W3V" firstAttribute="top" secondItem="Sbp-6w-6dJ" secondAttribute="top" constant="20" id="IwQ-YB-tEY"/>
-                                    <constraint firstItem="b1f-fH-W3V" firstAttribute="leading" secondItem="Sbp-6w-6dJ" secondAttribute="leading" constant="20" id="Q4R-aL-J7D"/>
-                                    <constraint firstAttribute="trailing" secondItem="b1f-fH-W3V" secondAttribute="trailing" constant="20" id="Q9I-8u-SJS"/>
-                                    <constraint firstAttribute="trailing" secondItem="Zkj-7O-aYA" secondAttribute="trailing" constant="20" id="x9d-iF-MpN"/>
-                                    <constraint firstItem="Zkj-7O-aYA" firstAttribute="leading" secondItem="Sbp-6w-6dJ" secondAttribute="leading" constant="20" id="zBL-84-Iyb"/>
+                                    <constraint firstAttribute="trailing" secondItem="GyV-lz-qnf" secondAttribute="trailing" constant="8" id="GE9-CJ-pDt"/>
+                                    <constraint firstItem="b1f-fH-W3V" firstAttribute="leading" secondItem="Sbp-6w-6dJ" secondAttribute="leading" constant="8" id="Q4R-aL-J7D"/>
+                                    <constraint firstAttribute="trailing" secondItem="b1f-fH-W3V" secondAttribute="trailing" constant="8" id="Q9I-8u-SJS"/>
+                                    <constraint firstItem="GyV-lz-qnf" firstAttribute="top" secondItem="Sbp-6w-6dJ" secondAttribute="top" constant="19" id="QFO-5a-fUe"/>
+                                    <constraint firstItem="Zkj-7O-aYA" firstAttribute="top" secondItem="b1f-fH-W3V" secondAttribute="bottom" constant="10" id="QFf-02-ShM"/>
+                                    <constraint firstItem="b1f-fH-W3V" firstAttribute="top" secondItem="GyV-lz-qnf" secondAttribute="bottom" constant="10" id="bTQ-0p-XRr"/>
+                                    <constraint firstItem="GyV-lz-qnf" firstAttribute="leading" secondItem="Sbp-6w-6dJ" secondAttribute="leading" constant="8" id="cgv-IE-9uF"/>
+                                    <constraint firstAttribute="height" constant="140" id="wyY-0K-FcW"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zkj-7O-aYA" secondAttribute="trailing" constant="8" id="x9d-iF-MpN"/>
+                                    <constraint firstItem="Zkj-7O-aYA" firstAttribute="leading" secondItem="Sbp-6w-6dJ" secondAttribute="leading" constant="8" id="zBL-84-Iyb"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="8xf-zN-Kyy">
-                                <rect key="frame" x="0.0" y="110" width="375" height="473"/>
+                                <rect key="frame" x="0.0" y="140" width="375" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="nFd-k5-HCt">
                                     <rect key="frame" x="0.0" y="177" width="375" height="1"/>
@@ -604,6 +634,7 @@
                         <outlet property="locationTextField" destination="QmI-Jb-8cA" id="265-A7-Mm7"/>
                         <outlet property="nameTextField" destination="qLT-3x-fOW" id="7OW-b2-gLg"/>
                         <outlet property="profileViewModel" destination="q8n-Jg-HZd" id="T9d-Fq-lR7"/>
+                        <outlet property="searchTypeControl" destination="IC9-aA-suc" id="guJ-Tf-tmc"/>
                         <segue destination="zc4-1T-JnA" kind="show" identifier="CheffDetailsSegue" id="Vri-v7-xfT"/>
                     </connections>
                 </viewController>
@@ -897,7 +928,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CheffServicesCell" id="6S6-u1-t4f" customClass="CheffServicesCell" customModule="Homesheff" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="238" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="237.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6S6-u1-t4f" id="Hjo-aI-ckA">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1222,18 +1253,18 @@
         <image name="HomeSheff_Icon_Grey" width="118" height="113"/>
         <image name="back-arrow" width="12" height="18"/>
         <image name="location" width="18" height="18"/>
-        <image name="my-account-nonselected" width="25" height="25"/>
-        <image name="my-account-selected" width="25" height="25"/>
+        <image name="my-account-nonselected" width="50" height="50"/>
+        <image name="my-account-selected" width="50" height="50"/>
         <image name="pencil-icon" width="11" height="11"/>
         <image name="pencil-icon-background-circle" width="33" height="33"/>
         <image name="profile_background_placeholder" width="375" height="124"/>
         <image name="search" width="13" height="13"/>
-        <image name="search-nonselected" width="25" height="25"/>
-        <image name="search-selected" width="25" height="25"/>
+        <image name="search-nonselected" width="50" height="50"/>
+        <image name="search-selected" width="50" height="50"/>
         <image name="sheff_profile_placeholder" width="70" height="70"/>
         <image name="sheffs_list_placeholder" width="55" height="55"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="r0W-Nl-gXX"/>
+        <segue reference="Vri-v7-xfT"/>
     </inferredMetricsTieBreakers>
 </document>

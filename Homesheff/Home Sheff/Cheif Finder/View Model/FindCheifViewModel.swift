@@ -8,17 +8,19 @@
 
 import UIKit
 import NVActivityIndicatorView
+import MapKit
 
 enum SearchType {
-    case searchByFirstName
+    case searchByName
     case searchByLocation
+    case searchByServices
 }
 
 class FindCheifViewModel: NSObject {
     
     private let apiHandler = APIManager()
     
-    var searchType: SearchType = .searchByFirstName
+    var searchType: SearchType = .searchByName
     
     var reloadTableView: (() -> Void)?
     
@@ -31,9 +33,8 @@ class FindCheifViewModel: NSObject {
     var numberOfRows: Int {
         
         switch searchType {
-        case .searchByFirstName:
-            return matchingCheffs.count
-        case .searchByLocation:
+        case .searchByName,
+        .searchByLocation, .searchByServices:
             return cheffServices.count
         }
     }
@@ -53,28 +54,73 @@ class FindCheifViewModel: NSObject {
     var matchingCheffs = [Chef]()
     override init() {
         super.init()
-        
-        getListOfUser(userType: "all")
-       //self.cheif = self.createArray()
+        decodeLocationAndGetSheffs(location: LocationManager.shared.currentLocation)
     }
     
-    func getListOfUser(userType:String) {
-        apiHandler.fetchUserList(requestEnvelop: self.userListEnvelop()) { [weak self] (list,isCompleted ) in
-            self?.cheif = list!
-            self?.matchingCheffs = list!
-            self?.reloadTableView?()
+    func getSheffsByLocation(requestEnvelope: Requestable, completion:@escaping (Bool) -> Void) {
+        self.apiHandler.getSheffsByLocation(sheffRequestEnvelope: requestEnvelope) { (sheffList, status) in
+            if sheffList != nil && sheffList?.count ?? 0 > 0 {
+                self.cheffServices = sheffList!
+                self.reloadTableView?()
+                completion(true)
+            } else {
+               completion(false)
+            }
         }
     }
     
-    func searchServices(searchText: String, latitude: String, longitude: String) {
-        apiHandler.searchServicesApi(requestEnvelop: self.searchServicesEnvelop(searchString: searchText, latitude: latitude, longitude: longitude), completion: {[unowned self] (list, isCompleted) in
+    func getSheffsByLocation(location: String, completion:@escaping (Bool) -> Void) {
+        let sheffRequestEnvelop = self.getSheffsByLocationEnvelop(location: location)
+        self.getSheffsByLocation(requestEnvelope: sheffRequestEnvelop) { (status) in
+            completion(status)
+        }
+    }
+    
+    func decodeLocationAndGetSheffs(location: CLLocation) {
+        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+            self.searchType = .searchByLocation
+            if(placemarks != nil) {
+                let sheffRequestEnvelop = self.getSheffsByLocationEnvelop(location: "\(placemarks?.first?.locality ?? "Washington") \(placemarks?.first?.administrativeArea ?? "DC")")
+                self.getSheffsByLocation(requestEnvelope: sheffRequestEnvelop) { (status) in
+                    
+                }
+            }
+        }
+    }
+    
+    func getSheffsByLocationEnvelop(location: String) -> Requestable {
+        
+        let sheffListLocationPath = ServicePath.getSheffsByLocation(location: location)
+        let sheffListEnvelop = GetSheffsByLocationEnvelop(pathType: sheffListLocationPath)
+        return sheffListEnvelop
+    }
+    
+    
+    func searchCheffByName(searchText: String, location: String, completion: @escaping (Bool) -> Void) {
+        
+        apiHandler.searchServicesApi(requestEnvelop: self.searchCheffByNameEnvelop(searchString: searchText, location:location ), completion: {[unowned self] (list, isCompleted) in
+            if isCompleted {
+                if let cheffs = list {
+                    self.cheffServices = cheffs
+                    self.reloadTableView?()
+                    completion(true)
+                }
+            } else {
+                completion(false)
+            }
+        })
+    }
+    
+    func searchServices(searchText: String, location: String, completion: @escaping (Bool) -> Void) {
+        apiHandler.searchServicesApi(requestEnvelop: self.searchServicesEnvelop(searchString: searchText, location: location), completion: {[unowned self] (list, isCompleted) in
             if isCompleted {
                 if let cheffs = list {
                    self.cheffServices = cheffs
                    self.reloadTableView?()
+                    completion(true)
                 }
-            }else {
-                
+            } else {
+                 completion(false)
             }
         })
     }
@@ -88,42 +134,17 @@ class FindCheifViewModel: NSObject {
         let userEnvelop = GetUserById(pathType: searchPath)
         return userEnvelop
     }
+
     
-    func userListEnvelop() -> Requestable {
-        
-        let userListSearchPath = ServicePath.listOfUsers(userType: "all")
-        let userListEnvelop = ListOfUsers(pathType: userListSearchPath)
-        
-        return userListEnvelop
-    }
-    
-    func searchServicesEnvelop(searchString: String, latitude: String, longitude: String) -> Requestable {
-        let searchServicesSearchPath = ServicePath.searchServices(searchString: searchString, lat: latitude, lon: longitude)
+    func searchServicesEnvelop(searchString: String, location: String) -> Requestable {
+        let searchServicesSearchPath = ServicePath.searchServices(searchString: searchString, location: location)
         let searchServicesEnvelop = SearchServices(pathType: searchServicesSearchPath)
         return searchServicesEnvelop
     }
- 
-    /**This function will search user by firstname from master list and put in matching cheffs
-    */
-    func searchListOfUser(matchingString:String? = nil) {
-        guard let searchText = matchingString else {
-            self.matchingCheffs = self.cheif
-            self.reloadTableView?()
-            return
-        }
-        let matchingChefs = self.cheif.filter({(cheff) in
-            if let firstName = cheff.firstName {
-                if let _ = firstName.range(of: searchText, options: .caseInsensitive) {
-                    return true
-                } else {
-                    return false
-                }
-            }else {
-                return false
-            }
-        })
-        self.matchingCheffs = matchingChefs
-        self.reloadTableView?()
-    }
     
+    func searchCheffByNameEnvelop(searchString: String, location: String) -> Requestable {
+        let searchCheffByNameSearchPath = ServicePath.searchCheffByName(searchString: searchString, location: location)
+        let searchCheffByNameEnvelop = SearchCheffByName(pathType: searchCheffByNameSearchPath)
+        return searchCheffByNameEnvelop
+    }
 }
